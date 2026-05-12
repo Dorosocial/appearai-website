@@ -1,1 +1,415 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Visibility Checker — AppearAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050508;--surface:#0c0c12;--surface2:#12121a;
+  --border:#1e1e2e;--border2:#2a2a3e;
+  --text:#f0f0ff;--muted:#6060a0;--muted2:#3a3a60;
+  --green:#00e676;--amber:#ffb300;--red:#ff4444;
+  --accent:#7c3aed;--accent2:#a855f7;--blue:#4f8fff;
+}
+html{font-size:16px}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;padding:2.5rem 1rem 4rem;
+  position:relative;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);
+  width:700px;height:500px;
+  background:radial-gradient(ellipse,rgba(124,58,237,0.18) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+.wrap{width:100%;max-width:560px;position:relative;z-index:1}
+.brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:2.5rem}
+.brand-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em;color:var(--text)}
+.brand-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.headline{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,9vw,4.8rem);
+  line-height:0.95;letter-spacing:0.02em;text-align:center;
+  margin-bottom:1rem;
+  background:linear-gradient(135deg,#ffffff 0%,#a855f7 45%,#4f8fff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sub{font-size:15px;color:var(--muted);text-align:center;line-height:1.7;margin-bottom:0.75rem;max-width:420px;margin-left:auto;margin-right:auto}
+.sub-tag{
+  font-size:12px;color:var(--muted2);text-align:center;
+  margin-bottom:1.5rem;
+  font-style:italic;
+}
+.urgency{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.2);
+  border-radius:99px;padding:6px 16px;font-size:12px;font-weight:600;
+  color:#ff7070;letter-spacing:0.04em;text-transform:uppercase;
+  margin:0 auto 1.75rem;width:fit-content;
+}
+.urgency-dot{width:6px;height:6px;border-radius:50%;background:#ff4444;box-shadow:0 0 6px #ff4444;animation:blink 1.5s infinite}
+.input-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:1.5rem;margin-bottom:1rem;
+  position:relative;overflow:hidden;
+}
+.input-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--blue),var(--green));
+}
+.input-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem}
+.input-row{display:flex;gap:8px}
+input[type=text]{
+  flex:1;font-family:'DM Mono',monospace;font-size:14px;padding:13px 16px;
+  background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+  color:var(--text);outline:none;transition:border-color 0.2s,box-shadow 0.2s;
+}
+input[type=text]:focus{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(168,85,247,0.15)}
+input[type=text]::placeholder{color:var(--muted2)}
+.check-btn{
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  padding:13px 22px;background:linear-gradient(135deg,var(--accent),var(--blue));
+  color:#fff;border:none;border-radius:10px;cursor:pointer;white-space:nowrap;
+  box-shadow:0 4px 20px rgba(124,58,237,0.4);transition:opacity 0.15s,transform 0.1s,box-shadow 0.2s;
+}
+.check-btn:hover{opacity:0.9;box-shadow:0 4px 28px rgba(124,58,237,0.6)}
+.check-btn:active{transform:scale(0.97)}
+.check-btn:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
+.err{font-size:12px;color:var(--red);margin-top:8px;display:none;text-align:center}
+.score-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;display:none;margin-bottom:1rem;
+  animation:slideUp 0.4s cubic-bezier(.2,0,.2,1) forwards;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.score-banner{
+  padding:1.5rem;display:flex;align-items:center;gap:1.25rem;
+  border-bottom:1px solid var(--border);position:relative;overflow:hidden;
+}
+.score-glow{
+  position:absolute;top:50%;left:-20px;transform:translateY(-50%);
+  width:220px;height:220px;border-radius:50%;opacity:0.07;pointer-events:none;transition:background 0.5s;
+}
+.score-ring{width:82px;height:82px;flex-shrink:0;position:relative}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring-num{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.02em;transition:color 0.5s;
+}
+.score-info{flex:1}
+.score-domain{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:5px}
+.score-verdict{font-size:16px;font-weight:600;margin-bottom:8px;line-height:1.3;transition:color 0.5s}
+.bar-bg{height:6px;background:var(--border2);border-radius:99px;overflow:hidden}
+.bar{height:100%;border-radius:99px;width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.checks{display:flex;flex-direction:column}
+.check{border-bottom:1px solid var(--border);opacity:0;animation:slideUp 0.3s ease forwards;cursor:pointer;transition:background 0.15s;user-select:none}
+.check:last-child{border-bottom:none}
+.check:hover{background:rgba(255,255,255,0.025)}
+.check-header{display:flex;align-items:center;gap:12px;padding:1rem 1.25rem}
+.icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:all 0.3s}
+.icon.pass{background:rgba(0,230,118,0.12);color:var(--green);box-shadow:0 0 12px rgba(0,230,118,0.2)}
+.icon.fail{background:rgba(255,68,68,0.12);color:var(--red);box-shadow:0 0 12px rgba(255,68,68,0.2)}
+.icon.warn{background:rgba(255,179,0,0.12);color:var(--amber);box-shadow:0 0 12px rgba(255,179,0,0.15)}
+.icon.spin{background:var(--surface2);color:var(--muted2);font-size:8px}
+.check-mid{flex:1;min-width:0}
+.check-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.check-desc{font-size:11px;color:var(--muted);line-height:1.4}
+.check-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
+.pts{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.03em;line-height:1;transition:color 0.3s}
+.pts.pass{color:var(--green)}
+.pts.fail{color:var(--red)}
+.pts.warn{color:var(--amber)}
+.pts.spin{color:var(--muted2)}
+.pts-lbl{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted2)}
+.arr{font-size:10px;color:var(--muted2);transition:transform 0.25s;margin-top:3px}
+.edu-wrap{max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(.4,0,.2,1)}
+.edu-wrap.open{max-height:300px}
+.edu-box{margin:0 1.25rem 1rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:1rem 1.125rem}
+.edu-tag{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px}
+.edu-body{font-size:13px;color:#8888bb;line-height:1.65;margin-bottom:10px}
+.edu-impact{display:flex;align-items:flex-start;gap:8px;border-radius:7px;padding:8px 10px;border:1px solid rgba(255,68,68,0.15);background:rgba(255,68,68,0.06)}
+.edu-impact.pass{border-color:rgba(0,230,118,0.15);background:rgba(0,230,118,0.06)}
+.edu-impact.warn{border-color:rgba(255,179,0,0.15);background:rgba(255,179,0,0.06)}
+.edu-impact-ico{font-size:13px;flex-shrink:0;margin-top:1px}
+.edu-impact-txt{font-size:12px;font-weight:500;color:#aaaacc;line-height:1.5}
+.cta-card{
+  background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(79,143,255,0.08));
+  border:1px solid rgba(168,85,247,0.3);border-radius:16px;padding:1.5rem;
+  display:none;animation:slideUp 0.4s ease forwards;position:relative;overflow:hidden;
+}
+.cta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--blue))}
+.cta-lbl{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
+.cta-hl{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:0.03em;color:var(--text);line-height:1.1;margin-bottom:8px}
+.cta-txt{font-size:15px;font-weight:500;color:#d0d0ff;line-height:1.65;margin-bottom:1.25rem}
+.cta-btn{
+  display:inline-block;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  padding:12px 24px;background:linear-gradient(135deg,var(--accent),var(--blue));
+  color:#fff;border:none;border-radius:10px;cursor:pointer;text-decoration:none;
+  box-shadow:0 4px 20px rgba(124,58,237,0.5);transition:opacity 0.15s,box-shadow 0.2s;
+}
+.cta-btn:hover{opacity:0.9;box-shadow:0 4px 28px rgba(124,58,237,0.7)}
+.powered{text-align:center;font-size:11px;color:var(--muted2);margin-top:1.5rem;letter-spacing:0.05em}
+@media(max-width:420px){
+  .input-row{flex-direction:column}
+  .check-btn{width:100%}
+  .headline{font-size:2.6rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="brand-dot"></div>
+    <div class="brand-logo">appearai.io</div>
+  </div>
+  <h1 class="headline">Is your business<br>visible to AI?</h1>
+  <p class="sub">AI tools like ChatGPT, Perplexity, and Claude are recommending local businesses every day. Find out if yours shows up — free, in seconds.</p>
+  <p class="sub-tag">Built for local businesses — clinics, trades, salons and local service providers.</p>
+  <div class="urgency"><div class="urgency-dot"></div>95% of local business sites fail this check</div>
+  <div class="input-card">
+    <div class="input-label">Enter your website URL</div>
+    <div class="input-row">
+      <input type="text" id="urlInput" placeholder="yourbusiness.com" autocomplete="off" autocapitalize="off"/>
+      <button class="check-btn" id="checkBtn" onclick="runCheck()">Check my site →</button>
+    </div>
+    <div class="err" id="err"></div>
+  </div>
+  <div class="score-card" id="scoreCard">
+    <div class="score-banner">
+      <div class="score-glow" id="scoreGlow"></div>
+      <div class="score-ring">
+        <svg width="82" height="82" viewBox="0 0 82 82">
+          <circle cx="41" cy="41" r="35" fill="none" stroke="#1e1e2e" stroke-width="6"/>
+          <circle cx="41" cy="41" r="35" fill="none" stroke-width="6" stroke-linecap="round"
+            id="scoreArc" stroke-dasharray="219.9" stroke-dashoffset="219.9" stroke="#7c3aed"
+            style="transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1),stroke 0.5s"/>
+        </svg>
+        <div class="score-ring-num" id="scoreNum">—</div>
+      </div>
+      <div class="score-info">
+        <div class="score-domain" id="domain"></div>
+        <div class="score-verdict" id="verdict">Analysing your site...</div>
+        <div class="bar-bg"><div class="bar" id="bar"></div></div>
+      </div>
+    </div>
+    <div class="checks" id="checks"></div>
+  </div>
+  <div class="cta-card" id="cta">
+    <div class="cta-lbl">Join 100<span style="font-size:0.7em">s</span> of local businesses getting found on AI</div>
+    <div class="cta-hl">Every day you wait, a competitor gets recommended instead.</div>
+    <p class="cta-txt">Your site has gaps stopping AI from recommending you to customers. Our team fixes this fast — audits, sprints, and ongoing monitoring.</p>
+    <a href="https://appearai.io/audit" class="cta-btn">Get my free audit →</a>
+  </div>
+  <div class="powered">powered by <b style="-webkit-text-fill-color:var(--text);color:var(--text)">appearai.io</b></div>
+</div>
+<script>
+const WORKER='https://appearai-checker.socialmoa95.workers.dev';
+
+const defs=[
+  {id:'https',title:'HTTPS & Security',weight:10,
+   tag:'What is HTTPS?',
+   edu:'HTTPS encrypts the connection between a visitor and your website. It shows as the padlock icon in browsers. Without it, your site is flagged as "Not Secure" by every major browser.',
+   impactFail:'AI crawlers like GPTBot and ClaudeBot deprioritise non-HTTPS sites. No HTTPS means a lower chance of being recommended by ChatGPT or Claude.',
+   impactPass:'Your site is secure. AI crawlers fully trust HTTPS sites and are more likely to index and cite them in answers.'},
+  {id:'schema',title:'Structured Data (Schema)',weight:20,
+   tag:'What is structured data?',
+   edu:'Schema markup is hidden code that tells AI exactly what your business is — your name, address, phone, services, hours, and reviews. Think of it as a business card written in a language AI reads perfectly.',
+   impactFail:'Without schema, AI guesses what your business does and often gets it wrong — or skips you entirely when recommending local businesses to potential customers.',
+   impactPass:'Excellent. Your schema markup means AI can read your business details accurately and confidently recommend you when someone searches for your services.'},
+  {id:'robots',title:'AI Crawler Access',weight:15,
+   tag:'What is robots.txt?',
+   edu:'robots.txt is a file on your website that tells bots what they can and cannot read. Many websites accidentally block AI crawlers like GPTBot (ChatGPT), ClaudeBot, and PerplexityBot.',
+   impactFail:'An AI crawler is being blocked. This means ChatGPT, Claude, or Perplexity literally cannot read your website — making it impossible for them to recommend you.',
+   impactPass:'All major AI crawlers are allowed. GPTBot, ClaudeBot, and PerplexityBot can fully access and read your website content.'},
+  {id:'llms',title:'llms.txt File',weight:20,
+   tag:'What is llms.txt?',
+   edu:'llms.txt is a new standard file (like robots.txt but for AI) that guides AI language models on how to understand your website — what your business does, your key pages, and how to reference you. Very few local businesses have this set up correctly.',
+   impactFail:'No llms.txt means AI has no guide for understanding your site. This is one of the most impactful fixes for AI visibility and requires specialist setup.',
+   impactPass:'You have an llms.txt file. This gives AI models a direct guide to your business, improving how accurately they describe and recommend you.'},
+  {id:'metadesc',title:'Meta Description',weight:15,
+   tag:'What is a meta description?',
+   edu:'A meta description is a short summary of your page that appears in search results and is read by AI crawlers. It tells AI exactly what your business does in plain language.',
+   impactFail:'No meta description means AI has to guess what your business does from your page content alone — leading to inaccurate or missing recommendations.',
+   impactPass:'Your meta description gives AI a clear, concise summary of your business — improving how accurately it describes and recommends you.'},
+  {id:'title',title:'Business Name & Page Title',weight:10,
+   tag:'Why does your page title matter?',
+   edu:'Your page title is the first thing AI reads when visiting your site. It should clearly state your business name and what you do. Generic titles like "Home" or "Welcome" confuse AI crawlers.',
+   impactFail:'Your page title is weak or generic. AI cannot confidently identify your business name or what you do — making it hard to recommend you accurately.',
+   impactPass:'Your page title clearly identifies your business. AI can immediately understand who you are and what you do.'},
+  {id:'content',title:'Content Structure',weight:10,
+   tag:'Why does content structure matter?',
+   edu:'Structure refers to how your page is organised — clear H1/H2 headings, a descriptive page title, a meta description, and obvious info about your services and location. AI reads structure, not just words.',
+   impactFail:'Poor structure means AI cannot confidently understand your services or location. It may describe your business vaguely or not recommend you at all.',
+   impactPass:'Good structure means AI can clearly identify what you do, where you are, and who to recommend you to.'},
+];
+
+const msgs={
+  https:    {pass:'Secure — AI crawlers fully trust your site.',fail:'Not HTTPS — AI crawlers flag this site as untrustworthy.',warn:'HTTPS unclear.'},
+  schema:   {pass:'Schema found — AI knows exactly who you are.',fail:'No schema found — AI builds an incomplete picture of your business.',warn:'Limited schema — AI is building an incomplete picture of your business.'},
+  robots:   {pass:'All AI crawlers allowed — they can read your site.',fail:'AI crawlers blocked — ChatGPT or Claude cannot read you.',warn:'Crawler access unclear — needs investigation.'},
+  llms:     {pass:'llms.txt found — AI has a guide to your content.',fail:'No llms.txt — AI has no guide to understand your site.',warn:'llms.txt unclear.'},
+  metadesc: {pass:'Meta description found — AI has a clear summary of your business.',fail:'No meta description — AI has to guess what your business does.',warn:'Meta description too short or missing.'},
+  title:    {pass:'Strong page title — AI can clearly identify your business.',fail:'Weak or generic title — AI cannot identify your business name.',warn:'Page title could be more descriptive.'},
+  content:  {pass:'Good structure — AI understands your business.',fail:'Poor structure — AI cannot identify your services.',warn:'Structure needs improvement.'},
+};
+
+let scores={},openCheck=null;
+
+function norm(r){let u=r.trim();if(!u.startsWith('http'))u='https://'+u;try{return new URL(u)}catch(e){return null}}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+
+function tally(){
+  let e=0,t=0;
+  defs.forEach(d=>{t+=d.weight;if(scores[d.id]!==undefined)e+=scores[d.id]});
+  const p=Math.round((e/t)*100);
+  const tier=p>=70?'good':p>=40?'warn':'bad';
+  const col={good:'#00e676',warn:'#ffb300',bad:'#ff4444'};
+  const barBg={good:'linear-gradient(90deg,#00e676,#00c853)',warn:'linear-gradient(90deg,#ffb300,#ff6d00)',bad:'linear-gradient(90deg,#ff4444,#d50000)'};
+  const glows={good:'radial-gradient(ellipse,rgba(0,230,118,1) 0%,transparent 70%)',warn:'radial-gradient(ellipse,rgba(255,179,0,1) 0%,transparent 70%)',bad:'radial-gradient(ellipse,rgba(255,68,68,1) 0%,transparent 70%)'};
+  const vt={
+    good:'Your site gives AI a good chance of recommending you.',
+    warn:'AI tools may know you exist — but aren\'t recommending you consistently to the customers who need you.',
+    bad:'Your site doesn\'t give AI what it needs to recommend your business to customers.'
+  };
+  const circ=219.9;
+  document.getElementById('scoreNum').textContent=p;
+  document.getElementById('scoreNum').style.color=col[tier];
+  document.getElementById('scoreArc').style.strokeDashoffset=circ-(circ*(p/100));
+  document.getElementById('scoreArc').style.stroke=col[tier];
+  document.getElementById('scoreGlow').style.background=glows[tier];
+  document.getElementById('bar').style.width=p+'%';
+  document.getElementById('bar').style.background=barBg[tier];
+  const v=document.getElementById('verdict');
+  v.textContent=vt[tier];v.style.color=col[tier];
+  return p;
+}
+
+function setCheck(id,status,score){
+  const icon=document.getElementById('i-'+id);
+  const desc=document.getElementById('d-'+id);
+  const pts=document.getElementById('pts-'+id);
+  const item=document.getElementById('c-'+id);
+  const def=defs.find(d=>d.id===id);
+  if(!icon)return;
+  icon.className='icon '+status;
+  icon.textContent=status==='pass'?'✓':status==='fail'?'✗':'!';
+  desc.textContent=msgs[id][status]||msgs[id].warn;
+  if(pts){pts.className='pts '+status;pts.textContent=score+'/'+def.weight}
+  item.style.opacity='1';
+  scores[id]=score;
+  tally();
+  const imp=document.getElementById('imp-'+id);
+  if(imp){
+    if(status==='pass'){
+      imp.className='edu-impact pass';
+      imp.innerHTML=`<div class="edu-impact-ico">✓</div><div class="edu-impact-txt">${def.impactPass}</div>`;
+    } else {
+      imp.className='edu-impact'+(status==='warn'?' warn':'');
+      imp.innerHTML=`<div class="edu-impact-ico">${status==='warn'?'!':'✗'}</div><div class="edu-impact-txt">${def.impactFail}</div>`;
+    }
+  }
+}
+
+function toggleCheck(id){
+  const exp=document.getElementById('exp-'+id);
+  const arr=document.getElementById('arr-'+id);
+  if(!exp)return;
+  const isOpen=exp.classList.contains('open');
+  if(openCheck&&openCheck!==id){
+    const pe=document.getElementById('exp-'+openCheck);
+    const pa=document.getElementById('arr-'+openCheck);
+    if(pe)pe.classList.remove('open');
+    if(pa)pa.style.transform='';
+  }
+  exp.classList.toggle('open',!isOpen);
+  arr.style.transform=!isOpen?'rotate(180deg)':'';
+  openCheck=!isOpen?id:null;
+}
+
+async function runCheck(){
+  const raw=document.getElementById('urlInput').value;
+  if(!raw.trim()){document.getElementById('urlInput').focus();return}
+  const parsed=norm(raw);
+  const errEl=document.getElementById('err');
+  if(!parsed){errEl.textContent='Please enter a valid address, e.g. yourbusiness.com';errEl.style.display='block';return}
+  errEl.style.display='none';
+  const btn=document.getElementById('checkBtn');
+  btn.disabled=true;btn.textContent='Checking...';
+  const card=document.getElementById('scoreCard');
+  const checksEl=document.getElementById('checks');
+  const cta=document.getElementById('cta');
+  card.style.display='block';cta.style.display='none';
+  checksEl.innerHTML='';scores={};openCheck=null;
+  document.getElementById('scoreNum').textContent='—';
+  document.getElementById('scoreNum').style.color='';
+  document.getElementById('scoreArc').style.strokeDashoffset='219.9';
+  document.getElementById('scoreArc').style.stroke='#7c3aed';
+  document.getElementById('bar').style.width='0%';
+  document.getElementById('verdict').textContent='Analysing your site...';
+  document.getElementById('verdict').style.color='';
+  document.getElementById('domain').textContent=parsed.hostname.replace('www.','');
+
+  defs.forEach((d,i)=>{
+    const el=document.createElement('div');
+    el.className='check';el.id='c-'+d.id;
+    el.style.animationDelay=(i*0.07)+'s';
+    el.onclick=()=>toggleCheck(d.id);
+    el.innerHTML=`
+      <div class="check-header">
+        <div class="icon spin" id="i-${d.id}">···</div>
+        <div class="check-mid">
+          <div class="check-title">${d.title}</div>
+          <div class="check-desc" id="d-${d.id}">Checking... <span style="color:#3a3a60;font-size:10px">tap to learn more</span></div>
+        </div>
+        <div class="check-right">
+          <div class="pts spin" id="pts-${d.id}">—/${d.weight}</div>
+          <div class="pts-lbl">points</div>
+          <div class="arr" id="arr-${d.id}">▾</div>
+        </div>
+      </div>
+      <div class="edu-wrap" id="exp-${d.id}">
+        <div class="edu-box">
+          <div class="edu-tag">${d.tag}</div>
+          <div class="edu-body">${d.edu}</div>
+          <div class="edu-impact" id="imp-${d.id}">
+            <div class="edu-impact-ico">···</div>
+            <div class="edu-impact-txt">Checking impact...</div>
+          </div>
+        </div>
+      </div>`;
+    checksEl.appendChild(el);
+  });
+
+  const base=parsed.origin;
+
+  try {
+    const wResp=await fetch(`${WORKER}?url=${encodeURIComponent(base)}`);
+    const wData=await wResp.json();
+    if(wData&&wData.results){
+      const r=wData.results;
+      for(const[i,id] of ['https','schema','robots','llms','metadesc','title','content'].entries()){
+        await sleep(i*100);
+        setCheck(id,r[id]?.status||'warn',r[id]?.score??0);
+      }
+    }
+  } catch(e){
+    setCheck('https',parsed.protocol==='https:'?'pass':'fail',parsed.protocol==='https:'?10:0);
+    ['schema','robots','llms','metadesc','title','content'].forEach(id=>setCheck(id,'warn',0));
+  }
+
+  btn.disabled=false;btn.textContent='Check again →';
+  if(tally()<80)cta.style.display='block';
+}
+
+document.getElementById('urlInput').addEventListener('keydown',e=>{if(e.key==='Enter')runCheck()});
+</script>
+</body>
+      </html>
