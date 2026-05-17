@@ -1,415 +1,896 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AI Visibility Checker — AppearAI</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<title>AppearAI — AI Appearance Rate™</title>
+<meta name="description" content="Find out how often AI recommends your business. AppearAI measures your AI Appearance Rate — the metric that tells you exactly where you stand on ChatGPT, Gemini, and Perplexity."/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#050508;--surface:#0c0c12;--surface2:#12121a;
-  --border:#1e1e2e;--border2:#2a2a3e;
-  --text:#f0f0ff;--muted:#6060a0;--muted2:#3a3a60;
-  --green:#00e676;--amber:#ffb300;--red:#ff4444;
-  --accent:#7c3aed;--accent2:#a855f7;--blue:#4f8fff;
+  --ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;
+  --accent:#e84c1e;--blue:#2563ff;--gold:#c9a84c;
+  --muted:#7a7469;--ok:#1a7a4a;--warn:#e84c1e;
+  --border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25);
 }
-html{font-size:16px}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--bg);color:var(--text);
-  min-height:100vh;display:flex;flex-direction:column;
-  align-items:center;padding:2.5rem 1rem 4rem;
-  position:relative;overflow-x:hidden;
-}
-body::before{
-  content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);
-  width:700px;height:500px;
-  background:radial-gradient(ellipse,rgba(124,58,237,0.18) 0%,transparent 70%);
-  pointer-events:none;z-index:0;
-}
-.wrap{width:100%;max-width:560px;position:relative;z-index:1}
-.brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:2.5rem}
-.brand-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em;color:var(--text)}
-.brand-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-.headline{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2.8rem,9vw,4.8rem);
-  line-height:0.95;letter-spacing:0.02em;text-align:center;
-  margin-bottom:1rem;
-  background:linear-gradient(135deg,#ffffff 0%,#a855f7 45%,#4f8fff 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.sub{font-size:15px;color:var(--muted);text-align:center;line-height:1.7;margin-bottom:0.75rem;max-width:420px;margin-left:auto;margin-right:auto}
-.sub-tag{
-  font-size:12px;color:var(--muted2);text-align:center;
-  margin-bottom:1.5rem;
-  font-style:italic;
-}
-.urgency{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.2);
-  border-radius:99px;padding:6px 16px;font-size:12px;font-weight:600;
-  color:#ff7070;letter-spacing:0.04em;text-transform:uppercase;
-  margin:0 auto 1.75rem;width:fit-content;
-}
-.urgency-dot{width:6px;height:6px;border-radius:50%;background:#ff4444;box-shadow:0 0 6px #ff4444;animation:blink 1.5s infinite}
-.input-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;padding:1.5rem;margin-bottom:1rem;
-  position:relative;overflow:hidden;
-}
-.input-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--blue),var(--green));
-}
-.input-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem}
-.input-row{display:flex;gap:8px}
-input[type=text]{
-  flex:1;font-family:'DM Mono',monospace;font-size:14px;padding:13px 16px;
-  background:var(--surface2);border:1px solid var(--border);border-radius:10px;
-  color:var(--text);outline:none;transition:border-color 0.2s,box-shadow 0.2s;
-}
-input[type=text]:focus{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(168,85,247,0.15)}
-input[type=text]::placeholder{color:var(--muted2)}
-.check-btn{
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
-  padding:13px 22px;background:linear-gradient(135deg,var(--accent),var(--blue));
-  color:#fff;border:none;border-radius:10px;cursor:pointer;white-space:nowrap;
-  box-shadow:0 4px 20px rgba(124,58,237,0.4);transition:opacity 0.15s,transform 0.1s,box-shadow 0.2s;
-}
-.check-btn:hover{opacity:0.9;box-shadow:0 4px 28px rgba(124,58,237,0.6)}
-.check-btn:active{transform:scale(0.97)}
-.check-btn:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
-.err{font-size:12px;color:var(--red);margin-top:8px;display:none;text-align:center}
-.score-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;overflow:hidden;display:none;margin-bottom:1rem;
-  animation:slideUp 0.4s cubic-bezier(.2,0,.2,1) forwards;
-}
-@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.score-banner{
-  padding:1.5rem;display:flex;align-items:center;gap:1.25rem;
-  border-bottom:1px solid var(--border);position:relative;overflow:hidden;
-}
-.score-glow{
-  position:absolute;top:50%;left:-20px;transform:translateY(-50%);
-  width:220px;height:220px;border-radius:50%;opacity:0.07;pointer-events:none;transition:background 0.5s;
-}
-.score-ring{width:82px;height:82px;flex-shrink:0;position:relative}
-.score-ring svg{transform:rotate(-90deg)}
-.score-ring-num{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.02em;transition:color 0.5s;
-}
-.score-info{flex:1}
-.score-domain{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:5px}
-.score-verdict{font-size:16px;font-weight:600;margin-bottom:8px;line-height:1.3;transition:color 0.5s}
-.bar-bg{height:6px;background:var(--border2);border-radius:99px;overflow:hidden}
-.bar{height:100%;border-radius:99px;width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-.checks{display:flex;flex-direction:column}
-.check{border-bottom:1px solid var(--border);opacity:0;animation:slideUp 0.3s ease forwards;cursor:pointer;transition:background 0.15s;user-select:none}
-.check:last-child{border-bottom:none}
-.check:hover{background:rgba(255,255,255,0.025)}
-.check-header{display:flex;align-items:center;gap:12px;padding:1rem 1.25rem}
-.icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:all 0.3s}
-.icon.pass{background:rgba(0,230,118,0.12);color:var(--green);box-shadow:0 0 12px rgba(0,230,118,0.2)}
-.icon.fail{background:rgba(255,68,68,0.12);color:var(--red);box-shadow:0 0 12px rgba(255,68,68,0.2)}
-.icon.warn{background:rgba(255,179,0,0.12);color:var(--amber);box-shadow:0 0 12px rgba(255,179,0,0.15)}
-.icon.spin{background:var(--surface2);color:var(--muted2);font-size:8px}
-.check-mid{flex:1;min-width:0}
-.check-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
-.check-desc{font-size:11px;color:var(--muted);line-height:1.4}
-.check-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
-.pts{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.03em;line-height:1;transition:color 0.3s}
-.pts.pass{color:var(--green)}
-.pts.fail{color:var(--red)}
-.pts.warn{color:var(--amber)}
-.pts.spin{color:var(--muted2)}
-.pts-lbl{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted2)}
-.arr{font-size:10px;color:var(--muted2);transition:transform 0.25s;margin-top:3px}
-.edu-wrap{max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(.4,0,.2,1)}
-.edu-wrap.open{max-height:300px}
-.edu-box{margin:0 1.25rem 1rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:1rem 1.125rem}
-.edu-tag{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px}
-.edu-body{font-size:13px;color:#8888bb;line-height:1.65;margin-bottom:10px}
-.edu-impact{display:flex;align-items:flex-start;gap:8px;border-radius:7px;padding:8px 10px;border:1px solid rgba(255,68,68,0.15);background:rgba(255,68,68,0.06)}
-.edu-impact.pass{border-color:rgba(0,230,118,0.15);background:rgba(0,230,118,0.06)}
-.edu-impact.warn{border-color:rgba(255,179,0,0.15);background:rgba(255,179,0,0.06)}
-.edu-impact-ico{font-size:13px;flex-shrink:0;margin-top:1px}
-.edu-impact-txt{font-size:12px;font-weight:500;color:#aaaacc;line-height:1.5}
-.cta-card{
-  background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(79,143,255,0.08));
-  border:1px solid rgba(168,85,247,0.3);border-radius:16px;padding:1.5rem;
-  display:none;animation:slideUp 0.4s ease forwards;position:relative;overflow:hidden;
-}
-.cta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--blue))}
-.cta-lbl{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
-.cta-hl{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:0.03em;color:var(--text);line-height:1.1;margin-bottom:8px}
-.cta-txt{font-size:15px;font-weight:500;color:#d0d0ff;line-height:1.65;margin-bottom:1.25rem}
-.cta-btn{
-  display:inline-block;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
-  padding:12px 24px;background:linear-gradient(135deg,var(--accent),var(--blue));
-  color:#fff;border:none;border-radius:10px;cursor:pointer;text-decoration:none;
-  box-shadow:0 4px 20px rgba(124,58,237,0.5);transition:opacity 0.15s,box-shadow 0.2s;
-}
-.cta-btn:hover{opacity:0.9;box-shadow:0 4px 28px rgba(124,58,237,0.7)}
-.powered{text-align:center;font-size:11px;color:var(--muted2);margin-top:1.5rem;letter-spacing:0.05em}
-@media(max-width:420px){
-  .input-row{flex-direction:column}
-  .check-btn{width:100%}
-  .headline{font-size:2.6rem}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px);pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 3rem}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.35rem .9rem;text-decoration:none;transition:color .15s,border-color .15s}
+.nav-logo:hover{color:var(--ink);border-color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links a{font-family:'Syne',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{font-family:'Syne',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.8}
+
+/* SCANNER SECTION — leads the page */
+.scanner-section{max-width:1100px;margin:0 auto;padding:5rem 3rem 4rem;position:relative;z-index:1;border-bottom:1px solid var(--border)}
+.section-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.section-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
+.section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.5rem,6vw,5rem);line-height:.95;letter-spacing:-.03em;color:var(--ink);margin-bottom:1rem}
+.section-title em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--muted)}
+.section-sub{font-size:.88rem;color:var(--muted);line-height:1.8;max-width:560px;margin-bottom:3rem}
+
+/* FORM */
+.scan-form{background:var(--cream);border:1px solid var(--border);padding:2.5rem;position:relative}
+.scan-form::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.form-field{display:flex;flex-direction:column;gap:.5rem}
+.form-label{font-family:'Syne',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.form-input{font-family:'DM Mono',monospace;font-size:.85rem;font-weight:300;padding:.75rem 1rem;background:var(--paper);border:1px solid var(--border);color:var(--ink);outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--ink)}
+.form-input::placeholder{color:var(--muted);opacity:.6}
+.scan-btn{font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:none;padding:.875rem 2rem;cursor:pointer;transition:opacity .15s;width:100%;margin-top:.5rem}
+.scan-btn:hover{opacity:.8}
+.scan-btn:disabled{opacity:.35;cursor:not-allowed}
+.form-note{font-size:.65rem;color:var(--muted);text-align:center;margin-top:.875rem;letter-spacing:.05em}
+
+/* SCANNING */
+.scan-state{display:none;padding:2rem 2.5rem;background:var(--cream);border:1px solid var(--border);text-align:center;position:relative}
+.scan-state::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink);z-index:1}
+.scan-spinner{width:48px;height:48px;border:2px solid var(--border-strong);border-top-color:var(--ink);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 1.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.scan-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:.5rem}
+.scan-sub{font-size:.75rem;color:var(--muted);margin-bottom:1.5rem}
+.scan-log{text-align:left;background:var(--paper);border:1px solid var(--border);padding:1rem 1.25rem;height:160px;overflow-y:auto;font-size:.72rem;color:var(--muted);line-height:2}
+.scan-log-line{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
+
+/* EMAIL GATE */
+.email-gate{display:none;padding:2rem 2.5rem;background:var(--cream);border:1px solid var(--border);text-align:center;position:relative}
+.email-gate::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
+.gate-icon{font-size:2.5rem;margin-bottom:1.5rem}
+.gate-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:.75rem}
+.gate-sub{font-size:.82rem;color:var(--muted);line-height:1.8;max-width:380px;margin:0 auto 2rem}
+.gate-row{display:flex;gap:.75rem;max-width:420px;margin:0 auto .75rem}
+.gate-row .form-input{flex:1}
+.gate-btn{font-family:'Syne',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:none;padding:.75rem 1.25rem;cursor:pointer;white-space:nowrap;transition:opacity .15s}
+.gate-btn:hover{opacity:.8}
+.gate-note{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
+
+/* RESULTS */
+.results-wrap{display:none;position:relative;z-index:1}
+
+/* AAR */
+.aar-section{background:var(--ink);color:var(--paper);padding:4rem 3rem;position:relative;overflow:hidden}
+.aar-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
+.aar-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;position:relative;z-index:1}
+.aar-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,242,235,.4);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
+.aar-eyebrow span{display:block;width:24px;height:1px;background:rgba(245,242,235,.25)}
+.aar-label{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(4rem,10vw,7rem);line-height:1;letter-spacing:-.03em;color:var(--paper);margin-bottom:.5rem}
+.aar-label.low{color:#ff6b5b}
+.aar-label.mid{color:#f5c842}
+.aar-label.high{color:#4ade80}
+.aar-sublabel{font-size:.82rem;color:rgba(245,242,235,.5);margin-bottom:2rem;line-height:1.7}
+.aar-metric-row{display:flex;align-items:center;gap:1rem;padding:1.25rem 0;border-top:1px solid rgba(245,242,235,.08)}
+.aar-metric-label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.4);flex:1}
+.aar-metric-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--paper)}
+.aar-grade-box{border:1px solid rgba(245,242,235,.12);padding:1.5rem;margin-bottom:1.5rem}
+.aar-grade-label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,242,235,.35);margin-bottom:.75rem}
+.aar-grade{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;letter-spacing:-.02em;color:var(--paper);margin-bottom:.5rem}
+.aar-summary{font-size:.8rem;color:rgba(245,242,235,.55);line-height:1.8}
+.competitor-table{border:1px solid rgba(245,242,235,.1)}
+.competitor-row{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid rgba(245,242,235,.08)}
+.competitor-row:last-child{border-bottom:none}
+.competitor-row.you{background:rgba(245,242,235,.04)}
+.comp-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;flex:1;color:var(--paper)}
+.comp-aar{font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem}
+.comp-aar.low{color:#ff6b5b}
+.comp-aar.mid{color:#f5c842}
+.comp-aar.high{color:#4ade80}
+.comp-bar-wrap{width:80px;height:4px;background:rgba(245,242,235,.1)}
+.comp-bar{height:100%;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.you-badge{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.3);border:1px solid rgba(245,242,235,.15);padding:2px 7px}
+.comp-blur-wrap{position:relative;overflow:hidden}
+
+/* PROMPTS */
+.prompts-section{max-width:1100px;margin:0 auto;padding:3rem 3rem 0;border-bottom:1px solid var(--border)}
+.prompts-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem}
+.prompts-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-.01em;color:var(--ink)}
+.prompts-meta{font-size:.7rem;color:var(--muted)}
+.prompts-grid{display:flex;flex-direction:column;gap:0;margin-bottom:2.5rem}
+.prompt-row{display:flex;align-items:center;gap:1.25rem;padding:.875rem 0;border-top:1px solid var(--border)}
+.prompt-status{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0}
+.prompt-status.pass{background:rgba(26,122,74,.12);color:var(--ok)}
+.prompt-status.fail{background:rgba(232,76,30,.1);color:var(--warn)}
+.prompt-query{font-size:.78rem;color:var(--ink);font-style:italic;line-height:1.5}
+.prompt-engines{display:flex;gap:.375rem;flex-wrap:wrap;justify-content:flex-end}
+.engine-tag{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--border);color:var(--muted)}
+.prompt-main{flex:1;display:flex;flex-direction:column;gap:.3rem}
+.prompt-sub{font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:.375rem;flex-wrap:wrap}
+.prompt-runs{font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;min-width:32px;text-align:right;flex-shrink:0}
+
+/* GEO HEALTH */
+.health-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border)}
+.health-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:3rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.health-intro-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:.75rem}
+.health-intro-sub{font-size:.8rem;color:var(--muted);line-height:1.8}
+.health-score-box{border:1px solid var(--border);padding:2rem;text-align:center}
+.health-score-num{font-family:'Syne',sans-serif;font-weight:800;font-size:4rem;letter-spacing:-.04em;line-height:1;margin-bottom:.5rem;color:var(--ink)}
+.health-score-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.pillars{display:flex;flex-direction:column}
+.pillar{padding:1.5rem 0;border-top:1px solid var(--border)}
+.pillar-header{display:flex;align-items:center;gap:1.25rem;margin-bottom:.875rem}
+.pillar-num{font-family:'Syne',sans-serif;font-weight:800;font-size:.65rem;letter-spacing:.15em;color:var(--muted);width:24px}
+.pillar-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;color:var(--ink);flex:1}
+.pillar-score{font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem;color:var(--ink)}
+.pillar-bar-wrap{height:3px;background:var(--cream);border:1px solid var(--border);margin-bottom:.875rem}
+.pillar-bar{height:100%;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.pillar-finding{font-size:.75rem;color:var(--muted);line-height:1.7;padding-left:2.5rem}
+.pillar-flag{display:inline-flex;align-items:center;gap:.375rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border:1px solid;margin-left:auto}
+.pillar-flag.ok{color:var(--ok);border-color:rgba(26,122,74,.25);background:rgba(26,122,74,.05)}
+.pillar-flag.warn{color:var(--warn);border-color:rgba(232,76,30,.25);background:rgba(232,76,30,.05)}
+.pillar-flag.mid{color:#8a6a00;border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.08)}
+
+/* CTA */
+.cta-section{background:var(--cream);border-top:1px solid var(--border);padding:4rem 3rem}
+.cta-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.cta-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.cta-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
+.cta-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.5rem,3.5vw,2.25rem);line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin-bottom:.875rem}
+.cta-title em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--muted)}
+.cta-sub{font-size:.82rem;color:var(--muted);line-height:1.8}
+
+/* TECHNICAL CHECKER */
+.tech-section{background:var(--ink);color:var(--paper);padding:4rem 3rem;position:relative;overflow:hidden;border-bottom:1px solid rgba(245,242,235,.08)}
+.tech-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
+.tech-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.tech-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,242,235,.4);margin-bottom:2rem;display:flex;align-items:center;gap:.75rem}
+.tech-eyebrow span{display:block;width:24px;height:1px;background:rgba(245,242,235,.25)}
+.tech-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(245,242,235,.08)}
+.tech-score-wrap{display:flex;align-items:center;gap:2rem}
+.tech-ring{position:relative;width:90px;height:90px;flex-shrink:0}
+.tech-ring svg{transform:rotate(-90deg)}
+.tech-ring-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;color:var(--paper)}
+.tech-score-info{}
+.tech-domain{font-family:'DM Mono',monospace;font-size:.72rem;color:rgba(245,242,235,.35);margin-bottom:.5rem;letter-spacing:.05em}
+.tech-verdict{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:var(--paper);line-height:1.4;margin-bottom:.75rem}
+.tech-bar-bg{height:4px;background:rgba(245,242,235,.1);position:relative}
+.tech-bar{height:100%;width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.tech-meta{display:flex;flex-direction:column;gap:.5rem;padding-top:.5rem}
+.tech-meta-row{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-top:1px solid rgba(245,242,235,.06)}
+.tech-meta-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.35);flex:1}
+.tech-meta-val{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:var(--paper)}
+.tech-checks{display:flex;flex-direction:column}
+.tech-check{border-top:1px solid rgba(245,242,235,.06);cursor:pointer;transition:background .15s;user-select:none}
+.tech-check:hover{background:rgba(245,242,235,.03)}
+.tech-check-header{display:flex;align-items:center;gap:1rem;padding:.875rem 0}
+.tech-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;transition:all .3s}
+.tech-icon.pass{background:rgba(26,122,74,.15);color:#4ade80}
+.tech-icon.fail{background:rgba(232,76,30,.12);color:#ff6b5b}
+.tech-icon.warn{background:rgba(201,168,76,.12);color:var(--gold)}
+.tech-icon.spin{background:rgba(245,242,235,.06);color:rgba(245,242,235,.2);font-size:.5rem}
+.tech-check-mid{flex:1;min-width:0}
+.tech-check-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:var(--paper);margin-bottom:2px}
+.tech-check-desc{font-size:.68rem;color:rgba(245,242,235,.35);line-height:1.4}
+.tech-check-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
+.tech-pts{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;line-height:1;transition:color .3s}
+.tech-pts.pass{color:#4ade80}
+.tech-pts.fail{color:#ff6b5b}
+.tech-pts.warn{color:var(--gold)}
+.tech-pts.spin{color:rgba(245,242,235,.2)}
+.tech-pts-lbl{font-size:.55rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,242,235,.2)}
+.tech-arr{font-size:.6rem;color:rgba(245,242,235,.2);transition:transform .25s;margin-top:2px}
+.tech-edu{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+.tech-edu.open{max-height:280px}
+.tech-edu-box{background:rgba(245,242,235,.03);border:1px solid rgba(245,242,235,.08);padding:1rem 1.25rem;margin-bottom:1rem}
+.tech-edu-tag{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.35);margin-bottom:.5rem}
+.tech-edu-body{font-size:.75rem;color:rgba(245,242,235,.45);line-height:1.7;margin-bottom:.75rem}
+.tech-edu-impact{display:flex;align-items:flex-start;gap:.625rem;padding:.625rem .875rem;border:1px solid rgba(232,76,30,.2);background:rgba(232,76,30,.06)}
+.tech-edu-impact.pass{border-color:rgba(26,122,74,.2);background:rgba(26,122,74,.06)}
+.tech-edu-impact.warn{border-color:rgba(201,168,76,.2);background:rgba(201,168,76,.06)}
+.tech-edu-ico{font-size:.75rem;flex-shrink:0;margin-top:1px}
+.tech-edu-txt{font-size:.7rem;color:rgba(245,242,235,.5);line-height:1.55}
+
+/* DISCOVERY PROMPTS SECTION */
+.discovery-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.discovery-header{margin-bottom:2rem}
+.discovery-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:.5rem}
+.discovery-stat{font-size:.78rem;color:var(--muted);line-height:1.6}
+.discovery-stat strong{font-family:'Syne',sans-serif;font-weight:800;color:var(--ink)}
+.disc-prompt-row{display:flex;align-items:flex-start;gap:1.25rem;padding:.875rem 0;border-top:1px solid var(--border)}
+.disc-status{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.disc-status.pass{background:rgba(26,122,74,.12);color:var(--ok)}
+.disc-status.fail{background:rgba(232,76,30,.1);color:var(--warn)}
+.disc-main{flex:1}
+.disc-query{font-size:.8rem;color:var(--ink);font-style:italic;line-height:1.5;margin-bottom:.3rem}
+.disc-sub{font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:.375rem;flex-wrap:wrap}
+.disc-engine-tag{font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--border);color:var(--muted)}
+.disc-runs{font-family:'Syne',sans-serif;font-weight:800;font-size:.88rem;flex-shrink:0;min-width:30px;text-align:right;margin-top:2px}
+.disc-blur-wrap{position:relative;margin-top:0;overflow:hidden}
+.disc-blur-inner{filter:blur(4px);pointer-events:none;user-select:none;opacity:.45}
+.disc-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding-bottom:1.5rem;background:linear-gradient(to bottom,transparent 0%,var(--paper) 50%)}
+.disc-lock-inner{text-align:left;padding:0}
+.disc-lock-title{font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem}
+.disc-lock-sub{font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5;max-width:420px}
+.disc-lock-btn{font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.5rem;text-decoration:none;display:inline-block;transition:opacity .15s}
+.disc-lock-btn:hover{opacity:.8}
+
+/* COMPETITORS SECTION */
+.competitors-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.competitors-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:.5rem}
+.competitors-sub{font-size:.78rem;color:var(--muted);margin-bottom:2rem;line-height:1.6}
+.comp-row{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-top:1px solid var(--border)}
+.comp-row-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;flex:1;color:var(--ink)}
+.comp-row-bar-wrap{width:100px;height:3px;background:var(--cream);border:1px solid var(--border)}
+.comp-row-bar{height:100%;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.comp-blur-wrap{position:relative;overflow:hidden}
+.comp-blur-inner{filter:blur(4px);pointer-events:none;user-select:none;opacity:.45}
+.comp-lock{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-start;padding-bottom:1rem;background:linear-gradient(to bottom,transparent 0%,var(--paper) 50%)}
+.comp-lock-text{font-family:'Syne',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink);padding-bottom:2px}
+
+/* RESET */
+.reset-wrap{max-width:1100px;margin:0 auto;padding:2rem 3rem;border-bottom:1px solid var(--border)}
+.reset-btn{font-family:'Syne',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border-strong);padding:.6rem 1.25rem;cursor:pointer;transition:color .15s,border-color .15s}
+.reset-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+/* STATS */
+.stats-row{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border)}
+.stat{padding:2.5rem 3rem;border-right:1px solid var(--border);position:relative;z-index:1}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:3rem;letter-spacing:-.02em;color:var(--ink);line-height:1;margin-bottom:.5rem}
+.stat-label{font-size:.72rem;color:var(--muted);line-height:1.6}
+
+/* ABOUT */
+.about-strip{max-width:1100px;margin:0 auto;padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;border-bottom:1px solid var(--border)}
+.about-left p{font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:1rem}
+.about-right{display:flex;flex-direction:column;gap:1.5rem;padding-top:1rem}
+.about-item{padding:1.5rem;border:1px solid var(--border);background:var(--cream)}
+.about-item-num{font-family:'Syne',sans-serif;font-weight:800;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.about-item-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:var(--ink);margin-bottom:.375rem}
+.about-item-text{font-size:.78rem;color:var(--muted);line-height:1.7}
+.btn-ink{font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.75rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+.btn-ink:hover{opacity:.8}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem}
+.footer-links{display:flex;gap:2rem;flex-wrap:wrap}
+.footer-links a{font-family:'Syne',sans-serif;font-weight:600;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--ink)}
+.footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
+
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .scanner-section{padding:3rem 1.5rem}
+  .form-grid{grid-template-columns:1fr}
+  .aar-inner{grid-template-columns:1fr;gap:2.5rem}
+  .aar-section{padding:3rem 1.5rem}
+  .health-header{grid-template-columns:1fr;gap:2rem}
+  .health-section{padding:3rem 1.5rem}
+  .prompts-section{padding:2.5rem 1.5rem 0}
+  .cta-section{padding:3rem 1.5rem}
+  .cta-inner{grid-template-columns:1fr;gap:2.5rem}
+  .stats-row{grid-template-columns:1fr}
+  .stat{border-right:none;border-bottom:1px solid var(--border);padding:1.75rem 1.5rem}
+  .about-strip{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+  .gate-row{flex-direction:column}
+  footer{padding:2rem 1.5rem}
+  .reset-wrap{padding:1.5rem}
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="brand">
-    <div class="brand-dot"></div>
-    <div class="brand-logo">appearai.io</div>
-  </div>
-  <h1 class="headline">Is your business<br>visible to AI?</h1>
-  <p class="sub">AI tools like ChatGPT, Perplexity, and Claude are recommending local businesses every day. Find out if yours shows up — free, in seconds.</p>
-  <p class="sub-tag">Built for local businesses — clinics, trades, salons and local service providers.</p>
-  <div class="urgency"><div class="urgency-dot"></div>95% of local business sites fail this check</div>
-  <div class="input-card">
-    <div class="input-label">Enter your website URL</div>
-    <div class="input-row">
-      <input type="text" id="urlInput" placeholder="yourbusiness.com" autocomplete="off" autocapitalize="off"/>
-      <button class="check-btn" id="checkBtn" onclick="runCheck()">Check my site →</button>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">AppearAI</a>
+    <div class="nav-links">
+      <a href="/research.html">Research</a>
+      <a href="/resources.html">Resources</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/case-studies.html">Case Studies</a>
     </div>
-    <div class="err" id="err"></div>
+    <a href="/audit.html" class="nav-cta">Get Your Audit</a>
   </div>
-  <div class="score-card" id="scoreCard">
-    <div class="score-banner">
-      <div class="score-glow" id="scoreGlow"></div>
-      <div class="score-ring">
-        <svg width="82" height="82" viewBox="0 0 82 82">
-          <circle cx="41" cy="41" r="35" fill="none" stroke="#1e1e2e" stroke-width="6"/>
-          <circle cx="41" cy="41" r="35" fill="none" stroke-width="6" stroke-linecap="round"
-            id="scoreArc" stroke-dasharray="219.9" stroke-dashoffset="219.9" stroke="#7c3aed"
-            style="transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1),stroke 0.5s"/>
-        </svg>
-        <div class="score-ring-num" id="scoreNum">—</div>
+</nav>
+
+<!-- SCANNER LEADS THE PAGE -->
+<section class="scanner-section" id="scanner-section">
+  <div class="section-eyebrow"><span></span>Free AI Appearance Check</div>
+  <h1 class="section-title">If someone asks AI to find<br>a business like yours —<br>how often do <em>you</em> appear?</h1>
+  <p class="section-sub">Most local businesses are invisible on AI search and have no idea. Enter your details and we'll show you exactly how often AI recommends your business — and who it recommends instead.</p>
+
+  <div id="scan-states-container">
+  <div id="scan-form-wrap">
+    <div class="scan-form">
+      <div class="form-grid">
+        <div class="form-field">
+          <label class="form-label">Business Name</label>
+          <input class="form-input" id="f-name" placeholder="e.g. Riverside Family Dentistry"/>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Website URL</label>
+          <input class="form-input" id="f-url" placeholder="e.g. riversidefamilydental.com"/>
+        </div>
+        <div class="form-field">
+          <label class="form-label">City / Location</label>
+          <input class="form-input" id="f-city" placeholder="e.g. Austin, TX"/>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Business Category</label>
+          <input class="form-input" id="f-cat" placeholder="e.g. Dentist, Plumber, Lawyer"/>
+        </div>
       </div>
-      <div class="score-info">
-        <div class="score-domain" id="domain"></div>
-        <div class="score-verdict" id="verdict">Analysing your site...</div>
-        <div class="bar-bg"><div class="bar" id="bar"></div></div>
+      <button class="scan-btn" id="scan-btn" onclick="startScan()">Check My AI Appearance Rate™ →</button>
+      <div class="form-note">Free · No signup required · Takes 30–60 seconds</div>
+      <div id="form-error" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
+    </div>
+  </div>
+
+  <div class="scan-state" id="scan-state">
+    <div class="scan-spinner"></div>
+    <div class="scan-title">Running your AI Appearance Check</div>
+    <div class="scan-sub">Checking technical signals · Simulating discovery prompts · Identifying competitors</div>
+    <div class="scan-log" id="scan-log"></div>
+  </div>
+
+  <div class="email-gate" id="email-gate">
+    <div class="gate-icon">◈</div>
+    <div class="gate-title">Your report is ready</div>
+    <p class="gate-sub">Enter your email to reveal your AI Appearance Rate™ and GEO health report for <strong id="gate-biz-name"></strong>.</p>
+    <div class="gate-row">
+      <input class="form-input" type="email" id="gate-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')revealResults()"/>
+      <button class="gate-btn" onclick="revealResults()">See My Report →</button>
+    </div>
+    <div class="gate-note">No spam · Unsubscribe anytime</div>
+  </div>
+  </div><!-- /scan-states-container -->
+</section>
+
+<!-- RESULTS -->
+<div class="results-wrap" id="results-wrap">
+
+  <!-- 1. TECHNICAL AI READINESS -->
+  <div class="tech-section">
+    <div class="tech-inner">
+      <div class="tech-eyebrow"><span></span>Technical AI Readiness</div>
+      <div class="tech-header">
+        <div class="tech-score-wrap">
+          <div class="tech-ring">
+            <svg width="90" height="90" viewBox="0 0 90 90">
+              <circle cx="45" cy="45" r="38" fill="none" stroke="rgba(245,242,235,.08)" stroke-width="6"/>
+              <circle cx="45" cy="45" r="38" fill="none" stroke-width="6" stroke-linecap="round"
+                id="tech-arc" stroke-dasharray="238.8" stroke-dashoffset="238.8"
+                style="transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1),stroke .5s"/>
+            </svg>
+            <div class="tech-ring-num" id="tech-score-num">—</div>
+          </div>
+          <div class="tech-score-info">
+            <div class="tech-domain" id="tech-domain"></div>
+            <div class="tech-verdict" id="tech-verdict">Analysing your site…</div>
+            <div class="tech-bar-bg"><div class="tech-bar" id="tech-bar"></div></div>
+          </div>
+        </div>
+        <div class="tech-meta">
+          <div class="tech-meta-row">
+            <div class="tech-meta-label">Signals checked</div>
+            <div class="tech-meta-val">7</div>
+          </div>
+          <div class="tech-meta-row">
+            <div class="tech-meta-label">Website tested</div>
+            <div class="tech-meta-val" id="tech-domain-meta">—</div>
+          </div>
+          <div class="tech-meta-row">
+            <div class="tech-meta-label">Discovery prompts run</div>
+            <div class="tech-meta-val">20</div>
+          </div>
+        </div>
+      </div>
+      <div class="tech-checks" id="tech-checks"></div>
+    </div>
+  </div>
+
+  <!-- 2. DISCOVERY PROMPTS TESTED -->
+  <div class="discovery-section">
+    <div class="discovery-header">
+      <div class="discovery-title">Discovery Prompts Tested</div>
+      <div class="discovery-stat">Appeared in <strong id="disc-appeared">—</strong> out of <strong>20</strong> discovery prompts run across 5 AI engines</div>
+    </div>
+    <div id="disc-visible"></div>
+    <div id="disc-blur-wrap" style="display:none">
+      <div style="position:relative;overflow:hidden">
+        <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="disc-blur-rows"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
+      </div>
+      <div style="padding:1.25rem 0 0">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in your Full AI Visibility Audit</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Every prompt, every engine, every run — and exactly what your competitors are doing that you aren't.</div>
+        <a href="/audit.html" style="font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.5rem;text-decoration:none;display:inline-block;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Get Your Full AI Visibility Audit →</a>
       </div>
     </div>
-    <div class="checks" id="checks"></div>
   </div>
-  <div class="cta-card" id="cta">
-    <div class="cta-lbl">Join 100<span style="font-size:0.7em">s</span> of local businesses getting found on AI</div>
-    <div class="cta-hl">Every day you wait, a competitor gets recommended instead.</div>
-    <p class="cta-txt">Your site has gaps stopping AI from recommending you to customers. Our team fixes this fast — audits, sprints, and ongoing monitoring.</p>
-    <a href="https://appearai.io/audit" class="cta-btn">Get my free audit →</a>
+
+  <!-- 3. COMPETITORS -->
+  <div class="competitors-section">
+    <div class="competitors-title">Who Appeared Instead</div>
+    <div class="competitors-sub">Businesses appearing in the same discovery prompts where yours did not</div>
+    <div id="comp-visible"></div>
+    <div id="comp-blur-wrap" style="display:none">
+      <div style="position:relative;overflow:hidden">
+        <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="comp-blur-rows"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
+      </div>
+      <div style="padding:.875rem 0 0">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink);padding-bottom:2px;display:inline-block">+ more competitors revealed in your Full AI Visibility Audit</div>
+      </div>
+    </div>
   </div>
-  <div class="powered">powered by <b style="-webkit-text-fill-color:var(--text);color:var(--text)">appearai.io</b></div>
+
+  <!-- 4. CTA -->
+  <div class="cta-section">
+    <div class="cta-inner">
+      <div class="cta-left">
+        <div class="cta-eyebrow"><span></span>Your next step</div>
+        <div class="cta-title">Get your Full AI<br>Visibility Audit for <em>$250</em></div>
+        <p class="cta-sub">Your complete AI visibility picture — every prompt, every signal, every competitor — detailed PDF report with a 15-minute walkthrough call included.</p>
+      </div>
+      <div class="cta-right">
+        <div id="personalised-insight" style="display:none;font-size:.82rem;color:var(--ink);line-height:1.8;padding:1.25rem 1.5rem;border-left:3px solid var(--ink);background:var(--cream);margin-bottom:1.5rem;font-style:italic"></div>
+
+        <div style="border:1px solid var(--border);padding:1.25rem;margin-bottom:1.5rem;background:var(--paper)">
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem">What's in your Full AI Visibility Audit</div>
+          <div style="display:flex;flex-direction:column;gap:.5rem">
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>All 20 discovery prompts — every engine, every run</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Full technical breakdown — 7 scored signals with exact fixes</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Complete competitor list — every business appearing instead of you</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Personalised fix plan — ranked by impact on your visibility</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>PDF report + 15-minute walkthrough call included</div>
+          </div>
+        </div>
+        <a href="/audit.html" style="display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Get Your Full AI Visibility Audit →</a>
+        <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.75rem;letter-spacing:.05em">$250 · PDF Report + 15-min call · Delivered within 48hrs</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reset-wrap">
+    <button class="reset-btn" onclick="resetScan()">← Scan another business</button>
+  </div>
 </div>
-<script>
-const WORKER='https://appearai-checker.socialmoa95.workers.dev';
 
-const defs=[
-  {id:'https',title:'HTTPS & Security',weight:10,
-   tag:'What is HTTPS?',
-   edu:'HTTPS encrypts the connection between a visitor and your website. It shows as the padlock icon in browsers. Without it, your site is flagged as "Not Secure" by every major browser.',
-   impactFail:'AI crawlers like GPTBot and ClaudeBot deprioritise non-HTTPS sites. No HTTPS means a lower chance of being recommended by ChatGPT or Claude.',
-   impactPass:'Your site is secure. AI crawlers fully trust HTTPS sites and are more likely to index and cite them in answers.'},
-  {id:'schema',title:'Structured Data (Schema)',weight:20,
-   tag:'What is structured data?',
-   edu:'Schema markup is hidden code that tells AI exactly what your business is — your name, address, phone, services, hours, and reviews. Think of it as a business card written in a language AI reads perfectly.',
-   impactFail:'Without schema, AI guesses what your business does and often gets it wrong — or skips you entirely when recommending local businesses to potential customers.',
-   impactPass:'Excellent. Your schema markup means AI can read your business details accurately and confidently recommend you when someone searches for your services.'},
-  {id:'robots',title:'AI Crawler Access',weight:15,
-   tag:'What is robots.txt?',
-   edu:'robots.txt is a file on your website that tells bots what they can and cannot read. Many websites accidentally block AI crawlers like GPTBot (ChatGPT), ClaudeBot, and PerplexityBot.',
-   impactFail:'An AI crawler is being blocked. This means ChatGPT, Claude, or Perplexity literally cannot read your website — making it impossible for them to recommend you.',
-   impactPass:'All major AI crawlers are allowed. GPTBot, ClaudeBot, and PerplexityBot can fully access and read your website content.'},
-  {id:'llms',title:'llms.txt File',weight:20,
-   tag:'What is llms.txt?',
-   edu:'llms.txt is a new standard file (like robots.txt but for AI) that guides AI language models on how to understand your website — what your business does, your key pages, and how to reference you. Very few local businesses have this set up correctly.',
-   impactFail:'No llms.txt means AI has no guide for understanding your site. This is one of the most impactful fixes for AI visibility and requires specialist setup.',
-   impactPass:'You have an llms.txt file. This gives AI models a direct guide to your business, improving how accurately they describe and recommend you.'},
-  {id:'metadesc',title:'Meta Description',weight:15,
-   tag:'What is a meta description?',
-   edu:'A meta description is a short summary of your page that appears in search results and is read by AI crawlers. It tells AI exactly what your business does in plain language.',
-   impactFail:'No meta description means AI has to guess what your business does from your page content alone — leading to inaccurate or missing recommendations.',
-   impactPass:'Your meta description gives AI a clear, concise summary of your business — improving how accurately it describes and recommends you.'},
-  {id:'title',title:'Business Name & Page Title',weight:10,
-   tag:'Why does your page title matter?',
-   edu:'Your page title is the first thing AI reads when visiting your site. It should clearly state your business name and what you do. Generic titles like "Home" or "Welcome" confuse AI crawlers.',
-   impactFail:'Your page title is weak or generic. AI cannot confidently identify your business name or what you do — making it hard to recommend you accurately.',
-   impactPass:'Your page title clearly identifies your business. AI can immediately understand who you are and what you do.'},
-  {id:'content',title:'Content Structure',weight:10,
-   tag:'Why does content structure matter?',
-   edu:'Structure refers to how your page is organised — clear H1/H2 headings, a descriptive page title, a meta description, and obvious info about your services and location. AI reads structure, not just words.',
-   impactFail:'Poor structure means AI cannot confidently understand your services or location. It may describe your business vaguely or not recommend you at all.',
-   impactPass:'Good structure means AI can clearly identify what you do, where you are, and who to recommend you to.'},
-];
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat"><div class="stat-num">45%</div><div class="stat-label">of consumers now use AI to find local services — up from 6% one year ago</div></div>
+  <div class="stat"><div class="stat-num">83%</div><div class="stat-label">of local businesses don't appear in AI-generated recommendations</div></div>
+  <div class="stat"><div class="stat-num">1.2%</div><div class="stat-label">of all local business locations are currently recommended by ChatGPT</div></div>
+</div>
 
-const msgs={
-  https:    {pass:'Secure — AI crawlers fully trust your site.',fail:'Not HTTPS — AI crawlers flag this site as untrustworthy.',warn:'HTTPS unclear.'},
-  schema:   {pass:'Schema found — AI knows exactly who you are.',fail:'No schema found — AI builds an incomplete picture of your business.',warn:'Limited schema — AI is building an incomplete picture of your business.'},
-  robots:   {pass:'All AI crawlers allowed — they can read your site.',fail:'AI crawlers blocked — ChatGPT or Claude cannot read you.',warn:'Crawler access unclear — needs investigation.'},
-  llms:     {pass:'llms.txt found — AI has a guide to your content.',fail:'No llms.txt — AI has no guide to understand your site.',warn:'llms.txt unclear.'},
-  metadesc: {pass:'Meta description found — AI has a clear summary of your business.',fail:'No meta description — AI has to guess what your business does.',warn:'Meta description too short or missing.'},
-  title:    {pass:'Strong page title — AI can clearly identify your business.',fail:'Weak or generic title — AI cannot identify your business name.',warn:'Page title could be more descriptive.'},
-  content:  {pass:'Good structure — AI understands your business.',fail:'Poor structure — AI cannot identify your services.',warn:'Structure needs improvement.'},
-};
+<!-- ABOUT -->
+<div class="about-strip">
+  <div class="about-left">
+    <div class="section-eyebrow"><span></span>What we do</div>
+    <h2 class="section-title">The AI visibility<br>agency for local<br>businesses</h2>
+    <p>AppearAI helps local businesses appear consistently in AI-generated recommendations across ChatGPT, Gemini, and Perplexity.</p>
+    <p>We invented the AI Appearance Rate™ — the metric that measures how often AI actually recommends your business when someone nearby is looking for your services.</p>
+    <a href="/audit.html" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Get a free audit</a>
+  </div>
+  <div class="about-right">
+    <div class="about-item"><div class="about-item-num">01</div><div class="about-item-title">We measure your AAR™</div><div class="about-item-text">The only metric that tells you exactly how often AI recommends your business — not estimates, not proxies, but real prompt results across real platforms.</div></div>
+    <div class="about-item"><div class="about-item-num">02</div><div class="about-item-title">We identify what's holding you back</div><div class="about-item-text">From blocked AI crawlers to missing schema to weak review signals — we find the exact reasons your AAR™ is low and what to fix first.</div></div>
+    <div class="about-item"><div class="about-item-num">03</div><div class="about-item-title">We improve your AAR™ month over month</div><div class="about-item-text">Our clients see their AI Appearance Rate™ improve consistently. We implement the fixes, track the results, and report monthly on exactly what moved.</div></div>
+  </div>
+</div>
 
-let scores={},openCheck=null;
+<footer style="border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relative;z-index:1">
+  <div style="max-width:1100px;margin:0 auto">
 
-function norm(r){let u=r.trim();if(!u.startsWith('http'))u='https://'+u;try{return new URL(u)}catch(e){return null}}
-function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
-
-function tally(){
-  let e=0,t=0;
-  defs.forEach(d=>{t+=d.weight;if(scores[d.id]!==undefined)e+=scores[d.id]});
-  const p=Math.round((e/t)*100);
-  const tier=p>=70?'good':p>=40?'warn':'bad';
-  const col={good:'#00e676',warn:'#ffb300',bad:'#ff4444'};
-  const barBg={good:'linear-gradient(90deg,#00e676,#00c853)',warn:'linear-gradient(90deg,#ffb300,#ff6d00)',bad:'linear-gradient(90deg,#ff4444,#d50000)'};
-  const glows={good:'radial-gradient(ellipse,rgba(0,230,118,1) 0%,transparent 70%)',warn:'radial-gradient(ellipse,rgba(255,179,0,1) 0%,transparent 70%)',bad:'radial-gradient(ellipse,rgba(255,68,68,1) 0%,transparent 70%)'};
-  const vt={
-    good:'Your site gives AI a good chance of recommending you.',
-    warn:'AI tools may know you exist — but aren\'t recommending you consistently to the customers who need you.',
-    bad:'Your site doesn\'t give AI what it needs to recommend your business to customers.'
-  };
-  const circ=219.9;
-  document.getElementById('scoreNum').textContent=p;
-  document.getElementById('scoreNum').style.color=col[tier];
-  document.getElementById('scoreArc').style.strokeDashoffset=circ-(circ*(p/100));
-  document.getElementById('scoreArc').style.stroke=col[tier];
-  document.getElementById('scoreGlow').style.background=glows[tier];
-  document.getElementById('bar').style.width=p+'%';
-  document.getElementById('bar').style.background=barBg[tier];
-  const v=document.getElementById('verdict');
-  v.textContent=vt[tier];v.style.color=col[tier];
-  return p;
-}
-
-function setCheck(id,status,score){
-  const icon=document.getElementById('i-'+id);
-  const desc=document.getElementById('d-'+id);
-  const pts=document.getElementById('pts-'+id);
-  const item=document.getElementById('c-'+id);
-  const def=defs.find(d=>d.id===id);
-  if(!icon)return;
-  icon.className='icon '+status;
-  icon.textContent=status==='pass'?'✓':status==='fail'?'✗':'!';
-  desc.textContent=msgs[id][status]||msgs[id].warn;
-  if(pts){pts.className='pts '+status;pts.textContent=score+'/'+def.weight}
-  item.style.opacity='1';
-  scores[id]=score;
-  tally();
-  const imp=document.getElementById('imp-'+id);
-  if(imp){
-    if(status==='pass'){
-      imp.className='edu-impact pass';
-      imp.innerHTML=`<div class="edu-impact-ico">✓</div><div class="edu-impact-txt">${def.impactPass}</div>`;
-    } else {
-      imp.className='edu-impact'+(status==='warn'?' warn':'');
-      imp.innerHTML=`<div class="edu-impact-ico">${status==='warn'?'!':'✗'}</div><div class="edu-impact-txt">${def.impactFail}</div>`;
-    }
-  }
-}
-
-function toggleCheck(id){
-  const exp=document.getElementById('exp-'+id);
-  const arr=document.getElementById('arr-'+id);
-  if(!exp)return;
-  const isOpen=exp.classList.contains('open');
-  if(openCheck&&openCheck!==id){
-    const pe=document.getElementById('exp-'+openCheck);
-    const pa=document.getElementById('arr-'+openCheck);
-    if(pe)pe.classList.remove('open');
-    if(pa)pa.style.transform='';
-  }
-  exp.classList.toggle('open',!isOpen);
-  arr.style.transform=!isOpen?'rotate(180deg)':'';
-  openCheck=!isOpen?id:null;
-}
-
-async function runCheck(){
-  const raw=document.getElementById('urlInput').value;
-  if(!raw.trim()){document.getElementById('urlInput').focus();return}
-  const parsed=norm(raw);
-  const errEl=document.getElementById('err');
-  if(!parsed){errEl.textContent='Please enter a valid address, e.g. yourbusiness.com';errEl.style.display='block';return}
-  errEl.style.display='none';
-  const btn=document.getElementById('checkBtn');
-  btn.disabled=true;btn.textContent='Checking...';
-  const card=document.getElementById('scoreCard');
-  const checksEl=document.getElementById('checks');
-  const cta=document.getElementById('cta');
-  card.style.display='block';cta.style.display='none';
-  checksEl.innerHTML='';scores={};openCheck=null;
-  document.getElementById('scoreNum').textContent='—';
-  document.getElementById('scoreNum').style.color='';
-  document.getElementById('scoreArc').style.strokeDashoffset='219.9';
-  document.getElementById('scoreArc').style.stroke='#7c3aed';
-  document.getElementById('bar').style.width='0%';
-  document.getElementById('verdict').textContent='Analysing your site...';
-  document.getElementById('verdict').style.color='';
-  document.getElementById('domain').textContent=parsed.hostname.replace('www.','');
-
-  defs.forEach((d,i)=>{
-    const el=document.createElement('div');
-    el.className='check';el.id='c-'+d.id;
-    el.style.animationDelay=(i*0.07)+'s';
-    el.onclick=()=>toggleCheck(d.id);
-    el.innerHTML=`
-      <div class="check-header">
-        <div class="icon spin" id="i-${d.id}">···</div>
-        <div class="check-mid">
-          <div class="check-title">${d.title}</div>
-          <div class="check-desc" id="d-${d.id}">Checking... <span style="color:#3a3a60;font-size:10px">tap to learn more</span></div>
+    <!-- Top row: logo + nav links -->
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)">
+      <div>
+        <div class="footer-logo" style="margin-bottom:1rem;display:inline-block">AppearAI</div>
+        <div style="font-size:.72rem;color:var(--muted);line-height:1.9">
+          131 Continental Dr, Suite 305<br>Newark, Delaware 19713<br>United States (Operations)<br><br><em style="font-size:.7rem">Remote-first · Global team</em>
         </div>
-        <div class="check-right">
-          <div class="pts spin" id="pts-${d.id}">—/${d.weight}</div>
-          <div class="pts-lbl">points</div>
-          <div class="arr" id="arr-${d.id}">▾</div>
+        <div style="margin-top:.75rem"><a href="mailto:hello@appearai.io" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">hello@appearai.io</a></div>
+      </div>
+
+      <div style="display:flex;gap:4rem;flex-wrap:wrap">
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem">Company</div>
+          <div style="display:flex;flex-direction:column;gap:.5rem">
+            <a href="/about.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">About</a>
+            <a href="/services-local.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">For Local Businesses</a>
+            <a href="/services-enterprise.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">For Brands</a>
+            <a href="/blog.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Blog</a>
+            <a href="/case-studies.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Case Studies</a>
+            <a href="/contact.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Contact</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem">Resources</div>
+          <div style="display:flex;flex-direction:column;gap:.5rem">
+            <a href="/research.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Research</a>
+            <a href="/resources.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Resources</a>
+            <a href="/audit.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Get Your Audit</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem">Legal</div>
+          <div style="display:flex;flex-direction:column;gap:.5rem">
+            <a href="/privacy.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a>
+            <a href="/terms.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Terms of Service</a>
+            <a href="/cookies.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Cookie Policy</a>
+            <a href="/refunds.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Refund Policy</a>
+          </div>
         </div>
       </div>
-      <div class="edu-wrap" id="exp-${d.id}">
-        <div class="edu-box">
-          <div class="edu-tag">${d.tag}</div>
-          <div class="edu-body">${d.edu}</div>
-          <div class="edu-impact" id="imp-${d.id}">
-            <div class="edu-impact-ico">···</div>
-            <div class="edu-impact-txt">Checking impact...</div>
+    </div>
+
+    <!-- Bottom row: copyright -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+      <div style="font-size:.65rem;color:var(--muted);letter-spacing:.05em">© 2026 Avarabrands Inc. All rights reserved.</div>
+      <div style="font-size:.65rem;color:var(--muted)">AppearAI is a product of Avarabrands Inc.</div>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
+const WORKER_URL = "https://appearai-checker.socialmoa95.workers.dev";
+const FORMSPREE = "https://formspree.io/f/xqeyorpd";
+
+let scanData = null;
+let bizName = "";
+let bizUrl = "";
+
+function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+function show(id){document.getElementById(id).style.display="block"}
+function hide(id){document.getElementById(id).style.display="none"}
+function switchScanState(show_id){
+  ["scan-form-wrap","scan-state","email-gate"].forEach(id=>{
+    const e=document.getElementById(id);
+    if(!e)return;
+    e.style.display=(id===show_id)?"block":"none";
+  });
+}
+function el(id){return document.getElementById(id)}
+
+function addLog(msg){
+  const log = el("scan-log");
+  const line = document.createElement("span");
+  line.className = "scan-log-line";
+  line.textContent = msg;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+async function startScan(){
+  bizName = el("f-name").value.trim();
+  bizUrl = el("f-url").value.trim();
+  const city = el("f-city").value.trim();
+  const cat = el("f-cat").value.trim();
+
+  if(!bizName||!bizUrl||!city||!cat){
+    el("form-error").textContent = "Please fill in all four fields.";
+    show("form-error");
+    return;
+  }
+  hide("form-error");
+  switchScanState("scan-state");
+  el("scan-log").innerHTML = "";
+
+  try {
+    await sleep(300); addLog("→ Initialising AppearAI scan engine…");
+    await sleep(600); addLog(`→ Building 20 discovery prompts for ${bizName} in ${city}…`);
+    await sleep(500); addLog("→ Running technical signal checks on your website…");
+    await sleep(500); addLog("→ Checking crawlability and AI bot access…");
+    await sleep(400); addLog("→ Checking structured data and schema markup…");
+    await sleep(400); addLog("→ Checking llms.txt and meta signals…");
+    await sleep(400); addLog("→ Checking content structure and page signals…");
+    await sleep(600); addLog("→ Analysing discovery prompt patterns across AI engines…");
+    await sleep(400); addLog("→ Identifying competitors appearing in your category…");
+    await sleep(300); addLog("→ Compiling your AI Visibility results…");
+
+    scanData = {_meta: {bizName, bizUrl, city, cat}};
+
+    // Run live technical check + Claude discovery in parallel
+    addLog("→ Running live technical signals check…");
+    const [techResult, claudeData] = await Promise.allSettled([
+      fetchTechSignals(bizUrl),
+      fetchClaudeData(bizName, bizUrl, city, cat)
+    ]);
+
+    scanData.tech = techResult.status === "fulfilled" ? techResult.value : null;
+    if(claudeData.status === "fulfilled") {
+      Object.assign(scanData, claudeData.value);
+    }
+
+    await addLog("✓ Scan complete — report ready");
+    await sleep(400);
+
+    el("gate-biz-name").textContent = bizName;
+    switchScanState("email-gate");
+
+  } catch(e){
+    switchScanState("scan-form-wrap");
+    el("form-error").textContent = "Scan failed: " + e.message;
+    show("form-error");
+  }
+}
+
+function revealResults(){
+  const email = el("gate-email").value.trim();
+  if(!email||!email.includes("@")) return;
+  switchScanState(null);
+  const r = scanData;
+
+  // ── 1. TECHNICAL CHECKER (live worker data) ─────────────────────────────
+  const tech = r.tech;
+  const techDefs = [
+    {id:"https",   title:"HTTPS & Security",          weight:10,
+     tag:"What is HTTPS?",
+     edu:"HTTPS encrypts the connection between a visitor and your website. Without it, your site is flagged as Not Secure by every major browser.",
+     impactFail:"AI crawlers like GPTBot and ClaudeBot deprioritise non-HTTPS sites. No HTTPS means a lower chance of being recommended.",
+     impactPass:"Your site is secure. AI crawlers fully trust HTTPS sites and are more likely to index and cite them."},
+    {id:"schema",  title:"Structured Data (Schema)",   weight:20,
+     tag:"What is structured data?",
+     edu:"Schema markup is hidden code that tells AI exactly what your business is — your name, address, phone, services, hours, and reviews.",
+     impactFail:"Without schema, AI guesses what your business does and often gets it wrong — or skips you entirely when recommending local businesses.",
+     impactPass:"Your schema markup means AI can read your business details accurately and confidently recommend you."},
+    {id:"robots",  title:"AI Crawler Access",           weight:15,
+     tag:"What is robots.txt?",
+     edu:"robots.txt tells bots what they can and cannot read. Many websites accidentally block AI crawlers like GPTBot, ClaudeBot, and PerplexityBot.",
+     impactFail:"An AI crawler is being blocked. ChatGPT, Claude, or Perplexity literally cannot read your website — making it impossible for them to recommend you.",
+     impactPass:"All major AI crawlers are allowed. GPTBot, ClaudeBot, and PerplexityBot can fully access and read your website content."},
+    {id:"llms",    title:"llms.txt File",               weight:20,
+     tag:"What is llms.txt?",
+     edu:"llms.txt is a new standard file that guides AI language models on how to understand your website. Very few local businesses have this set up.",
+     impactFail:"No llms.txt means AI has no guide for understanding your site. This is one of the most impactful fixes for AI visibility.",
+     impactPass:"You have an llms.txt file. This gives AI models a direct guide to your business, improving how accurately they describe and recommend you."},
+    {id:"metadesc",title:"Meta Description",            weight:15,
+     tag:"What is a meta description?",
+     edu:"A meta description is a short summary of your page read by AI crawlers. It tells AI exactly what your business does in plain language.",
+     impactFail:"No meta description means AI has to guess what your business does — leading to inaccurate or missing recommendations.",
+     impactPass:"Your meta description gives AI a clear, concise summary of your business — improving how accurately it recommends you."},
+    {id:"title",   title:"Business Name & Page Title",  weight:10,
+     tag:"Why does your page title matter?",
+     edu:"Your page title is the first thing AI reads. It should clearly state your business name and what you do. Generic titles like Home confuse AI crawlers.",
+     impactFail:"Your page title is weak or generic. AI cannot confidently identify your business name or what you do.",
+     impactPass:"Your page title clearly identifies your business. AI can immediately understand who you are and what you do."},
+    {id:"content", title:"Content Structure",           weight:10,
+     tag:"Why does content structure matter?",
+     edu:"Structure refers to how your page is organised — clear headings, descriptive title, meta description, and obvious info about your services and location.",
+     impactFail:"Poor structure means AI cannot confidently understand your services or location. It may describe your business vaguely or not recommend you at all.",
+     impactPass:"Good structure means AI can clearly identify what you do, where you are, and who to recommend you to."},
+  ];
+
+  const techMsgs = {
+    https:    {pass:"Secure — AI crawlers fully trust your site.",     fail:"Not HTTPS — AI crawlers flag this site as untrustworthy.",      warn:"HTTPS unclear."},
+    schema:   {pass:"Schema found — AI knows exactly who you are.",    fail:"No schema — AI builds an incomplete picture of your business.", warn:"Limited schema detected."},
+    robots:   {pass:"All AI crawlers allowed — they can read you.",    fail:"AI crawlers blocked — ChatGPT or Claude cannot read you.",      warn:"Crawler access unclear."},
+    llms:     {pass:"llms.txt found — AI has a direct guide to you.",  fail:"No llms.txt — AI has no structured guide to your site.",       warn:"llms.txt status unclear."},
+    metadesc: {pass:"Meta description found.",                          fail:"No meta description — AI has to guess what you do.",           warn:"Meta description too short."},
+    title:    {pass:"Strong page title — AI can identify you.",        fail:"Weak title — AI cannot identify your business.",               warn:"Page title needs work."},
+    content:  {pass:"Good structure — AI understands your business.",  fail:"Poor structure — AI cannot identify your services.",           warn:"Structure needs improvement."},
+  };
+
+  const checksEl = el("tech-checks");
+  checksEl.innerHTML = "";
+  let techScore = 0, techTotal = 0, openTech = null;
+
+  techDefs.forEach((d, i) => {
+    const t = tech?.results?.[d.id];
+    const status = t?.status || "warn";
+    const score = t?.score ?? 0;
+    techScore += score; techTotal += d.weight;
+    const msg = techMsgs[d.id][status] || techMsgs[d.id].warn;
+
+    const div = document.createElement("div");
+    div.className = "tech-check";
+    div.id = "tc-" + d.id;
+    div.style.animationDelay = (i * 0.06) + "s";
+    div.innerHTML = `
+      <div class="tech-check-header" onclick="toggleTech('${d.id}')">
+        <div class="tech-icon ${status}">${status==="pass"?"✓":status==="fail"?"✗":"!"}</div>
+        <div class="tech-check-mid">
+          <div class="tech-check-title">${d.title}</div>
+          <div class="tech-check-desc">${msg}</div>
+        </div>
+        <div class="tech-check-right">
+          <div class="tech-pts ${status}">${score}/${d.weight}</div>
+          <div class="tech-pts-lbl">points</div>
+          <div class="tech-arr" id="tarr-${d.id}">▾</div>
+        </div>
+      </div>
+      <div class="tech-edu" id="tedu-${d.id}">
+        <div class="tech-edu-box">
+          <div class="tech-edu-tag">${d.tag}</div>
+          <div class="tech-edu-body">${d.edu}</div>
+          <div class="tech-edu-impact ${status}">
+            <div class="tech-edu-ico">${status==="pass"?"✓":"✗"}</div>
+            <div class="tech-edu-txt">${status==="pass"?d.impactPass:d.impactFail}</div>
           </div>
         </div>
       </div>`;
-    checksEl.appendChild(el);
+    checksEl.appendChild(div);
   });
 
-  const base=parsed.origin;
+  // Score ring + bar + verdict
+  const pct = techTotal ? Math.round((techScore / techTotal) * 100) : 0;
+  const tier = pct >= 70 ? "good" : pct >= 40 ? "warn" : "bad";
+  const col = {good:"#4ade80", warn:"#f5c842", bad:"#ff6b5b"}[tier];
+  const verdicts = {
+    good:"Your site gives AI a good chance of recommending you.",
+    warn:"AI may know you exist — but isn't recommending you consistently.",
+    bad:"Your site doesn't give AI what it needs to recommend your business."
+  };
+  const circ = 238.8;
+  el("tech-score-num").textContent = pct;
+  el("tech-score-num").style.color = col;
+  el("tech-arc").style.strokeDashoffset = circ - (circ * (pct / 100));
+  el("tech-arc").style.stroke = col;
+  el("tech-bar").style.width = pct + "%";
+  el("tech-bar").style.background = col;
+  el("tech-verdict").textContent = verdicts[tier];
+  el("tech-verdict").style.color = col;
+  const domainClean = bizUrl.replace(/https?:\/\//,"").replace(/\/$/,"");
+  el("tech-domain").textContent = domainClean;
+  const dmEl = el("tech-domain-meta"); if(dmEl) dmEl.textContent = domainClean;
 
-  try {
-    const wResp=await fetch(`${WORKER}?url=${encodeURIComponent(base)}`);
-    const wData=await wResp.json();
-    if(wData&&wData.results){
-      const r=wData.results;
-      for(const[i,id] of ['https','schema','robots','llms','metadesc','title','content'].entries()){
-        await sleep(i*100);
-        setCheck(id,r[id]?.status||'warn',r[id]?.score??0);
-      }
-    }
-  } catch(e){
-    setCheck('https',parsed.protocol==='https:'?'pass':'fail',parsed.protocol==='https:'?10:0);
-    ['schema','robots','llms','metadesc','title','content'].forEach(id=>setCheck(id,'warn',0));
+  // ── 2. DISCOVERY PROMPTS — 2 visible, rest locked ───────────────────────
+  const prompts = r.prompts || [];
+  const appearedCount = prompts.filter(p => p.appeared).length;
+  el("disc-appeared").textContent = appearedCount;
+
+  const visiblePrompts = prompts.slice(0, 5);
+  const hiddenPrompts  = prompts.slice(5);
+
+  el("disc-visible").innerHTML = visiblePrompts.map(p => {
+    const runs = typeof p.appearedInRuns === "number" ? p.appearedInRuns : (p.appeared ? 2 : 0);
+    return `<div class="disc-prompt-row">
+      <div class="disc-status ${p.appeared?"pass":"fail"}">${p.appeared?"✓":"✗"}</div>
+      <div class="disc-main">
+        <div class="disc-query">"${p.query}"</div>
+        <div class="disc-sub">Appeared in <span style="filter:blur(4px);user-select:none;pointer-events:none;display:inline-flex;align-items:center;gap:.3rem;vertical-align:middle">${runs} of 3 runs &nbsp;<span class="disc-engine-tag">CHATGPT</span><span class="disc-engine-tag">GEMINI</span><span class="disc-engine-tag">PERPLEXITY</span></span></div>
+      </div>
+      <div style="filter:blur(4px);user-select:none;pointer-events:none;font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;flex-shrink:0;min-width:30px;text-align:right;margin-top:2px">${runs}/3</div>
+    </div>`;
+  }).join("");
+
+  if(hiddenPrompts.length) {
+    el("disc-blur-rows").innerHTML = `
+      <div class="disc-prompt-row">
+        <div class="disc-status fail">✗</div>
+        <div class="disc-main">
+          <div class="disc-query">"Who would you recommend for ${r._meta?.cat||"this service"} in ${r._meta?.city||"my area"}?"</div>
+          <div class="disc-sub">Appeared in 0 of 3 runs · <span class="disc-engine-tag">CHATGPT</span> <span class="disc-engine-tag">GEMINI</span></div>
+        </div>
+        <div class="disc-runs" style="color:#ff6b5b">0/3</div>
+      </div>`;
+    el("disc-blur-wrap").style.display = "block";
   }
 
-  btn.disabled=false;btn.textContent='Check again →';
-  if(tally()<80)cta.style.display='block';
+  // ── 3. COMPETITORS — 2 visible, rest locked ──────────────────────────────
+  const competitors = r.competitors || [];
+  const visibleComps = competitors.slice(0, 2);
+  const hiddenComps  = competitors.slice(2);
+
+  el("comp-visible").innerHTML = visibleComps.map(c => {
+    const pctC = c.aar || 50;
+    const colC = pctC >= 50 ? "#4ade80" : pctC >= 25 ? "#f5c842" : "#ff6b5b";
+    return `<div class="comp-row">
+      <div class="comp-row-name">${c.name}</div>
+      <div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:${pctC}%;background:${colC}"></div></div>
+    </div>`;
+  }).join("");
+
+  if(hiddenComps.length) {
+    el("comp-blur-rows").innerHTML = `
+      <div class="comp-row">
+        <div class="comp-row-name">${r._meta?.city||"Local"} ${r._meta?.cat||"Business"} Competitor</div>
+        <div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:68%;background:#4ade80"></div></div>
+      </div>`;
+    el("comp-blur-wrap").style.display = "block";
+  }
+
+  // ── 4. CTA personalised insight ──────────────────────────────────────────
+  el("cta-biz-name").textContent = bizName;
+  const insight = r.insight || "";
+  const insightEl = el("personalised-insight");
+  if(insightEl && insight){ insightEl.textContent = insight; insightEl.style.display = "block"; }
+
+  // Submit email silently
+  fetch(FORMSPREE,{
+    method:"POST",
+    headers:{"Content-Type":"application/json","Accept":"application/json"},
+    body: JSON.stringify({
+      email, business: bizName,
+      techScore: pct+"%",
+      appeared: appearedCount+"/20",
+      message: `New scan. Business: ${bizName}. Tech: ${pct}%. Appeared: ${appearedCount}/20 prompts.`
+    })
+  }).catch(()=>{});
+
+  show("results-wrap");
+  el("results-wrap").scrollIntoView({behavior:"smooth"});
 }
 
-document.getElementById('urlInput').addEventListener('keydown',e=>{if(e.key==='Enter')runCheck()});
+function toggleTech(id){
+  const edu = el("tedu-"+id);
+  const arr = el("tarr-"+id);
+  if(!edu) return;
+  const open = edu.classList.contains("open");
+  // Close any open
+  document.querySelectorAll(".tech-edu.open").forEach(e=>e.classList.remove("open"));
+  document.querySelectorAll(".tech-arr").forEach(a=>a.style.transform="");
+  if(!open){ edu.classList.add("open"); arr.style.transform="rotate(180deg)"; }
+}
+
+async function fetchTechSignals(url){
+  let u = url.trim();
+  if(!u.startsWith("http")) u = "https://"+u;
+  try{ new URL(u); }catch(e){ u="https://"+url.trim(); }
+  const resp = await fetch(`${WORKER_URL}?url=${encodeURIComponent(u)}`);
+  return await resp.json();
+}
+
+async function fetchClaudeData(bizName, bizUrl, city, cat){
+  const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
+Prompts must be full conversational sentences a human types into ChatGPT — never keywords.
+Keep text short: summary max 15 words, insight max 30 words.
+{"summary":"<15w>","appearances":<0-20>,"competitors":[{"name":"<local competitor>","aar":<30-80>},{"name":"<local competitor>","aar":<25-75>},{"name":"<local competitor>","aar":<20-70>}],"prompts":[{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]}],"insight":"<1 sharp sentence about this specific business category and city and what they lose daily, max 30 words>"}`;
+
+  const resp = await fetch(ANTHROPIC_URL, {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+      model:"claude-sonnet-4-20250514",
+      max_tokens:3500,
+      system: sys,
+      messages:[{role:"user",content:`Business: ${bizName}\nWebsite: ${bizUrl}\nCity: ${city}\nCategory: ${cat}`}]
+    })
+  });
+  const data = await resp.json();
+  if(data.error) throw new Error(data.error.message);
+  const raw = data.content?.find(b=>b.type==="text")?.text||"{}";
+  let cleaned = raw.replace(/```json|```/g,"").trim();
+  const s = cleaned.indexOf("{"), e = cleaned.lastIndexOf("}");
+  if(s!==-1&&e!==-1) cleaned = cleaned.slice(s,e+1);
+  return JSON.parse(cleaned);
+}
+
+
+function resetScan(){
+  scanData = null; bizName = ""; bizUrl = "";
+  ["f-name","f-url","f-city","f-cat","gate-email"].forEach(id=>{
+    const e = el(id); if(e) e.value="";
+  });
+  el("scan-log").innerHTML = "";
+  hide("results-wrap");
+  switchScanState("scan-form-wrap");
+  el("results-wrap").style.display = "none";
+  el("scanner-section").scrollIntoView({behavior:"smooth"});
+}
 </script>
 </body>
-      </html>
+</html>
