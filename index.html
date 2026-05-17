@@ -4,64 +4,61 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AppearAI — AI Appearance Rate™</title>
-<meta name="description" content="Find out how often AI recommends your business. AppearAI measures your AI Appearance Rate — the metric that tells you exactly where you stand on ChatGPT, Gemini, and Perplexity."/>
+<meta name="description" content="Find out how often AI recommends your business. AppearAI measures your AI Appearance Rate across ChatGPT, Gemini, and Perplexity."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:clip;width:100%}
-body{overflow-x:clip;width:100%;position:relative}
-nav,section,div,footer,header{max-width:100vw}
+html,body{overflow-x:hidden;width:100%}
 :root{
   --ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;
-  --accent:#e84c1e;--blue:#2563ff;--gold:#c9a84c;
-  --muted:#4a4640;--ok:#1a7a4a;--warn:#e84c1e;
+  --muted:#4a4640;--ok:#1a7a4a;--warn:#e84c1e;--gold:#c9a84c;
   --border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25);
 }
-html{font-size:16px;scroll-behavior:smooth;overflow-x:clip}
-body{font-family:'DM Mono','Courier New',monospace;font-weight:300;background:var(--paper);color:var(--ink);overflow-x:clip;line-height:1.6;position:relative;width:100%}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);line-height:1.6}
 body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px);pointer-events:none;z-index:0}
 
 /* NAV */
 nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 2rem}
-.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;overflow:hidden}
-.nav-logo{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.35rem .9rem;text-decoration:none;transition:color .15s,border-color .15s;flex-shrink:0;white-space:nowrap}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.15em;color:var(--muted);border:1px solid currentColor;padding:.3rem .9rem;text-decoration:none;transition:color .15s;flex-shrink:0;white-space:nowrap}
 .nav-logo:hover{color:var(--ink);border-color:var(--ink)}
-.nav-links{display:flex;align-items:center;gap:2.5rem}
-.nav-links a{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
-.nav-links a:hover{color:var(--ink)}
-.nav-cta{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s;flex-shrink:0;white-space:nowrap}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-cta{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s;flex-shrink:0;white-space:nowrap}
 .nav-cta:hover{opacity:.8}
 
-/* SCANNER SECTION — leads the page */
-.scanner-section{max-width:1100px;margin:0 auto;padding:4rem 2rem;position:relative;z-index:1;border-bottom:1px solid var(--border)}
+/* SECTION TITLES - Bebas Neue fills width */
 .section-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
 .section-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
-.section-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:clamp(5rem,12vw,8rem);line-height:1;letter-spacing:.03em;color:var(--ink);margin-bottom:1rem;word-break:break-word;overflow-wrap:break-word;width:100%;display:block}
-.section-title em{font-family:'DM Sans','Georgia',sans-serif;font-style:italic;font-weight:400;color:var(--muted);display:inline}
-.section-sub{font-size:.88rem;color:var(--muted);line-height:1.8;max-width:100%;margin-bottom:2rem;word-break:break-word}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:7vw;line-height:1;letter-spacing:.03em;color:var(--ink);margin-bottom:1rem;display:block;width:100%}
+.section-title em{font-family:'DM Sans',sans-serif;font-style:italic;font-weight:400;color:var(--muted);font-size:.75em}
+.section-sub{font-size:.88rem;color:var(--muted);line-height:1.8;max-width:560px;margin-bottom:2rem}
 
 /* FORM */
+.scanner-section{max-width:1100px;margin:0 auto;padding:4rem 2rem;position:relative;z-index:1;border-bottom:1px solid var(--border)}
 .scan-form{background:var(--cream);border:1px solid var(--border);padding:2.5rem;position:relative}
 .scan-form::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
 .form-field{display:flex;flex-direction:column;gap:.5rem}
-.form-label{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-.form-input{font-family:'DM Mono','Courier New',monospace;font-size:.85rem;font-weight:300;padding:.75rem 1rem;background:var(--paper);border:1px solid var(--border);color:var(--ink);outline:none;transition:border-color .2s}
+.form-label{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.form-input{font-family:'DM Mono',monospace;font-size:.85rem;font-weight:300;padding:.75rem 1rem;background:var(--paper);border:1px solid var(--border);color:var(--ink);outline:none;transition:border-color .2s;width:100%}
 .form-input:focus{border-color:var(--ink)}
 .form-input::placeholder{color:var(--muted);opacity:.6}
-.scan-btn{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:none;padding:.875rem 2rem;cursor:pointer;transition:opacity .15s;width:100%;margin-top:.5rem}
+.scan-btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:none;padding:.875rem 2rem;cursor:pointer;transition:opacity .15s;width:100%;margin-top:.5rem}
 .scan-btn:hover{opacity:.8}
 .scan-btn:disabled{opacity:.35;cursor:not-allowed}
 .form-note{font-size:.65rem;color:var(--muted);text-align:center;margin-top:.875rem;letter-spacing:.05em}
 
-/* SCANNING */
+/* SCAN STATE */
 .scan-state{display:none;padding:2rem 2.5rem;background:var(--cream);border:1px solid var(--border);text-align:center;position:relative}
-.scan-state::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink);z-index:1}
+.scan-state::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
 .scan-spinner{width:48px;height:48px;border:2px solid var(--border-strong);border-top-color:var(--ink);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 1.5rem}
 @keyframes spin{to{transform:rotate(360deg)}}
-.scan-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:.5rem;word-break:break-word}
+.scan-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.05em;color:var(--ink);margin-bottom:.5rem}
 .scan-sub{font-size:.75rem;color:var(--muted);margin-bottom:1.5rem}
 .scan-log{text-align:left;background:var(--paper);border:1px solid var(--border);padding:1rem 1.25rem;height:160px;overflow-y:auto;font-size:.72rem;color:var(--muted);line-height:2}
 .scan-log-line{display:block;animation:fadeIn .3s ease}
@@ -71,131 +68,50 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .email-gate{display:none;padding:2rem 2.5rem;background:var(--cream);border:1px solid var(--border);text-align:center;position:relative}
 .email-gate::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
 .gate-icon{font-size:2.5rem;margin-bottom:1.5rem}
-.gate-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.5rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:.75rem}
+.gate-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;color:var(--ink);margin-bottom:.75rem}
 .gate-sub{font-size:.82rem;color:var(--muted);line-height:1.8;max-width:380px;margin:0 auto 2rem}
 .gate-row{display:flex;gap:.75rem;max-width:420px;margin:0 auto .75rem}
 .gate-row .form-input{flex:1}
-.gate-btn{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:none;padding:.75rem 1.25rem;cursor:pointer;white-space:nowrap;transition:opacity .15s}
+.gate-btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:none;padding:.75rem 1.25rem;cursor:pointer;white-space:nowrap;transition:opacity .15s}
 .gate-btn:hover{opacity:.8}
 .gate-note{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
 
 /* RESULTS */
 .results-wrap{display:none;position:relative;z-index:1}
 
-/* AAR */
-.aar-section{background:var(--ink);color:var(--paper);padding:4rem 3rem;position:relative;overflow:hidden}
-.aar-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
-.aar-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;position:relative;z-index:1}
-.aar-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,242,235,.4);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
-.aar-eyebrow span{display:block;width:24px;height:1px;background:rgba(245,242,235,.25)}
-.aar-label{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:clamp(3rem,8vw,7rem);line-height:1;letter-spacing:-.03em;color:var(--paper);margin-bottom:.5rem}
-.aar-label.low{color:#ff6b5b}
-.aar-label.mid{color:#f5c842}
-.aar-label.high{color:#4ade80}
-.aar-sublabel{font-size:.82rem;color:rgba(245,242,235,.5);margin-bottom:2rem;line-height:1.7}
-.aar-metric-row{display:flex;align-items:center;gap:1rem;padding:1.25rem 0;border-top:1px solid rgba(245,242,235,.08)}
-.aar-metric-label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.4);flex:1}
-.aar-metric-val{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.1rem;color:var(--paper)}
-.aar-grade-box{border:1px solid rgba(245,242,235,.12);padding:1.5rem;margin-bottom:1.5rem}
-.aar-grade-label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,242,235,.35);margin-bottom:.75rem}
-.aar-grade{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:2rem;letter-spacing:-.02em;color:var(--paper);margin-bottom:.5rem}
-.aar-summary{font-size:.8rem;color:rgba(245,242,235,.55);line-height:1.8}
-.competitor-table{border:1px solid rgba(245,242,235,.1)}
-.competitor-row{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid rgba(245,242,235,.08)}
-.competitor-row:last-child{border-bottom:none}
-.competitor-row.you{background:rgba(245,242,235,.04)}
-.comp-name{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.78rem;flex:1;color:var(--paper)}
-.comp-aar{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.9rem}
-.comp-aar.low{color:#ff6b5b}
-.comp-aar.mid{color:#f5c842}
-.comp-aar.high{color:#4ade80}
-.comp-bar-wrap{width:80px;height:4px;background:rgba(245,242,235,.1)}
-.comp-bar{height:100%;transition:width .8s cubic-bezier(.4,0,.2,1)}
-.you-badge{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.3);border:1px solid rgba(245,242,235,.15);padding:2px 7px}
-.comp-blur-wrap{position:relative;overflow:hidden}
-
-/* PROMPTS */
-.prompts-section{max-width:1100px;margin:0 auto;padding:3rem 3rem 0;border-bottom:1px solid var(--border)}
-.prompts-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem}
-.prompts-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1rem;letter-spacing:-.01em;color:var(--ink)}
-.prompts-meta{font-size:.7rem;color:var(--muted)}
-.prompts-grid{display:flex;flex-direction:column;gap:0;margin-bottom:2.5rem}
-.prompt-row{display:flex;align-items:center;gap:1.25rem;padding:.875rem 0;border-top:1px solid var(--border)}
-.prompt-status{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0}
-.prompt-status.pass{background:rgba(26,122,74,.12);color:var(--ok)}
-.prompt-status.fail{background:rgba(232,76,30,.1);color:var(--warn)}
-.prompt-query{font-size:.78rem;color:var(--ink);font-style:italic;line-height:1.5}
-.prompt-engines{display:flex;gap:.375rem;flex-wrap:wrap;justify-content:flex-end}
-.engine-tag{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--border);color:var(--muted)}
-.prompt-main{flex:1;display:flex;flex-direction:column;gap:.3rem}
-.prompt-sub{font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:.375rem;flex-wrap:wrap}
-.prompt-runs{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.1rem;min-width:32px;text-align:right;flex-shrink:0}
-
-/* GEO HEALTH */
-.health-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border)}
-.health-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:3rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
-.health-intro-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.5rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:.75rem}
-.health-intro-sub{font-size:.8rem;color:var(--muted);line-height:1.8}
-.health-score-box{border:1px solid var(--border);padding:2rem;text-align:center}
-.health-score-num{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:4rem;letter-spacing:-.04em;line-height:1;margin-bottom:.5rem;color:var(--ink)}
-.health-score-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-.pillars{display:flex;flex-direction:column}
-.pillar{padding:1.5rem 0;border-top:1px solid var(--border)}
-.pillar-header{display:flex;align-items:center;gap:1.25rem;margin-bottom:.875rem}
-.pillar-num{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.65rem;letter-spacing:.15em;color:var(--muted);width:24px}
-.pillar-name{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.1rem;color:var(--ink);flex:1}
-.pillar-score{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.9rem;color:var(--ink)}
-.pillar-bar-wrap{height:3px;background:var(--cream);border:1px solid var(--border);margin-bottom:.875rem}
-.pillar-bar{height:100%;transition:width 1s cubic-bezier(.4,0,.2,1)}
-.pillar-finding{font-size:.75rem;color:var(--muted);line-height:1.7;padding-left:2.5rem}
-.pillar-flag{display:inline-flex;align-items:center;gap:.375rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border:1px solid;margin-left:auto}
-.pillar-flag.ok{color:var(--ok);border-color:rgba(26,122,74,.25);background:rgba(26,122,74,.05)}
-.pillar-flag.warn{color:var(--warn);border-color:rgba(232,76,30,.25);background:rgba(232,76,30,.05)}
-.pillar-flag.mid{color:#8a6a00;border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.08)}
-
-/* CTA */
-.cta-section{background:var(--cream);border-top:1px solid var(--border);padding:4rem 3rem;overflow:hidden}
-.cta-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.cta-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
-.cta-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
-.cta-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:clamp(1.5rem,3.5vw,2.25rem);line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin-bottom:.875rem}
-.cta-title em{font-family:'DM Sans','Georgia',sans-serif;font-style:italic;font-weight:400;color:var(--muted)}
-.cta-sub{font-size:.82rem;color:var(--muted);line-height:1.8}
-
-/* TECHNICAL CHECKER */
-.tech-section{background:var(--ink);color:var(--paper);padding:4rem 3rem;position:relative;overflow:hidden;border-bottom:1px solid rgba(245,242,235,.08)}
+/* TECH SECTION */
+.tech-section{background:var(--ink);padding:4rem 2rem;position:relative;overflow:hidden;border-bottom:1px solid rgba(245,242,235,.08)}
 .tech-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
-.tech-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;overflow:hidden}
+.tech-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
 .tech-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,242,235,.4);margin-bottom:2rem;display:flex;align-items:center;gap:.75rem}
 .tech-eyebrow span{display:block;width:24px;height:1px;background:rgba(245,242,235,.25)}
 .tech-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(245,242,235,.08)}
-.tech-score-wrap{display:flex;align-items:center;gap:2rem}
+.tech-score-wrap{display:flex;align-items:center;gap:1.5rem}
 .tech-ring{position:relative;width:90px;height:90px;flex-shrink:0}
 .tech-ring svg{transform:rotate(-90deg)}
-.tech-ring-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.5rem;color:var(--paper)}
-.tech-score-info{}
-.tech-domain{font-family:'DM Mono','Courier New',monospace;font-size:.72rem;color:rgba(245,242,235,.35);margin-bottom:.5rem;letter-spacing:.05em}
-.tech-verdict{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.95rem;color:var(--paper);line-height:1.4;margin-bottom:.75rem}
-.tech-bar-bg{height:4px;background:rgba(245,242,235,.1);position:relative}
+.tech-ring-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:var(--paper)}
+.tech-domain{font-family:'DM Mono',monospace;font-size:.72rem;color:rgba(245,242,235,.35);margin-bottom:.5rem}
+.tech-verdict{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.95rem;color:var(--paper);line-height:1.4;margin-bottom:.75rem}
+.tech-bar-bg{height:4px;background:rgba(245,242,235,.1)}
 .tech-bar{height:100%;width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
 .tech-meta{display:flex;flex-direction:column;gap:.5rem;padding-top:.5rem}
 .tech-meta-row{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-top:1px solid rgba(245,242,235,.06)}
 .tech-meta-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.35);flex:1}
-.tech-meta-val{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.75rem;color:var(--paper);word-break:break-word;overflow-wrap:break-word}
+.tech-meta-val{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.82rem;color:var(--paper);word-break:break-word}
 .tech-checks{display:flex;flex-direction:column}
-.tech-check{border-top:1px solid rgba(245,242,235,.06);cursor:pointer;transition:background .15s;user-select:none}
+.tech-check{border-top:1px solid rgba(245,242,235,.06);cursor:pointer;transition:background .15s}
 .tech-check:hover{background:rgba(245,242,235,.03)}
 .tech-check-header{display:flex;align-items:center;gap:1rem;padding:.875rem 0}
-.tech-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;transition:all .3s}
+.tech-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0}
 .tech-icon.pass{background:rgba(26,122,74,.15);color:#4ade80}
 .tech-icon.fail{background:rgba(232,76,30,.12);color:#ff6b5b}
 .tech-icon.warn{background:rgba(201,168,76,.12);color:var(--gold)}
 .tech-icon.spin{background:rgba(245,242,235,.06);color:rgba(245,242,235,.2);font-size:.5rem}
 .tech-check-mid{flex:1;min-width:0}
-.tech-check-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.82rem;color:var(--paper);margin-bottom:2px}
+.tech-check-title{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.82rem;color:var(--paper);margin-bottom:2px}
 .tech-check-desc{font-size:.68rem;color:rgba(245,242,235,.35);line-height:1.4}
 .tech-check-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
-.tech-pts{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1rem;line-height:1;transition:color .3s}
+.tech-pts{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;line-height:1}
 .tech-pts.pass{color:#4ade80}
 .tech-pts.fail{color:#ff6b5b}
 .tech-pts.warn{color:var(--gold)}
@@ -205,7 +121,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .tech-edu{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
 .tech-edu.open{max-height:280px}
 .tech-edu-box{background:rgba(245,242,235,.03);border:1px solid rgba(245,242,235,.08);padding:1rem 1.25rem;margin-bottom:1rem}
-.tech-edu-tag{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.35);margin-bottom:.5rem}
+.tech-edu-tag{font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.35);margin-bottom:.5rem}
 .tech-edu-body{font-size:.75rem;color:rgba(245,242,235,.45);line-height:1.7;margin-bottom:.75rem}
 .tech-edu-impact{display:flex;align-items:flex-start;gap:.625rem;padding:.625rem .875rem;border:1px solid rgba(232,76,30,.2);background:rgba(232,76,30,.06)}
 .tech-edu-impact.pass{border-color:rgba(26,122,74,.2);background:rgba(26,122,74,.06)}
@@ -213,143 +129,118 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .tech-edu-ico{font-size:.75rem;flex-shrink:0;margin-top:1px}
 .tech-edu-txt{font-size:.7rem;color:rgba(245,242,235,.5);line-height:1.55}
 
-/* DISCOVERY PROMPTS SECTION */
-.discovery-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1;overflow:hidden}
-.discovery-header{margin-bottom:2rem}
-.discovery-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:.5rem}
-.discovery-stat{font-size:.78rem;color:var(--muted);line-height:1.6}
-.discovery-stat strong{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;color:var(--ink)}
-.disc-prompt-row{display:flex;align-items:flex-start;gap:1.25rem;padding:.875rem 0;border-top:1px solid var(--border);overflow:hidden;min-width:0}
+/* DISCOVERY */
+.discovery-section{max-width:1100px;margin:0 auto;padding:4rem 2rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.discovery-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;color:var(--ink);margin-bottom:.5rem}
+.discovery-stat{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem}
+.discovery-stat strong{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--ink)}
+.disc-prompt-row{display:flex;align-items:flex-start;gap:1.25rem;padding:.875rem 0;border-top:1px solid var(--border);min-width:0;overflow:hidden}
 .disc-status{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0;margin-top:2px}
 .disc-status.pass{background:rgba(26,122,74,.12);color:var(--ok)}
 .disc-status.fail{background:rgba(232,76,30,.1);color:var(--warn)}
-.disc-main{flex:1}
-.disc-query{font-size:.8rem;color:var(--ink);font-style:italic;line-height:1.5;margin-bottom:.3rem}
-.disc-sub{font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:.375rem;flex-wrap:wrap;overflow:hidden;max-width:100%}
+.disc-main{flex:1;min-width:0}
+.disc-query{font-size:.8rem;color:var(--ink);font-style:italic;line-height:1.5;margin-bottom:.3rem;overflow-wrap:break-word}
+.disc-sub{font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:.375rem;flex-wrap:wrap}
 .disc-engine-tag{font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--border);color:var(--muted)}
-.disc-runs{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.88rem;flex-shrink:0;min-width:30px;text-align:right;margin-top:2px}
-.disc-blur-wrap{position:relative;margin-top:0;overflow:hidden}
-.disc-blur-inner{filter:blur(4px);pointer-events:none;user-select:none;opacity:.45}
-.disc-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding-bottom:1.5rem;background:linear-gradient(to bottom,transparent 0%,var(--paper) 50%)}
-.disc-lock-inner{text-align:left;padding:0}
-.disc-lock-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem}
-.disc-lock-sub{font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5;max-width:420px}
-.disc-lock-btn{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.5rem;text-decoration:none;display:inline-block;transition:opacity .15s}
-.disc-lock-btn:hover{opacity:.8}
+.disc-runs{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;flex-shrink:0;min-width:30px;text-align:right;margin-top:2px}
 
-/* COMPETITORS SECTION */
-.competitors-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1;overflow:hidden}
-.competitors-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:.5rem}
+/* COMPETITORS */
+.competitors-section{max-width:1100px;margin:0 auto;padding:4rem 2rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.competitors-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;color:var(--ink);margin-bottom:.5rem}
 .competitors-sub{font-size:.78rem;color:var(--muted);margin-bottom:2rem;line-height:1.6}
 .comp-row{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-top:1px solid var(--border)}
-.comp-row-name{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.82rem;flex:1;color:var(--ink)}
-.comp-row-bar-wrap{width:100px;height:3px;background:var(--cream);border:1px solid var(--border)}
+.comp-row-name{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.82rem;flex:1;color:var(--ink)}
+.comp-row-bar-wrap{width:80px;height:3px;background:var(--cream);border:1px solid var(--border);flex-shrink:0}
 .comp-row-bar{height:100%;transition:width .8s cubic-bezier(.4,0,.2,1)}
-.comp-blur-wrap{position:relative;overflow:hidden}
-.comp-blur-inner{filter:blur(4px);pointer-events:none;user-select:none;opacity:.45}
-.comp-lock{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-start;padding-bottom:1rem;background:linear-gradient(to bottom,transparent 0%,var(--paper) 50%)}
-.comp-lock-text{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink);padding-bottom:2px}
+
+/* CTA SECTION */
+.cta-section{background:var(--cream);border-top:1px solid var(--border);padding:4rem 2rem;overflow:hidden}
+.cta-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.cta-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.cta-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:.03em;color:var(--ink);margin-bottom:.875rem;line-height:1}
+.cta-title em{font-family:'DM Sans',sans-serif;font-style:italic;font-weight:400;color:var(--muted);font-size:.7em}
+.cta-sub{font-size:.82rem;color:var(--muted);line-height:1.8}
+.btn-ink{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.875rem 2rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+.btn-ink:hover{opacity:.8}
 
 /* RESET */
-.reset-wrap{max-width:1100px;margin:0 auto;padding:2rem 3rem;border-bottom:1px solid var(--border)}
-.reset-btn{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border-strong);padding:.6rem 1.25rem;cursor:pointer;transition:color .15s,border-color .15s}
+.reset-wrap{max-width:1100px;margin:0 auto;padding:2rem;border-bottom:1px solid var(--border)}
+.reset-btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border-strong);padding:.6rem 1.25rem;cursor:pointer;transition:color .15s,border-color .15s}
 .reset-btn:hover{color:var(--ink);border-color:var(--ink)}
 
 /* STATS */
-.stats-row{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border);overflow:hidden}
-.stat{padding:2rem 1.5rem;border-right:1px solid var(--border);position:relative;z-index:1;min-width:0;overflow:hidden}
+.stats-row{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border)}
+.stat{padding:2.5rem 2rem;border-right:1px solid var(--border);position:relative;z-index:1;overflow:hidden}
 .stat:last-child{border-right:none}
-.stat-num{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:5rem;letter-spacing:-.02em;color:var(--ink);line-height:1;margin-bottom:.5rem;max-width:100%}
-.stat-label{font-size:.72rem;color:var(--muted);line-height:1.6;word-wrap:break-word;overflow-wrap:break-word}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:var(--ink);line-height:1;margin-bottom:.5rem}
+.stat-label{font-size:.72rem;color:var(--muted);line-height:1.6}
 
 /* ABOUT */
-.about-strip{max-width:1100px;margin:0 auto;padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;border-bottom:1px solid var(--border);overflow:hidden}
+.about-strip{max-width:1100px;margin:0 auto;padding:5rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;border-bottom:1px solid var(--border)}
 .about-left p{font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:1rem}
 .about-right{display:flex;flex-direction:column;gap:1.5rem;padding-top:1rem}
 .about-item{padding:1.5rem;border:1px solid var(--border);background:var(--cream)}
-.about-item-num{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.about-item-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.9rem;color:var(--ink);margin-bottom:.375rem}
+.about-item-num{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem}
+.about-item-title{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.9rem;color:var(--ink);margin-bottom:.375rem}
 .about-item-text{font-size:.78rem;color:var(--muted);line-height:1.7}
-.btn-ink{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.75rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
-.btn-ink:hover{opacity:.8}
 
 /* FOOTER */
-footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
-.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
-.footer-logo{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem}
-.footer-links{display:flex;gap:2rem;flex-wrap:wrap}
-.footer-links a{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
-.footer-links a:hover{color:var(--ink)}
+footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relative;z-index:1}
+.footer-top{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.15em;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem;display:inline-block;margin-bottom:1rem}
+.footer-addr{font-size:.72rem;color:var(--muted);line-height:1.9}
+.footer-col-title{font-family:'DM Sans',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem}
+.footer-col{display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-col a:hover{color:var(--ink)}
+.footer-cols{display:flex;gap:4rem;flex-wrap:wrap}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
 
+/* DISC/COMP BLUR */
+.disc-blur-wrap,.comp-blur-wrap{overflow:hidden}
+.comp-lock-text{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink);padding-bottom:2px;display:inline-block}
+.disc-lock-btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.5rem;text-decoration:none;display:inline-block;transition:opacity .15s}
+.disc-lock-btn:hover{opacity:.8}
+
+/* MOBILE */
 @media(max-width:768px){
-  html,body{overflow-x:hidden;width:100%}
-  /* Constrain ALL bold Syne headings on mobile */
-  [style*="Syne"],[class*="title"],[class*="heading"],[class*="name"],[class*="num"],[class*="stat"]{
-    max-width:100%;
-    overflow-wrap:break-word;
-    word-break:break-word;
-  }
-  .section-title{font-size:4.5rem!important}
-  .stat-num{font-size:3.5rem!important}
-  .aar-label{font-size:5rem!important}
-  .health-score-num{font-size:2.5rem!important}
-  .cta-title{font-size:3rem!important}
-  .health-intro-title{font-size:2rem!important}
-  .discovery-title{font-size:2rem!important}
-  .competitors-title{font-size:2rem!important}
-  .prompts-title{font-size:2rem!important}
-  .tech-verdict{font-size:.82rem!important}
-  .about-item-title{font-size:1rem!important}
   nav{padding:0 1rem}
   .nav-links{display:none}
-  .scanner-section{padding:2rem 1rem}
-  .section-title{font-size:1.8rem!important;line-height:1.05!important;letter-spacing:-.02em!important}
-  .section-sub{font-size:.82rem}
+  .section-title{font-size:7vw}
+  .scanner-section{padding:2.5rem 1rem}
   .form-grid{grid-template-columns:1fr}
-  .scan-state{padding:2rem 1.5rem}
-  .email-gate{padding:2rem 1.5rem}
+  .scan-state,.email-gate{padding:2rem 1rem}
   .gate-row{flex-direction:column}
-  .aar-section{padding:2.5rem 1.5rem}
-  .aar-inner{grid-template-columns:1fr;gap:2rem}
-  .health-section{padding:2.5rem 1.5rem}
-  .health-header{grid-template-columns:1fr;gap:1.5rem}
-  .prompts-section{padding:2rem 1.5rem 0}
-  .cta-section{padding:2.5rem 1.5rem}
-  .cta-inner{grid-template-columns:1fr;gap:2rem}
-  .stats-row{grid-template-columns:1fr}
-  .stat{border-right:none;border-bottom:1px solid var(--border);padding:1.75rem 1.5rem}
-  .stat:last-child{border-bottom:none}
-  .stat-num{font-size:2.25rem}
-  .about-strip{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1.5rem}
-  .reset-wrap{padding:1.5rem}
-  .tech-section{padding:2.5rem 1.5rem}
-  .tech-inner{padding:0}
+  .tech-section{padding:2.5rem 1rem}
   .tech-header{grid-template-columns:1fr;gap:1.5rem}
   .tech-score-wrap{gap:1rem}
-  .tech-meta{padding-top:.5rem}
-  .tech-ring{width:72px;height:72px;flex-shrink:0}
-  .tech-ring svg{width:72px;height:72px}
-  .tech-meta-val{font-size:.72rem;word-break:break-word}
-  .discovery-section{padding:2.5rem 1.5rem}
-  .disc-prompt-row{gap:.75rem}
-  .disc-query{font-size:.75rem}
-  .competitors-section{padding:2.5rem 1.5rem}
-  .comp-row-bar-wrap{width:60px}
-  footer{padding:2rem 1.5rem}
-  .footer-top{flex-direction:column}
+  .discovery-section{padding:2.5rem 1rem}
+  .competitors-section{padding:2.5rem 1rem}
+  .cta-section{padding:2.5rem 1rem}
+  .cta-inner{grid-template-columns:1fr;gap:2rem}
+  .cta-title{font-size:10vw}
+  .stats-row{grid-template-columns:1fr}
+  .stat{border-right:none;border-bottom:1px solid var(--border);padding:1.75rem 1rem}
+  .stat:last-child{border-bottom:none}
+  .stat-num{font-size:4rem}
+  .about-strip{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1rem}
+  footer{padding:2rem 1rem}
   .footer-cols{gap:2rem}
   .footer-bottom{flex-direction:column;gap:.5rem}
-}</style>
+  .reset-wrap{padding:1.5rem 1rem}
+}
+</style>
 </head>
 <body>
-
 <nav>
   <div class="nav-inner">
-    <a href="/" class="nav-logo">AppearAI</a>
+    <a href="/index.html" class="nav-logo">AppearAI</a>
     <div class="nav-links">
+      <a href="/services-local.html">For Local Businesses</a>
+      <a href="/services-enterprise.html">For Brands</a>
       <a href="/research.html">Research</a>
-      <a href="/resources.html">Resources</a>
       <a href="/blog.html">Blog</a>
       <a href="/case-studies.html">Case Studies</a>
     </div>
@@ -357,63 +248,63 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
   </div>
 </nav>
 
-<!-- SCANNER LEADS THE PAGE -->
+<!-- SCANNER -->
 <section class="scanner-section" id="scanner-section">
   <div class="section-eyebrow"><span></span>Free AI Appearance Check</div>
-  <h1 class="section-title">If someone asks AI to find a business like yours — how often do <em style="font-family:'DM Sans',sans-serif;font-style:italic;font-weight:400;color:var(--muted)">you</em> appear?</h1>
+  <h1 class="section-title">If someone asks AI to find a business like yours — how often do <em>you</em> appear?</h1>
   <p class="section-sub">Most local businesses are invisible on AI search and have no idea. Enter your details and we'll show you exactly how often AI recommends your business — and who it recommends instead.</p>
 
   <div id="scan-states-container">
-  <div id="scan-form-wrap">
-    <div class="scan-form">
-      <div class="form-grid">
-        <div class="form-field">
-          <label class="form-label">Business Name</label>
-          <input class="form-input" id="f-name" placeholder="e.g. Riverside Family Dentistry"/>
+    <div id="scan-form-wrap">
+      <div class="scan-form">
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label">Business Name</label>
+            <input class="form-input" id="f-name" placeholder="e.g. Riverside Family Dentistry"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Website URL</label>
+            <input class="form-input" id="f-url" placeholder="e.g. riversidefamilydental.com"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">City / Location</label>
+            <input class="form-input" id="f-city" placeholder="e.g. Austin, TX"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Business Category</label>
+            <input class="form-input" id="f-cat" placeholder="e.g. Dentist, Plumber, Lawyer"/>
+          </div>
         </div>
-        <div class="form-field">
-          <label class="form-label">Website URL</label>
-          <input class="form-input" id="f-url" placeholder="e.g. riversidefamilydental.com"/>
-        </div>
-        <div class="form-field">
-          <label class="form-label">City / Location</label>
-          <input class="form-input" id="f-city" placeholder="e.g. Austin, TX"/>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Business Category</label>
-          <input class="form-input" id="f-cat" placeholder="e.g. Dentist, Plumber, Lawyer"/>
-        </div>
+        <button class="scan-btn" id="scan-btn" onclick="startScan()">Check My AI Appearance Rate™ →</button>
+        <div class="form-note">Free · No signup required · Takes 30–60 seconds</div>
+        <div id="form-error" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
       </div>
-      <button class="scan-btn" id="scan-btn" onclick="startScan()">Check My AI Appearance Rate™ →</button>
-      <div class="form-note">Free · No signup required · Takes 30–60 seconds</div>
-      <div id="form-error" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
+    </div>
+
+    <div class="scan-state" id="scan-state">
+      <div class="scan-spinner"></div>
+      <div class="scan-title">Running your AI Appearance Check</div>
+      <div class="scan-sub">Checking technical signals · Analysing discovery prompt patterns · Identifying competitors</div>
+      <div class="scan-log" id="scan-log"></div>
+    </div>
+
+    <div class="email-gate" id="email-gate">
+      <div class="gate-icon">◈</div>
+      <div class="gate-title">Your report is ready</div>
+      <p class="gate-sub">Enter your email to reveal your AI Appearance Rate™ and GEO health report for <strong id="gate-biz-name"></strong>.</p>
+      <div class="gate-row">
+        <input class="form-input" type="email" id="gate-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')revealResults()"/>
+        <button class="gate-btn" onclick="revealResults()">See My Report →</button>
+      </div>
+      <div class="gate-note">No spam · Unsubscribe anytime</div>
     </div>
   </div>
-
-  <div class="scan-state" id="scan-state">
-    <div class="scan-spinner"></div>
-    <div class="scan-title">Running your AI Appearance Check</div>
-    <div class="scan-sub">Checking technical signals · Simulating discovery prompts · Identifying competitors</div>
-    <div class="scan-log" id="scan-log"></div>
-  </div>
-
-  <div class="email-gate" id="email-gate">
-    <div class="gate-icon">◈</div>
-    <div class="gate-title">Your report is ready</div>
-    <p class="gate-sub">Enter your email to reveal your AI Appearance Rate™ and GEO health report for <strong id="gate-biz-name"></strong>.</p>
-    <div class="gate-row">
-      <input class="form-input" type="email" id="gate-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')revealResults()"/>
-      <button class="gate-btn" onclick="revealResults()">See My Report →</button>
-    </div>
-    <div class="gate-note">No spam · Unsubscribe anytime</div>
-  </div>
-  </div><!-- /scan-states-container -->
 </section>
 
 <!-- RESULTS -->
 <div class="results-wrap" id="results-wrap">
 
-  <!-- 1. TECHNICAL AI READINESS -->
+  <!-- TECHNICAL -->
   <div class="tech-section">
     <div class="tech-inner">
       <div class="tech-eyebrow"><span></span>Technical AI Readiness</div>
@@ -428,7 +319,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
             </svg>
             <div class="tech-ring-num" id="tech-score-num">—</div>
           </div>
-          <div class="tech-score-info">
+          <div>
             <div class="tech-domain" id="tech-domain"></div>
             <div class="tech-verdict" id="tech-verdict">Analysing your site…</div>
             <div class="tech-bar-bg"><div class="tech-bar" id="tech-bar"></div></div>
@@ -453,55 +344,52 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
     </div>
   </div>
 
-  <!-- 2. DISCOVERY PROMPTS TESTED -->
+  <!-- DISCOVERY -->
   <div class="discovery-section">
-    <div class="discovery-header">
-      <div class="discovery-title">Discovery Prompts Tested</div>
-      <div class="discovery-stat">Appeared in <strong id="disc-appeared">—</strong> out of <strong>20</strong> discovery prompts run across 5 AI engines</div>
-    </div>
+    <div class="discovery-title">Discovery Prompts Tested</div>
+    <div class="discovery-stat">Appeared in <strong id="disc-appeared">—</strong> out of <strong>20</strong> discovery prompts run across 5 AI engines</div>
     <div id="disc-visible"></div>
-    <div id="disc-blur-wrap" style="display:none">
+    <div id="disc-blur-wrap" class="disc-blur-wrap" style="display:none">
       <div style="position:relative;overflow:hidden">
         <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="disc-blur-rows"></div>
         <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
       </div>
       <div style="padding:1.25rem 0 0">
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in your Full AI Visibility Audit</div>
+        <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in your Full AI Visibility Audit</div>
         <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Every prompt, every engine, every run — and exactly what your competitors are doing that you aren't.</div>
-        <a href="/audit.html" style="font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.5rem;text-decoration:none;display:inline-block;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Get Your Full AI Visibility Audit →</a>
+        <a href="/audit.html" class="disc-lock-btn">Get Your Full AI Visibility Audit →</a>
       </div>
     </div>
   </div>
 
-  <!-- 3. COMPETITORS -->
+  <!-- COMPETITORS -->
   <div class="competitors-section">
     <div class="competitors-title">Who Appeared Instead</div>
     <div class="competitors-sub">Businesses appearing in the same discovery prompts where yours did not</div>
     <div id="comp-visible"></div>
-    <div id="comp-blur-wrap" style="display:none">
+    <div class="comp-blur-wrap" id="comp-blur-wrap" style="display:none">
       <div style="position:relative;overflow:hidden">
         <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="comp-blur-rows"></div>
         <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
       </div>
       <div style="padding:.875rem 0 0">
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink);padding-bottom:2px;display:inline-block">+ more competitors revealed in your Full AI Visibility Audit</div>
+        <div class="comp-lock-text">+ more competitors revealed in your Full AI Visibility Audit</div>
       </div>
     </div>
   </div>
 
-  <!-- 4. CTA -->
+  <!-- CTA -->
   <div class="cta-section">
     <div class="cta-inner">
-      <div class="cta-left">
+      <div>
         <div class="cta-eyebrow"><span></span>Your next step</div>
-        <div class="cta-title">Get your Full AI<br>Visibility Audit for <em>$250</em></div>
-        <p class="cta-sub">Your complete AI visibility picture — every prompt, every signal, every competitor — detailed PDF report with a 15-minute walkthrough call included.</p>
+        <div class="cta-title">Get your Full AI Visibility Audit for <em>$250</em></div>
+        <p class="cta-sub">Your complete AI visibility picture — every prompt, every signal, every competitor — in a detailed PDF report with a 15-minute walkthrough call included.</p>
       </div>
-      <div class="cta-right">
-        <div id="personalised-insight" style="display:none;font-size:.82rem;color:var(--ink);line-height:1.8;padding:1.25rem 1.5rem;border-left:3px solid var(--ink);background:var(--cream);margin-bottom:1.5rem;font-style:italic"></div>
-
+      <div>
+        <div id="personalised-insight" style="display:none;font-size:.82rem;color:var(--ink);line-height:1.8;padding:1.25rem 1.5rem;border-left:3px solid var(--ink);background:var(--paper);margin-bottom:1.5rem;font-style:italic"></div>
         <div style="border:1px solid var(--border);padding:1.25rem;margin-bottom:1.5rem;background:var(--paper)">
-          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem">What's in your Full AI Visibility Audit</div>
+          <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem">What's in your Full AI Visibility Audit</div>
           <div style="display:flex;flex-direction:column;gap:.5rem">
             <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>All 20 discovery prompts — every engine, every run</div>
             <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Full technical breakdown — 7 scored signals with exact fixes</div>
@@ -510,7 +398,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
             <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>PDF report + 15-minute walkthrough call included</div>
           </div>
         </div>
-        <a href="/audit.html" style="display:block;font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Get Your Full AI Visibility Audit →</a>
+        <a href="https://buy.stripe.com/cNiaEWcve0NNdKvgWu14401" style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Get Your Full AI Visibility Audit — $250 →</a>
         <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.75rem;letter-spacing:.05em">$250 · PDF Report + 15-min call · Delivered within 48hrs</div>
       </div>
     </div>
@@ -532,7 +420,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
 <div class="about-strip">
   <div class="about-left">
     <div class="section-eyebrow"><span></span>What we do</div>
-    <h2 style="font-family:'Bebas Neue',Impact,sans-serif,-apple-system,sans-serif;font-weight:400;font-size:clamp(1.4rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin-bottom:1rem;word-break:break-word">The AI visibility agency for local businesses</h2>
+    <h2 class="section-title">The AI visibility agency for local businesses</h2>
     <p>AppearAI helps local businesses appear consistently in AI-generated recommendations across ChatGPT, Gemini, and Perplexity.</p>
     <p>We invented the AI Appearance Rate™ — the metric that measures how often AI actually recommends your business when someone nearby is looking for your services.</p>
     <a href="/audit.html" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Get Your Audit</a>
@@ -544,57 +432,54 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
   </div>
 </div>
 
-<footer style="border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relative;z-index:1">
-  <div style="max-width:1100px;margin:0 auto">
-
-    <!-- Top row: logo + nav links -->
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)">
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">AppearAI</div>
+      <div class="footer-addr">
+        131 Continental Dr, Suite 305<br>
+        Newark, Delaware 19713<br>
+        United States (Operations)<br><br>
+        <em style="font-size:.7rem">Remote-first · Global team</em><br><br>
+        <a href="mailto:hello@appearai.io" style="color:var(--muted);text-decoration:none">hello@appearai.io</a>
+      </div>
+    </div>
+    <div class="footer-cols">
       <div>
-        <div class="footer-logo" style="margin-bottom:1rem;display:inline-block">AppearAI</div>
-        <div style="font-size:.72rem;color:var(--muted);line-height:1.9">
-          131 Continental Dr, Suite 305<br>Newark, Delaware 19713<br>United States (Operations)<br><br><em style="font-size:.7rem">Remote-first · Global team</em>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-col">
+          <a href="/about.html">About</a>
+          <a href="/services-local.html">For Local Businesses</a>
+          <a href="/services-enterprise.html">For Brands</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/contact.html">Contact</a>
         </div>
-        <div style="margin-top:.75rem"><a href="mailto:hello@appearai.io" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">hello@appearai.io</a></div>
       </div>
-
-      <div style="display:flex;gap:4rem;flex-wrap:wrap">
-        <div>
-          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem">Company</div>
-          <div style="display:flex;flex-direction:column;gap:.5rem">
-            <a href="/about.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">About</a>
-            <a href="/services-local.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">For Local Businesses</a>
-            <a href="/services-enterprise.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">For Brands</a>
-            <a href="/blog.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Blog</a>
-            <a href="/case-studies.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Case Studies</a>
-            <a href="/contact.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Contact</a>
-          </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-col">
+          <a href="/research.html">Research</a>
+          <a href="/resources.html">Resources</a>
+          <a href="/index.html">Free Scanner</a>
+          <a href="/audit.html">Get Your Audit</a>
         </div>
-        <div>
-          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem">Resources</div>
-          <div style="display:flex;flex-direction:column;gap:.5rem">
-            <a href="/research.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Research</a>
-            <a href="/resources.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Resources</a>
-            <a href="/audit.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Get Your Audit</a>
-          </div>
-        </div>
-        <div>
-          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem">Legal</div>
-          <div style="display:flex;flex-direction:column;gap:.5rem">
-            <a href="/privacy.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a>
-            <a href="/terms.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Terms of Service</a>
-            <a href="/cookies.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Cookie Policy</a>
-            <a href="/refunds.html" style="font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Refund Policy</a>
-          </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-col">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="/cookies.html">Cookie Policy</a>
+          <a href="/refunds.html">Refund Policy</a>
         </div>
       </div>
     </div>
-
-    <!-- Bottom row: copyright -->
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-      <div style="font-size:.65rem;color:var(--muted);letter-spacing:.05em">© 2026 Avarabrands Inc. All rights reserved.</div>
-      <div style="font-size:.65rem;color:var(--muted)">AppearAI is a product of Avarabrands Inc.</div>
-    </div>
-
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Avarabrands Inc. All rights reserved.</div>
+    <div class="footer-copy">AppearAI is a product of Avarabrands Inc.</div>
   </div>
 </footer>
 
@@ -610,6 +495,8 @@ let bizUrl = "";
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 function show(id){document.getElementById(id).style.display="block"}
 function hide(id){document.getElementById(id).style.display="none"}
+function el(id){return document.getElementById(id)}
+
 function switchScanState(show_id){
   ["scan-form-wrap","scan-state","email-gate"].forEach(id=>{
     const e=document.getElementById(id);
@@ -617,143 +504,134 @@ function switchScanState(show_id){
     e.style.display=(id===show_id)?"block":"none";
   });
 }
-function el(id){return document.getElementById(id)}
 
 function addLog(msg){
-  const log = el("scan-log");
-  const line = document.createElement("span");
-  line.className = "scan-log-line";
-  line.textContent = msg;
+  const log=el("scan-log");
+  const line=document.createElement("span");
+  line.className="scan-log-line";
+  line.textContent=msg;
   log.appendChild(line);
-  log.scrollTop = log.scrollHeight;
+  log.scrollTop=log.scrollHeight;
 }
 
 async function startScan(){
-  bizName = el("f-name").value.trim();
-  bizUrl = el("f-url").value.trim();
-  const city = el("f-city").value.trim();
-  const cat = el("f-cat").value.trim();
-
+  bizName=el("f-name").value.trim();
+  bizUrl=el("f-url").value.trim();
+  const city=el("f-city").value.trim();
+  const cat=el("f-cat").value.trim();
   if(!bizName||!bizUrl||!city||!cat){
-    el("form-error").textContent = "Please fill in all four fields.";
-    show("form-error");
-    return;
+    el("form-error").textContent="Please fill in all four fields.";
+    show("form-error");return;
   }
   hide("form-error");
   switchScanState("scan-state");
-  el("scan-log").innerHTML = "";
+  el("scan-log").innerHTML="";
+  scanData={_meta:{bizName,bizUrl,city,cat}};
 
-  try {
-    await sleep(300); addLog("→ Initialising AppearAI scan engine…");
-    await sleep(600); addLog(`→ Building 20 discovery prompts for ${bizName} in ${city}…`);
-    await sleep(500); addLog("→ Running technical signal checks on your website…");
-    await sleep(500); addLog("→ Checking crawlability and AI bot access…");
-    await sleep(400); addLog("→ Checking structured data and schema markup…");
-    await sleep(400); addLog("→ Checking llms.txt and meta signals…");
-    await sleep(400); addLog("→ Checking content structure and page signals…");
-    await sleep(600); addLog("→ Analysing discovery prompt patterns across AI engines…");
-    await sleep(400); addLog("→ Identifying competitors appearing in your category…");
-    await sleep(300); addLog("→ Compiling your AI Visibility results…");
+  try{
+    await sleep(300);addLog("→ Initialising AppearAI scan engine…");
+    await sleep(600);addLog(`→ Building 20 discovery prompts for ${bizName} in ${city}…`);
+    await sleep(500);addLog("→ Running technical signal checks on your website…");
+    await sleep(500);addLog("→ Checking crawlability and AI bot access…");
+    await sleep(400);addLog("→ Checking structured data and schema markup…");
+    await sleep(400);addLog("→ Checking llms.txt and meta signals…");
+    await sleep(400);addLog("→ Checking content structure and page signals…");
+    await sleep(600);addLog("→ Analysing discovery prompt patterns across AI engines…");
+    await sleep(400);addLog("→ Identifying competitors appearing in your category…");
+    await sleep(300);addLog("→ Compiling your AI Visibility results…");
 
-    scanData = {_meta: {bizName, bizUrl, city, cat}};
-
-    // Run live technical check + Claude discovery in parallel
-    addLog("→ Running live technical signals check…");
-    const [techResult, claudeData] = await Promise.allSettled([
+    const [techResult,claudeData]=await Promise.allSettled([
       fetchTechSignals(bizUrl),
-      fetchClaudeData(bizName, bizUrl, city, cat)
+      fetchClaudeData(bizName,bizUrl,city,cat)
     ]);
 
-    scanData.tech = techResult.status === "fulfilled" ? techResult.value : null;
-    if(claudeData.status === "fulfilled") {
-      Object.assign(scanData, claudeData.value);
-    }
+    scanData.tech=techResult.status==="fulfilled"?techResult.value:null;
+    if(claudeData.status==="fulfilled"){Object.assign(scanData,claudeData.value);}
 
-    await addLog("✓ Scan complete — report ready");
+    addLog("✓ Scan complete — report ready");
     await sleep(400);
-
-    el("gate-biz-name").textContent = bizName;
+    el("gate-biz-name").textContent=bizName;
     switchScanState("email-gate");
 
-  } catch(e){
+  }catch(e){
     switchScanState("scan-form-wrap");
-    el("form-error").textContent = "Scan failed: " + e.message;
+    el("form-error").textContent="Scan failed: "+e.message;
     show("form-error");
   }
 }
 
+async function fetchTechSignals(url){
+  let u=url.trim();
+  if(!u.startsWith("http"))u="https://"+u;
+  try{new URL(u);}catch(e){u="https://"+url.trim();}
+  const resp=await fetch(`${WORKER_URL}?url=${encodeURIComponent(u)}`);
+  return await resp.json();
+}
+
+async function fetchClaudeData(bizName,bizUrl,city,cat){
+  const sys=`You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
+Prompts must be full conversational sentences a human types into ChatGPT — never keywords.
+Keep text short: summary max 15 words, insight max 30 words.
+{"summary":"<15w>","appearances":<0-20>,"competitors":[{"name":"<local competitor>","aar":<30-80>},{"name":"<local competitor>","aar":<25-75>},{"name":"<local competitor>","aar":<20-70>}],"prompts":[{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]}],"insight":"<1 sharp sentence about this specific business category and city, max 30 words>"}`;
+
+  const resp=await fetch(ANTHROPIC_URL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-20250514",
+      max_tokens:3500,
+      system:sys,
+      messages:[{role:"user",content:`Business: ${bizName}\nWebsite: ${bizUrl}\nCity: ${city}\nCategory: ${cat}`}]
+    })
+  });
+  const data=await resp.json();
+  if(data.error)throw new Error(data.error.message);
+  const raw=data.content?.find(b=>b.type==="text")?.text||"{}";
+  let cleaned=raw.replace(/```json|```/g,"").trim();
+  const s=cleaned.indexOf("{"),e=cleaned.lastIndexOf("}");
+  if(s!==-1&&e!==-1)cleaned=cleaned.slice(s,e+1);
+  return JSON.parse(cleaned);
+}
+
 function revealResults(){
-  const email = el("gate-email").value.trim();
-  if(!email||!email.includes("@")) return;
+  const email=el("gate-email").value.trim();
+  if(!email||!email.includes("@"))return;
   switchScanState(null);
-  const r = scanData;
+  const r=scanData;
 
-  // ── 1. TECHNICAL CHECKER (live worker data) ─────────────────────────────
-  const tech = r.tech;
-  const techDefs = [
-    {id:"https",   title:"HTTPS & Security",          weight:10,
-     tag:"What is HTTPS?",
-     edu:"HTTPS encrypts the connection between a visitor and your website. Without it, your site is flagged as Not Secure by every major browser.",
-     impactFail:"AI crawlers like GPTBot and ClaudeBot deprioritise non-HTTPS sites. No HTTPS means a lower chance of being recommended.",
-     impactPass:"Your site is secure. AI crawlers fully trust HTTPS sites and are more likely to index and cite them."},
-    {id:"schema",  title:"Structured Data (Schema)",   weight:20,
-     tag:"What is structured data?",
-     edu:"Schema markup is hidden code that tells AI exactly what your business is — your name, address, phone, services, hours, and reviews.",
-     impactFail:"Without schema, AI guesses what your business does and often gets it wrong — or skips you entirely when recommending local businesses.",
-     impactPass:"Your schema markup means AI can read your business details accurately and confidently recommend you."},
-    {id:"robots",  title:"AI Crawler Access",           weight:15,
-     tag:"What is robots.txt?",
-     edu:"robots.txt tells bots what they can and cannot read. Many websites accidentally block AI crawlers like GPTBot, ClaudeBot, and PerplexityBot.",
-     impactFail:"An AI crawler is being blocked. ChatGPT, Claude, or Perplexity literally cannot read your website — making it impossible for them to recommend you.",
-     impactPass:"All major AI crawlers are allowed. GPTBot, ClaudeBot, and PerplexityBot can fully access and read your website content."},
-    {id:"llms",    title:"llms.txt File",               weight:20,
-     tag:"What is llms.txt?",
-     edu:"llms.txt is a new standard file that guides AI language models on how to understand your website. Very few local businesses have this set up.",
-     impactFail:"No llms.txt means AI has no guide for understanding your site. This is one of the most impactful fixes for AI visibility.",
-     impactPass:"You have an llms.txt file. This gives AI models a direct guide to your business, improving how accurately they describe and recommend you."},
-    {id:"metadesc",title:"Meta Description",            weight:15,
-     tag:"What is a meta description?",
-     edu:"A meta description is a short summary of your page read by AI crawlers. It tells AI exactly what your business does in plain language.",
-     impactFail:"No meta description means AI has to guess what your business does — leading to inaccurate or missing recommendations.",
-     impactPass:"Your meta description gives AI a clear, concise summary of your business — improving how accurately it recommends you."},
-    {id:"title",   title:"Business Name & Page Title",  weight:10,
-     tag:"Why does your page title matter?",
-     edu:"Your page title is the first thing AI reads. It should clearly state your business name and what you do. Generic titles like Home confuse AI crawlers.",
-     impactFail:"Your page title is weak or generic. AI cannot confidently identify your business name or what you do.",
-     impactPass:"Your page title clearly identifies your business. AI can immediately understand who you are and what you do."},
-    {id:"content", title:"Content Structure",           weight:10,
-     tag:"Why does content structure matter?",
-     edu:"Structure refers to how your page is organised — clear headings, descriptive title, meta description, and obvious info about your services and location.",
-     impactFail:"Poor structure means AI cannot confidently understand your services or location. It may describe your business vaguely or not recommend you at all.",
-     impactPass:"Good structure means AI can clearly identify what you do, where you are, and who to recommend you to."},
+  // TECH SIGNALS
+  const techDefs=[
+    {id:"https",title:"HTTPS & Security",weight:10,tag:"What is HTTPS?",edu:"HTTPS encrypts the connection between a visitor and your website. Without it, your site is flagged as Not Secure.",impactFail:"AI crawlers like GPTBot and ClaudeBot deprioritise non-HTTPS sites.",impactPass:"Your site is secure. AI crawlers fully trust HTTPS sites."},
+    {id:"schema",title:"Structured Data (Schema)",weight:20,tag:"What is structured data?",edu:"Schema markup is hidden code that tells AI exactly what your business is — your name, address, phone, services, hours, and reviews.",impactFail:"Without schema, AI guesses what your business does and often gets it wrong.",impactPass:"Your schema markup means AI can read your business details accurately."},
+    {id:"robots",title:"AI Crawler Access",weight:15,tag:"What is robots.txt?",edu:"robots.txt tells bots what they can and cannot read. Many websites accidentally block AI crawlers like GPTBot, ClaudeBot, and PerplexityBot.",impactFail:"An AI crawler is being blocked. ChatGPT, Claude, or Perplexity cannot read your website.",impactPass:"All major AI crawlers are allowed. They can fully access and read your website."},
+    {id:"llms",title:"llms.txt File",weight:20,tag:"What is llms.txt?",edu:"llms.txt is a new standard file that guides AI language models on how to understand your website.",impactFail:"No llms.txt means AI has no guide for understanding your site.",impactPass:"You have an llms.txt file giving AI a direct guide to your business."},
+    {id:"metadesc",title:"Meta Description",weight:15,tag:"What is a meta description?",edu:"A meta description is a short summary of your page read by AI crawlers.",impactFail:"No meta description means AI has to guess what your business does.",impactPass:"Your meta description gives AI a clear summary of your business."},
+    {id:"title",title:"Business Name & Page Title",weight:10,tag:"Why does your page title matter?",edu:"Your page title is the first thing AI reads when visiting your site.",impactFail:"Your page title is weak or generic. AI cannot confidently identify your business.",impactPass:"Your page title clearly identifies your business."},
+    {id:"content",title:"Content Structure",weight:10,tag:"Why does content structure matter?",edu:"Structure refers to how your page is organised — clear headings, meta description, and obvious info about your services.",impactFail:"Poor structure means AI cannot confidently understand your services or location.",impactPass:"Good structure means AI can clearly identify what you do and where you are."},
   ];
-
-  const techMsgs = {
-    https:    {pass:"Secure — AI crawlers fully trust your site.",     fail:"Not HTTPS — AI crawlers flag this site as untrustworthy.",      warn:"HTTPS unclear."},
-    schema:   {pass:"Schema found — AI knows exactly who you are.",    fail:"No schema — AI builds an incomplete picture of your business.", warn:"Limited schema detected."},
-    robots:   {pass:"All AI crawlers allowed — they can read you.",    fail:"AI crawlers blocked — ChatGPT or Claude cannot read you.",      warn:"Crawler access unclear."},
-    llms:     {pass:"llms.txt found — AI has a direct guide to you.",  fail:"No llms.txt — AI has no structured guide to your site.",       warn:"llms.txt status unclear."},
-    metadesc: {pass:"Meta description found.",                          fail:"No meta description — AI has to guess what you do.",           warn:"Meta description too short."},
-    title:    {pass:"Strong page title — AI can identify you.",        fail:"Weak title — AI cannot identify your business.",               warn:"Page title needs work."},
-    content:  {pass:"Good structure — AI understands your business.",  fail:"Poor structure — AI cannot identify your services.",           warn:"Structure needs improvement."},
+  const techMsgs={
+    https:{pass:"Secure — AI crawlers fully trust your site.",fail:"Not HTTPS — AI crawlers flag this site as untrustworthy.",warn:"HTTPS status unclear."},
+    schema:{pass:"Schema found — AI knows exactly who you are.",fail:"No schema — AI builds an incomplete picture of your business.",warn:"Limited schema detected."},
+    robots:{pass:"All AI crawlers allowed.",fail:"AI crawlers blocked — ChatGPT or Claude cannot read you.",warn:"Crawler access unclear."},
+    llms:{pass:"llms.txt found — AI has a direct guide to you.",fail:"No llms.txt — AI has no structured guide to your site.",warn:"llms.txt status unclear."},
+    metadesc:{pass:"Meta description found.",fail:"No meta description — AI has to guess what you do.",warn:"Meta description too short."},
+    title:{pass:"Strong page title — AI can identify you.",fail:"Weak title — AI cannot identify your business.",warn:"Page title needs work."},
+    content:{pass:"Good structure — AI understands your business.",fail:"Poor structure — AI cannot identify your services.",warn:"Structure needs improvement."},
   };
 
-  const checksEl = el("tech-checks");
-  checksEl.innerHTML = "";
-  let techScore = 0, techTotal = 0, openTech = null;
+  const checksEl=el("tech-checks");
+  checksEl.innerHTML="";
+  let techScore=0,techTotal=0;
 
-  techDefs.forEach((d, i) => {
-    const t = tech?.results?.[d.id];
-    const status = t?.status || "warn";
-    const score = t?.score ?? 0;
-    techScore += score; techTotal += d.weight;
-    const msg = techMsgs[d.id][status] || techMsgs[d.id].warn;
-
-    const div = document.createElement("div");
-    div.className = "tech-check";
-    div.id = "tc-" + d.id;
-    div.style.animationDelay = (i * 0.06) + "s";
-    div.innerHTML = `
+  techDefs.forEach((d,i)=>{
+    const t=r.tech?.results?.[d.id];
+    const status=t?.status||"warn";
+    const score=t?.score??0;
+    techScore+=score;techTotal+=d.weight;
+    const msg=techMsgs[d.id][status]||techMsgs[d.id].warn;
+    const div=document.createElement("div");
+    div.className="tech-check";
+    div.innerHTML=`
       <div class="tech-check-header" onclick="toggleTech('${d.id}')">
         <div class="tech-icon ${status}">${status==="pass"?"✓":status==="fail"?"✗":"!"}</div>
         <div class="tech-check-mid">
@@ -779,162 +657,92 @@ function revealResults(){
     checksEl.appendChild(div);
   });
 
-  // Score ring + bar + verdict
-  const pct = techTotal ? Math.round((techScore / techTotal) * 100) : 0;
-  const tier = pct >= 70 ? "good" : pct >= 40 ? "warn" : "bad";
-  const col = {good:"#4ade80", warn:"#f5c842", bad:"#ff6b5b"}[tier];
-  const verdicts = {
-    good:"Your site gives AI a good chance of recommending you.",
-    warn:"AI may know you exist — but isn't recommending you consistently.",
-    bad:"Your site doesn't give AI what it needs to recommend your business."
-  };
-  const circ = 238.8;
-  el("tech-score-num").textContent = pct;
-  el("tech-score-num").style.color = col;
-  el("tech-arc").style.strokeDashoffset = circ - (circ * (pct / 100));
-  el("tech-arc").style.stroke = col;
-  el("tech-bar").style.width = pct + "%";
-  el("tech-bar").style.background = col;
-  el("tech-verdict").textContent = verdicts[tier];
-  el("tech-verdict").style.color = col;
-  const domainClean = bizUrl.replace(/https?:\/\//,"").replace(/\/$/,"");
-  el("tech-domain").textContent = domainClean;
-  const dmEl = el("tech-domain-meta"); if(dmEl) dmEl.textContent = domainClean;
+  const pct=techTotal?Math.round((techScore/techTotal)*100):0;
+  const tier=pct>=70?"good":pct>=40?"warn":"bad";
+  const col={good:"#4ade80",warn:"#f5c842",bad:"#ff6b5b"}[tier];
+  const verdicts={good:"Your site gives AI a good chance of recommending you.",warn:"AI may know you exist — but isn't recommending you consistently.",bad:"Your site doesn't give AI what it needs to recommend your business."};
+  const circ=238.8;
+  el("tech-score-num").textContent=pct;
+  el("tech-score-num").style.color=col;
+  el("tech-arc").style.strokeDashoffset=circ-(circ*(pct/100));
+  el("tech-arc").style.stroke=col;
+  el("tech-bar").style.width=pct+"%";
+  el("tech-bar").style.background=col;
+  el("tech-verdict").textContent=verdicts[tier];
+  el("tech-verdict").style.color=col;
+  const domainClean=bizUrl.replace(/https?:\/\//,"").replace(/\/$/,"");
+  el("tech-domain").textContent=domainClean;
+  const dmEl=el("tech-domain-meta");if(dmEl)dmEl.textContent=domainClean;
 
-  // ── 2. DISCOVERY PROMPTS — 2 visible, rest locked ───────────────────────
-  const prompts = r.prompts || [];
-  const appearedCount = prompts.filter(p => p.appeared).length;
-  el("disc-appeared").textContent = appearedCount;
+  // PROMPTS
+  const prompts=r.prompts||[];
+  const appearedCount=prompts.filter(p=>p.appeared).length;
+  el("disc-appeared").textContent=appearedCount;
+  const visiblePrompts=prompts.slice(0,3);
+  const hiddenPrompts=prompts.slice(3);
 
-  const visiblePrompts = prompts.slice(0, 5);
-  const hiddenPrompts  = prompts.slice(5);
-
-  el("disc-visible").innerHTML = visiblePrompts.map(p => {
-    const runs = typeof p.appearedInRuns === "number" ? p.appearedInRuns : (p.appeared ? 2 : 0);
+  el("disc-visible").innerHTML=visiblePrompts.map(p=>{
+    const runs=typeof p.appearedInRuns==="number"?p.appearedInRuns:(p.appeared?2:0);
+    const runColor=runs===3?"#4ade80":runs>=1?"#f5c842":"var(--warn)";
     return `<div class="disc-prompt-row">
       <div class="disc-status ${p.appeared?"pass":"fail"}">${p.appeared?"✓":"✗"}</div>
       <div class="disc-main">
         <div class="disc-query">"${p.query}"</div>
-        <div class="disc-sub">Appeared in <span style="filter:blur(4px);user-select:none;pointer-events:none;display:inline-flex;align-items:center;gap:.3rem;vertical-align:middle">${runs} of 3 runs &nbsp;<span class="disc-engine-tag">CHATGPT</span><span class="disc-engine-tag">GEMINI</span><span class="disc-engine-tag">PERPLEXITY</span></span></div>
+        <div class="disc-sub">Appeared in <span style="filter:blur(4px);user-select:none;pointer-events:none;display:inline-flex;align-items:center;gap:.3rem;vertical-align:middle">${runs} of 3 runs &nbsp;${(p.engines||[]).map(e=>`<span class="disc-engine-tag">${e}</span>`).join("")}</span></div>
       </div>
-      <div style="filter:blur(4px);user-select:none;pointer-events:none;font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:1.1rem;flex-shrink:0;min-width:30px;text-align:right;margin-top:2px">${runs}/3</div>
+      <div class="disc-runs" style="color:${runColor}">${runs}/3</div>
     </div>`;
   }).join("");
 
-  if(hiddenPrompts.length) {
-    el("disc-blur-rows").innerHTML = `
-      <div class="disc-prompt-row">
-        <div class="disc-status fail">✗</div>
-        <div class="disc-main">
-          <div class="disc-query">"Who would you recommend for ${r._meta?.cat||"this service"} in ${r._meta?.city||"my area"}?"</div>
-          <div class="disc-sub">Appeared in 0 of 3 runs · <span class="disc-engine-tag">CHATGPT</span> <span class="disc-engine-tag">GEMINI</span></div>
-        </div>
-        <div class="disc-runs" style="color:#ff6b5b">0/3</div>
-      </div>`;
-    el("disc-blur-wrap").style.display = "block";
+  if(hiddenPrompts.length){
+    el("disc-blur-rows").innerHTML=`<div class="disc-prompt-row"><div class="disc-status fail">✗</div><div class="disc-main"><div class="disc-query">"Who would you recommend for ${r._meta?.cat||"this service"} in ${r._meta?.city||"my area"}?"</div><div class="disc-sub">Appeared in 0 of 3 runs</div></div><div class="disc-runs" style="color:#ff6b5b">0/3</div></div>`;
+    el("disc-blur-wrap").style.display="block";
   }
 
-  // ── 3. COMPETITORS — 2 visible, rest locked ──────────────────────────────
-  const competitors = r.competitors || [];
-  const visibleComps = competitors.slice(0, 2);
-  const hiddenComps  = competitors.slice(2);
-
-  el("comp-visible").innerHTML = visibleComps.map(c => {
-    const pctC = c.aar || 50;
-    const colC = pctC >= 50 ? "#4ade80" : pctC >= 25 ? "#f5c842" : "#ff6b5b";
-    return `<div class="comp-row">
-      <div class="comp-row-name">${c.name}</div>
-      <div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:${pctC}%;background:${colC}"></div></div>
-    </div>`;
+  // COMPETITORS
+  const competitors=r.competitors||[];
+  el("comp-visible").innerHTML=competitors.slice(0,2).map(c=>{
+    const pctC=c.aar||50;
+    const colC=pctC>=50?"#4ade80":pctC>=25?"#f5c842":"#ff6b5b";
+    return `<div class="comp-row"><div class="comp-row-name">${c.name}</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:${pctC}%;background:${colC}"></div></div></div>`;
   }).join("");
 
-  if(hiddenComps.length) {
-    el("comp-blur-rows").innerHTML = `
-      <div class="comp-row">
-        <div class="comp-row-name">${r._meta?.city||"Local"} ${r._meta?.cat||"Business"} Competitor</div>
-        <div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:68%;background:#4ade80"></div></div>
-      </div>`;
-    el("comp-blur-wrap").style.display = "block";
+  if(competitors.length>2){
+    el("comp-blur-rows").innerHTML=`<div class="comp-row"><div class="comp-row-name">████████████</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:65%;background:#4ade80"></div></div></div>`;
+    el("comp-blur-wrap").style.display="block";
   }
 
-  // ── 4. CTA personalised insight ──────────────────────────────────────────
-  el("cta-biz-name").textContent = bizName;
-  const insight = r.insight || "";
-  const insightEl = el("personalised-insight");
-  if(insightEl && insight){ insightEl.textContent = insight; insightEl.style.display = "block"; }
+  // INSIGHT & CTA
+  el("cta-biz-name") && (el("cta-biz-name").textContent=bizName);
+  const insight=r.insight||"";
+  const insightEl=el("personalised-insight");
+  if(insightEl&&insight){insightEl.textContent=insight;insightEl.style.display="block";}
 
-  // Submit email silently
-  fetch(FORMSPREE,{
-    method:"POST",
-    headers:{"Content-Type":"application/json","Accept":"application/json"},
-    body: JSON.stringify({
-      email, business: bizName,
-      techScore: pct+"%",
-      appeared: appearedCount+"/20",
-      message: `New scan. Business: ${bizName}. Tech: ${pct}%. Appeared: ${appearedCount}/20 prompts.`
-    })
-  }).catch(()=>{});
+  fetch(FORMSPREE,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({email,business:bizName,techScore:pct+"%",appeared:appearedCount+"/20",message:`New scan. Business: ${bizName}. Tech: ${pct}%. Appeared: ${appearedCount}/20 prompts.`})}).catch(()=>{});
 
   show("results-wrap");
   el("results-wrap").scrollIntoView({behavior:"smooth"});
 }
 
 function toggleTech(id){
-  const edu = el("tedu-"+id);
-  const arr = el("tarr-"+id);
-  if(!edu) return;
-  const open = edu.classList.contains("open");
-  // Close any open
+  const edu=el("tedu-"+id);
+  const arr=el("tarr-"+id);
+  if(!edu)return;
+  const open=edu.classList.contains("open");
   document.querySelectorAll(".tech-edu.open").forEach(e=>e.classList.remove("open"));
   document.querySelectorAll(".tech-arr").forEach(a=>a.style.transform="");
-  if(!open){ edu.classList.add("open"); arr.style.transform="rotate(180deg)"; }
+  if(!open){edu.classList.add("open");arr.style.transform="rotate(180deg)";}
 }
-
-async function fetchTechSignals(url){
-  let u = url.trim();
-  if(!u.startsWith("http")) u = "https://"+u;
-  try{ new URL(u); }catch(e){ u="https://"+url.trim(); }
-  const resp = await fetch(`${WORKER_URL}?url=${encodeURIComponent(u)}`);
-  return await resp.json();
-}
-
-async function fetchClaudeData(bizName, bizUrl, city, cat){
-  const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
-Prompts must be full conversational sentences a human types into ChatGPT — never keywords.
-Keep text short: summary max 15 words, insight max 30 words.
-{"summary":"<15w>","appearances":<0-20>,"competitors":[{"name":"<local competitor>","aar":<30-80>},{"name":"<local competitor>","aar":<25-75>},{"name":"<local competitor>","aar":<20-70>}],"prompts":[{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]}],"insight":"<1 sharp sentence about this specific business category and city and what they lose daily, max 30 words>"}`;
-
-  const resp = await fetch(ANTHROPIC_URL, {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({
-      model:"claude-sonnet-4-20250514",
-      max_tokens:3500,
-      system: sys,
-      messages:[{role:"user",content:`Business: ${bizName}\nWebsite: ${bizUrl}\nCity: ${city}\nCategory: ${cat}`}]
-    })
-  });
-  const data = await resp.json();
-  if(data.error) throw new Error(data.error.message);
-  const raw = data.content?.find(b=>b.type==="text")?.text||"{}";
-  let cleaned = raw.replace(/```json|```/g,"").trim();
-  const s = cleaned.indexOf("{"), e = cleaned.lastIndexOf("}");
-  if(s!==-1&&e!==-1) cleaned = cleaned.slice(s,e+1);
-  return JSON.parse(cleaned);
-}
-
 
 function resetScan(){
-  scanData = null; bizName = ""; bizUrl = "";
-  ["f-name","f-url","f-city","f-cat","gate-email"].forEach(id=>{
-    const e = el(id); if(e) e.value="";
-  });
-  el("scan-log").innerHTML = "";
+  scanData=null;bizName="";bizUrl="";
+  ["f-name","f-url","f-city","f-cat","gate-email"].forEach(id=>{const e=el(id);if(e)e.value="";});
+  el("scan-log").innerHTML="";
   hide("results-wrap");
+  el("results-wrap").style.display="none";
   switchScanState("scan-form-wrap");
-  el("results-wrap").style.display = "none";
   el("scanner-section").scrollIntoView({behavior:"smooth"});
 }
 </script>
 </body>
-</html>
+          </html>
