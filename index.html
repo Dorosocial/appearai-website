@@ -14,8 +14,8 @@
   --muted:#7a7469;--ok:#1a7a4a;--warn:#e84c1e;
   --border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25);
 }
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6}
+html{font-size:16px;scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6;max-width:100%}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px);pointer-events:none;z-index:0}
 
 /* NAV */
@@ -149,7 +149,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .pillar-flag.mid{color:#8a6a00;border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.08)}
 
 /* CTA */
-.cta-section{background:var(--cream);border-top:1px solid var(--border);padding:4rem 3rem}
+.cta-section{background:var(--cream);border-top:1px solid var(--border);padding:4rem 3rem;overflow:hidden}
 .cta-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
 .cta-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
 .cta-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
@@ -160,7 +160,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 /* TECHNICAL CHECKER */
 .tech-section{background:var(--ink);color:var(--paper);padding:4rem 3rem;position:relative;overflow:hidden;border-bottom:1px solid rgba(245,242,235,.08)}
 .tech-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
-.tech-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.tech-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;overflow:hidden}
 .tech-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,242,235,.4);margin-bottom:2rem;display:flex;align-items:center;gap:.75rem}
 .tech-eyebrow span{display:block;width:24px;height:1px;background:rgba(245,242,235,.25)}
 .tech-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(245,242,235,.08)}
@@ -176,7 +176,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .tech-meta{display:flex;flex-direction:column;gap:.5rem;padding-top:.5rem}
 .tech-meta-row{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-top:1px solid rgba(245,242,235,.06)}
 .tech-meta-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.35);flex:1}
-.tech-meta-val{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:var(--paper)}
+.tech-meta-val{font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;color:var(--paper);word-break:break-word;overflow-wrap:break-word}
 .tech-checks{display:flex;flex-direction:column}
 .tech-check{border-top:1px solid rgba(245,242,235,.06);cursor:pointer;transition:background .15s;user-select:none}
 .tech-check:hover{background:rgba(245,242,235,.03)}
@@ -209,18 +209,18 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .tech-edu-txt{font-size:.7rem;color:rgba(245,242,235,.5);line-height:1.55}
 
 /* DISCOVERY PROMPTS SECTION */
-.discovery-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.discovery-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1;overflow:hidden}
 .discovery-header{margin-bottom:2rem}
 .discovery-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:.5rem}
 .discovery-stat{font-size:.78rem;color:var(--muted);line-height:1.6}
 .discovery-stat strong{font-family:'Syne',sans-serif;font-weight:800;color:var(--ink)}
-.disc-prompt-row{display:flex;align-items:flex-start;gap:1.25rem;padding:.875rem 0;border-top:1px solid var(--border)}
+.disc-prompt-row{display:flex;align-items:flex-start;gap:1.25rem;padding:.875rem 0;border-top:1px solid var(--border);overflow:hidden;min-width:0}
 .disc-status{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0;margin-top:2px}
 .disc-status.pass{background:rgba(26,122,74,.12);color:var(--ok)}
 .disc-status.fail{background:rgba(232,76,30,.1);color:var(--warn)}
 .disc-main{flex:1}
 .disc-query{font-size:.8rem;color:var(--ink);font-style:italic;line-height:1.5;margin-bottom:.3rem}
-.disc-sub{font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:.375rem;flex-wrap:wrap}
+.disc-sub{font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:.375rem;flex-wrap:wrap;overflow:hidden;max-width:100%}
 .disc-engine-tag{font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--border);color:var(--muted)}
 .disc-runs{font-family:'Syne',sans-serif;font-weight:800;font-size:.88rem;flex-shrink:0;min-width:30px;text-align:right;margin-top:2px}
 .disc-blur-wrap{position:relative;margin-top:0;overflow:hidden}
@@ -233,7 +233,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .disc-lock-btn:hover{opacity:.8}
 
 /* COMPETITORS SECTION */
-.competitors-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.competitors-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1;overflow:hidden}
 .competitors-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:.5rem}
 .competitors-sub{font-size:.78rem;color:var(--muted);margin-bottom:2rem;line-height:1.6}
 .comp-row{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-top:1px solid var(--border)}
@@ -251,14 +251,14 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .reset-btn:hover{color:var(--ink);border-color:var(--ink)}
 
 /* STATS */
-.stats-row{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border)}
-.stat{padding:2.5rem 3rem;border-right:1px solid var(--border);position:relative;z-index:1}
+.stats-row{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border);overflow:hidden}
+.stat{padding:2.5rem 2rem;border-right:1px solid var(--border);position:relative;z-index:1;min-width:0;overflow:hidden}
 .stat:last-child{border-right:none}
 .stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:3rem;letter-spacing:-.02em;color:var(--ink);line-height:1;margin-bottom:.5rem}
-.stat-label{font-size:.72rem;color:var(--muted);line-height:1.6}
+.stat-label{font-size:.72rem;color:var(--muted);line-height:1.6;word-wrap:break-word;overflow-wrap:break-word}
 
 /* ABOUT */
-.about-strip{max-width:1100px;margin:0 auto;padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;border-bottom:1px solid var(--border)}
+.about-strip{max-width:1100px;margin:0 auto;padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;border-bottom:1px solid var(--border);overflow:hidden}
 .about-left p{font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:1rem}
 .about-right{display:flex;flex-direction:column;gap:1.5rem;padding-top:1rem}
 .about-item{padding:1.5rem;border:1px solid var(--border);background:var(--cream)}
@@ -278,7 +278,9 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
 .footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
 
 @media(max-width:768px){
-  .section-title{font-size:clamp(1.75rem,8vw,2.5rem)!important}
+  *{max-width:100%;box-sizing:border-box}
+  img,video,iframe{max-width:100%}
+  .section-title{font-size:clamp(1.5rem,7vw,2.25rem)!important}
   nav{padding:0 1.5rem}
   .nav-links{display:none}
   .scanner-section{padding:3rem 1.5rem}
@@ -310,10 +312,15 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
   .cta-section{padding:2.5rem 1.5rem}
   .cta-inner{grid-template-columns:1fr!important;gap:2rem!important}
   /* Stats row mobile */
-  .stats-row{display:block}
+  .stats-row{display:flex;flex-direction:column}
+  .stat{border-right:none!important;border-bottom:1px solid var(--border);padding:1.75rem 1.5rem!important;width:100%}
+  .stat:last-child{border-bottom:none}
+  .stat-num{font-size:2.25rem}
+  .stat-label{white-space:normal;word-break:normal}
   /* About strip mobile */
-  .about-strip{display:block;padding:2.5rem 1.5rem}
-  .about-right{margin-top:2rem}
+  .about-strip{grid-template-columns:1fr!important;gap:2.5rem;padding:2.5rem 1.5rem}
+  .about-right{margin-top:0}
+  .section-title{font-size:clamp(1.5rem,7vw,2.25rem)!important}
 }
 </style>
 </head>
@@ -510,7 +517,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem}
     <h2 class="section-title">The AI visibility<br>agency for local<br>businesses</h2>
     <p>AppearAI helps local businesses appear consistently in AI-generated recommendations across ChatGPT, Gemini, and Perplexity.</p>
     <p>We invented the AI Appearance Rate™ — the metric that measures how often AI actually recommends your business when someone nearby is looking for your services.</p>
-    <a href="/audit.html" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Get a free audit</a>
+    <a href="/audit.html" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Get Your Audit</a>
   </div>
   <div class="about-right">
     <div class="about-item"><div class="about-item-num">01</div><div class="about-item-title">We measure your AAR™</div><div class="about-item-text">The only metric that tells you exactly how often AI recommends your business — not estimates, not proxies, but real prompt results across real platforms.</div></div>
