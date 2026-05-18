@@ -546,7 +546,11 @@ async function startScan(){
     ]);
 
     scanData.tech=techResult.status==="fulfilled"?techResult.value:null;
-    if(claudeData.status==="fulfilled"){Object.assign(scanData,claudeData.value);}
+    if(claudeData.status==="fulfilled"){
+      Object.assign(scanData,claudeData.value);
+    } else {
+      addLog("✗ Claude error: "+claudeData.reason?.message);
+    }
 
     addLog("✓ Scan complete — report ready");
     await sleep(400);
@@ -578,7 +582,7 @@ Keep text short: summary max 15 words, insight max 30 words.
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      model:"claude-sonnet-4-20250514",
+      model:"claude-3-5-sonnet-20241022",
       max_tokens:3500,
       system:sys,
       messages:[{role:"user",content:`Business: ${bizName}\nWebsite: ${bizUrl}\nCity: ${city}\nCategory: ${cat}`}]
@@ -745,4 +749,4 @@ function resetScan(){
 }
 </script>
 </body>
-</html>
+                                                                                              </html>
