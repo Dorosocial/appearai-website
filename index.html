@@ -574,7 +574,7 @@ Prompts must be full conversational sentences a human types into ChatGPT — nev
 Keep text short: summary max 15 words, insight max 30 words.
 {"summary":"<15w>","appearances":<0-20>,"competitors":[{"name":"<local competitor>","aar":<30-80>},{"name":"<local competitor>","aar":<25-75>},{"name":"<local competitor>","aar":<20-70>}],"prompts":[{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]}],"insight":"<1 sharp sentence about this specific business category and city, max 30 words>"}`;
 
-  const resp=await fetch(ANTHROPIC_URL,{
+  const resp=await fetch(WORKER_URL+"/claude",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
@@ -745,4 +745,4 @@ function resetScan(){
 }
 </script>
 </body>
-          </html>
+</html>
