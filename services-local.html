@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Visibility for Local Businesses — AppearAI</title>
+<meta name="description" content="AppearAI helps local businesses appear consistently when AI recommends services in their area. Four layers of AI visibility work, built for the businesses AI ignores."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden;width:100%}
+:root{
+  --ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;
+  --muted:#7a7469;--ok:#1a7a4a;--warn:#e84c1e;--gold:#c9a84c;
+  --border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px);pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 3rem}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.35rem .9rem;text-decoration:none;transition:color .15s,border-color .15s}
+.nav-logo:hover{color:var(--ink);border-color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links a{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--ink)}
+.nav-cta{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.8}
+
+/* SHARED */
+.section-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.section-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
+.btn-ink{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.875rem 2rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+.btn-ink:hover{opacity:.8}
+.btn-ghost{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--ink);padding:.875rem 2rem;border:1px solid var(--ink);cursor:pointer;text-decoration:none;display:inline-block;transition:all .15s}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+/* HERO */
+.hero{max-width:1100px;margin:0 auto;padding:5rem 3rem 4rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:.375rem .875rem;margin-bottom:2rem}
+
+.hero h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(2.5rem,6vw,5rem);line-height:.95;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.5rem}
+.hero h1 em{font-family:'DM Sans',sans-serif;font-style:italic;font-weight:400;color:var(--muted)}
+.hero-sub{font-size:.92rem;color:var(--muted);line-height:1.9;max-width:560px;margin-bottom:2.5rem}
+.hero-cta-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.hero-note{font-size:.68rem;color:var(--muted);letter-spacing:.05em}
+
+/* PROBLEM STRIP */
+.problem-strip{background:var(--ink);position:relative;overflow:hidden}
+.problem-strip::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
+.problem-inner{max-width:1100px;margin:0 auto;padding:4rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.problem-left p{font-size:.88rem;color:rgba(245,242,235,.55);line-height:1.9;margin-bottom:1rem}
+.problem-left p:last-child{margin-bottom:0}
+.problem-right{display:flex;flex-direction:column;gap:1.25rem}
+.problem-stat{padding:1.5rem;border:1px solid rgba(245,242,235,.08)}
+.problem-stat-num{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2.5rem;letter-spacing:-.03em;color:var(--paper);line-height:1;margin-bottom:.375rem}
+.problem-stat-label{font-size:.72rem;color:rgba(245,242,235,.4);line-height:1.6}
+
+/* WHO */
+.who-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.who-card{padding:1.75rem;border:1px solid var(--border);background:var(--cream);position:relative}
+.who-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
+.who-card-icon{font-size:1.5rem;margin-bottom:1rem}
+.who-card-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.9rem;color:var(--ink);margin-bottom:.5rem}
+.who-card-text{font-size:.75rem;color:var(--muted);line-height:1.7}
+
+/* LAYERS */
+.layers-section{position:relative;z-index:1}
+.layers-header{max-width:1100px;margin:0 auto;padding:4rem 3rem 2rem;border-bottom:1px solid var(--border)}
+.layer{border-bottom:1px solid var(--border);position:relative;z-index:1}
+.layer-inner{max-width:1100px;margin:0 auto;padding:3.5rem 3rem;display:grid;grid-template-columns:280px 1fr;gap:5rem;align-items:start}
+.layer-num{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.layer-name{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.5rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:1rem;line-height:1.1}
+.layer-tag{display:inline-block;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .75rem;border:1px solid var(--border);color:var(--muted);margin-bottom:1rem}
+.layer-right p{font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:1rem}
+.layer-right p:last-child{margin-bottom:0}
+.layer-outcome{margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--cream);border:1px solid var(--border);border-left:3px solid var(--ink)}
+.layer-outcome-label{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.layer-outcome-text{font-size:.8rem;color:var(--ink);line-height:1.7;font-style:italic}
+.layer:nth-child(even){background:var(--cream)}
+
+/* ADDONS */
+.addons-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.addons-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem}
+.addon-card{padding:1.75rem;border:1px solid var(--border);position:relative}
+.addon-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--border-strong)}
+.addon-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.88rem;color:var(--ink);margin-bottom:.5rem}
+.addon-text{font-size:.75rem;color:var(--muted);line-height:1.7}
+
+/* HOW */
+.how-section{background:var(--ink);position:relative;overflow:hidden}
+.how-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
+.how-inner{max-width:1100px;margin:0 auto;padding:4rem 3rem;position:relative;z-index:1}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3rem;border:1px solid rgba(245,242,235,.08)}
+.how-step{padding:2rem 1.75rem;border-right:1px solid rgba(245,242,235,.08)}
+.how-step:last-child{border-right:none}
+.how-step-num{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2rem;color:rgba(245,242,235,.08);line-height:1;margin-bottom:1rem}
+.how-step-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--paper);margin-bottom:.5rem}
+.how-step-text{font-size:.72rem;color:rgba(245,242,235,.4);line-height:1.7}
+
+/* CTA SECTION */
+.cta-section{max-width:1100px;margin:0 auto;padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.75rem,4vw,3rem);line-height:1;letter-spacing:-.03em;color:var(--ink);margin-bottom:1rem}
+.cta-title em{font-family:'DM Sans',sans-serif;font-style:italic;font-weight:400;color:var(--muted)}
+.cta-sub{font-size:.85rem;color:var(--muted);line-height:1.9}
+.cta-right-box{padding:2.5rem;border:1px solid var(--border);background:var(--cream);position:relative}
+.cta-right-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
+.cta-right-label{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.cta-right-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.25rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:.75rem;line-height:1.2}
+.cta-right-text{font-size:.78rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relative;z-index:1}
+.footer-top{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem;display:inline-block;margin-bottom:1rem}
+.footer-addr{font-size:.72rem;color:var(--muted);line-height:1.9}
+.footer-col-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem}
+.footer-col{display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-col a:hover{color:var(--ink)}
+.footer-cols{display:flex;gap:4rem;flex-wrap:wrap}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
+
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .hero{padding:3rem 1.5rem}
+  .problem-inner{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+  .who-section{padding:3rem 1.5rem}
+  .who-grid{grid-template-columns:1fr}
+  .layer-inner{grid-template-columns:1fr;gap:1.5rem;padding:2.5rem 1.5rem}
+  .how-steps{grid-template-columns:1fr 1fr}
+  .how-step{border-bottom:1px solid rgba(245,242,235,.08)}
+  .addons-section{padding:3rem 1.5rem}
+  .addons-grid{grid-template-columns:1fr}
+  .cta-section{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+  .layers-header{padding:3rem 1.5rem 2rem}
+  footer{padding:2.5rem 1.5rem 2rem}
+  .footer-cols{gap:2.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo">AppearAI</a>
+    <div class="nav-links">
+      <a href="/services-local.html" class="active">For Local Businesses</a>
+      <a href="/services-enterprise.html">For Brands</a>
+      <a href="/research.html">Research</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/case-studies.html">Case Studies</a>
+    </div>
+    <a href="https://calendly.com/hello-appearai/30min" class="nav-cta">Book a Strategy Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">AI Visibility for Local Businesses</div>
+  <h1>AI keeps recommending<br>your competitors.<br>We fix <em>that.</em></h1>
+  <p class="hero-sub">When someone nearby asks ChatGPT, Gemini, or Perplexity for a dentist, a plumber, or a lawyer — your name should come up. Right now, for most local businesses, it doesn't. We change that.</p>
+  <div class="hero-cta-row">
+    <a href="https://calendly.com/hello-appearai/30min" class="btn-ink">Book a Strategy Call →</a>
+    <a href="/audit.html" class="btn-ghost">Get Your Scan →</a>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<div class="problem-strip">
+  <div class="problem-inner">
+    <div class="problem-left">
+      <div class="section-eyebrow" style="color:rgba(245,242,235,.35)"><span style="background:rgba(245,242,235,.2)"></span>The Problem</div>
+      <p>AI search is now the first stop for millions of people looking for local services. They don't type into Google anymore — they ask. And when they ask, AI gives them a set of names.</p>
+      <p>Those names are not random. They come from a set of signals your website either has or doesn't. Most local businesses don't have them and this is not because their service is poor, but mostly because nobody told them AI works differently to search.</p>
+      <p>We built AppearAI to fix exactly this. We make local businesses visible to AI — systematically.</p>
+    </div>
+    <div class="problem-right">
+      <div class="problem-stat">
+        <div class="problem-stat-num">83%</div>
+        <div class="problem-stat-label">of local businesses do not appear when AI is asked to recommend their service in their city</div>
+      </div>
+      <div class="problem-stat">
+        <div class="problem-stat-num">45%</div>
+        <div class="problem-stat-label">of consumers now use AI to find and choose local service providers</div>
+      </div>
+      <div class="problem-stat">
+        <div class="problem-stat-num">1.2%</div>
+        <div class="problem-stat-label">of all local business locations are currently recommended by ChatGPT when asked</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO -->
+<section class="who-section">
+  <div class="section-eyebrow"><span></span>Who This Is For</div>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.5rem,3.5vw,2.5rem);letter-spacing:-.02em;color:var(--ink);line-height:1.05">Any local business where one new<br>client pays for this many times over.</h2>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-card-icon">🦷</div>
+      <div class="who-card-title">Healthcare & Dental</div>
+      <div class="who-card-text">Clinics, dental practices, physio, optometrists. One new patient relationship is worth thousands. AI is now where patients start their search.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">⚖️</div>
+      <div class="who-card-title">Legal & Financial</div>
+      <div class="who-card-text">Lawyers, accountants, financial advisors. High-value clients ask AI for recommendations before they ask anyone else.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">🔧</div>
+      <div class="who-card-title">Trades & Home Services</div>
+      <div class="who-card-text">Plumbers, electricians, HVAC, contractors. Urgent jobs mean people ask AI first and call whoever comes up.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">🍽️</div>
+      <div class="who-card-title">Restaurants & Hospitality</div>
+      <div class="who-card-text">Diners ask AI where to eat every night. If your restaurant isn't appearing in those answers, those tables go elsewhere.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">💇</div>
+      <div class="who-card-title">Beauty & Wellness</div>
+      <div class="who-card-text">Salons, spas, gyms, studios. Repeat-client businesses where appearing once in AI can mean a customer for years.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">🏠</div>
+      <div class="who-card-title">Real Estate & Property</div>
+      <div class="who-card-text">Agents, property managers, letting agencies. Buyers and renters now ask AI who to trust before picking up the phone.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYERS -->
+<section class="layers-section">
+  <div class="layers-header">
+    <div class="section-eyebrow"><span></span>How We Work</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.5rem,3.5vw,2.5rem);letter-spacing:-.02em;color:var(--ink);line-height:1.05;max-width:600px">Four layers of work. Each one builds on the last. Together they make AI recommend you.</h2>
+  </div>
+
+  <div class="layer">
+    <div class="layer-inner">
+      <div class="layer-left">
+        <div class="layer-num">Layer 01</div>
+        <div class="layer-name">AI Readiness</div>
+        <div class="layer-tag">The launch pad</div>
+      </div>
+      <div class="layer-right">
+        <p>AI platforms can only recommend what they can read. Most local business websites were built for a different era — one where search engines were the audience. The signals that tell AI who you are, what you do, and where you operate are either missing, incomplete, or actively blocking the very crawlers that would recommend you.</p>
+        <p>Layer 1 is where every client starts — and where the transformation begins. We implement the technical infrastructure that makes your website readable, structured, and trustworthy to every major AI platform. This is not maintenance work. It is the launch pad everything else is built on.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">AI platforms can find, read, and understand your business. The foundation is set — everything that follows builds directly on this.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div class="layer-left">
+        <div class="layer-num">Layer 02</div>
+        <div class="layer-name">Entity Dominance</div>
+        <div class="layer-tag">Making AI know who you are</div>
+      </div>
+      <div class="layer-right">
+        <p>Being technically readable is the floor. AI platforms understand the world through entities — structured representations of who businesses are, built from interconnected signals. A business without a strong entity is one AI describes vaguely, attributes inconsistently, and recommends hesitantly.</p>
+        <p>Layer 2 establishes and dominates your entity. We ensure your business is the authoritative, well-defined presence AI reaches for with confidence — described accurately, positioned correctly within your category, and associated with the right signals of trust and expertise in your area.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">AI knows exactly who your business is and why it should be recommended — described accurately and consistently across every platform.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div class="layer-left">
+        <div class="layer-num">Layer 03</div>
+        <div class="layer-name">Search & AI Discovery</div>
+        <div class="layer-tag">Found in both worlds</div>
+      </div>
+      <div class="layer-right">
+        <p>Search and AI are converging. Google's AI Overviews, Perplexity's cited answers, and traditional organic rankings all draw from overlapping signals. Businesses that optimise for one while ignoring the other are leaving significant visibility on the table.</p>
+        <p>Layer 3 positions your business to be discovered across both channels simultaneously — earning citations in AI-generated answers while strengthening your organic search presence. We track your citation share in AI Overviews and Perplexity monthly, so you can see exactly where you are appearing and where competitors are gaining ground.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your business is found whether someone searches traditionally or asks AI — with citation share tracked across both channels and reported monthly.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div class="layer-left">
+        <div class="layer-num">Layer 04</div>
+        <div class="layer-name">GEO & Authority Building</div>
+        <div class="layer-tag">Building real authority</div>
+      </div>
+      <div class="layer-right">
+        <p>AI platforms triangulate authority from a web of external signals. A business that only exists on its own website is one AI recommends cautiously. The businesses AI recommends consistently have corroborating signals across the wider web — signals that confirm the entity is real, established, and trusted in its community.</p>
+        <p>Layer 4 builds those off-site authority signals strategically. We establish your business across the sources AI platforms use to confirm credibility — community platforms, authoritative references, and brand signals that compound over time and become increasingly difficult for competitors to replicate.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your business is corroborated across the web — giving AI the external confirmation it needs to recommend you consistently and without hesitation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div class="layer-left">
+        <div class="layer-num">Layer 05</div>
+        <div class="layer-name">LLM Seeding</div>
+        <div class="layer-tag">The big play</div>
+      </div>
+      <div class="layer-right">
+        <p>The most durable AI visibility comes from presence in the sources that AI platforms learn from. Businesses that appear in high-authority, widely-cited sources hold a structural advantage — one that compounds over time and is extraordinarily difficult for competitors to close.</p>
+        <p>Layer 5 builds that presence strategically. We place your business in the sources that shape what AI knows — so that your name, your reputation, and your category leadership are embedded at the level where AI forms its understanding, not just where it searches for answers.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your business is present in the sources AI learns from — creating a structural visibility advantage that compounds continuously and is built to last.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div class="layer-left">
+        <div class="layer-num">Layer 06</div>
+        <div class="layer-name">AI Visibility Management</div>
+        <div class="layer-tag">The permanent layer</div>
+      </div>
+      <div class="layer-right">
+        <p>AI is not static. The platforms update their models, new competitors enter your space, and what was working six months ago may need reinforcing today. The businesses that stay visible are not the ones that did the work once — they are the ones that never stopped.</p>
+        <p>Layer 6 is the ongoing management layer that protects and grows everything built in Layers 1–5. Your AAR™ is tracked monthly, competitive movements are caught early, and every significant platform update is assessed for impact on your visibility — with a response in place before you notice a difference.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your AI visibility compounds rather than drifts. Every layer of work is protected, every platform shift is caught, and your position strengthens continuously.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- ADDONS -->
+<section class="addons-section">
+  <div class="section-eyebrow"><span></span>Additional Services</div>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.25rem,3vw,2rem);letter-spacing:-.02em;color:var(--ink);line-height:1.1;max-width:500px">Specialist work that compounds your visibility over time.</h2>
+  <div class="addons-grid">
+    <div class="addon-card">
+      <div class="addon-title">Quarterly AI Visibility Audit</div>
+      <div class="addon-text">A deep review of where your business is cited — and where it's absent — across the major AI platforms. Delivered as a report with prioritised actions for the next quarter.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-title">AI Reputation Monitoring</div>
+      <div class="addon-text">AI doesn't always get it right. We monitor for inaccurate descriptions, missing citations, and negative brand signals in AI-generated answers — and we correct them.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-title">AAR™ Visibility Dashboard</div>
+      <div class="addon-text">Your AI Appearance Rate™ tracked monthly across all major platforms. See exactly how your visibility changes over time and how you compare to local competitors.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-title">Competitor Gap Report</div>
+      <div class="addon-text">A detailed breakdown of which competitors are appearing instead of you, on which prompts, and what signals they have that you don't. Actionable. Specific. Updated quarterly.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div class="how-inner">
+    <div class="section-eyebrow" style="color:rgba(245,242,235,.35)"><span style="background:rgba(245,242,235,.2)"></span>How It Works</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.5rem,3.5vw,2.5rem);letter-spacing:-.02em;color:var(--paper);line-height:1.05;max-width:500px">From invisible to recommended. Here's how we get there.</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">01</div>
+        <div class="how-step-title">Your Scan</div>
+        <div class="how-step-text">Run your AI visibility scan. See your technical score and a preview of how AI is — or isn't — finding your business right now.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">02</div>
+        <div class="how-step-title">Full Audit</div>
+        <div class="how-step-text">Your $250 Full AI Visibility Audit gives you the complete picture. Every gap, every competitor, every missed prompt. PDF delivered within 48 hours.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">03</div>
+        <div class="how-step-title">Strategy Call</div>
+        <div class="how-step-text">We walk through your audit together — 15 minutes, included in the audit — and map out exactly which layers of work will move your AAR™ the most.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">04</div>
+        <div class="how-step-title">We Get to Work</div>
+        <div class="how-step-text">We implement. You watch your AAR™ score move. Monthly reports show you exactly what changed and what's next.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section style="border-bottom:1px solid var(--border)">
+  <div class="cta-section">
+    <div>
+      <div class="section-eyebrow"><span></span>Ready to start</div>
+      <div class="cta-title">Let's get <em>your business</em><br>found on AI.</div>
+      <p class="cta-sub">Book a free 15-minute strategy call. We'll look at your current AI visibility, identify the biggest gaps, and tell you exactly which layer of work makes sense to start with.</p>
+    </div>
+    <div class="cta-right-box">
+      <div class="cta-right-label">Free Strategy Call</div>
+      <div class="cta-right-title">15 minutes. No obligation. Specific to your business.</div>
+      <div class="cta-right-text">We don't do generic pitches. Every call starts with your actual scan results and ends with a clear recommendation — whether that's working with us or not.</div>
+      <a href="https://calendly.com/hello-appearai/30min" class="btn-ink" style="width:100%;text-align:center;display:block">Book Your Strategy Call →</a>
+      <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.875rem;letter-spacing:.05em">Or <a href="/audit.html" style="color:var(--ink);text-decoration:underline">get your scan</a> first</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">AppearAI</div>
+      <div class="footer-addr">
+        131 Continental Dr, Suite 305<br>Newark, Delaware 19713<br>United States (Operations)<br><br><em style="font-size:.7rem">Remote-first · Global team</em><br><br>
+        <a href="mailto:hello@appearai.io" style="color:var(--muted);text-decoration:none">hello@appearai.io</a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-col">
+          <a href="/about.html">About</a>
+          <a href="/services-local.html">For Local Businesses</a>
+          <a href="/services-enterprise.html">For Brands</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-col">
+          <a href="/research.html">Research</a>
+          <a href="/resources.html">Resources</a>
+          <a href="/index.html">Free Scanner</a>
+          <a href="/audit.html">Get Your Audit</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-col">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="/cookies.html">Cookie Policy</a>
+          <a href="/refunds.html">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Avarabrands Inc. All rights reserved.</div>
+    <div class="footer-copy">AppearAI is a product of Avarabrands Inc.</div>
+  </div>
+</footer>
+
+</body>
+</html>
