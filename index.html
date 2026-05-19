@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -573,11 +572,51 @@ async function fetchTechSignals(url){
   return await resp.json();
 }
 
+function buildPrompts(bizName, city, cat) {
+  const c = cat.toLowerCase();
+  const templates = [
+    `Who is the best ${c} near ${city}?`,
+    `Can you recommend a good ${c} in ${city}?`,
+    `What ${c} would you suggest for someone in ${city}?`,
+    `I need a ${c} in ${city} — who should I go to?`,
+    `Which ${c} in ${city} has the best reviews?`,
+    `What is the top-rated ${c} in ${city}?`,
+    `I am looking for a trusted ${c} near ${city}. Any recommendations?`,
+    `Who are the most recommended ${c}s in ${city}?`,
+    `What ${c} do locals in ${city} recommend?`,
+    `Can you suggest the best ${c} in ${city} for a new patient?`,
+    `Which ${c} in ${city} would you trust?`,
+    `I am new to ${city} and need a ${c}. Who should I call?`,
+    `What is the highest-rated ${c} in ${city} right now?`,
+    `Who is a reliable ${c} in ${city}?`,
+    `Recommend a ${c} near ${city} with good customer service.`,
+    `What ${c} near ${city} is taking new clients?`,
+    `Who is the most well-known ${c} in ${city}?`,
+    `Best ${c} in ${city} — who comes up most often?`,
+    `Which ${c} in ${city} would you recommend to a friend?`,
+    `Find me a ${c} in ${city} that people actually trust.`
+  ];
+  return templates;
+}
+
 async function fetchClaudeData(bizName,bizUrl,city,cat){
-  const sys=`You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
-Prompts must be full conversational sentences a human types into ChatGPT — never keywords.
-Keep text short: summary max 15 words, insight max 30 words.
-{"summary":"<15w>","appearances":<0-20>,"competitors":[{"name":"<local competitor>","aar":<30-80>},{"name":"<local competitor>","aar":<25-75>},{"name":"<local competitor>","aar":<20-70>}],"prompts":[{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]},{"query":"<conversational q>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":["<name>"]}],"insight":"<1 sharp sentence about this specific business category and city, max 30 words>"}`;
+  const prompts = buildPrompts(bizName, city, cat);
+  const promptList = prompts.map((q,i) => `${i+1}. "${q}"`).join('\n');
+
+  const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
+For each prompt, simulate whether ${bizName} (${bizUrl}) would appear in AI search results.
+Base your simulation on realistic AI recommendation patterns for a ${cat} in ${city}.
+Return exactly this structure:
+{"competitors":[{"name":"<real local competitor name>","aar":<30-80>},{"name":"<real local competitor name>","aar":<25-75>},{"name":"<real local competitor name>","aar":<20-70>}],"prompts":[<20 objects with appeared, appearedInRuns 0-3, engines array>],"insight":"<1 sharp insight about ${cat} AI visibility in ${city}, max 30 words>"}
+Each prompt object: {"appeared":<bool>,"appearedInRuns":<0-3>,"engines":["ChatGPT","Perplexity","Gemini","Claude AI","Google AI"]}
+Only include engines where the business actually appeared. Be realistic — most unoptimised businesses appear in 2-6 of 20 prompts.`;
+
+  const userMsg = `Business: ${bizName}
+Website: ${bizUrl}
+City: ${city}
+Category: ${cat}
+Prompts to evaluate:
+${promptList}`;
 
   const resp=await fetch(WORKER_URL+"/claude",{
     method:"POST",
@@ -586,7 +625,7 @@ Keep text short: summary max 15 words, insight max 30 words.
       model:"claude-sonnet-4-5",
       max_tokens:3500,
       system:sys,
-      messages:[{role:"user",content:`Business: ${bizName}\nWebsite: ${bizUrl}\nCity: ${city}\nCategory: ${cat}`}]
+      messages:[{role:"user",content:userMsg}]
     })
   });
   const data=await resp.json();
@@ -595,7 +634,13 @@ Keep text short: summary max 15 words, insight max 30 words.
   let cleaned=raw.replace(/```json|```/g,"").trim();
   const s=cleaned.indexOf("{"),e=cleaned.lastIndexOf("}");
   if(s!==-1&&e!==-1)cleaned=cleaned.slice(s,e+1);
-  return JSON.parse(cleaned);
+  const result = JSON.parse(cleaned);
+  // Attach the deterministic prompts as queries
+  result.prompts = (result.prompts||[]).map((p,i) => ({
+    ...p,
+    query: prompts[i] || prompts[0]
+  }));
+  return result;
 }
 
 function revealResults(){
@@ -750,4 +795,4 @@ function resetScan(){
 }
 </script>
 </body>
-</html>
+              </html>
