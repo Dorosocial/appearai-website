@@ -3,344 +3,252 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Get Your Free AI Visibility Audit — AppearAI</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<title>Full AI Visibility Audit Report — $250 — AppearAI</title>
+<meta name="description" content="Get your complete AI visibility audit. 20 discovery prompts, full technical breakdown, competitor analysis, AAR™ score, and a 15-minute walkthrough call. $250, delivered within 48 hours."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#050508;--surface:#0c0c12;--surface2:#12121a;
-  --border:#1e1e2e;--border2:#2a2a3e;
-  --text:#f0f0ff;--muted:#6060a0;--muted2:#3a3a60;
-  --green:#00e676;--amber:#ffb300;--red:#ff4444;
-  --accent:#7c3aed;--accent2:#a855f7;--blue:#4f8fff;
-}
-html{font-size:16px}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--bg);color:var(--text);
-  min-height:100vh;display:flex;flex-direction:column;
-  align-items:center;padding:2.5rem 1rem 4rem;
-  position:relative;overflow-x:hidden;
-}
-body::before{
-  content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);
-  width:700px;height:500px;
-  background:radial-gradient(ellipse,rgba(124,58,237,0.18) 0%,transparent 70%);
-  pointer-events:none;z-index:0;
-}
-body::after{
-  content:'';position:fixed;bottom:-100px;right:-100px;
-  width:400px;height:400px;
-  background:radial-gradient(ellipse,rgba(79,143,255,0.08) 0%,transparent 70%);
-  pointer-events:none;z-index:0;
-}
-.wrap{width:100%;max-width:560px;position:relative;z-index:1}
-.brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:2.5rem}
-.brand-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em;color:var(--text);text-decoration:none}
-.brand-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-.badge{
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.2);
-  border-radius:99px;padding:6px 16px;font-size:11px;font-weight:600;
-  color:#00e676;letter-spacing:0.08em;text-transform:uppercase;
-  margin:0 auto 1.5rem;width:fit-content;
-}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:#00e676;box-shadow:0 0 6px #00e676;animation:blink 2s infinite}
-.headline{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2.4rem,8vw,3.8rem);
-  line-height:0.95;letter-spacing:0.02em;text-align:center;
-  margin-bottom:1rem;
-  background:linear-gradient(135deg,#ffffff 0%,#a855f7 45%,#4f8fff 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.sub{font-size:15px;color:var(--muted);text-align:center;line-height:1.7;margin-bottom:2rem;max-width:440px;margin-left:auto;margin-right:auto}
-.what-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;
-  position:relative;overflow:hidden;
-}
-.what-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--blue),var(--green));
-}
-.what-title{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
-.what-items{display:flex;flex-direction:column;gap:10px}
-.what-item{display:flex;align-items:flex-start;gap:12px}
-.what-icon{
-  width:22px;height:22px;border-radius:50%;flex-shrink:0;
-  background:rgba(0,230,118,0.12);color:var(--green);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;margin-top:1px;
-  box-shadow:0 0 8px rgba(0,230,118,0.2);
-}
-.what-text{font-size:14px;color:var(--text);line-height:1.5}
-.what-text span{font-size:12px;color:var(--muted);display:block;margin-top:2px}
-.starting-point{
-  margin-top:1.25rem;padding:1rem 1.125rem;
-  background:rgba(124,58,237,0.06);
-  border:1px solid rgba(124,58,237,0.15);
-  border-radius:10px;
-}
-.starting-point-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px}
-.starting-point-text{font-size:13px;color:#8888bb;line-height:1.65}
-.starting-point-text strong{color:#aaaacc;font-weight:500}
-.teaser-card{
-  background:var(--surface2);border:1px solid var(--border2);
-  border-radius:12px;padding:1.125rem 1.25rem;margin-top:1rem;
-}
-.teaser-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
-.teaser-text{font-size:13px;color:#8888bb;line-height:1.65}
-.teaser-text strong{color:#aaaacc;font-weight:500}
-.form-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;padding:1.5rem;margin-bottom:1rem;
-  position:relative;overflow:hidden;
-}
-.form-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--blue));
-}
-.form-title{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem}
-.field{margin-bottom:1rem}
-.field label{display:block;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.field input,.field select,.field textarea{
-  width:100%;font-family:'DM Sans',sans-serif;font-size:14px;
-  padding:12px 16px;background:var(--surface2);
-  border:1px solid var(--border);border-radius:10px;
-  color:var(--text);outline:none;
-  transition:border-color 0.2s,box-shadow 0.2s;
-}
-.field input:focus,.field select:focus,.field textarea:focus{
-  border-color:var(--accent2);box-shadow:0 0 0 3px rgba(168,85,247,0.15);
-}
-.field input::placeholder,.field textarea::placeholder{color:var(--muted2)}
-.field select{appearance:none;cursor:pointer}
-.field select option{background:var(--surface2);color:var(--text)}
-.field textarea{resize:vertical;min-height:80px;line-height:1.5}
-.submit-btn{
-  width:100%;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;
-  padding:15px 24px;background:linear-gradient(135deg,var(--accent),var(--blue));
-  color:#fff;border:none;border-radius:10px;cursor:pointer;
-  box-shadow:0 4px 24px rgba(124,58,237,0.4);
-  transition:opacity 0.15s,transform 0.1s,box-shadow 0.2s;
-  margin-top:0.5rem;
-}
-.submit-btn:hover{opacity:0.9;box-shadow:0 4px 28px rgba(124,58,237,0.6)}
-.submit-btn:active{transform:scale(0.98)}
-.submit-btn:disabled{opacity:0.4;cursor:not-allowed}
-.no-catch{text-align:center;font-size:12px;color:var(--muted2);margin-top:0.875rem;line-height:1.6}
-.success-card{
-  background:var(--surface);border:1px solid rgba(0,230,118,0.3);
-  border-radius:16px;padding:2rem 1.5rem;text-align:center;
-  display:none;animation:slideUp 0.4s ease forwards;
-  position:relative;overflow:hidden;
-}
-.success-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),#00c853)}
-@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.success-icon{width:56px;height:56px;border-radius:50%;background:rgba(0,230,118,0.12);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 1rem;box-shadow:0 0 20px rgba(0,230,118,0.2)}
-.success-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.02em;color:var(--text);margin-bottom:0.5rem}
-.success-sub{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1.25rem}
-.success-next{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:1rem 1.125rem;text-align:left}
-.success-next-title{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
-.success-next-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#8888bb;line-height:1.5;margin-bottom:6px}
-.success-next-item:last-child{margin-bottom:0}
-.success-next-num{width:18px;height:18px;border-radius:50%;background:rgba(168,85,247,0.15);color:var(--accent2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
-.proof{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem}
-.proof-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted2)}
-.proof-dot{width:5px;height:5px;border-radius:50%;background:var(--green)}
-.powered{text-align:center;font-size:11px;color:var(--muted2);margin-top:1.5rem;letter-spacing:0.05em}
-@media(max-width:420px){.headline{font-size:2.2rem}}
+html,body{overflow-x:hidden;width:100%}
+:root{--ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;--muted:#7a7469;--ok:#1a7a4a;--warn:#e84c1e;--gold:#c9a84c;--border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25)}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px);pointer-events:none;z-index:0}
+nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 3rem}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.35rem .9rem;text-decoration:none;transition:color .15s,border-color .15s}
+.nav-logo:hover{color:var(--ink);border-color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links a{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-cta{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.8}
+.section-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.section-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
+.btn-ink{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.875rem 2rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+.btn-ink:hover{opacity:.8}
+.btn-ghost{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--ink);padding:.875rem 2rem;border:1px solid var(--ink);cursor:pointer;text-decoration:none;display:inline-block;transition:all .15s}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relative;z-index:1}
+.footer-top{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem;display:inline-block;margin-bottom:1rem}
+.footer-addr{font-size:.72rem;color:var(--muted);line-height:1.9}
+.footer-col-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem}
+.footer-col{display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-col a:hover{color:var(--ink)}
+.footer-cols{display:flex;gap:4rem;flex-wrap:wrap}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
+@media(max-width:768px){nav{padding:0 1.5rem}.nav-links{display:none}footer{padding:2rem 1.5rem}.footer-cols{gap:2rem}}
+
+.audit-hero{background:var(--ink);position:relative;overflow:hidden}
+.audit-hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
+.audit-hero-inner{max-width:1100px;margin:0 auto;padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.audit-price-box{background:rgba(245,242,235,.04);border:1px solid rgba(245,242,235,.12);padding:2.5rem;position:relative}
+.audit-price-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--paper)}
+.audit-price{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:4rem;letter-spacing:-.04em;color:var(--paper);line-height:1;margin-bottom:.375rem}
+.audit-price-label{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,242,235,.4);margin-bottom:2rem}
+.audit-includes{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem}
+.audit-include-row{display:flex;align-items:flex-start;gap:.75rem;font-size:.78rem;color:rgba(245,242,235,.6);line-height:1.5}
+.audit-include-check{color:#4ade80;font-weight:700;flex-shrink:0}
+.audit-btn{display:block;font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--paper);color:var(--ink);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s;border:none;cursor:pointer;width:100%}
+.audit-btn:hover{opacity:.85}
+.audit-note{font-size:.65rem;color:rgba(245,242,235,.3);text-align:center;margin-top:.875rem;letter-spacing:.05em}
+.what-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.what-card{padding:1.75rem;border:1px solid var(--border);background:var(--cream);position:relative}
+.what-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
+.what-card-num{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.what-card-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.9rem;color:var(--ink);margin-bottom:.5rem}
+.what-card-text{font-size:.78rem;color:var(--muted);line-height:1.7}
+.process-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.process-steps{display:flex;flex-direction:column;gap:0;margin-top:2rem}
+.process-step{display:grid;grid-template-columns:48px 1fr;gap:1.5rem;padding:1.5rem 0;border-top:1px solid var(--border);align-items:start}
+.process-step-num{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.5rem;color:var(--cream);line-height:1;padding-top:.25rem}
+.process-step-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.9rem;color:var(--ink);margin-bottom:.375rem}
+.process-step-text{font-size:.78rem;color:var(--muted);line-height:1.7}
+.for-section{background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.for-inner{max-width:1100px;margin:0 auto;padding:4rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem}
+.faq-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.faq-item{padding:1.5rem 0;border-top:1px solid var(--border)}
+.faq-q{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.88rem;color:var(--ink);margin-bottom:.625rem}
+.faq-a{font-size:.8rem;color:var(--muted);line-height:1.8}
+.cta-dark{background:var(--ink);position:relative;overflow:hidden}
+.cta-dark::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
+.cta-dark-inner{max-width:1100px;margin:0 auto;padding:5rem 3rem;text-align:center;position:relative;z-index:1}
+@media(max-width:768px){.audit-hero-inner{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}.what-grid{grid-template-columns:1fr}.for-inner{grid-template-columns:1fr;gap:2.5rem}.what-section,.process-section,.faq-section{padding:3rem 1.5rem}.for-inner{padding:3rem 1.5rem}}
+
 </style>
 </head>
 <body>
-<div class="wrap">
-
-  <div class="brand">
-    <div class="brand-dot"></div>
-    <a href="/" class="brand-logo">appearai.io</a>
+<nav>
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo">AppearAI</a>
+    <div class="nav-links">
+      <a href="/services-local.html">For Local Businesses</a>
+      <a href="/services-enterprise.html">For Brands</a>
+      <a href="/research.html">Research</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/case-studies.html">Case Studies</a>
+    </div>
+    <a href="/audit.html" class="active" class="nav-cta">Get Your Audit</a>
   </div>
+</nav>
 
-  <div class="badge"><div class="badge-dot"></div>Free — no strings attached</div>
-
-  <h1 class="headline">Find out what AI<br>says about your business</h1>
-  <p class="sub">We'll show you exactly where you stand on ChatGPT and Perplexity — including which competitors are getting recommended instead of you and the key reasons why.</p>
-
-  <div class="what-card">
-    <div class="what-title">What you'll receive</div>
-    <div class="what-items">
-      <div class="what-item">
-        <div class="what-icon">✓</div>
-        <div class="what-text">Live AI prompt testing
-          <span>We run real queries your customers are searching right now — and show you exactly what ChatGPT and Perplexity say about your business in real time</span>
-        </div>
-      </div>
-      <div class="what-item">
-        <div class="what-icon">✓</div>
-        <div class="what-text">Competitor intelligence snapshot
-          <span>We identify which local competitors AI is recommending over you — and break down exactly what signals they have that you don't</span>
-        </div>
-      </div>
-      <div class="what-item">
-        <div class="what-icon">✓</div>
-        <div class="what-text">The full picture behind your score
-          <span>Your score shows what's broken — this audit explains why it's broken, what it's costing you, and how wide the gap is between you and the businesses AI recommends</span>
-        </div>
-      </div>
-      <div class="what-item">
-        <div class="what-icon">✓</div>
-        <div class="what-text">Your most impactful next steps
-          <span>Not a generic list — a specific, prioritised breakdown of what would move your recommendations the most, based on your actual business and location</span>
-        </div>
-      </div>
+<div class="audit-hero">
+  <div class="audit-hero-inner">
+    <div>
+      <div class="section-eyebrow" style="color:rgba(245,242,235,.4)"><span style="background:rgba(245,242,235,.2)"></span>Full AI Visibility Audit Report</div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(2rem,5vw,4rem);line-height:.95;letter-spacing:-.03em;color:var(--paper);margin-bottom:1.25rem">Find out exactly where<br>AI stands on <em style="font-family:'DM Sans',sans-serif;font-style:italic;font-weight:400;color:rgba(245,242,235,.4)">your business.</em></h1>
+      <p style="font-size:.9rem;color:rgba(245,242,235,.5);line-height:1.9;max-width:480px">A complete, detailed picture of your AI visibility — every prompt, every engine, every competitor, every signal. Delivered as a comprehensive PDF report with a 15-minute walkthrough call included.</p>
     </div>
-
-    <div class="starting-point">
-      <div class="starting-point-label">This is your starting point</div>
-      <div class="starting-point-text">This audit gives you a clear picture of where you stand and what's holding you back. For businesses that want the <strong>full intelligence report</strong> — including a complete competitor analysis, revenue impact estimate, and a full 30/60/90 day fix roadmap — we offer a comprehensive deep-dive audit. But this is the right place to start.</div>
-    </div>
-
-    <div class="teaser-card">
-      <div class="teaser-label">What this audit reveals</div>
-      <div class="teaser-text">Most local businesses are surprised by what we find. AI tools often have an <strong>incomplete or inaccurate picture</strong> of the business — recommending competitors not because they are better, but because their digital presence is better structured. This audit shows you exactly <strong>where that gap is and how wide it is.</strong></div>
+    <div class="audit-price-box">
+      <div class="audit-price">$250</div>
+      <div class="audit-price-label">One-time · No subscription</div>
+      <div class="audit-includes">
+        <div class="audit-include-row"><span class="audit-include-check">✓</span>All 20 discovery prompts across 5 AI engines</div>
+        <div class="audit-include-row"><span class="audit-include-check">✓</span>Full technical signal breakdown — 7 scored checks</div>
+        <div class="audit-include-row"><span class="audit-include-check">✓</span>Complete competitor analysis — who appears instead of you</div>
+        <div class="audit-include-row"><span class="audit-include-check">✓</span>Your AAR™ score — the metric that measures AI visibility</div>
+        <div class="audit-include-row"><span class="audit-include-check">✓</span>Personalised fix plan — ranked by impact</div>
+        <div class="audit-include-row"><span class="audit-include-check">✓</span>PDF report delivered within 48 hours</div>
+        <div class="audit-include-row"><span class="audit-include-check">✓</span>15-minute walkthrough call — included</div>
+      </div>
+      <a href="https://buy.stripe.com/cNiaEWcve0NNdKvgWu14401" class="audit-btn">Get Your Full AI Visibility Audit →</a>
+      <div class="audit-note">Delivered within 48 hours · hello@appearai.io</div>
     </div>
   </div>
-
-  <div class="form-card" id="formCard">
-    <div class="form-title">Tell us about your business</div>
-    <div class="field">
-      <label>Your name</label>
-      <input type="text" id="fname" placeholder="John Smith" autocomplete="name"/>
-    </div>
-    <div class="field">
-      <label>Business name</label>
-      <input type="text" id="bname" placeholder="Smile Dental Clinic"/>
-    </div>
-    <div class="field">
-      <label>Website URL</label>
-      <input type="text" id="burl" placeholder="yourbusiness.com" autocomplete="off" autocapitalize="off"/>
-    </div>
-    <div class="field">
-      <label>Business type</label>
-      <select id="btype">
-        <option value="" disabled selected>Select your business type</option>
-        <option>Dental clinic</option>
-        <option>Physiotherapy / rehab</option>
-        <option>Medical practice</option>
-        <option>HVAC / heating & cooling</option>
-        <option>Plumber</option>
-        <option>Electrician</option>
-        <option>Law firm</option>
-        <option>Accountant</option>
-        <option>Beauty salon / hair salon</option>
-        <option>Chiropractor</option>
-        <option>Optician</option>
-        <option>Real estate agent</option>
-        <option>Veterinary clinic</option>
-        <option>Other local business</option>
-      </select>
-    </div>
-    <div class="field">
-      <label>City & country</label>
-      <input type="text" id="bcity" placeholder="Miami, USA"/>
-    </div>
-    <div class="field">
-      <label>Email address</label>
-      <input type="email" id="bemail" placeholder="you@yourbusiness.com" autocomplete="email"/>
-    </div>
-    <div class="field">
-      <label>Anything else? <span style="color:var(--muted2);font-size:10px;text-transform:none;letter-spacing:0">(optional)</span></label>
-      <textarea id="bnotes" placeholder="e.g. our main competitor is XYZ clinic, we want to appear for cosmetic dentistry searches in Miami..."></textarea>
-    </div>
-    <button class="submit-btn" id="submitBtn" onclick="submitForm()">Get my free audit →</button>
-    <p class="no-catch">No credit card. No sales pitch. No obligation. Just an honest look at your AI visibility.</p>
-  </div>
-
-  <div class="success-card" id="successCard">
-    <div class="success-icon">✓</div>
-    <div class="success-title">You're in — audit incoming</div>
-    <p class="success-sub">We've received your details and will send your AI visibility audit within 48 hours. Check your inbox — including spam just in case.</p>
-    <div class="success-next">
-      <div class="success-next-title">Do this while you wait</div>
-      <div class="success-next-item">
-        <div class="success-next-num">1</div>
-        Open ChatGPT and search: "best [your business type] in [your city]" — do it 3 times and note what comes up
-      </div>
-      <div class="success-next-item">
-        <div class="success-next-num">2</div>
-        Do the same on Perplexity.ai — the results will likely surprise you
-      </div>
-      <div class="success-next-item">
-        <div class="success-next-num">3</div>
-        Note every competitor that appears — we'll explain exactly why in your audit
-      </div>
-    </div>
-  </div>
-
-  <div class="proof">
-    <div class="proof-item"><div class="proof-dot"></div>No credit card required</div>
-    <div class="proof-item"><div class="proof-dot"></div>Delivered within 48 hours</div>
-    <div class="proof-item"><div class="proof-dot"></div>100% free, no strings</div>
-  </div>
-
-  <div class="powered">powered by <b style="-webkit-text-fill-color:var(--text);color:var(--text)">appearai.io</b></div>
 </div>
 
-<script>
-async function submitForm(){
-  const fname  = document.getElementById('fname').value.trim();
-  const bname  = document.getElementById('bname').value.trim();
-  const burl   = document.getElementById('burl').value.trim();
-  const btype  = document.getElementById('btype').value;
-  const bcity  = document.getElementById('bcity').value.trim();
-  const bemail = document.getElementById('bemail').value.trim();
-  const bnotes = document.getElementById('bnotes').value.trim();
+<section class="what-section">
+  <div class="section-eyebrow"><span></span>What's in the report</div>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.5rem,3.5vw,2.5rem);letter-spacing:-.02em;color:var(--ink);line-height:1.05;max-width:600px">Everything your free scan showed you — and everything it didn't.</h2>
+  <div class="what-grid">
+    <div class="what-card">
+      <div class="what-card-num">01</div>
+      <div class="what-card-title">All 20 Discovery Prompts</div>
+      <div class="what-card-text">Every prompt run across ChatGPT, Gemini, Perplexity, Claude AI, and Google AI — 3 runs each, 300 total evaluations. You see every appearance, every miss, and every engine that recommended a competitor instead.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">02</div>
+      <div class="what-card-title">Your AAR™ Score</div>
+      <div class="what-card-text">Your AI Appearance Rate™ — the definitive metric of AI visibility. A single, clear percentage that tells you exactly how often AI recommends your business when someone nearby asks for your service.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">03</div>
+      <div class="what-card-title">Full Technical Breakdown</div>
+      <div class="what-card-text">All 7 technical signals scored and explained — HTTPS, schema markup, AI crawler access, llms.txt, meta description, page title, and content structure. Each with a specific finding and a clear fix.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">04</div>
+      <div class="what-card-title">Complete Competitor Analysis</div>
+      <div class="what-card-text">Every business appearing in your discovery prompts instead of you — with their estimated AAR™, the signals driving their visibility advantage, and what it would take to close the gap.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">05</div>
+      <div class="what-card-title">Personalised Fix Plan</div>
+      <div class="what-card-text">A prioritised action plan specific to your business — the fixes ranked by their expected impact on your AAR™, so you know exactly what to do first and why.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">06</div>
+      <div class="what-card-title">15-Minute Walkthrough Call</div>
+      <div class="what-card-text">A call with our team included in every audit. We walk through your report together, answer every question, and give you a clear picture of what we'd recommend as a next step — with no obligation.</div>
+    </div>
+  </div>
+</section>
 
-  if(!fname){alert('Please enter your name');return}
-  if(!bname){alert('Please enter your business name');return}
-  if(!burl){alert('Please enter your website URL');return}
-  if(!btype){alert('Please select your business type');return}
-  if(!bcity){alert('Please enter your city and country');return}
-  if(!bemail||!bemail.includes('@')){alert('Please enter a valid email address');return}
+<section class="process-section">
+  <div class="section-eyebrow"><span></span>How it works</div>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.25rem,3vw,2rem);letter-spacing:-.02em;color:var(--ink);line-height:1.1">Simple. Fast. Specific to your business.</h2>
+  <div class="process-steps">
+    <div class="process-step"><div class="process-step-num">01</div><div><div class="process-step-title">You pay and submit your details</div><div class="process-step-text">After payment, you'll receive a short form asking for your business name, website, city, and category. Takes two minutes.</div></div></div>
+    <div class="process-step"><div class="process-step-num">02</div><div><div class="process-step-title">We run your full audit</div><div class="process-step-text">Our team runs all 20 discovery prompts across 5 AI engines, analyses your 7 technical signals, identifies your competitors, and calculates your AAR™ score.</div></div></div>
+    <div class="process-step"><div class="process-step-num">03</div><div><div class="process-step-title">You receive your PDF report within 48 hours</div><div class="process-step-text">A comprehensive, professionally formatted PDF report delivered to your email — with everything in plain language, not technical jargon.</div></div></div>
+    <div class="process-step"><div class="process-step-num">04</div><div><div class="process-step-title">We walk through it together</div><div class="process-step-text">Once your report is delivered, we reach out to book your included 15-minute call. We walk through every finding together, answer your questions, and give you a clear picture of exactly what to do next.</div></div></div>
+  </div>
+</section>
 
-  const btn=document.getElementById('submitBtn');
-  btn.disabled=true;
-  btn.textContent='Sending...';
+<div class="for-section">
+  <div class="for-inner">
+    <div>
+      <div class="section-eyebrow"><span></span>Who this is for</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.25rem,3vw,2rem);letter-spacing:-.02em;color:var(--ink);line-height:1.1;margin-bottom:1.5rem">Any local business where one new client covers this many times over.</h2>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:1rem">Dentists, lawyers, accountants, plumbers, physios, restaurants, salons — any business where a single client relationship is worth significantly more than $250.</p>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.9">If AI is already recommending your competitors and not you, the audit tells you exactly why — and exactly what to fix. If you're not sure whether AI is recommending you at all, the audit answers that question definitively.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <div style="padding:1.5rem;border:1px solid var(--border);background:var(--paper);position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--ink);margin-bottom:.375rem">Healthcare & Dental</div><div style="font-size:.75rem;color:var(--muted);line-height:1.6">One new patient relationship is worth thousands. AI is now where patients start.</div></div>
+      <div style="padding:1.5rem;border:1px solid var(--border);background:var(--paper);position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--ink);margin-bottom:.375rem">Legal & Financial</div><div style="font-size:.75rem;color:var(--muted);line-height:1.6">High-value clients ask AI for recommendations before they ask anyone else.</div></div>
+      <div style="padding:1.5rem;border:1px solid var(--border);background:var(--paper);position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--ink);margin-bottom:.375rem">Trades & Restaurants</div><div style="font-size:.75rem;color:var(--muted);line-height:1.6">Urgent decisions and dining choices — AI is the first stop, not Google.</div></div>
+    </div>
+  </div>
+</div>
 
-  try {
-    const res=await fetch('https://formspree.io/f/xqeyorpd',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({
-        name:fname,
-        business:bname,
-        website:burl,
-        type:btype,
-        city:bcity,
-        email:bemail,
-        notes:bnotes
-      })
-    });
-    if(res.ok){
-      document.getElementById('formCard').style.display='none';
-      document.getElementById('successCard').style.display='block';
-      window.scrollTo({top:0,behavior:'smooth'});
-    } else {
-      btn.disabled=false;
-      btn.textContent='Get my free audit →';
-      alert('Something went wrong. Please email us at hello@appearai.io');
-    }
-  } catch(e){
-    btn.disabled=false;
-    btn.textContent='Get my free audit →';
-    alert('Something went wrong. Please email us at hello@appearai.io');
-  }
-}
+<section class="faq-section">
+  <div class="section-eyebrow"><span></span>Questions</div>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.25rem,3vw,2rem);letter-spacing:-.02em;color:var(--ink);margin-bottom:1.5rem">Common questions</h2>
+  <div class="faq-item"><div class="faq-q">How is this different from the free scan?</div><div class="faq-a">The free scan gives you a preview — your technical score and a glimpse of how AI sees your business. The full audit gives you everything: all 20 prompts, all engines, all competitors, your full AAR™ score, a complete technical breakdown with specific fixes, and a prioritised action plan. It is a comprehensive document, not a preview.</div></div>
+  <div class="faq-item"><div class="faq-q">How long does the audit take?</div><div class="faq-a">We deliver your PDF report within 48 hours of receiving your business details. For most clients it is faster. We then schedule your 15-minute walkthrough call at a time that suits you.</div></div>
+  <div class="faq-item"><div class="faq-q">Do I need to do anything technical?</div><div class="faq-a">No. You provide your business name, website URL, city, and category. We do everything else. The report is written in plain language — no technical background required.</div></div>
+  <div class="faq-item"><div class="faq-q">What happens after the audit?</div><div class="faq-a">You have a detailed picture of your AI visibility position and a prioritised fix plan. We walk through the next steps together on your included call — and if you want us to implement the work, that is a separate conversation with no obligation.</div></div>
+  <div class="faq-item"><div class="faq-q">Is this a subscription?</div><div class="faq-a">No. The audit is a one-time $250 payment. There is no recurring charge. If you choose to work with us on an ongoing basis, that is a separate conversation.</div></div>
+</section>
 
-document.addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA')submitForm();
-});
-</script>
+<div class="cta-dark">
+  <div class="cta-dark-inner">
+    <div class="section-eyebrow" style="color:rgba(245,242,235,.35);justify-content:center"><span style="background:rgba(245,242,235,.2)"></span>Ready to know</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.75rem,4vw,3.5rem);letter-spacing:-.03em;color:var(--paper);line-height:1;margin-bottom:1rem">Find out exactly where<br>AI stands on your business.</h2>
+    <p style="font-size:.88rem;color:rgba(245,242,235,.45);line-height:1.8;max-width:480px;margin:0 auto 2rem">$250. PDF delivered within 48 hours. 15-minute call included. No subscription, no obligation.</p>
+    <a href="https://buy.stripe.com/cNiaEWcve0NNdKvgWu14401" class="btn-ink" style="background:var(--paper);color:var(--ink);font-size:.8rem;padding:1rem 2.5rem">Get Your Full AI Visibility Audit — $250 →</a>
+  </div>
+</div>
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">AppearAI</div>
+      <div class="footer-addr">
+        131 Continental Dr, Suite 305<br>Newark, Delaware 19713<br>United States (Operations)<br><br><em style="font-size:.7rem">Remote-first · Global team</em><br><br>
+        <a href="mailto:hello@appearai.io" style="color:var(--muted);text-decoration:none">hello@appearai.io</a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-col">
+          <a href="/about.html">About</a>
+          <a href="/services-local.html">For Local Businesses</a>
+          <a href="/services-enterprise.html">For Brands</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-col">
+          <a href="/research.html">Research</a>
+          <a href="/resources.html">Resources</a>
+          <a href="/index.html">Free Scanner</a>
+          <a href="/audit.html">Get Your Audit</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-col">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="/cookies.html">Cookie Policy</a>
+          <a href="/refunds.html">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Avarabrands Inc. All rights reserved.</div>
+    <div class="footer-copy">AppearAI is a product of Avarabrands Inc.</div>
+  </div>
+</footer>
 </body>
-</html>
+  </html>
