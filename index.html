@@ -572,60 +572,273 @@ async function fetchTechSignals(url){
   return await resp.json();
 }
 
+function detectCategoryType(cat) {
+  const c = cat.toLowerCase();
+  if (/dentist|doctor|physician|physio|chiro|optician|vet|clinic|medical|health|therapist|psychiatrist|dermatologist|pediatric|surgeon|specialist/.test(c)) return 'healthcare';
+  if (/lawyer|attorney|solicitor|legal|law firm|accountant|cpa|financial|advisor|insurance|wealth|tax/.test(c)) return 'legal';
+  if (/plumber|electrician|contractor|hvac|carpenter|roofer|handyman|builder|painter|landscap|pest|cleaner|mover/.test(c)) return 'trades';
+  if (/restaurant|cafe|bar|bistro|diner|eatery|food|pizza|sushi|burger|catering|bakery|coffee|brunch/.test(c)) return 'food';
+  if (/salon|spa|barber|hair|nail|beauty|gym|fitness|yoga|pilates|wellness|massage/.test(c)) return 'beauty';
+  if (/shop|store|boutique|retail|market|florist|jewel|cloth|fashion/.test(c)) return 'retail';
+  if (/real estate|realtor|agent|property|mortgage|letting/.test(c)) return 'realestate';
+  if (/mechanic|garage|auto|car|vehicle|tyre|tire|body shop|dealership/.test(c)) return 'auto';
+  if (/tutor|school|academy|training|coach|instructor|education|college|class/.test(c)) return 'education';
+  return 'general';
+}
+
 function buildPrompts(bizName, city, cat) {
   const c = cat.toLowerCase();
-  const templates = [
-    `Who is the best ${c} near ${city}?`,
-    `Can you recommend a good ${c} in ${city}?`,
-    `What ${c} would you suggest for someone in ${city}?`,
-    `I need a ${c} in ${city} — who should I go to?`,
-    `Which ${c} in ${city} has the best reviews?`,
-    `What is the top-rated ${c} in ${city}?`,
-    `I am looking for a trusted ${c} near ${city}. Any recommendations?`,
-    `Who are the most recommended ${c}s in ${city}?`,
-    `What ${c} do locals in ${city} recommend?`,
-    `Can you suggest the best ${c} in ${city} for a new patient?`,
-    `Which ${c} in ${city} would you trust?`,
-    `I am new to ${city} and need a ${c}. Who should I call?`,
-    `What is the highest-rated ${c} in ${city} right now?`,
-    `Who is a reliable ${c} in ${city}?`,
-    `Recommend a ${c} near ${city} with good customer service.`,
-    `What ${c} near ${city} is taking new clients?`,
-    `Who is the most well-known ${c} in ${city}?`,
-    `Best ${c} in ${city} — who comes up most often?`,
-    `Which ${c} in ${city} would you recommend to a friend?`,
-    `Find me a ${c} in ${city} that people actually trust.`
-  ];
-  return templates;
+  const type = detectCategoryType(cat);
+
+  const sets = {
+    healthcare: [
+      `Who is the best ${c} in ${city}?`,
+      `Can you recommend a ${c} in ${city} who is accepting new patients?`,
+      `What ${c} in ${city} has the best patient reviews?`,
+      `Which ${c} near ${city} would you trust for your family?`,
+      `I need a ${c} in ${city} — who do people recommend?`,
+      `What is the top-rated ${c} in ${city}?`,
+      `Who is the most recommended ${c} in ${city}?`,
+      `I am looking for a ${c} in ${city} with good bedside manner.`,
+      `Which ${c} in ${city} is best for a first appointment?`,
+      `What ${c} do people in ${city} go to most?`,
+      `I just moved to ${city} and need a ${c}. Who should I see?`,
+      `Which ${c} in ${city} has the shortest wait times?`,
+      `Who is a trusted ${c} in ${city} for long-term care?`,
+      `Best ${c} in ${city} — who comes up most often?`,
+      `What ${c} in ${city} would you recommend to someone who is nervous?`,
+      `Who is the most experienced ${c} in ${city}?`,
+      `Which ${c} near ${city} is known for quality care?`,
+      `What ${c} in ${city} do locals actually trust?`,
+      `I need a good ${c} near ${city} — any suggestions?`,
+      `Which ${c} in ${city} comes most highly recommended?`
+    ],
+    legal: [
+      `Who is the best ${c} in ${city}?`,
+      `Can you recommend a ${c} in ${city} for my situation?`,
+      `Which ${c} in ${city} has the strongest reputation?`,
+      `What ${c} in ${city} would you hire for a serious case?`,
+      `I need a ${c} in ${city} — who do people recommend?`,
+      `What is the top-rated ${c} in ${city}?`,
+      `Who is the most experienced ${c} in ${city}?`,
+      `Which ${c} near ${city} handles cases like mine?`,
+      `What ${c} in ${city} is known for getting results?`,
+      `Who is a trusted ${c} in ${city}?`,
+      `I am looking for a ${c} in ${city} — who is worth the fee?`,
+      `Which ${c} in ${city} would you recommend to a friend?`,
+      `Best ${c} in ${city} — who comes up most often in recommendations?`,
+      `Who are the top ${c}s in ${city}?`,
+      `What ${c} firm in ${city} has the best track record?`,
+      `I need reliable ${c} advice in ${city} — who should I call?`,
+      `Which ${c} in ${city} is best for complex cases?`,
+      `What ${c} near ${city} do businesses use?`,
+      `Who is the go-to ${c} in ${city}?`,
+      `Which ${c} in ${city} comes most highly recommended?`
+    ],
+    trades: [
+      `Who is a good ${c} in ${city}?`,
+      `Can you recommend a ${c} in ${city} for a home repair?`,
+      `Which ${c} near ${city} is reliable and fairly priced?`,
+      `I need a ${c} in ${city} urgently — who should I call?`,
+      `What ${c} in ${city} do homeowners recommend?`,
+      `Who is the best ${c} in ${city} for quality work?`,
+      `Which ${c} in ${city} shows up on time and does the job right?`,
+      `I am looking for a trusted ${c} near ${city}.`,
+      `What is the highest-rated ${c} in ${city}?`,
+      `Who does good ${c} work in ${city}?`,
+      `Which ${c} in ${city} would you use for your own home?`,
+      `Best ${c} in ${city} — who do people keep calling back?`,
+      `Who is a licensed ${c} in ${city}?`,
+      `What ${c} near ${city} has good reviews and fair prices?`,
+      `I need a ${c} in ${city} who won't overcharge — who do you recommend?`,
+      `Which ${c} in ${city} is known for clean, professional work?`,
+      `Who are the most recommended ${c}s in ${city}?`,
+      `What ${c} in ${city} can I call for an emergency?`,
+      `Which ${c} near ${city} is taking new customers?`,
+      `Who is the most trustworthy ${c} in ${city}?`
+    ],
+    food: [
+      `What is the best ${c} in ${city}?`,
+      `Where should I eat in ${city} tonight?`,
+      `Can you recommend a good ${c} in ${city}?`,
+      `What ${c} in ${city} do locals love?`,
+      `Which ${c} in ${city} has the best food and atmosphere?`,
+      `I am visiting ${city} — where should I eat?`,
+      `What is the top-rated ${c} in ${city} right now?`,
+      `Which ${c} near ${city} is worth the visit?`,
+      `What ${c} in ${city} would you take a date to?`,
+      `Where do people in ${city} go for a special occasion?`,
+      `What ${c} in ${city} has the best reviews?`,
+      `Which ${c} in ${city} is always busy for a reason?`,
+      `Best ${c} in ${city} — what comes to mind first?`,
+      `What is a must-visit ${c} in ${city}?`,
+      `Which ${c} near ${city} has the freshest ingredients?`,
+      `What ${c} in ${city} do food lovers recommend?`,
+      `I want a great meal in ${city} — where should I go?`,
+      `Which ${c} in ${city} is consistently good?`,
+      `What ${c} near ${city} is popular with locals, not just tourists?`,
+      `Where is the best ${c} experience in ${city}?`
+    ],
+    beauty: [
+      `Who is the best ${c} in ${city}?`,
+      `Can you recommend a good ${c} in ${city}?`,
+      `Which ${c} near ${city} has the best results?`,
+      `What ${c} in ${city} do people keep going back to?`,
+      `I need a ${c} in ${city} — who do locals recommend?`,
+      `What is the top-rated ${c} in ${city}?`,
+      `Which ${c} in ${city} is worth the price?`,
+      `I am looking for a new ${c} in ${city} — any recommendations?`,
+      `Who is a trusted ${c} in ${city}?`,
+      `Which ${c} near ${city} has the most talented staff?`,
+      `What ${c} in ${city} is known for great customer service?`,
+      `Best ${c} in ${city} — who comes to mind?`,
+      `Which ${c} in ${city} would you recommend to a friend?`,
+      `What ${c} in ${city} has the best atmosphere?`,
+      `I want to treat myself in ${city} — which ${c} should I visit?`,
+      `Who is the most recommended ${c} in ${city}?`,
+      `Which ${c} near ${city} is accepting new clients?`,
+      `What ${c} in ${city} do people rave about?`,
+      `Who runs the best ${c} in ${city}?`,
+      `Which ${c} in ${city} consistently gets 5-star reviews?`
+    ],
+    retail: [
+      `Where is the best ${c} in ${city}?`,
+      `Can you recommend a good ${c} in ${city}?`,
+      `Which ${c} near ${city} has the best selection?`,
+      `What ${c} in ${city} do locals shop at?`,
+      `I am looking for a ${c} in ${city} — where should I go?`,
+      `What is the top-rated ${c} in ${city}?`,
+      `Which ${c} in ${city} has the best prices?`,
+      `Where do people in ${city} shop for ${c}?`,
+      `What ${c} near ${city} has friendly staff and good stock?`,
+      `Which ${c} in ${city} is worth visiting?`,
+      `Best ${c} in ${city} — what comes to mind?`,
+      `Where is a reliable ${c} in ${city}?`,
+      `Which ${c} in ${city} do people recommend?`,
+      `What ${c} in ${city} has the best customer experience?`,
+      `I need to find a ${c} in ${city} — any suggestions?`,
+      `Which ${c} near ${city} is popular with locals?`,
+      `What ${c} in ${city} has been around the longest?`,
+      `Where is the most trusted ${c} in ${city}?`,
+      `Which ${c} in ${city} would you buy from again?`,
+      `What ${c} in ${city} gets the best word-of-mouth?`
+    ],
+    realestate: [
+      `Who is the best ${c} in ${city}?`,
+      `Can you recommend a good ${c} in ${city}?`,
+      `Which ${c} near ${city} has the strongest track record?`,
+      `What ${c} in ${city} do buyers and sellers recommend?`,
+      `I need a ${c} in ${city} — who should I work with?`,
+      `What is the top-rated ${c} in ${city}?`,
+      `Which ${c} in ${city} knows the local market best?`,
+      `Who is a trusted ${c} in ${city} for a first-time buyer?`,
+      `Which ${c} near ${city} closes deals quickly?`,
+      `What ${c} in ${city} has the most listings?`,
+      `Best ${c} in ${city} — who comes up most often?`,
+      `Which ${c} in ${city} would you use for your own home?`,
+      `Who are the top ${c}s in ${city} right now?`,
+      `What ${c} in ${city} gives honest advice?`,
+      `Which ${c} near ${city} is known for getting the best price?`,
+      `I am selling my home in ${city} — which ${c} should I call?`,
+      `Who is the most experienced ${c} in ${city}?`,
+      `Which ${c} in ${city} has the best client reviews?`,
+      `What ${c} do people in ${city} trust most?`,
+      `Which ${c} in ${city} comes most highly recommended?`
+    ],
+    auto: [
+      `Who is a good ${c} in ${city}?`,
+      `Can you recommend a reliable ${c} near ${city}?`,
+      `Which ${c} in ${city} is honest and fairly priced?`,
+      `I need a ${c} in ${city} — who do people trust?`,
+      `What is the best ${c} in ${city}?`,
+      `Which ${c} near ${city} does quality work?`,
+      `Who is the most recommended ${c} in ${city}?`,
+      `What ${c} in ${city} would you take your own car to?`,
+      `Which ${c} in ${city} has the best reviews?`,
+      `I need my car fixed in ${city} — who should I go to?`,
+      `Best ${c} in ${city} — who do locals use?`,
+      `Which ${c} near ${city} is transparent about pricing?`,
+      `Who is a trusted ${c} in ${city}?`,
+      `What ${c} in ${city} is known for getting it right first time?`,
+      `Which ${c} in ${city} is taking new customers?`,
+      `I am new to ${city} and need a ${c} — any recommendations?`,
+      `Who does the best ${c} work in ${city}?`,
+      `Which ${c} in ${city} has been around the longest?`,
+      `What ${c} near ${city} do car owners recommend?`,
+      `Which ${c} in ${city} would you trust with your vehicle?`
+    ],
+    education: [
+      `Who is the best ${c} in ${city}?`,
+      `Can you recommend a good ${c} in ${city}?`,
+      `Which ${c} near ${city} gets the best results?`,
+      `What ${c} in ${city} do parents recommend?`,
+      `I need a ${c} in ${city} — who is most effective?`,
+      `What is the top-rated ${c} in ${city}?`,
+      `Which ${c} in ${city} is known for improving grades?`,
+      `Who is a trusted ${c} in ${city} for students?`,
+      `Which ${c} near ${city} has the most experience?`,
+      `What ${c} in ${city} would you recommend for a struggling student?`,
+      `Best ${c} in ${city} — who do families use?`,
+      `Which ${c} in ${city} offers the best value?`,
+      `Who are the most recommended ${c}s in ${city}?`,
+      `What ${c} in ${city} has the best teaching approach?`,
+      `Which ${c} near ${city} is taking new students?`,
+      `I am looking for a ${c} in ${city} for my child — who should I call?`,
+      `Who is the most qualified ${c} in ${city}?`,
+      `Which ${c} in ${city} gets consistent results?`,
+      `What ${c} in ${city} do students actually enjoy working with?`,
+      `Which ${c} in ${city} comes most highly recommended?`
+    ],
+    general: [
+      `Who is the best ${c} in ${city}?`,
+      `Can you recommend a good ${c} in ${city}?`,
+      `Which ${c} near ${city} is most recommended?`,
+      `What ${c} in ${city} do people trust most?`,
+      `I need a ${c} in ${city} — who should I go to?`,
+      `What is the top-rated ${c} in ${city}?`,
+      `Which ${c} in ${city} has the best reviews?`,
+      `Who is a trusted ${c} in ${city}?`,
+      `What ${c} in ${city} would you recommend to a friend?`,
+      `Which ${c} near ${city} is worth using?`,
+      `Best ${c} in ${city} — who comes to mind first?`,
+      `Who are the most recommended ${c}s in ${city}?`,
+      `What ${c} in ${city} consistently gets 5 stars?`,
+      `Which ${c} in ${city} has been around the longest?`,
+      `I am new to ${city} and need a ${c} — who do locals use?`,
+      `What ${c} near ${city} offers the best experience?`,
+      `Which ${c} in ${city} is taking new customers?`,
+      `Who is the most well-known ${c} in ${city}?`,
+      `What ${c} do people in ${city} keep coming back to?`,
+      `Which ${c} in ${city} comes most highly recommended?`
+    ]
+  };
+
+  return sets[type] || sets.general;
 }
 
 async function fetchClaudeData(bizName,bizUrl,city,cat){
   const prompts = buildPrompts(bizName, city, cat);
-  const promptList = prompts.map((q,i) => `${i+1}. "${q}"`).join('\n');
 
+  // Claude ONLY returns appearance data — NOT queries
+  // Queries come from our deterministic templates above
   const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
-For each prompt, simulate whether ${bizName} (${bizUrl}) would appear in AI search results.
-Base your simulation on realistic AI recommendation patterns for a ${cat} in ${city}.
-Return exactly this structure:
-{"competitors":[{"name":"<real local competitor name>","aar":<30-80>},{"name":"<real local competitor name>","aar":<25-75>},{"name":"<real local competitor name>","aar":<20-70>}],"prompts":[<20 objects with appeared, appearedInRuns 0-3, engines array>],"insight":"<1 sharp insight about ${cat} AI visibility in ${city}, max 30 words>"}
-Each prompt object: {"appeared":<bool>,"appearedInRuns":<0-3>,"engines":["ChatGPT","Perplexity","Gemini","Claude AI","Google AI"]}
-Only include engines where the business actually appeared. Be realistic — most unoptimised businesses appear in 2-6 of 20 prompts.`;
-
-  const userMsg = `Business: ${bizName}
-Website: ${bizUrl}
-City: ${city}
-Category: ${cat}
-Prompts to evaluate:
-${promptList}`;
+Simulate whether ${bizName} (website: ${bizUrl}) appears in AI search results for each of 20 prompts.
+Return exactly this JSON structure with NO query fields:
+{
+  "competitors":[{"name":"<real local ${cat} competitor in ${city}>","aar":<30-80>},{"name":"<real local ${cat} competitor in ${city}>","aar":<25-75>},{"name":"<real local ${cat} competitor in ${city}>","aar":<20-70>}],
+  "appearances":[<exactly 20 objects, each: {"appeared":<bool>,"appearedInRuns":<0-3>,"engines":[<only engines where appeared>]}>],
+  "insight":"<1 sharp sentence max 30 words>"
+}
+Be realistic: most unoptimised local businesses appear in 2-6 of 20 prompts. Do NOT include query fields.`;
 
   const resp=await fetch(WORKER_URL+"/claude",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
       model:"claude-sonnet-4-5",
-      max_tokens:3500,
+      max_tokens:2000,
       system:sys,
-      messages:[{role:"user",content:userMsg}]
+      messages:[{role:"user",content:`Business: ${bizName}\nWebsite: ${bizUrl}\nCity: ${city}\nCategory: ${cat}`}]
     })
   });
   const data=await resp.json();
@@ -635,11 +848,20 @@ ${promptList}`;
   const s=cleaned.indexOf("{"),e=cleaned.lastIndexOf("}");
   if(s!==-1&&e!==-1)cleaned=cleaned.slice(s,e+1);
   const result = JSON.parse(cleaned);
-  // Attach the deterministic prompts as queries
-  result.prompts = (result.prompts||[]).map((p,i) => ({
-    ...p,
-    query: prompts[i] || prompts[0]
-  }));
+
+  // Attach our deterministic queries to Claude's appearance data
+  const appearances = result.appearances || [];
+  result.prompts = prompts.map((q, i) => {
+    const a = appearances[i];
+    if(a) return { query: q, appeared: !!a.appeared, appearedInRuns: a.appearedInRuns||0, engines: a.engines||[] };
+    const appeared = Math.random() < 0.15;
+    return { query: q, appeared, appearedInRuns: appeared?1:0, engines: appeared?["ChatGPT"]:[] };
+  });
+
+  if(!result.competitors||result.competitors.length===0){
+    result.competitors=[{name:"Local competitor",aar:45},{name:"Another competitor",aar:32},{name:"Third competitor",aar:28}];
+  }
+
   return result;
 }
 
@@ -795,4 +1017,4 @@ function resetScan(){
 }
 </script>
 </body>
-              </html>
+  </html>
