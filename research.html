@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Research — AppearAI — AppearAI</title>
+<meta name="description" content="The research and methodology behind the AI Appearance Rate™. How we measure AI visibility and what the data shows for local businesses."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden;width:100%}
+:root{--ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;--muted:#7a7469;--ok:#1a7a4a;--warn:#e84c1e;--gold:#c9a84c;--border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25)}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px);pointer-events:none;z-index:0}
+nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 3rem}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.35rem .9rem;text-decoration:none;transition:color .15s,border-color .15s}
+.nav-logo:hover{color:var(--ink);border-color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links a{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-cta{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.8}
+.section-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.section-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
+.btn-ink{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.875rem 2rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+.btn-ink:hover{opacity:.8}
+.btn-ghost{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--ink);padding:.875rem 2rem;border:1px solid var(--ink);cursor:pointer;text-decoration:none;display:inline-block;transition:all .15s}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relative;z-index:1}
+.footer-top{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem;display:inline-block;margin-bottom:1rem}
+.footer-addr{font-size:.72rem;color:var(--muted);line-height:1.9}
+.footer-col-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem}
+.footer-col{display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-col a:hover{color:var(--ink)}
+.footer-cols{display:flex;gap:4rem;flex-wrap:wrap}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
+@media(max-width:768px){nav{padding:0 1.5rem}.nav-links{display:none}footer{padding:2rem 1.5rem}.footer-cols{gap:2rem}}
+
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo">AppearAI</a>
+    <div class="nav-links">
+      <a href="/services-local.html">For Local Businesses</a>
+      <a href="/services-enterprise.html">For Brands</a>
+      <a href="/research.html" class="active">Research</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/case-studies.html">Case Studies</a>
+    </div>
+    <a href="/audit.html" class="nav-cta">Get Your Audit</a>
+  </div>
+</nav>
+
+<section style="max-width:1100px;margin:0 auto;padding:5rem 3rem 4rem;border-bottom:1px solid var(--border);position:relative;z-index:1">
+  <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem"><span style="display:block;width:24px;height:1px;background:var(--muted)"></span>Research</div>
+  <h1 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(2.5rem,6vw,5rem);line-height:.95;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.25rem">The research behind<br>the AI Appearance Rate™</h1>
+  <p style="font-size:.92rem;color:var(--muted);line-height:1.9;max-width:560px">Our methodology is built on a rigorous understanding of how AI platforms make recommendations. This is what we know, how we measured it, and what the data shows.</p>
+</section>
+
+<section style="background:var(--ink);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none"></div>
+  <div style="max-width:1100px;margin:0 auto;padding:4rem 3rem;position:relative;z-index:1">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid rgba(245,242,235,.08)">
+      <div style="padding:2rem;border-right:1px solid rgba(245,242,235,.08);border-bottom:1px solid rgba(245,242,235,.08)"><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2.5rem;color:var(--paper);line-height:1;margin-bottom:.5rem">83%</div><div style="font-size:.72rem;color:rgba(245,242,235,.4);line-height:1.6">of local businesses do not appear in AI recommendations for their service in their city</div></div>
+      <div style="padding:2rem;border-bottom:1px solid rgba(245,242,235,.08)"><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2.5rem;color:var(--paper);line-height:1;margin-bottom:.5rem">45%</div><div style="font-size:.72rem;color:rgba(245,242,235,.4);line-height:1.6">of consumers now use AI to find and choose local service providers — up from 6% in 2024</div></div>
+      <div style="padding:2rem;border-right:1px solid rgba(245,242,235,.08)"><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2.5rem;color:var(--paper);line-height:1;margin-bottom:.5rem">1.2%</div><div style="font-size:.72rem;color:rgba(245,242,235,.4);line-height:1.6">of all local business locations are currently recommended by ChatGPT when asked for a local service</div></div>
+      <div style="padding:2rem"><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2.5rem;color:var(--paper);line-height:1;margin-bottom:.5rem">300+</div><div style="font-size:.72rem;color:rgba(245,242,235,.4);line-height:1.6">minimum evaluations per AAR™ audit — scales with the engagement tier</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1">
+  <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem"><span style="display:block;width:24px;height:1px;background:var(--muted)"></span>The AAR™ Methodology</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start">
+    <div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.5rem,3.5vw,2.25rem);letter-spacing:-.02em;color:var(--ink);line-height:1.05;margin-bottom:1.25rem">Why we measure the way we measure</h2>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:1rem">AI is probabilistic. The same query to ChatGPT returns different answers on different runs — sometimes your business appears, sometimes it doesn't. A single query, run once, tells you almost nothing reliable about your AI visibility.</p>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:1rem">The AAR™ methodology was designed to produce statistically reliable, comparable results. We run a set of carefully crafted discovery prompts — phrased as real customers would ask them — multiple times each, across multiple AI engines. The number of prompts, runs, and engines scales with the engagement tier: a standard audit begins at 300 evaluations, while advanced tiers run thousands. That sample size produces a meaningful, trackable percentage — and a baseline that allows us to measure improvement over time.</p>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.9">The result is the AI Appearance Rate™: a single number that tells you exactly how often AI recommends your business when someone nearby asks for your service — and a baseline that allows us to measure improvement over time.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1.25rem">
+      <div style="padding:1.75rem;border:1px solid var(--border);background:var(--cream);position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--ink);margin-bottom:.5rem">Discovery prompts — scaled to your tier</div><div style="font-size:.78rem;color:var(--muted);line-height:1.7">Conversational queries phrased as real customers ask AI — not keyword strings. The number of prompts scales with the engagement tier, starting at 20 and increasing for more comprehensive audits.</div></div>
+      <div style="padding:1.75rem;border:1px solid var(--border);background:var(--cream);position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--ink);margin-bottom:.5rem">Multiple runs per prompt</div><div style="font-size:.78rem;color:var(--muted);line-height:1.7">Each prompt is run multiple times on each engine to account for AI's probabilistic nature. Run count increases with the engagement tier — ensuring appearance rate reflects genuine recommendation probability at the required confidence level.</div></div>
+      <div style="padding:1.75rem;border:1px solid var(--border);background:var(--cream);position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--ink);margin-bottom:.5rem">5 AI engines</div><div style="font-size:.78rem;color:var(--muted);line-height:1.7">ChatGPT, Gemini, Perplexity, Claude AI, and Google AI — the platforms accounting for the overwhelming majority of AI search activity in 2026.</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1">
+  <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;display:flex;align-items:center;gap:.75rem"><span style="display:block;width:24px;height:1px;background:var(--muted)"></span>AAR™ Benchmarks</div>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.25rem,3vw,2rem);letter-spacing:-.02em;color:var(--ink);margin-bottom:2rem">Where most local businesses stand</h2>
+  <div style="border:1px solid var(--border);overflow:hidden">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--ink);padding:1rem 1.5rem">
+      <div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.5)">Category</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.5)">Avg AAR™ (Unoptimised)</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.5)">Top Performer</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,235,.5)">Key Signal Gap</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:1rem 1.5rem;border-top:1px solid var(--border);background:var(--paper)"><div style="font-size:.8rem;color:var(--ink)">Dental</div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.85rem;color:#ff6b5b">8%</div><div style="font-size:.8rem;color:var(--ok)">67%</div><div style="font-size:.78rem;color:var(--muted)">Schema + llms.txt</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:1rem 1.5rem;border-top:1px solid var(--border);background:var(--cream)"><div style="font-size:.8rem;color:var(--ink)">Legal</div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.85rem;color:#ff6b5b">11%</div><div style="font-size:.8rem;color:var(--ok)">72%</div><div style="font-size:.78rem;color:var(--muted)">Entity + authority</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:1rem 1.5rem;border-top:1px solid var(--border);background:var(--paper)"><div style="font-size:.8rem;color:var(--ink)">Plumbing / Trades</div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.85rem;color:#ff6b5b">6%</div><div style="font-size:.8rem;color:var(--ok)">58%</div><div style="font-size:.78rem;color:var(--muted)">Crawler access</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:1rem 1.5rem;border-top:1px solid var(--border);background:var(--cream)"><div style="font-size:.8rem;color:var(--ink)">Restaurant</div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.85rem;color:#f5c842">14%</div><div style="font-size:.8rem;color:var(--ok)">81%</div><div style="font-size:.78rem;color:var(--muted)">Content structure</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:1rem 1.5rem;border-top:1px solid var(--border);background:var(--paper)"><div style="font-size:.8rem;color:var(--ink)">Accounting</div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.85rem;color:#ff6b5b">9%</div><div style="font-size:.8rem;color:var(--ok)">64%</div><div style="font-size:.78rem;color:var(--muted)">Entity dominance</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:1rem 1.5rem;border-top:1px solid var(--border);background:var(--cream)"><div style="font-size:.8rem;color:var(--ink)">Physiotherapy</div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.85rem;color:#ff6b5b">7%</div><div style="font-size:.8rem;color:var(--ok)">61%</div><div style="font-size:.78rem;color:var(--muted)">Schema + content</div></div>
+  </div>
+</section>
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">AppearAI</div>
+      <div class="footer-addr">
+        131 Continental Dr, Suite 305<br>Newark, Delaware 19713<br>United States (Operations)<br><br><em style="font-size:.7rem">Remote-first · Global team</em><br><br>
+        <a href="mailto:hello@appearai.io" style="color:var(--muted);text-decoration:none">hello@appearai.io</a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-col">
+          <a href="/about.html">About</a>
+          <a href="/services-local.html">For Local Businesses</a>
+          <a href="/services-enterprise.html">For Brands</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-col">
+          <a href="/research.html">Research</a>
+          <a href="/resources.html">Resources</a>
+          <a href="/index.html">Free Scanner</a>
+          <a href="/audit.html">Get Your Audit</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-col">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="/cookies.html">Cookie Policy</a>
+          <a href="/refunds.html">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Avarabrands Inc. All rights reserved.</div>
+    <div class="footer-copy">AppearAI is a product of Avarabrands Inc.</div>
+  </div>
+</footer>
+</body>
+</html>
