@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Visibility for Brands — AppearAI</title>
+<meta name="description" content="AppearAI helps brands own their entity across every AI platform. Four layers of visibility work built for businesses that cannot afford to be misrepresented by AI."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden;width:100%}
+:root{
+  --ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;
+  --muted:#7a7469;--ok:#1a7a4a;--warn:#e84c1e;--gold:#c9a84c;
+  --border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px);pointer-events:none;z-index:0}
+nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 3rem}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.35rem .9rem;text-decoration:none;transition:color .15s,border-color .15s}
+.nav-logo:hover{color:var(--ink);border-color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links a{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-cta{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.8}
+.section-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.section-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
+.btn-ink{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.875rem 2rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+.btn-ink:hover{opacity:.8}
+.btn-ghost{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--ink);padding:.875rem 2rem;border:1px solid var(--ink);cursor:pointer;text-decoration:none;display:inline-block;transition:all .15s}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+/* HERO — dark for enterprise feel */
+.hero{background:var(--ink);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;padding:6rem 3rem 5rem;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,242,235,.35);border:1px solid rgba(245,242,235,.12);padding:.375rem .875rem;margin-bottom:2rem}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(2.5rem,6vw,5.5rem);line-height:.92;letter-spacing:-.03em;color:var(--paper);margin-bottom:1.5rem}
+.hero h1 em{font-family:'DM Sans',sans-serif;font-style:italic;font-weight:400;color:rgba(245,242,235,.4)}
+.hero-sub{font-size:.92rem;color:rgba(245,242,235,.5);line-height:1.9;max-width:560px;margin-bottom:2.5rem}
+.hero-cta-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.btn-paper{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--paper);color:var(--ink);padding:.875rem 2rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+.btn-paper:hover{opacity:.85}
+.btn-ghost-light{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:rgba(245,242,235,.6);padding:.875rem 2rem;border:1px solid rgba(245,242,235,.2);cursor:pointer;text-decoration:none;display:inline-block;transition:all .15s}
+.btn-ghost-light:hover{color:var(--paper);border-color:rgba(245,242,235,.5)}
+
+/* PROBLEM */
+.problem-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;position:relative;z-index:1}
+.problem-text p{font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:1rem}
+
+/* LAYERS */
+.layers-header{max-width:1100px;margin:0 auto;padding:4rem 3rem 2rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.layer{border-bottom:1px solid var(--border);position:relative;z-index:1}
+.layer:nth-child(even){background:var(--cream)}
+.layer-inner{max-width:1100px;margin:0 auto;padding:3.5rem 3rem;display:grid;grid-template-columns:280px 1fr;gap:5rem;align-items:start}
+.layer-num{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.layer-name{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.5rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:1rem;line-height:1.1}
+.layer-tag{display:inline-block;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .75rem;border:1px solid var(--border);color:var(--muted);margin-bottom:1rem}
+.layer-right p{font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:1rem}
+.layer-right p:last-child{margin-bottom:0}
+.layer-outcome{margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--cream);border:1px solid var(--border);border-left:3px solid var(--ink)}
+.layer-outcome-label{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.layer-outcome-text{font-size:.8rem;color:var(--ink);line-height:1.7;font-style:italic}
+
+/* ADDONS */
+.addons-section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.addons-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem}
+.addon-card{padding:1.75rem;border:1px solid var(--border);position:relative}
+.addon-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--border-strong)}
+.addon-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.88rem;color:var(--ink);margin-bottom:.5rem}
+.addon-text{font-size:.75rem;color:var(--muted);line-height:1.7}
+
+/* CTA */
+.cta-section{background:var(--ink);position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.04) 60px);pointer-events:none}
+.cta-inner{max-width:1100px;margin:0 auto;padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.75rem,4vw,3rem);line-height:1;letter-spacing:-.03em;color:var(--paper);margin-bottom:1rem}
+.cta-title em{font-family:'DM Sans',sans-serif;font-style:italic;font-weight:400;color:rgba(245,242,235,.4)}
+.cta-sub{font-size:.85rem;color:rgba(245,242,235,.5);line-height:1.9}
+.cta-right-box{padding:2.5rem;border:1px solid rgba(245,242,235,.1);background:rgba(245,242,235,.03);position:relative}
+.cta-right-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:rgba(245,242,235,.15)}
+.cta-right-label{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,242,235,.35);margin-bottom:1rem}
+.cta-right-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.25rem;letter-spacing:-.02em;color:var(--paper);margin-bottom:.75rem;line-height:1.2}
+.cta-right-text{font-size:.78rem;color:rgba(245,242,235,.45);line-height:1.7;margin-bottom:1.5rem}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relative;z-index:1}
+.footer-top{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem;display:inline-block;margin-bottom:1rem}
+.footer-addr{font-size:.72rem;color:var(--muted);line-height:1.9}
+.footer-col-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem}
+.footer-col{display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-col a:hover{color:var(--ink)}
+.footer-cols{display:flex;gap:4rem;flex-wrap:wrap}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
+
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .hero-inner{padding:3.5rem 1.5rem}
+  .problem-section{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+  .layers-header{padding:3rem 1.5rem 2rem}
+  .layer-inner{grid-template-columns:1fr;gap:1.5rem;padding:2.5rem 1.5rem}
+  .addons-section{padding:3rem 1.5rem}
+  .addons-grid{grid-template-columns:1fr}
+  .cta-inner{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+  footer{padding:2.5rem 1.5rem 2rem}
+  .footer-cols{gap:2.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo">AppearAI</a>
+    <div class="nav-links">
+      <a href="/services-local.html">For Local Businesses</a>
+      <a href="/services-enterprise.html" class="active">For Brands</a>
+      <a href="/research.html">Research</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/case-studies.html">Case Studies</a>
+    </div>
+    <a href="https://calendly.com/hello-appearai/30min" class="nav-cta">Book a Strategy Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">AI Visibility for Brands</div>
+    <h1>AI is forming opinions<br>about your brand.<br><em>You're not in the room.</em></h1>
+    <p class="hero-sub">Every day, millions of people ask AI about brands like yours — who to trust, who to buy from, who leads the category. The answers AI gives are shaping your reputation in real time. Most brands have no idea what's being said, and no strategy to influence it.</p>
+    <div class="hero-cta-row">
+      <a href="https://calendly.com/hello-appearai/30min" class="btn-paper">Book a Strategy Call →</a>
+      <a href="/index.html" class="btn-ghost-light">Run a Free Scan First</a>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="problem-text">
+    <div class="section-eyebrow"><span></span>The Brand Problem</div>
+    <p>AI search is not neutral. When someone asks an AI platform about your category, your competitors, or your brand directly, the answer they receive is shaped by a set of signals your brand either controls or doesn't.</p>
+    <p>Most brands — even large ones — have left this entirely to chance. No entity strategy. No AI citation monitoring. No presence in the sources that LLMs draw from. The result is a brand that exists in AI's world as an incomplete, sometimes inaccurate, often underrepresented version of itself.</p>
+    <p>Layers 3 and 4 of our work address this at the level of brand authority and AI training data — work that requires deep expertise and cannot be replicated by an SEO agency running AI tools.</p>
+  </div>
+  <div>
+    <div style="padding:2rem;border:1px solid var(--border);background:var(--cream);position:relative;margin-bottom:1.25rem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2rem;letter-spacing:-.03em;color:var(--ink);line-height:1;margin-bottom:.5rem">92%</div>
+      <div style="font-size:.75rem;color:var(--muted);line-height:1.6">of brands have no documented strategy for how they appear in AI-generated answers</div>
+    </div>
+    <div style="padding:2rem;border:1px solid var(--border);background:var(--cream);position:relative;margin-bottom:1.25rem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2rem;letter-spacing:-.03em;color:var(--ink);line-height:1;margin-bottom:.5rem">67%</div>
+      <div style="font-size:.75rem;color:var(--muted);line-height:1.6">of AI-generated brand descriptions contain inaccurate or outdated information, according to our 2025 audit data</div>
+    </div>
+    <div style="padding:2rem;border:1px solid var(--border);background:var(--cream);position:relative">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2rem;letter-spacing:-.03em;color:var(--ink);line-height:1;margin-bottom:.5rem">3×</div>
+      <div style="font-size:.75rem;color:var(--muted);line-height:1.6">higher AI recommendation rate for brands with an active entity and authority strategy vs those without</div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYERS -->
+<section>
+  <div class="layers-header">
+    <div class="section-eyebrow"><span></span>The Work</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.5rem,3.5vw,2.5rem);letter-spacing:-.02em;color:var(--ink);line-height:1.05;max-width:600px">Four layers. Built in sequence. The result is a brand AI trusts, cites, and recommends.</h2>
+  </div>
+
+  <div class="layer">
+    <div class="layer-inner">
+      <div>
+        <div class="layer-num">Layer 01</div>
+        <div class="layer-name">AI Readiness</div>
+        <div class="layer-tag">The launch pad</div>
+      </div>
+      <div class="layer-right">
+        <p>Before any visibility work can have full effect, the technical infrastructure must be in place. AI platforms index, read, and evaluate your web presence constantly — and the signals that communicate what your brand is, what it stands for, and who it serves must be present, accurate, and unobstructed.</p>
+        <p>Layer 1 is the launch pad. We implement the technical standards that make your brand readable and trustworthy to every major AI platform — creating the conditions for every subsequent layer to work at full power.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your brand is technically sound. AI platforms can read you accurately and completely — and every layer of work that follows has the foundation it needs to deliver full impact.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div>
+        <div class="layer-num">Layer 02</div>
+        <div class="layer-name">Entity Dominance</div>
+        <div class="layer-tag">Making AI know who you are</div>
+      </div>
+      <div class="layer-right">
+        <p>A brand without a strong entity is a brand AI represents incompletely. Layer 2 builds and dominates your entity — optimising your Knowledge Graph presence, establishing your Entity Home, and building the semantic content clusters that tell AI exactly who you are, what you stand for, and why you lead your category.</p>
+        <p>This is the work that turns a brand from something AI knows about into something AI understands deeply.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your brand's entity is established and dominant — AI describes you accurately, positions you correctly, and recommends you with confidence.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div>
+        <div class="layer-num">Layer 03</div>
+        <div class="layer-name">Search & AI Discovery</div>
+        <div class="layer-tag">Found in both worlds</div>
+      </div>
+      <div class="layer-right">
+        <p>Layer 3 addresses both traditional search and AI-generated discovery simultaneously. We implement the content architecture and optimisation that earns citations in AI Overviews and Perplexity while compounding your organic search authority.</p>
+        <p>Citation share in AI-generated answers is tracked monthly across the major platforms — giving you a clear, measurable view of your AI market position relative to competitors.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your brand appears across both traditional search and AI-generated answers — with monthly citation tracking that shows exactly where you stand.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div>
+        <div class="layer-num">Layer 04</div>
+        <div class="layer-name">GEO & Authority Building</div>
+        <div class="layer-tag">Building real authority</div>
+      </div>
+      <div class="layer-right">
+        <p>Authority in AI's world is not self-declared — it is corroborated. Layer 4 builds the off-site signals that confirm your brand's authority across the sources AI platforms draw from: community platforms, niche publications, authoritative references, and the brand signals that establish you as a genuine leader in your category.</p>
+        <p>This is compounding work. Every signal added in Layer 4 strengthens the ones built before it — creating a web of authority that grows more resilient and more valuable over time.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your brand's authority is corroborated across the web — with the external signals that give AI the confidence to recommend you above alternatives.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div>
+        <div class="layer-num">Layer 05</div>
+        <div class="layer-name">LLM Seeding</div>
+        <div class="layer-tag">The big play</div>
+      </div>
+      <div class="layer-right">
+        <p>The most sophisticated layer of AI visibility work operates at the level of what AI platforms are trained on. Brands that appear consistently in the high-authority sources that shape LLM training data hold a structural advantage that is extraordinarily difficult for competitors to replicate.</p>
+        <p>Layer 5 places your brand in those sources — strategically and authentically — so that your name, your positioning, and your category authority are embedded in AI's understanding at the foundational level.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your brand is present in the sources AI learns from — a structural advantage that makes your visibility self-reinforcing and increasingly hard to compete with.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-inner">
+      <div>
+        <div class="layer-num">Layer 06</div>
+        <div class="layer-name">AI Visibility Management</div>
+        <div class="layer-tag">The permanent layer</div>
+      </div>
+      <div class="layer-right">
+        <p>AI platforms update continuously. Models are retrained, citation sources shift, and competitive positions change — sometimes significantly. The brands that hold their AI visibility are not those that built it once. They are the ones that never stopped managing it.</p>
+        <p>Layer 6 is the permanent management layer. Your brand's visibility is monitored continuously — AAR™ tracked across platforms, share of voice measured monthly, model updates assessed for impact, and every signal maintained to the standard set by the work beneath it.</p>
+        <div class="layer-outcome">
+          <div class="layer-outcome-label">What changes</div>
+          <div class="layer-outcome-text">Your brand's AI visibility is a managed, living asset — monitored continuously, protected proactively, and built to compound in your favour month after month.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- ADDONS -->
+<section class="addons-section">
+  <div class="section-eyebrow"><span></span>Specialist Services</div>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(1.25rem,3vw,2rem);letter-spacing:-.02em;color:var(--ink);line-height:1.1;max-width:500px">High-value work that layers onto any engagement.</h2>
+  <div class="addons-grid">
+    <div class="addon-card">
+      <div class="addon-title">AI Reputation Shield</div>
+      <div class="addon-text">Continuous monitoring for inaccurate brand descriptions, hallucinated attributes, and negative bias in AI-generated answers — with active intervention to correct them across platforms.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-title">Share of Voice Tracking</div>
+      <div class="addon-text">Monthly measurement of how often your brand appears in AI-generated answers for your category queries, compared to competitors. The only metric that tells you your true AI market position.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-title">Advanced Digital PR</div>
+      <div class="addon-text">Strategic placement in the high-authority publications and sources that are foundational to LLM training data — creating a presence in AI's world that starts at the source.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-title">Competitive Intelligence</div>
+      <div class="addon-text">A detailed analysis of how competitors are positioned in AI-generated answers, which signals they hold that you don't, and a prioritised roadmap to close the gap.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div>
+      <div class="section-eyebrow" style="color:rgba(245,242,235,.35)"><span style="background:rgba(245,242,235,.2)"></span>Work with us</div>
+      <div class="cta-title">Let's talk about<br>where your brand<br>stands <em>in AI.</em></div>
+      <p class="cta-sub">Brand engagements start with a strategy call. We come prepared with your current AI visibility data, a preliminary entity assessment, and an honest view of where the biggest opportunities are.</p>
+    </div>
+    <div class="cta-right-box">
+      <div class="cta-right-label">Strategy Call</div>
+      <div class="cta-right-title" style="color:var(--paper)">30 minutes. No deck. Just your data and an honest conversation.</div>
+      <div class="cta-right-text">We don't pitch before we've looked at your situation. Every strategy call starts with what we've already found — and ends with a clear picture of what we'd do and why.</div>
+      <a href="https://calendly.com/hello-appearai/30min" class="btn-paper" style="width:100%;text-align:center;display:block">Book Your Strategy Call →</a>
+      <div style="font-size:.65rem;color:rgba(245,242,235,.3);text-align:center;margin-top:.875rem;letter-spacing:.05em">hello@appearai.io · We respond within one business day</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">AppearAI</div>
+      <div class="footer-addr">
+        131 Continental Dr, Suite 305<br>Newark, Delaware 19713<br>United States (Operations)<br><br><em style="font-size:.7rem">Remote-first · Global team</em><br><br>
+        <a href="mailto:hello@appearai.io" style="color:var(--muted);text-decoration:none">hello@appearai.io</a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-col">
+          <a href="/about.html">About</a>
+          <a href="/services-local.html">For Local Businesses</a>
+          <a href="/services-enterprise.html">For Brands</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-col">
+          <a href="/research.html">Research</a>
+          <a href="/resources.html">Resources</a>
+          <a href="/index.html">Free Scanner</a>
+          <a href="/audit.html">Get Your Audit</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-col">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="/cookies.html">Cookie Policy</a>
+          <a href="/refunds.html">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+    <div class="footer-copy">© 2026 Avarabrands Inc. All rights reserved.</div>
+    <div class="footer-copy">AppearAI is a product of Avarabrands Inc.</div>
+  </div>
+</footer>
+
+</body>
+</html>
