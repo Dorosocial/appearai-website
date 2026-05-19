@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -692,9 +693,9 @@ function revealResults(){
       <div class="disc-status ${p.appeared?"pass":"fail"}">${p.appeared?"✓":"✗"}</div>
       <div class="disc-main">
         <div class="disc-query">"${p.query}"</div>
-        <div class="disc-sub">Appeared in <span style="filter:blur(4px);user-select:none;pointer-events:none;display:inline-flex;align-items:center;gap:.3rem;vertical-align:middle">${runs} of 3 runs &nbsp;${(p.engines||[]).map(e=>`<span class="disc-engine-tag">${e}</span>`).join("")}</span></div>
+        <div class="disc-sub" style="filter:blur(4px);user-select:none;pointer-events:none">Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
       </div>
-      <div class="disc-runs" style="color:${runColor}">${runs}/3</div>
+      <div class="disc-runs" style="filter:blur(4px);user-select:none;pointer-events:none;color:${runColor}">${runs}/3</div>
     </div>`;
   }).join("");
 
