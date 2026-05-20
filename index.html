@@ -574,28 +574,167 @@ async function fetchTechSignals(url){
 
 function detectCategoryType(cat) {
   const c = cat.toLowerCase();
-  if (/dentist|doctor|physician|physio|chiro|optician|vet|clinic|medical|health|therapist|psychiatrist|dermatologist|pediatric|surgeon|specialist|nurse|midwife/.test(c)) return 'healthcare';
-  if (/lawyer|attorney|solicitor|legal|law firm|accountant|cpa|financial|advisor|insurance|wealth|tax|auditor/.test(c)) return 'legal';
-  if (/plumber|electrician|contractor|hvac|carpenter|roofer|handyman|builder|painter|landscap|pest|cleaner|mover|locksmith|glazier/.test(c)) return 'trades';
-  if (/restaurant|cafe|bar|bistro|diner|eatery|food|pizza|sushi|burger|catering|bakery|coffee|brunch|pub|grill|steakhouse|takeaway|takeout/.test(c)) return 'food';
-  if (/salon|spa|barber|hair|nail|beauty|gym|fitness|yoga|pilates|wellness|massage|tanning|lash|brow|wax/.test(c)) return 'beauty';
-  if (/shop|store|boutique|retail|market|florist|jewel|cloth|fashion|gift|furniture|electronics|bookshop/.test(c)) return 'retail';
-  if (/real estate|realtor|agent|property|mortgage|letting|estate agent/.test(c)) return 'realestate';
-  if (/mechanic|garage|auto|car|vehicle|tyre|tire|body shop|dealership|mot|servicing/.test(c)) return 'auto';
-  if (/tutor|school|academy|training|coach|instructor|education|college|class|driving|music teacher/.test(c)) return 'education';
-  if (/hotel|b&b|bed and breakfast|accommodation|guesthouse|hostel|airbnb|lodge/.test(c)) return 'hotel';
-  if (/photographer|videographer|photo|wedding planner|event|dj|venue|florist|catering/.test(c)) return 'events';
-  if (/cleaner|cleaning|laundry|dry clean|ironing|domestic/.test(c)) return 'cleaning';
-  if (/it support|tech|computer|phone repair|web|app developer|software|digital/.test(c)) return 'tech';
-  if (/nursery|childcare|babysitter|nanny|creche|daycare|after school/.test(c)) return 'childcare';
-  if (/taxi|cab|uber|minicab|courier|delivery|moving|removal|transport/.test(c)) return 'transport';
-  if (/groomer|dog walker|pet|kennel|cattery|animal/.test(c)) return 'pets';
+
+  // HEALTHCARE — all medical, dental, mental health, allied health
+  if (/dentist|dental|doctor|physician|gp|physio|physiotherapist|chiro|chiropractor|optician|optometrist|ophthalmologist|vet|veterinar|clinic|medical|health|therapist|psychologist|psychiatrist|counsellor|counselor|dermatologist|pediatric|paediatric|surgeon|specialist|nurse|midwife|veneer|implant|orthodont|teeth|cosmetic dent|endodont|periodont|prosthodont|oral|gum disease|root canal|invisalign|braces|whitening|hygienist|audiologist|podiatrist|osteopath|acupunctur|nutritionist|dietitian|speech therap|occupational therap|radiolog|oncolog|cardiolog|neurolog|urol|gynecol|gynaecol|obstetric|fertility|ivf|plastic surg|cosmetic surg|aesthetic|botox|filler|skin clinic|laser clinic|mri|ultrasound|x.ray|blood test|pharmacy|pharmacist|optom/.test(c)) return 'healthcare';
+
+  // LEGAL & FINANCE
+  if (/lawyer|attorney|solicitor|legal|law firm|barrister|notary|accountant|cpa|chartered accountant|bookkeeper|financial|advisor|adviser|financial planner|insurance|wealth|tax|auditor|mortgage broker|financial consultant|investment|stockbroker|forex|crypto advisor|pension|estate planner|will|probate|conveyancer|paralegal/.test(c)) return 'legal';
+
+  // TRADES & HOME SERVICES
+  if (/plumber|plumbing|electrician|electrical|contractor|hvac|heating|cooling|air con|carpenter|joiner|roofer|roofing|handyman|builder|building|painter|decorator|landscap|gardener|garden|pest control|exterminator|cleaner|cleaning|mover|removal|locksmith|glazier|window|flooring|tiler|tiling|plastering|plasterer|bricklayer|mason|welder|fencer|fence|driveway|paving|pool|solar|insulation|waterproof|restoration|demolition/.test(c)) return 'trades';
+
+  // FOOD & HOSPITALITY
+  if (/restaurant|cafe|coffee shop|bar|bistro|diner|eatery|brasserie|food|pizza|sushi|burger|chinese|indian|thai|mexican|italian|french|japanese|korean|vietnamese|greek|mediterranean|middle east|african|caribbean|american|bbq|steakhouse|seafood|vegan|vegetarian|catering|bakery|patisserie|brunch|pub|gastropub|grill|takeaway|takeout|fast food|food truck|buffet|tapas|ramen|noodle|curry|sandwich|deli|ice cream|dessert|cake|donut|waffle|breakfast|lunch|dinner|supper/.test(c)) return 'food';
+
+  // BEAUTY & WELLNESS
+  if (/salon|spa|barber|barbershop|hair|nail|beauty|gym|fitness|yoga|pilates|wellness|massage|tanning|lash|lashes|brow|wax|waxing|threading|facial|skincare|skin care|makeup|make.up|microblading|tattoo|piercing|personal trainer|pt |crossfit|boxing|martial arts|kickboxing|karate|judo|bjj|mma|swimming|dance|ballet|zumba|aerobics|boot camp|weight loss|slimming|liposuction|cryotherapy|infrared|float tank|reiki|reflexology|hypnotherapy|life coach|wellness coach/.test(c)) return 'beauty';
+
+  // RETAIL & SHOPPING
+  if (/shop|store|boutique|retail|market|supermarket|grocery|florist|jeweller|jeweler|jewelry|jewellery|clothing|clothes|fashion|gift|furniture|homeware|electronics|appliance|bookshop|bookstore|toy|sport|outdoor|camping|cycling|bike|shoe|footwear|optician|glasses|sunglasses|watch|luggage|bag|handbag|antique|vintage|second.hand|thrift|charity shop|art gallery|craft|hobby|garden centre|nursery plant|hardware|diy/.test(c)) return 'retail';
+
+  // REAL ESTATE
+  if (/real estate|realtor|estate agent|property|mortgage|letting|letting agent|property management|property manager|property developer|land|surveyor|home staging|interior design|interior designer|architect|architecture/.test(c)) return 'realestate';
+
+  // AUTOMOTIVE
+  if (/mechanic|garage|auto|car|vehicle|tyre|tire|body shop|dealership|mot|servicing|car service|car repair|car wash|valet|detailing|windscreen|exhaust|transmission|clutch|brake|engine|oil change|breakdown|recovery|towing|electric vehicle|ev charging|van|truck|motorcycle|motorbike|scooter/.test(c)) return 'auto';
+
+  // EDUCATION & TRAINING
+  if (/tutor|tutoring|school|academy|training|coach|instructor|education|college|university|class|course|workshop|driving|music teacher|music lesson|piano|guitar|singing|art class|language|english|spanish|french|german|mandarin|maths|math|science|coding|programming|test prep|exam|ielts|sat|gmat|gre|online course|e.learning|skills/.test(c)) return 'education';
+
+  // HOTELS & ACCOMMODATION
+  if (/hotel|b&b|bed and breakfast|accommodation|guesthouse|guest house|hostel|airbnb|lodge|motel|inn|resort|villa|apartment rental|serviced apartment|holiday let|vacation rental|campsite|glamping|caravan/.test(c)) return 'hotel';
+
+  // EVENTS & CREATIVE
+  if (/photographer|photography|videographer|videography|photo booth|wedding planner|wedding|event planner|event management|dj|venue|florist|catering|caterer|magician|entertainer|band|musician|mc|emcee|balloon|decorator|prop hire|photo studio|film|production|animation|graphic design|graphic designer/.test(c)) return 'events';
+
+  // CLEANING SERVICES
+  if (/cleaner|cleaning|laundry|dry clean|ironing|domestic cleaner|house clean|office clean|carpet clean|window clean|pressure wash|end of tenancy|after builders|oven clean|upholstery/.test(c)) return 'cleaning';
+
+  // TECHNOLOGY & DIGITAL
+  if (/it support|it services|tech support|computer repair|computer|phone repair|iphone|samsung|web design|web developer|web development|app developer|app development|software|digital marketing|seo|social media|graphic design|branding|cybersecurity|network|data recovery|cctv|smart home|automation/.test(c)) return 'tech';
+
+  // CHILDCARE & EDUCATION
+  if (/nursery|childcare|child care|babysitter|babysitting|nanny|creche|daycare|day care|after school|breakfast club|holiday club|child minder|childminder|preschool|pre.school|kindergarten|montessori|steiner|kids club/.test(c)) return 'childcare';
+
+  // TRANSPORT & LOGISTICS
+  if (/taxi|cab|minicab|private hire|chauffeur|limo|limousine|courier|delivery|same day delivery|removal|removals|moving company|man with a van|shipping|freight|logistics|airport transfer|minibus|coach hire|bike courier|motorcycle courier/.test(c)) return 'transport';
+
+  // PETS & ANIMALS
+  if (/groomer|dog groomer|dog walker|dog walking|pet|kennel|cattery|animal|boarding|pet sitting|pet sitter|dog trainer|dog training|aquarium|reptile|exotic|horse|equine|farrier|stable/.test(c)) return 'pets';
+
+  // HEALTH & SOCIAL CARE
+  if (/care home|nursing home|assisted living|home care|domiciliary|carer|support worker|disability|mental health support|addiction|rehab|recovery|hospice/.test(c)) return 'healthcare';
+
   return 'general';
 }
 
-function buildPrompts(bizName, city, cat) {
+function normaliseCategory(cat, type) {
   const c = cat.toLowerCase();
+
+  const labels = {
+    // Healthcare
+    'veneer': 'dentist', 'veneers': 'dentist', 'dental implant': 'dentist', 'implant': 'dentist',
+    'teeth whitening': 'dentist', 'whitening': 'dentist', 'root canal': 'dentist',
+    'invisalign': 'orthodontist', 'braces': 'orthodontist', 'orthodont': 'orthodontist',
+    'cosmetic dent': 'cosmetic dentist', 'hygienist': 'dental hygienist',
+    'physio': 'physiotherapist', 'physiotherapist': 'physiotherapist',
+    'chiro': 'chiropractor', 'chiropractor': 'chiropractor',
+    'optician': 'optician', 'optometrist': 'optometrist',
+    'vet': 'vet', 'veterinar': 'vet',
+    'physician': 'doctor', 'gp': 'doctor', 'general practitioner': 'doctor',
+    'surgeon': 'surgeon', 'plastic surg': 'plastic surgeon', 'cosmetic surg': 'cosmetic surgeon',
+    'dermatologist': 'dermatologist', 'skin clinic': 'skin clinic',
+    'psychiatrist': 'psychiatrist', 'psychologist': 'psychologist',
+    'counsellor': 'counsellor', 'counselor': 'counsellor', 'therapist': 'therapist',
+    'podiatrist': 'podiatrist', 'osteopath': 'osteopath', 'audiologist': 'audiologist',
+    'nutritionist': 'nutritionist', 'dietitian': 'dietitian',
+    'midwife': 'midwife', 'fertility': 'fertility clinic', 'ivf': 'fertility clinic',
+    'botox': 'aesthetics clinic', 'filler': 'aesthetics clinic', 'aesthetic': 'aesthetics clinic',
+    'laser': 'laser clinic', 'pharmacy': 'pharmacy', 'pharmacist': 'pharmacist',
+    // Legal & Finance
+    'attorney': 'lawyer', 'solicitor': 'solicitor', 'barrister': 'barrister',
+    'law firm': 'law firm', 'notary': 'notary',
+    'accountant': 'accountant', 'cpa': 'accountant', 'bookkeeper': 'bookkeeper',
+    'financial advisor': 'financial advisor', 'financial adviser': 'financial advisor',
+    'mortgage broker': 'mortgage broker', 'insurance': 'insurance broker',
+    'wealth manager': 'wealth manager', 'tax advisor': 'tax advisor',
+    'conveyancer': 'conveyancer', 'estate planner': 'estate planner',
+    // Trades
+    'plumbing': 'plumber', 'electrician': 'electrician', 'electrical': 'electrician',
+    'hvac': 'HVAC engineer', 'heating': 'heating engineer', 'air con': 'air conditioning engineer',
+    'carpenter': 'carpenter', 'joiner': 'joiner', 'roofer': 'roofer', 'roofing': 'roofer',
+    'landscap': 'landscaper', 'gardener': 'gardener',
+    'pest control': 'pest control specialist', 'exterminator': 'pest control specialist',
+    'locksmith': 'locksmith', 'glazier': 'glazier', 'window': 'window fitter',
+    'flooring': 'flooring specialist', 'tiler': 'tiler', 'plasterer': 'plasterer',
+    'removal': 'removal company', 'mover': 'removal company',
+    // Food
+    'cafe': 'cafe', 'coffee shop': 'coffee shop', 'bistro': 'restaurant',
+    'diner': 'diner', 'eatery': 'restaurant', 'pub': 'pub', 'gastropub': 'pub',
+    'takeaway': 'takeaway', 'takeout': 'takeaway', 'bakery': 'bakery',
+    'patisserie': 'patisserie', 'pizza': 'pizza restaurant', 'sushi': 'sushi restaurant',
+    'burger': 'burger restaurant', 'steakhouse': 'steakhouse', 'bar': 'bar',
+    // Beauty
+    'barber': 'barber', 'barbershop': 'barber',
+    'nail': 'nail salon', 'lash': 'lash technician', 'lashes': 'lash technician',
+    'brow': 'brow specialist', 'wax': 'waxing salon', 'threading': 'threading salon',
+    'spa': 'spa', 'massage': 'massage therapist', 'tanning': 'tanning salon',
+    'gym': 'gym', 'fitness': 'gym', 'yoga': 'yoga studio', 'pilates': 'pilates studio',
+    'personal trainer': 'personal trainer', 'pt ': 'personal trainer',
+    'tattoo': 'tattoo studio', 'piercing': 'piercing studio',
+    // Auto
+    'car service': 'mechanic', 'car repair': 'mechanic', 'mot': 'MOT garage',
+    'body shop': 'body shop', 'car wash': 'car wash', 'valet': 'car valet',
+    'detailing': 'car detailing', 'tyre': 'tyre fitter', 'tire': 'tyre fitter',
+    // Education
+    'tutoring': 'tutor', 'driving': 'driving instructor',
+    'music lesson': 'music teacher', 'piano': 'piano teacher',
+    'guitar': 'guitar teacher', 'singing': 'singing teacher',
+    'language': 'language teacher', 'coding': 'coding tutor',
+    // Events
+    'photography': 'photographer', 'videography': 'videographer',
+    'wedding planner': 'wedding planner', 'dj': 'DJ',
+    'caterer': 'catering company', 'florist': 'florist',
+    'graphic design': 'graphic designer', 'graphic designer': 'graphic designer',
+    // Tech
+    'it support': 'IT support specialist', 'it services': 'IT support specialist',
+    'phone repair': 'phone repair technician', 'iphone repair': 'phone repair technician',
+    'web design': 'web designer', 'web developer': 'web developer',
+    'app developer': 'app developer', 'seo': 'SEO agency',
+    'social media': 'social media agency', 'digital marketing': 'digital marketing agency',
+    // Transport
+    'taxi': 'taxi service', 'cab': 'taxi service', 'chauffeur': 'chauffeur service',
+    'limo': 'limousine service', 'courier': 'courier service',
+    'removal': 'removal company', 'man with a van': 'removal company',
+    // Pets
+    'dog groomer': 'dog groomer', 'dog walker': 'dog walker',
+    'dog walking': 'dog walker', 'dog trainer': 'dog trainer',
+    'kennel': 'dog kennel', 'cattery': 'cattery', 'pet sitting': 'pet sitter',
+  };
+
+  // Check specific label overrides first (longest match wins)
+  const sortedKeys = Object.keys(labels).sort((a,b) => b.length - a.length);
+  for (const keyword of sortedKeys) {
+    if (c.includes(keyword)) return labels[keyword];
+  }
+
+  // Type defaults
+  const defaults = {
+    healthcare: 'doctor', legal: 'lawyer', trades: 'contractor',
+    food: 'restaurant', beauty: 'salon', retail: 'shop',
+    realestate: 'estate agent', auto: 'mechanic', education: 'tutor',
+    hotel: 'hotel', events: 'event specialist', cleaning: 'cleaning service',
+    tech: 'IT specialist', childcare: 'nursery', transport: 'transport service',
+    pets: 'pet specialist', general: c
+  };
+
+  return defaults[type] || c;
+}
+
+function buildPrompts(bizName, city, cat) {
   const type = detectCategoryType(cat);
+  const c = normaliseCategory(cat, type);
 
   const sets = {
     healthcare: [
@@ -1178,4 +1317,4 @@ function resetScan(){
 }
 </script>
 </body>
-              </html>
+</html>
