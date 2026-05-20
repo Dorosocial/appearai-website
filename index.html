@@ -204,6 +204,15 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 .disc-lock-btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.5rem;text-decoration:none;display:inline-block;transition:opacity .15s}
 .disc-lock-btn:hover{opacity:.8}
 
+/* CATEGORY DROPDOWN */
+#cat-dropdown::-webkit-scrollbar{width:4px}
+#cat-dropdown::-webkit-scrollbar-track{background:var(--cream)}
+#cat-dropdown::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:2px}
+.cat-group{font-family:'DM Sans',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:.5rem 1rem .2rem;background:var(--cream);border-bottom:1px solid var(--border)}
+.cat-option{font-size:.75rem;color:var(--muted);padding:.5rem 1rem;cursor:pointer;transition:background .1s;font-family:'DM Sans',sans-serif}
+.cat-option:hover{background:var(--cream);color:var(--ink)}
+.cat-option strong{color:var(--ink)}
+
 /* MOBILE */
 @media(max-width:768px){
   nav{padding:0 1rem}
@@ -270,9 +279,10 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
             <label class="form-label">City / Location</label>
             <input class="form-input" id="f-city" placeholder="e.g. Austin, TX"/>
           </div>
-          <div class="form-field">
+          <div class="form-field" style="position:relative">
             <label class="form-label">Business Category</label>
-            <input class="form-input" id="f-cat" placeholder="e.g. Dentist, Plumber, Lawyer"/>
+            <input class="form-input" id="f-cat" placeholder="e.g. Dentist, Restaurant, Plumber..." autocomplete="off" oninput="filterCategories()" onfocus="showDropdown()" onblur="setTimeout(hideDropdown,200)" onkeydown="handleCatKey(event)"/>
+            <div id="cat-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper);border:1px solid var(--border);border-top:none;max-height:220px;overflow-y:auto;z-index:200;box-shadow:0 4px 12px rgba(0,0,0,.1)"></div>
           </div>
         </div>
         <button class="scan-btn" id="scan-btn" onclick="startScan()">Check My AI Appearance Rate™ →</button>
@@ -1306,6 +1316,95 @@ function toggleTech(id){
   if(!open){edu.classList.add("open");arr.style.transform="rotate(180deg)";}
 }
 
+// ── CATEGORY DROPDOWN ──────────────────────────────────────────────────────
+const CATEGORIES = [
+  {group:"Healthcare & Medical", options:["Dentist","Cosmetic Dentist","Orthodontist","Dental Hygienist","Dental Practice","Doctor / GP","Specialist Physician","Surgeon","Plastic Surgeon","Cosmetic Surgeon","Physiotherapist","Chiropractor","Osteopath","Optician","Optometrist","Ophthalmologist","Podiatrist","Audiologist","Dermatologist","Aesthetics Clinic","Skin Clinic","Laser Clinic","Psychiatrist","Psychologist","Therapist / Counsellor","Nutritionist","Dietitian","Speech Therapist","Occupational Therapist","Fertility Clinic","IVF Clinic","Pharmacy","Veterinarian","Care Home","Home Care Provider","Midwife","Acupuncturist","Reflexologist","Hypnotherapist"]},
+  {group:"Legal & Finance", options:["Lawyer","Solicitor","Barrister","Attorney","Conveyancer","Notary","Accountant","CPA","Bookkeeper","Tax Advisor","Financial Advisor","Financial Planner","Mortgage Broker","Insurance Broker","Wealth Manager","Estate Planner","Paralegal","Immigration Lawyer","Family Lawyer","Criminal Lawyer","Personal Injury Lawyer","Employment Lawyer","Corporate Lawyer"]},
+  {group:"Trades & Home Services", options:["Plumber","Electrician","HVAC Engineer","Heating Engineer","Air Conditioning Engineer","Builder","General Contractor","Carpenter","Joiner","Roofer","Painter","Decorator","Landscaper","Gardener","Pest Control Specialist","Locksmith","Glazier","Window Fitter","Flooring Specialist","Tiler","Plasterer","Handyman","Solar Installer","Pool Specialist","Removal Company","Driveway Specialist","Fence Installer","Waterproofing Specialist","Insulation Specialist","Kitchen Fitter","Bathroom Fitter","Loft Conversion Specialist"]},
+  {group:"Food & Hospitality", options:["Restaurant","Cafe","Coffee Shop","Bar","Pub","Gastropub","Bistro","Diner","Bakery","Patisserie","Pizza Restaurant","Sushi Restaurant","Burger Restaurant","Steakhouse","Seafood Restaurant","Indian Restaurant","Chinese Restaurant","Thai Restaurant","Mexican Restaurant","Italian Restaurant","Japanese Restaurant","Mediterranean Restaurant","Vegan Restaurant","Vegetarian Restaurant","BBQ Restaurant","Fast Food","Takeaway","Food Truck","Catering Company","Dessert Shop","Ice Cream Shop","Brunch Spot","Sandwich Shop","Deli","Buffet Restaurant","Tapas Bar","Ramen Restaurant","Noodle Bar","Curry House"]},
+  {group:"Beauty & Wellness", options:["Hair Salon","Barber","Barbershop","Nail Salon","Lash Technician","Brow Specialist","Waxing Salon","Threading Salon","Spa","Day Spa","Massage Therapist","Tanning Salon","Tattoo Studio","Piercing Studio","Makeup Artist","Microblading Artist","Facial Specialist","Skin Care Specialist","Gym","Fitness Centre","Yoga Studio","Pilates Studio","Personal Trainer","CrossFit Box","Boxing Gym","Martial Arts Studio","Dance Studio","Swimming Pool","Slimming Clinic","Cryotherapy Centre","Float Tank Centre","Reiki Practitioner","Life Coach","Wellness Coach"]},
+  {group:"Retail & Shopping", options:["Clothing Store","Fashion Boutique","Jeweller","Florist","Electronics Store","Furniture Store","Bookshop","Toy Shop","Sports Shop","Outdoor Shop","Cycling Shop","Shoe Shop","Gift Shop","Hardware Store","DIY Store","Garden Centre","Antique Shop","Vintage Shop","Art Gallery","Craft Shop","Hobby Shop","Supermarket","Grocery Store","Convenience Store","Off Licence","Pharmacy","Pet Shop","Baby Shop","Wedding Dress Shop","Tailor","Dry Cleaner"]},
+  {group:"Real Estate", options:["Estate Agent","Letting Agent","Property Manager","Property Developer","Mortgage Broker","Surveyor","Interior Designer","Interior Decorator","Architect","Land Agent","Commercial Property Agent","Home Stager"]},
+  {group:"Automotive", options:["Mechanic","Auto Garage","MOT Centre","Body Shop","Car Wash","Car Valet","Car Detailing","Tyre Fitter","Car Dealership","Used Car Dealer","Motorcycle Repair","Scooter Repair","Van Repair","Truck Repair","Windscreen Repair","Exhaust Specialist","Transmission Specialist","Electric Vehicle Specialist","Car Rental","Recovery Service"]},
+  {group:"Education & Training", options:["Tutor","Tutoring Centre","Driving Instructor","Music Teacher","Piano Teacher","Guitar Teacher","Singing Teacher","Art Teacher","Language School","English Tutor","Maths Tutor","Science Tutor","Coding Tutor","Test Prep Tutor","Training Academy","Business Coach","Life Skills Coach","Swimming Teacher","Sports Coach","Martial Arts Instructor"]},
+  {group:"Hotels & Accommodation", options:["Hotel","Boutique Hotel","B&B","Guesthouse","Hostel","Holiday Let","Airbnb","Resort","Lodge","Motel","Inn","Serviced Apartment","Campsite","Glamping Site","Caravan Park"]},
+  {group:"Events & Creative", options:["Photographer","Wedding Photographer","Videographer","Wedding Videographer","Photo Booth Hire","Wedding Planner","Event Planner","Event Manager","DJ","Live Band","Musician","Magician","Entertainer","Venue","Wedding Venue","Conference Venue","Florist","Balloon Decorator","Graphic Designer","Branding Agency","Print Shop","Signage Company","Animation Studio","Film Production Company"]},
+  {group:"Technology & Digital", options:["IT Support","IT Services","Computer Repair","Phone Repair","iPhone Repair","Web Designer","Web Developer","App Developer","Software Developer","SEO Agency","Digital Marketing Agency","Social Media Agency","PPC Agency","Branding Agency","Cybersecurity Specialist","Network Engineer","Data Recovery Specialist","CCTV Installer","Smart Home Installer","E-commerce Specialist"]},
+  {group:"Childcare & Early Years", options:["Nursery","Daycare","Childminder","Babysitter","Nanny Agency","After School Club","Breakfast Club","Holiday Club","Preschool","Kindergarten","Montessori School","Steiner School","Kids Activity Club","Children's Party Entertainer"]},
+  {group:"Transport & Logistics", options:["Taxi","Private Hire","Chauffeur Service","Limousine Service","Airport Transfer","Minibus Hire","Coach Hire","Courier Service","Same Day Delivery","Removal Company","Man with a Van","Shipping Company","Freight Company","Bike Courier","Motorcycle Courier"]},
+  {group:"Pet Services", options:["Dog Groomer","Dog Walker","Dog Trainer","Pet Sitter","Dog Kennel","Cattery","Pet Boarding","Veterinarian","Exotic Pet Specialist","Horse Trainer","Farrier","Equine Therapist","Aquarium Shop","Fish Specialist"]},
+  {group:"Cleaning Services", options:["Domestic Cleaner","House Cleaner","Office Cleaner","Commercial Cleaner","Carpet Cleaner","End of Tenancy Cleaner","Window Cleaner","Pressure Washing","Oven Cleaner","Upholstery Cleaner","After Builders Cleaner","Laundry Service","Dry Cleaner","Ironing Service"]},
+  {group:"Health & Social Care", options:["Care Home","Nursing Home","Assisted Living","Home Care Provider","Domiciliary Carer","Support Worker","Disability Services","Mental Health Support","Addiction Counsellor","Rehabilitation Centre","Hospice","Community Support"]},
+];
+
+let dropdownVisible = false;
+
+function handleCatKey(e) {
+  if(e.key === 'Escape') { hideDropdown(); return; }
+  if(e.key === 'Tab' || e.key === 'Enter') {
+    const first = document.querySelector('.cat-option');
+    if(first) {
+      e.preventDefault();
+      first.dispatchEvent(new MouseEvent('mousedown'));
+    }
+  }
+}
+
+function showDropdown() {
+  const input = el("f-cat");
+  if(input && input.value.length >= 2) {
+    filterCategories();
+  }
+  dropdownVisible = true;
+}
+
+function hideDropdown() {
+  const dd = el("cat-dropdown");
+  if(dd) dd.style.display = "none";
+  dropdownVisible = false;
+}
+
+function filterCategories() {
+  const dd = el("cat-dropdown");
+  const input = el("f-cat");
+  if(!dd || !input) return;
+  const query = input.value.toLowerCase().trim();
+
+  // Don't show anything until 2 characters typed
+  if(query.length < 2) {
+    dd.style.display = "none";
+    return;
+  }
+
+  let html = "";
+  let totalResults = 0;
+
+  for(const group of CATEGORIES) {
+    const filtered = group.options.filter(o => o.toLowerCase().includes(query));
+    if(filtered.length === 0) continue;
+    totalResults += filtered.length;
+    html += `<div class="cat-group">${group.group}</div>`;
+    for(const opt of filtered) {
+      const highlighted = opt.replace(new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'), m=>`<strong style="color:var(--ink)">${m}</strong>`);
+      html += `<div class="cat-option" onmousedown="selectCategory('${opt.replace(/'/g,"\'")}')"> ${highlighted}</div>`;
+    }
+  }
+
+  if(totalResults === 0) {
+    html = `<div class="cat-option" style="color:var(--muted);font-style:italic">No match found. Try a different term.</div>`;
+  }
+
+  dd.innerHTML = html;
+  dd.style.display = "block";
+}
+
+function selectCategory(value) {
+  const input = el("f-cat");
+  if(input) input.value = value;
+  hideDropdown();
+}
+
+// ── RESET ────────────────────────────────────────────────────────────────────
 function resetScan(){
   scanData=null;bizName="";bizUrl="";
   ["f-name","f-url","f-city","f-cat","gate-email"].forEach(id=>{const e=el(id);if(e)e.value="";});
@@ -1317,4 +1416,4 @@ function resetScan(){
 }
 </script>
 </body>
-</html>
+          </html>
