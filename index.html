@@ -38,6 +38,12 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .section-title em{font-family:'DM Sans',sans-serif;font-style:italic;font-weight:400;color:var(--muted);font-size:.75em}
 .section-sub{font-size:.88rem;color:var(--muted);line-height:1.8;max-width:560px;margin-bottom:2rem}
 
+/* SCANNER TABS */
+.scanner-tabs{display:flex;gap:0;margin-bottom:2rem;border:1px solid var(--border);width:fit-content}
+.scanner-tab{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.75rem 1.5rem;cursor:pointer;transition:all .2s;background:var(--paper);color:var(--muted);border:none;white-space:nowrap}
+.scanner-tab.active{background:var(--ink);color:var(--paper)}
+.scanner-tab:hover:not(.active){background:var(--cream);color:var(--ink)}
+
 /* FORM */
 .scanner-section{max-width:1100px;margin:0 auto;padding:4rem 2rem;position:relative;z-index:1;border-bottom:1px solid var(--border)}
 .scan-form{background:var(--cream);border:1px solid var(--border);padding:2.5rem;position:relative}
@@ -251,20 +257,57 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 <!-- SCANNER -->
 <section class="scanner-section" id="scanner-section">
   <div class="section-eyebrow"><span></span>Free AI Appearance Check</div>
-  <h1 class="section-title">If someone asks AI to find a business like yours — how often do <em>you</em> appear?</h1>
-  <p class="section-sub">Most local businesses are invisible on AI search and have no idea. Enter your details and we'll show you exactly how often AI recommends your business — and who it recommends instead.</p>
+  <h1 class="section-title">If someone asks AI to recommend a business like yours — do <em>you</em> appear?</h1>
+  <p class="section-sub">Most brands and businesses are completely invisible on AI search and have no idea. Enter your details and we'll show you exactly how often AI recommends you — and who it recommends instead.</p>
+
+  <!-- SCANNER TABS -->
+  <div class="scanner-tabs">
+    <button class="scanner-tab active" id="tab-enterprise" onclick="window.switchTab('enterprise')">For Brands and Enterprises</button>
+    <button class="scanner-tab" id="tab-local" onclick="window.switchTab('local')">For Local Businesses</button>
+  </div>
 
   <div id="scan-states-container">
     <div id="scan-form-wrap">
-      <div class="scan-form">
+
+      <!-- ENTERPRISE SCANNER -->
+      <div class="scan-form" id="enterprise-form">
         <div class="form-grid">
           <div class="form-field">
-            <label class="form-label">Business Name</label>
-            <input class="form-input" id="f-name" placeholder="e.g. Riverside Family Dentistry"/>
+            <label class="form-label">Brand or Company Name</label>
+            <input class="form-input" id="f-name" placeholder="e.g. HubSpot, Shopify, Notion"/>
           </div>
           <div class="form-field">
             <label class="form-label">Website URL</label>
-            <input class="form-input" id="f-url" placeholder="e.g. riversidefamilydental.com"/>
+            <input class="form-input" id="f-url" placeholder="e.g. hubspot.com"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Industry</label>
+            <input class="form-input" id="f-industry" placeholder="e.g. SaaS, E-commerce, Finance"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Product or Service Category</label>
+            <input class="form-input" id="f-cat" placeholder="e.g. CRM software, Email marketing tool, Project management"/>
+          </div>
+        </div>
+        <div class="form-field" style="margin-bottom:1.25rem">
+          <label class="form-label">Target Market</label>
+          <input class="form-input" id="f-market" placeholder="e.g. United States, Global, United Kingdom"/>
+        </div>
+        <button class="scan-btn" id="scan-btn" onclick="startScan()">Check My AI Appearance Rate™ →</button>
+        <div class="form-note">Free · No signup required · Takes 30–60 seconds</div>
+        <div id="form-error" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
+      </div>
+
+      <!-- LOCAL BUSINESS SCANNER -->
+      <div class="scan-form" id="local-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label">Business Name</label>
+            <input class="form-input" id="f-name-local" placeholder="e.g. Riverside Family Dentistry"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Website URL</label>
+            <input class="form-input" id="f-url-local" placeholder="e.g. riversidefamilydental.com"/>
           </div>
           <div class="form-field">
             <label class="form-label">City / Location</label>
@@ -272,14 +315,15 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
           </div>
           <div class="form-field">
             <label class="form-label">Business Category</label>
-            <input class="form-input" id="f-cat" placeholder="e.g. Dentist, Plumber, Lawyer"/>
+            <input class="form-input" id="f-cat-local" placeholder="e.g. Dentist, Plumber, Lawyer"/>
           </div>
         </div>
-        <button class="scan-btn" id="scan-btn" onclick="startScan()">Check My AI Appearance Rate™ →</button>
+        <button class="scan-btn" onclick="startScanLocal()">Check My AI Appearance Rate™ →</button>
         <div class="form-note">Free · No signup required · Takes 30–60 seconds</div>
-        <div id="form-error" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
+        <div id="form-error-local" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
       </div>
-    </div>
+
+    </div>    </div>
 
     <div class="scan-state" id="scan-state">
       <div class="scan-spinner"></div>
@@ -420,9 +464,9 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 <div class="about-strip">
   <div class="about-left">
     <div class="section-eyebrow"><span></span>What we do</div>
-    <h2 class="section-title">The AI visibility agency for local businesses</h2>
-    <p>AppearAI helps local businesses appear consistently in AI-generated recommendations across ChatGPT, Gemini, and Perplexity.</p>
-    <p>We invented the AI Appearance Rate™ — the metric that measures how often AI actually recommends your business when someone nearby is looking for your services.</p>
+    <h2 class="section-title">The AI visibility agency for brands and businesses</h2>
+    <p>AppearAI helps brands, enterprises, and local businesses appear consistently in AI-generated recommendations across ChatGPT, Perplexity, and every major AI search engine.</p>
+    <p>We invented the AI Appearance Rate™ — the metric that measures how often AI actually recommends you when someone searches for what you offer.</p>
     <a href="/audit.html" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Get Your Audit</a>
   </div>
   <div class="about-right">
@@ -485,6 +529,29 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 
 <script>
 const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
+
+// ── TAB SWITCHING ─────────────────────────────────────────────────────────────
+let currentMode = 'enterprise';
+
+function switchTab(mode) {
+  currentMode = mode;
+  const enterpriseForm = document.getElementById('enterprise-form');
+  const localForm = document.getElementById('local-form');
+  const tabEnterprise = document.getElementById('tab-enterprise');
+  const tabLocal = document.getElementById('tab-local');
+
+  if(mode === 'enterprise') {
+    enterpriseForm.style.display = 'block';
+    localForm.style.display = 'none';
+    tabEnterprise.classList.add('active');
+    tabLocal.classList.remove('active');
+  } else {
+    enterpriseForm.style.display = 'none';
+    localForm.style.display = 'block';
+    tabLocal.classList.add('active');
+    tabEnterprise.classList.remove('active');
+  }
+}
 const WORKER_URL = "https://appearai-checker.socialmoa95.workers.dev";
 const FORMSPREE = "https://formspree.io/f/xqeyorpd";
 
@@ -517,32 +584,34 @@ function addLog(msg){
 async function startScan(){
   bizName=el("f-name").value.trim();
   bizUrl=el("f-url").value.trim();
-  const city=el("f-city").value.trim();
+  const industry=el("f-industry")?el("f-industry").value.trim():"";
   const cat=el("f-cat").value.trim();
-  if(!bizName||!bizUrl||!city||!cat){
-    el("form-error").textContent="Please fill in all four fields.";
+  const market=el("f-market")?el("f-market").value.trim():"Global";
+
+  if(!bizName||!bizUrl||!cat){
+    el("form-error").textContent="Please fill in all required fields.";
     show("form-error");return;
   }
   hide("form-error");
   switchScanState("scan-state");
   el("scan-log").innerHTML="";
-  scanData={_meta:{bizName,bizUrl,city,cat}};
+  scanData={_meta:{bizName,bizUrl,industry,cat,market,mode:'enterprise'}};
 
   try{
     await sleep(300);addLog("→ Initialising AppearAI scan engine…");
-    await sleep(600);addLog(`→ Building 20 discovery prompts for ${bizName} in ${city}…`);
+    await sleep(600);addLog(`→ Generating 20 AI discovery prompts for ${bizName} in ${market}…`);
     await sleep(500);addLog("→ Running technical signal checks on your website…");
     await sleep(500);addLog("→ Checking crawlability and AI bot access…");
     await sleep(400);addLog("→ Checking structured data and schema markup…");
     await sleep(400);addLog("→ Checking llms.txt and meta signals…");
     await sleep(400);addLog("→ Checking content structure and page signals…");
-    await sleep(600);addLog("→ Analysing discovery prompt patterns across AI engines…");
-    await sleep(400);addLog("→ Identifying competitors appearing in your category…");
+    await sleep(600);addLog("→ Simulating AI discovery prompts across engines…");
+    await sleep(400);addLog("→ Identifying competitors appearing instead of you…");
     await sleep(300);addLog("→ Compiling your AI Visibility results…");
 
     const [techResult,claudeData]=await Promise.allSettled([
       fetchTechSignals(bizUrl),
-      fetchClaudeData(bizName,bizUrl,city,cat)
+      fetchClaudeDataEnterprise(bizName,bizUrl,industry,cat,market)
     ]);
 
     scanData.tech=techResult.status==="fulfilled"?techResult.value:null;
@@ -574,28 +643,167 @@ async function fetchTechSignals(url){
 
 function detectCategoryType(cat) {
   const c = cat.toLowerCase();
-  if (/dentist|doctor|physician|physio|chiro|optician|vet|clinic|medical|health|therapist|psychiatrist|dermatologist|pediatric|surgeon|specialist|nurse|midwife/.test(c)) return 'healthcare';
-  if (/lawyer|attorney|solicitor|legal|law firm|accountant|cpa|financial|advisor|insurance|wealth|tax|auditor/.test(c)) return 'legal';
-  if (/plumber|electrician|contractor|hvac|carpenter|roofer|handyman|builder|painter|landscap|pest|cleaner|mover|locksmith|glazier/.test(c)) return 'trades';
-  if (/restaurant|cafe|bar|bistro|diner|eatery|food|pizza|sushi|burger|catering|bakery|coffee|brunch|pub|grill|steakhouse|takeaway|takeout/.test(c)) return 'food';
-  if (/salon|spa|barber|hair|nail|beauty|gym|fitness|yoga|pilates|wellness|massage|tanning|lash|brow|wax/.test(c)) return 'beauty';
-  if (/shop|store|boutique|retail|market|florist|jewel|cloth|fashion|gift|furniture|electronics|bookshop/.test(c)) return 'retail';
-  if (/real estate|realtor|agent|property|mortgage|letting|estate agent/.test(c)) return 'realestate';
-  if (/mechanic|garage|auto|car|vehicle|tyre|tire|body shop|dealership|mot|servicing/.test(c)) return 'auto';
-  if (/tutor|school|academy|training|coach|instructor|education|college|class|driving|music teacher/.test(c)) return 'education';
-  if (/hotel|b&b|bed and breakfast|accommodation|guesthouse|hostel|airbnb|lodge/.test(c)) return 'hotel';
-  if (/photographer|videographer|photo|wedding planner|event|dj|venue|florist|catering/.test(c)) return 'events';
-  if (/cleaner|cleaning|laundry|dry clean|ironing|domestic/.test(c)) return 'cleaning';
-  if (/it support|tech|computer|phone repair|web|app developer|software|digital/.test(c)) return 'tech';
-  if (/nursery|childcare|babysitter|nanny|creche|daycare|after school/.test(c)) return 'childcare';
-  if (/taxi|cab|uber|minicab|courier|delivery|moving|removal|transport/.test(c)) return 'transport';
-  if (/groomer|dog walker|pet|kennel|cattery|animal/.test(c)) return 'pets';
+
+  // HEALTHCARE — all medical, dental, mental health, allied health
+  if (/dentist|dental|doctor|physician|gp|physio|physiotherapist|chiro|chiropractor|optician|optometrist|ophthalmologist|vet|veterinar|clinic|medical|health|therapist|psychologist|psychiatrist|counsellor|counselor|dermatologist|pediatric|paediatric|surgeon|specialist|nurse|midwife|veneer|implant|orthodont|teeth|cosmetic dent|endodont|periodont|prosthodont|oral|gum disease|root canal|invisalign|braces|whitening|hygienist|audiologist|podiatrist|osteopath|acupunctur|nutritionist|dietitian|speech therap|occupational therap|radiolog|oncolog|cardiolog|neurolog|urol|gynecol|gynaecol|obstetric|fertility|ivf|plastic surg|cosmetic surg|aesthetic|botox|filler|skin clinic|laser clinic|mri|ultrasound|x.ray|blood test|pharmacy|pharmacist|optom/.test(c)) return 'healthcare';
+
+  // LEGAL & FINANCE
+  if (/lawyer|attorney|solicitor|legal|law firm|barrister|notary|accountant|cpa|chartered accountant|bookkeeper|financial|advisor|adviser|financial planner|insurance|wealth|tax|auditor|mortgage broker|financial consultant|investment|stockbroker|forex|crypto advisor|pension|estate planner|will|probate|conveyancer|paralegal/.test(c)) return 'legal';
+
+  // TRADES & HOME SERVICES
+  if (/plumber|plumbing|electrician|electrical|contractor|hvac|heating|cooling|air con|carpenter|joiner|roofer|roofing|handyman|builder|building|painter|decorator|landscap|gardener|garden|pest control|exterminator|cleaner|cleaning|mover|removal|locksmith|glazier|window|flooring|tiler|tiling|plastering|plasterer|bricklayer|mason|welder|fencer|fence|driveway|paving|pool|solar|insulation|waterproof|restoration|demolition/.test(c)) return 'trades';
+
+  // FOOD & HOSPITALITY
+  if (/restaurant|cafe|coffee shop|bar|bistro|diner|eatery|brasserie|food|pizza|sushi|burger|chinese|indian|thai|mexican|italian|french|japanese|korean|vietnamese|greek|mediterranean|middle east|african|caribbean|american|bbq|steakhouse|seafood|vegan|vegetarian|catering|bakery|patisserie|brunch|pub|gastropub|grill|takeaway|takeout|fast food|food truck|buffet|tapas|ramen|noodle|curry|sandwich|deli|ice cream|dessert|cake|donut|waffle|breakfast|lunch|dinner|supper/.test(c)) return 'food';
+
+  // BEAUTY & WELLNESS
+  if (/salon|spa|barber|barbershop|hair|nail|beauty|gym|fitness|yoga|pilates|wellness|massage|tanning|lash|lashes|brow|wax|waxing|threading|facial|skincare|skin care|makeup|make.up|microblading|tattoo|piercing|personal trainer|pt |crossfit|boxing|martial arts|kickboxing|karate|judo|bjj|mma|swimming|dance|ballet|zumba|aerobics|boot camp|weight loss|slimming|liposuction|cryotherapy|infrared|float tank|reiki|reflexology|hypnotherapy|life coach|wellness coach/.test(c)) return 'beauty';
+
+  // RETAIL & SHOPPING
+  if (/shop|store|boutique|retail|market|supermarket|grocery|florist|jeweller|jeweler|jewelry|jewellery|clothing|clothes|fashion|gift|furniture|homeware|electronics|appliance|bookshop|bookstore|toy|sport|outdoor|camping|cycling|bike|shoe|footwear|optician|glasses|sunglasses|watch|luggage|bag|handbag|antique|vintage|second.hand|thrift|charity shop|art gallery|craft|hobby|garden centre|nursery plant|hardware|diy/.test(c)) return 'retail';
+
+  // REAL ESTATE
+  if (/real estate|realtor|estate agent|property|mortgage|letting|letting agent|property management|property manager|property developer|land|surveyor|home staging|interior design|interior designer|architect|architecture/.test(c)) return 'realestate';
+
+  // AUTOMOTIVE
+  if (/mechanic|garage|auto|car|vehicle|tyre|tire|body shop|dealership|mot|servicing|car service|car repair|car wash|valet|detailing|windscreen|exhaust|transmission|clutch|brake|engine|oil change|breakdown|recovery|towing|electric vehicle|ev charging|van|truck|motorcycle|motorbike|scooter/.test(c)) return 'auto';
+
+  // EDUCATION & TRAINING
+  if (/tutor|tutoring|school|academy|training|coach|instructor|education|college|university|class|course|workshop|driving|music teacher|music lesson|piano|guitar|singing|art class|language|english|spanish|french|german|mandarin|maths|math|science|coding|programming|test prep|exam|ielts|sat|gmat|gre|online course|e.learning|skills/.test(c)) return 'education';
+
+  // HOTELS & ACCOMMODATION
+  if (/hotel|b&b|bed and breakfast|accommodation|guesthouse|guest house|hostel|airbnb|lodge|motel|inn|resort|villa|apartment rental|serviced apartment|holiday let|vacation rental|campsite|glamping|caravan/.test(c)) return 'hotel';
+
+  // EVENTS & CREATIVE
+  if (/photographer|photography|videographer|videography|photo booth|wedding planner|wedding|event planner|event management|dj|venue|florist|catering|caterer|magician|entertainer|band|musician|mc|emcee|balloon|decorator|prop hire|photo studio|film|production|animation|graphic design|graphic designer/.test(c)) return 'events';
+
+  // CLEANING SERVICES
+  if (/cleaner|cleaning|laundry|dry clean|ironing|domestic cleaner|house clean|office clean|carpet clean|window clean|pressure wash|end of tenancy|after builders|oven clean|upholstery/.test(c)) return 'cleaning';
+
+  // TECHNOLOGY & DIGITAL
+  if (/it support|it services|tech support|computer repair|computer|phone repair|iphone|samsung|web design|web developer|web development|app developer|app development|software|digital marketing|seo|social media|graphic design|branding|cybersecurity|network|data recovery|cctv|smart home|automation/.test(c)) return 'tech';
+
+  // CHILDCARE & EDUCATION
+  if (/nursery|childcare|child care|babysitter|babysitting|nanny|creche|daycare|day care|after school|breakfast club|holiday club|child minder|childminder|preschool|pre.school|kindergarten|montessori|steiner|kids club/.test(c)) return 'childcare';
+
+  // TRANSPORT & LOGISTICS
+  if (/taxi|cab|minicab|private hire|chauffeur|limo|limousine|courier|delivery|same day delivery|removal|removals|moving company|man with a van|shipping|freight|logistics|airport transfer|minibus|coach hire|bike courier|motorcycle courier/.test(c)) return 'transport';
+
+  // PETS & ANIMALS
+  if (/groomer|dog groomer|dog walker|dog walking|pet|kennel|cattery|animal|boarding|pet sitting|pet sitter|dog trainer|dog training|aquarium|reptile|exotic|horse|equine|farrier|stable/.test(c)) return 'pets';
+
+  // HEALTH & SOCIAL CARE
+  if (/care home|nursing home|assisted living|home care|domiciliary|carer|support worker|disability|mental health support|addiction|rehab|recovery|hospice/.test(c)) return 'healthcare';
+
   return 'general';
 }
 
-function buildPrompts(bizName, city, cat) {
+function normaliseCategory(cat, type) {
   const c = cat.toLowerCase();
+
+  const labels = {
+    // Healthcare
+    'veneer': 'dentist', 'veneers': 'dentist', 'dental implant': 'dentist', 'implant': 'dentist',
+    'teeth whitening': 'dentist', 'whitening': 'dentist', 'root canal': 'dentist',
+    'invisalign': 'orthodontist', 'braces': 'orthodontist', 'orthodont': 'orthodontist',
+    'cosmetic dent': 'cosmetic dentist', 'hygienist': 'dental hygienist',
+    'physio': 'physiotherapist', 'physiotherapist': 'physiotherapist',
+    'chiro': 'chiropractor', 'chiropractor': 'chiropractor',
+    'optician': 'optician', 'optometrist': 'optometrist',
+    'vet': 'vet', 'veterinar': 'vet',
+    'physician': 'doctor', 'gp': 'doctor', 'general practitioner': 'doctor',
+    'surgeon': 'surgeon', 'plastic surg': 'plastic surgeon', 'cosmetic surg': 'cosmetic surgeon',
+    'dermatologist': 'dermatologist', 'skin clinic': 'skin clinic',
+    'psychiatrist': 'psychiatrist', 'psychologist': 'psychologist',
+    'counsellor': 'counsellor', 'counselor': 'counsellor', 'therapist': 'therapist',
+    'podiatrist': 'podiatrist', 'osteopath': 'osteopath', 'audiologist': 'audiologist',
+    'nutritionist': 'nutritionist', 'dietitian': 'dietitian',
+    'midwife': 'midwife', 'fertility': 'fertility clinic', 'ivf': 'fertility clinic',
+    'botox': 'aesthetics clinic', 'filler': 'aesthetics clinic', 'aesthetic': 'aesthetics clinic',
+    'laser': 'laser clinic', 'pharmacy': 'pharmacy', 'pharmacist': 'pharmacist',
+    // Legal & Finance
+    'attorney': 'lawyer', 'solicitor': 'solicitor', 'barrister': 'barrister',
+    'law firm': 'law firm', 'notary': 'notary',
+    'accountant': 'accountant', 'cpa': 'accountant', 'bookkeeper': 'bookkeeper',
+    'financial advisor': 'financial advisor', 'financial adviser': 'financial advisor',
+    'mortgage broker': 'mortgage broker', 'insurance': 'insurance broker',
+    'wealth manager': 'wealth manager', 'tax advisor': 'tax advisor',
+    'conveyancer': 'conveyancer', 'estate planner': 'estate planner',
+    // Trades
+    'plumbing': 'plumber', 'electrician': 'electrician', 'electrical': 'electrician',
+    'hvac': 'HVAC engineer', 'heating': 'heating engineer', 'air con': 'air conditioning engineer',
+    'carpenter': 'carpenter', 'joiner': 'joiner', 'roofer': 'roofer', 'roofing': 'roofer',
+    'landscap': 'landscaper', 'gardener': 'gardener',
+    'pest control': 'pest control specialist', 'exterminator': 'pest control specialist',
+    'locksmith': 'locksmith', 'glazier': 'glazier', 'window': 'window fitter',
+    'flooring': 'flooring specialist', 'tiler': 'tiler', 'plasterer': 'plasterer',
+    'removal': 'removal company', 'mover': 'removal company',
+    // Food
+    'cafe': 'cafe', 'coffee shop': 'coffee shop', 'bistro': 'restaurant',
+    'diner': 'diner', 'eatery': 'restaurant', 'pub': 'pub', 'gastropub': 'pub',
+    'takeaway': 'takeaway', 'takeout': 'takeaway', 'bakery': 'bakery',
+    'patisserie': 'patisserie', 'pizza': 'pizza restaurant', 'sushi': 'sushi restaurant',
+    'burger': 'burger restaurant', 'steakhouse': 'steakhouse', 'bar': 'bar',
+    // Beauty
+    'barber': 'barber', 'barbershop': 'barber',
+    'nail': 'nail salon', 'lash': 'lash technician', 'lashes': 'lash technician',
+    'brow': 'brow specialist', 'wax': 'waxing salon', 'threading': 'threading salon',
+    'spa': 'spa', 'massage': 'massage therapist', 'tanning': 'tanning salon',
+    'gym': 'gym', 'fitness': 'gym', 'yoga': 'yoga studio', 'pilates': 'pilates studio',
+    'personal trainer': 'personal trainer', 'pt ': 'personal trainer',
+    'tattoo': 'tattoo studio', 'piercing': 'piercing studio',
+    // Auto
+    'car service': 'mechanic', 'car repair': 'mechanic', 'mot': 'MOT garage',
+    'body shop': 'body shop', 'car wash': 'car wash', 'valet': 'car valet',
+    'detailing': 'car detailing', 'tyre': 'tyre fitter', 'tire': 'tyre fitter',
+    // Education
+    'tutoring': 'tutor', 'driving': 'driving instructor',
+    'music lesson': 'music teacher', 'piano': 'piano teacher',
+    'guitar': 'guitar teacher', 'singing': 'singing teacher',
+    'language': 'language teacher', 'coding': 'coding tutor',
+    // Events
+    'photography': 'photographer', 'videography': 'videographer',
+    'wedding planner': 'wedding planner', 'dj': 'DJ',
+    'caterer': 'catering company', 'florist': 'florist',
+    'graphic design': 'graphic designer', 'graphic designer': 'graphic designer',
+    // Tech
+    'it support': 'IT support specialist', 'it services': 'IT support specialist',
+    'phone repair': 'phone repair technician', 'iphone repair': 'phone repair technician',
+    'web design': 'web designer', 'web developer': 'web developer',
+    'app developer': 'app developer', 'seo': 'SEO agency',
+    'social media': 'social media agency', 'digital marketing': 'digital marketing agency',
+    // Transport
+    'taxi': 'taxi service', 'cab': 'taxi service', 'chauffeur': 'chauffeur service',
+    'limo': 'limousine service', 'courier': 'courier service',
+    'removal': 'removal company', 'man with a van': 'removal company',
+    // Pets
+    'dog groomer': 'dog groomer', 'dog walker': 'dog walker',
+    'dog walking': 'dog walker', 'dog trainer': 'dog trainer',
+    'kennel': 'dog kennel', 'cattery': 'cattery', 'pet sitting': 'pet sitter',
+  };
+
+  // Check specific label overrides first (longest match wins)
+  const sortedKeys = Object.keys(labels).sort((a,b) => b.length - a.length);
+  for (const keyword of sortedKeys) {
+    if (c.includes(keyword)) return labels[keyword];
+  }
+
+  // Type defaults
+  const defaults = {
+    healthcare: 'dentist', legal: 'lawyer', trades: 'contractor',
+    food: 'restaurant', beauty: 'salon', retail: 'shop',
+    realestate: 'estate agent', auto: 'mechanic', education: 'tutor',
+    hotel: 'hotel', events: 'event specialist', cleaning: 'cleaning service',
+    tech: 'IT specialist', childcare: 'nursery', transport: 'transport service',
+    pets: 'pet specialist', general: c
+  };
+
+  return defaults[type] || c;
+}
+
+function buildPrompts(bizName, city, cat) {
   const type = detectCategoryType(cat);
+  const c = normaliseCategory(cat, type);
 
   const sets = {
     healthcare: [
@@ -978,26 +1186,27 @@ function buildPrompts(bizName, city, cat) {
 }
 
 async function fetchClaudeData(bizName,bizUrl,city,cat){
-  const prompts = buildPrompts(bizName, city, cat);
-
-  // Claude ONLY returns appearance data — NOT queries
-  // Queries come from our deterministic templates above
   const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
-Simulate whether ${bizName} (website: ${bizUrl}) appears in AI search results for each of 20 prompts.
-Return exactly this JSON structure with NO query fields:
+Generate 20 natural conversational discovery prompts that someone would type into an AI search engine when looking for a ${cat} in ${city}. Then simulate whether ${bizName} (${bizUrl}) appears in AI results for each prompt.
+Use the correct question word for each prompt based on what is being asked:
+- Use WHO for people based businesses like doctors, lawyers, dentists, plumbers
+- Use WHAT or WHERE for places and experiences like restaurants, hotels, cafes
+- Use WHICH when choosing between options
+Prompts must sound exactly like how real people type into ChatGPT. Use contractions. Keep them short and natural. No dashes.
+Return exactly this JSON structure:
 {
-  "competitors":[{"name":"<real local ${cat} competitor in ${city}>","aar":<30-80>},{"name":"<real local ${cat} competitor in ${city}>","aar":<25-75>},{"name":"<real local ${cat} competitor in ${city}>","aar":<20-70>}],
-  "appearances":[<exactly 20 objects, each: {"appeared":<bool>,"appearedInRuns":<0-3>,"engines":[<only engines where appeared>]}>],
-  "insight":"<1 sharp sentence max 30 words>"
+  "prompts": [<exactly 20 objects: {"query":"<natural conversational question>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":[<engines where appeared>]}>],
+  "competitors": [{"name":"<real local ${cat} competitor in ${city}>","aar":<30-80>},{"name":"<real local ${cat} competitor in ${city}>","aar":<25-75>},{"name":"<real local ${cat} competitor in ${city}>","aar":<20-70>}],
+  "insight": "<1 sharp sentence about ${bizName} AI visibility in ${city}, max 30 words>"
 }
-Be realistic: most unoptimised local businesses appear in 2-6 of 20 prompts. Do NOT include query fields.`;
+Be realistic: most unoptimised local businesses appear in 2-6 of 20 prompts. Only include engines where business actually appeared.`;
 
   const resp=await fetch(WORKER_URL+"/claude",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
       model:"claude-sonnet-4-5",
-      max_tokens:2000,
+      max_tokens:3500,
       system:sys,
       messages:[{role:"user",content:`Business: ${bizName}\nWebsite: ${bizUrl}\nCity: ${city}\nCategory: ${cat}`}]
     })
@@ -1010,15 +1219,6 @@ Be realistic: most unoptimised local businesses appear in 2-6 of 20 prompts. Do 
   if(s!==-1&&e!==-1)cleaned=cleaned.slice(s,e+1);
   const result = JSON.parse(cleaned);
 
-  // Attach our deterministic queries to Claude's appearance data
-  const appearances = result.appearances || [];
-  result.prompts = prompts.map((q, i) => {
-    const a = appearances[i];
-    if(a) return { query: q, appeared: !!a.appeared, appearedInRuns: a.appearedInRuns||0, engines: a.engines||[] };
-    const appeared = Math.random() < 0.15;
-    return { query: q, appeared, appearedInRuns: appeared?1:0, engines: appeared?["ChatGPT"]:[] };
-  });
-
   if(!result.competitors||result.competitors.length===0){
     result.competitors=[{name:"Local competitor",aar:45},{name:"Another competitor",aar:32},{name:"Third competitor",aar:28}];
   }
@@ -1026,147 +1226,97 @@ Be realistic: most unoptimised local businesses appear in 2-6 of 20 prompts. Do 
   return result;
 }
 
-function revealResults(){
-  const email=el("gate-email").value.trim();
-  if(!email||!email.includes("@"))return;
-  switchScanState(null);
-  const r=scanData;
 
-  // TECH SIGNALS
-  const techDefs=[
-    {id:"https",title:"HTTPS & Security",weight:10,tag:"What is HTTPS?",edu:"HTTPS encrypts the connection between a visitor and your website. Without it, your site is flagged as Not Secure.",impactFail:"AI crawlers like GPTBot and ClaudeBot deprioritise non-HTTPS sites.",impactPass:"Your site is secure. AI crawlers fully trust HTTPS sites."},
-    {id:"schema",title:"Structured Data (Schema)",weight:20,tag:"What is structured data?",edu:"Schema markup is hidden code that tells AI exactly what your business is — your name, address, phone, services, hours, and reviews.",impactFail:"Without schema, AI guesses what your business does and often gets it wrong.",impactPass:"Your schema markup means AI can read your business details accurately."},
-    {id:"robots",title:"AI Crawler Access",weight:15,tag:"What is robots.txt?",edu:"robots.txt tells bots what they can and cannot read. Many websites accidentally block AI crawlers like GPTBot, ClaudeBot, and PerplexityBot.",impactFail:"An AI crawler is being blocked. ChatGPT, Claude, or Perplexity cannot read your website.",impactPass:"All major AI crawlers are allowed. They can fully access and read your website."},
-    {id:"llms",title:"llms.txt File",weight:20,tag:"What is llms.txt?",edu:"llms.txt is a new standard file that guides AI language models on how to understand your website.",impactFail:"No llms.txt means AI has no guide for understanding your site.",impactPass:"You have an llms.txt file giving AI a direct guide to your business."},
-    {id:"metadesc",title:"Meta Description",weight:15,tag:"What is a meta description?",edu:"A meta description is a short summary of your page read by AI crawlers.",impactFail:"No meta description means AI has to guess what your business does.",impactPass:"Your meta description gives AI a clear summary of your business."},
-    {id:"title",title:"Business Name & Page Title",weight:10,tag:"Why does your page title matter?",edu:"Your page title is the first thing AI reads when visiting your site.",impactFail:"Your page title is weak or generic. AI cannot confidently identify your business.",impactPass:"Your page title clearly identifies your business."},
-    {id:"content",title:"Content Structure",weight:10,tag:"Why does content structure matter?",edu:"Structure refers to how your page is organised — clear headings, meta description, and obvious info about your services.",impactFail:"Poor structure means AI cannot confidently understand your services or location.",impactPass:"Good structure means AI can clearly identify what you do and where you are."},
-  ];
-  const techMsgs={
-    https:{pass:"Secure — AI crawlers fully trust your site.",fail:"Not HTTPS — AI crawlers flag this site as untrustworthy.",warn:"HTTPS status unclear."},
-    schema:{pass:"Schema found — AI knows exactly who you are.",fail:"No schema — AI builds an incomplete picture of your business.",warn:"Limited schema detected."},
-    robots:{pass:"All AI crawlers allowed.",fail:"AI crawlers blocked — ChatGPT or Claude cannot read you.",warn:"Crawler access unclear."},
-    llms:{pass:"llms.txt found — AI has a direct guide to you.",fail:"No llms.txt — AI has no structured guide to your site.",warn:"llms.txt status unclear."},
-    metadesc:{pass:"Meta description found.",fail:"No meta description — AI has to guess what you do.",warn:"Meta description too short."},
-    title:{pass:"Strong page title — AI can identify you.",fail:"Weak title — AI cannot identify your business.",warn:"Page title needs work."},
-    content:{pass:"Good structure — AI understands your business.",fail:"Poor structure — AI cannot identify your services.",warn:"Structure needs improvement."},
-  };
+async function fetchClaudeDataEnterprise(brandName, bizUrl, industry, category, market) {
+  const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
+Generate 20 natural conversational discovery prompts that someone would type into an AI search engine when looking for a ${category} solution in ${market}. Then simulate whether ${brandName} (${bizUrl}) appears in AI results for each prompt.
+Return exactly this JSON structure:
+{
+  "prompts": [<exactly 20 objects: {"query":"<natural conversational question>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":[<engines where appeared>]}>],
+  "competitors": [{"name":"<real competitor brand>","aar":<30-80>},{"name":"<real competitor>","aar":<25-75>},{"name":"<real competitor>","aar":<20-70>}],
+  "insight": "<1 sharp sentence about ${brandName} AI visibility in the ${category} space, max 30 words>"
+}
+Prompts should sound like real people asking AI: "What is the best CRM for small businesses?", "Which email marketing tool would you recommend?", "I need a project management tool for my team, any suggestions?"
+Be realistic: most brands appear in 3-8 of 20 prompts. Only include engines where brand actually appeared.`;
 
-  const checksEl=el("tech-checks");
-  checksEl.innerHTML="";
-  let techScore=0,techTotal=0;
-
-  techDefs.forEach((d,i)=>{
-    const t=r.tech?.results?.[d.id];
-    const status=t?.status||"warn";
-    const score=t?.score??0;
-    techScore+=score;techTotal+=d.weight;
-    const msg=techMsgs[d.id][status]||techMsgs[d.id].warn;
-    const div=document.createElement("div");
-    div.className="tech-check";
-    div.innerHTML=`
-      <div class="tech-check-header" onclick="toggleTech('${d.id}')">
-        <div class="tech-icon ${status}">${status==="pass"?"✓":status==="fail"?"✗":"!"}</div>
-        <div class="tech-check-mid">
-          <div class="tech-check-title">${d.title}</div>
-          <div class="tech-check-desc">${msg}</div>
-        </div>
-        <div class="tech-check-right">
-          <div class="tech-pts ${status}">${score}/${d.weight}</div>
-          <div class="tech-pts-lbl">points</div>
-          <div class="tech-arr" id="tarr-${d.id}">▾</div>
-        </div>
-      </div>
-      <div class="tech-edu" id="tedu-${d.id}">
-        <div class="tech-edu-box">
-          <div class="tech-edu-tag">${d.tag}</div>
-          <div class="tech-edu-body">${d.edu}</div>
-          <div class="tech-edu-impact ${status}">
-            <div class="tech-edu-ico">${status==="pass"?"✓":"✗"}</div>
-            <div class="tech-edu-txt">${status==="pass"?d.impactPass:d.impactFail}</div>
-          </div>
-        </div>
-      </div>`;
-    checksEl.appendChild(div);
+  const resp = await fetch(WORKER_URL + "/claude", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      model: "claude-sonnet-4-5",
+      max_tokens: 3500,
+      system: sys,
+      messages: [{role: "user", content: `Brand: ${brandName}
+Website: ${bizUrl}
+Industry: ${industry}
+Category: ${category}
+Target Market: ${market}`}]
+    })
   });
-
-  const pct=techTotal?Math.round((techScore/techTotal)*100):0;
-  const tier=pct>=70?"good":pct>=40?"warn":"bad";
-  const col={good:"#4ade80",warn:"#f5c842",bad:"#ff6b5b"}[tier];
-  const verdicts={good:"Your site gives AI a good chance of recommending you.",warn:"AI may know you exist — but isn't recommending you consistently.",bad:"Your site doesn't give AI what it needs to recommend your business."};
-  const circ=238.8;
-  el("tech-score-num").textContent=pct;
-  el("tech-score-num").style.color=col;
-  el("tech-arc").style.strokeDashoffset=circ-(circ*(pct/100));
-  el("tech-arc").style.stroke=col;
-  el("tech-bar").style.width=pct+"%";
-  el("tech-bar").style.background=col;
-  el("tech-verdict").textContent=verdicts[tier];
-  el("tech-verdict").style.color=col;
-  const domainClean=bizUrl.replace(/https?:\/\//,"").replace(/\/$/,"");
-  el("tech-domain").textContent=domainClean;
-  const dmEl=el("tech-domain-meta");if(dmEl)dmEl.textContent=domainClean;
-
-  // PROMPTS
-  const prompts=r.prompts||[];
-  const appearedCount=prompts.filter(p=>p.appeared).length;
-  el("disc-appeared").textContent=appearedCount;
-  const visiblePrompts=prompts.slice(0,3);
-  const hiddenPrompts=prompts.slice(3);
-
-  el("disc-visible").innerHTML=visiblePrompts.map(p=>{
-    const runs=typeof p.appearedInRuns==="number"?p.appearedInRuns:(p.appeared?2:0);
-    const runColor=runs===3?"#4ade80":runs>=1?"#f5c842":"var(--warn)";
-    return `<div class="disc-prompt-row">
-      <div class="disc-status ${p.appeared?"pass":"fail"}">${p.appeared?"✓":"✗"}</div>
-      <div class="disc-main">
-        <div class="disc-query">"${p.query}"</div>
-        <div class="disc-sub" style="filter:blur(4px);user-select:none;pointer-events:none">Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
-      </div>
-      <div class="disc-runs" style="filter:blur(4px);user-select:none;pointer-events:none;color:${runColor}">${runs}/3</div>
-    </div>`;
-  }).join("");
-
-  if(hiddenPrompts.length){
-    el("disc-blur-rows").innerHTML=`<div class="disc-prompt-row"><div class="disc-status fail">✗</div><div class="disc-main"><div class="disc-query">"Who would you recommend for ${r._meta?.cat||"this service"} in ${r._meta?.city||"my area"}?"</div><div class="disc-sub">Appeared in 0 of 3 runs</div></div><div class="disc-runs" style="color:#ff6b5b">0/3</div></div>`;
-    el("disc-blur-wrap").style.display="block";
-  }
-
-  // COMPETITORS
-  const competitors=r.competitors||[];
-  el("comp-visible").innerHTML=competitors.slice(0,2).map(c=>{
-    const pctC=c.aar||50;
-    const colC=pctC>=50?"#4ade80":pctC>=25?"#f5c842":"#ff6b5b";
-    return `<div class="comp-row"><div class="comp-row-name">${c.name}</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:${pctC}%;background:${colC}"></div></div></div>`;
-  }).join("");
-
-  if(competitors.length>2){
-    el("comp-blur-rows").innerHTML=`<div class="comp-row"><div class="comp-row-name">████████████</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:65%;background:#4ade80"></div></div></div>`;
-    el("comp-blur-wrap").style.display="block";
-  }
-
-  // INSIGHT & CTA
-  el("cta-biz-name") && (el("cta-biz-name").textContent=bizName);
-  const insight=r.insight||"";
-  const insightEl=el("personalised-insight");
-  if(insightEl&&insight){insightEl.textContent=insight;insightEl.style.display="block";}
-
-  fetch(FORMSPREE,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({email,business:bizName,techScore:pct+"%",appeared:appearedCount+"/20",message:`New scan. Business: ${bizName}. Tech: ${pct}%. Appeared: ${appearedCount}/20 prompts.`})}).catch(()=>{});
-
-  show("results-wrap");
-  el("results-wrap").scrollIntoView({behavior:"smooth"});
+  const data = await resp.json();
+  if(data.error) throw new Error(data.error.message);
+  const raw = data.content?.find(b => b.type === "text")?.text || "{}";
+  let cleaned = raw.replace(/```json|```/g, "").trim();
+  const s = cleaned.indexOf("{"), e = cleaned.lastIndexOf("}");
+  if(s !== -1 && e !== -1) cleaned = cleaned.slice(s, e + 1);
+  return JSON.parse(cleaned);
 }
 
-function toggleTech(id){
-  const edu=el("tedu-"+id);
-  const arr=el("tarr-"+id);
-  if(!edu)return;
-  const open=edu.classList.contains("open");
-  document.querySelectorAll(".tech-edu.open").forEach(e=>e.classList.remove("open"));
-  document.querySelectorAll(".tech-arr").forEach(a=>a.style.transform="");
-  if(!open){edu.classList.add("open");arr.style.transform="rotate(180deg)";}
+// ── LOCAL SCAN ────────────────────────────────────────────────────────────────
+async function startScanLocal() {
+  const localBizName = el("f-name-local").value.trim();
+  const localBizUrl = el("f-url-local").value.trim();
+  const city = el("f-city").value.trim();
+  const cat = el("f-cat-local").value.trim();
+
+  if(!localBizName || !localBizUrl || !city || !cat) {
+    el("form-error-local").textContent = "Please fill in all four fields.";
+    el("form-error-local").style.display = "block";
+    return;
+  }
+  el("form-error-local").style.display = "none";
+
+  bizName = localBizName;
+  bizUrl = localBizUrl;
+  currentMode = 'local';
+
+  switchScanState("scan-state");
+  el("scan-log").innerHTML = "";
+  scanData = {_meta: {bizName, bizUrl, city, cat}};
+
+  try {
+    await sleep(300); addLog("→ Initialising AppearAI scan engine…");
+    await sleep(600); addLog(`→ Building 20 discovery prompts for ${bizName} in ${city}…`);
+    await sleep(500); addLog("→ Running technical signal checks on your website…");
+    await sleep(400); addLog("→ Checking structured data and schema markup…");
+    await sleep(400); addLog("→ Checking AI crawler access…");
+    await sleep(600); addLog("→ Analysing discovery prompt patterns across AI engines…");
+    await sleep(400); addLog("→ Identifying competitors appearing in your category…");
+
+    const [techResult, claudeData] = await Promise.allSettled([
+      fetchTechSignals(localBizUrl),
+      fetchClaudeData(localBizName, localBizUrl, city, cat)
+    ]);
+
+    scanData.tech = techResult.status === "fulfilled" ? techResult.value : null;
+    if(claudeData.status === "fulfilled") {
+      Object.assign(scanData, claudeData.value);
+    } else {
+      addLog("✗ Claude error: " + claudeData.reason?.message);
+    }
+
+    addLog("✓ Scan complete — report ready");
+    await sleep(400);
+    el("gate-biz-name").textContent = bizName;
+    switchScanState("email-gate");
+  } catch(e) {
+    switchScanState("scan-form-wrap");
+    el("form-error-local").textContent = "Scan failed: " + e.message;
+    el("form-error-local").style.display = "block";
+  }
 }
 
+// ── RESET ────────────────────────────────────────────────────────────────────
 function resetScan(){
   scanData=null;bizName="";bizUrl="";
   ["f-name","f-url","f-city","f-cat","gate-email"].forEach(id=>{const e=el(id);if(e)e.value="";});
@@ -1178,4 +1328,4 @@ function resetScan(){
 }
 </script>
 </body>
-</html>
+              </html>
