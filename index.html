@@ -1317,6 +1317,142 @@ async function startScanLocal() {
 }
 
 // ── RESET ────────────────────────────────────────────────────────────────────
+function revealResults(){
+  const email=el("gate-email").value.trim();
+  if(!email||!email.includes("@"))return;
+  switchScanState(null);
+  const r=scanData;
+
+  const techDefs=[
+    {id:"https",title:"HTTPS & Security",weight:10,tag:"What is HTTPS?",edu:"HTTPS encrypts the connection between a visitor and your website. Without it, your site is flagged as Not Secure.",impactFail:"AI crawlers like GPTBot and ClaudeBot deprioritise non-HTTPS sites.",impactPass:"Your site is secure. AI crawlers fully trust HTTPS sites."},
+    {id:"schema",title:"Structured Data (Schema)",weight:20,tag:"What is structured data?",edu:"Schema markup is hidden code that tells AI exactly what your business is — your name, address, phone, services, hours, and reviews.",impactFail:"Without schema, AI guesses what your business does and often gets it wrong.",impactPass:"Your schema markup means AI can read your business details accurately."},
+    {id:"robots",title:"AI Crawler Access",weight:15,tag:"What is robots.txt?",edu:"robots.txt tells bots what they can and cannot read. Many websites accidentally block AI crawlers like GPTBot, ClaudeBot, and PerplexityBot.",impactFail:"An AI crawler is being blocked. ChatGPT, Claude, or Perplexity cannot read your website.",impactPass:"All major AI crawlers are allowed. They can fully access and read your website."},
+    {id:"llms",title:"llms.txt File",weight:20,tag:"What is llms.txt?",edu:"llms.txt is a new standard file that guides AI language models on how to understand your website.",impactFail:"No llms.txt means AI has no guide for understanding your site.",impactPass:"You have an llms.txt file giving AI a direct guide to your business."},
+    {id:"metadesc",title:"Meta Description",weight:15,tag:"What is a meta description?",edu:"A meta description is a short summary of your page read by AI crawlers.",impactFail:"No meta description means AI has to guess what your business does.",impactPass:"Your meta description gives AI a clear summary of your business."},
+    {id:"title",title:"Business Name & Page Title",weight:10,tag:"Why does your page title matter?",edu:"Your page title is the first thing AI reads when visiting your site.",impactFail:"Your page title is weak or generic. AI cannot confidently identify your business.",impactPass:"Your page title clearly identifies your business."},
+    {id:"content",title:"Content Structure",weight:10,tag:"Why does content structure matter?",edu:"Structure refers to how your page is organised — clear headings, meta description, and obvious info about your services.",impactFail:"Poor structure means AI cannot confidently understand your services or location.",impactPass:"Good structure means AI can clearly identify what you do and where you are."},
+  ];
+  const techMsgs={
+    https:{pass:"Secure — AI crawlers fully trust your site.",fail:"Not HTTPS — AI crawlers flag this site as untrustworthy.",warn:"HTTPS status unclear."},
+    schema:{pass:"Schema found — AI knows exactly who you are.",fail:"No schema — AI builds an incomplete picture of your business.",warn:"Limited schema detected."},
+    robots:{pass:"All AI crawlers allowed.",fail:"AI crawlers blocked — ChatGPT or Claude cannot read you.",warn:"Crawler access unclear."},
+    llms:{pass:"llms.txt found — AI has a direct guide to you.",fail:"No llms.txt — AI has no structured guide to your site.",warn:"llms.txt status unclear."},
+    metadesc:{pass:"Meta description found.",fail:"No meta description — AI has to guess what you do.",warn:"Meta description too short."},
+    title:{pass:"Strong page title — AI can identify you.",fail:"Weak title — AI cannot identify your business.",warn:"Page title needs work."},
+    content:{pass:"Good structure — AI understands your business.",fail:"Poor structure — AI cannot identify your services.",warn:"Structure needs improvement."},
+  };
+
+  const checksEl=el("tech-checks");
+  checksEl.innerHTML="";
+  let techScore=0,techTotal=0;
+
+  techDefs.forEach((d,i)=>{
+    const t=r.tech?.results?.[d.id];
+    const status=t?.status||"warn";
+    const score=t?.score??0;
+    techScore+=score;techTotal+=d.weight;
+    const msg=techMsgs[d.id][status]||techMsgs[d.id].warn;
+    const div=document.createElement("div");
+    div.className="tech-check";
+    div.innerHTML=`
+      <div class="tech-check-header" onclick="toggleTech('${d.id}')">
+        <div class="tech-icon ${status}">${status==="pass"?"✓":status==="fail"?"✗":"!"}</div>
+        <div class="tech-check-mid">
+          <div class="tech-check-title">${d.title}</div>
+          <div class="tech-check-desc">${msg}</div>
+        </div>
+        <div class="tech-check-right">
+          <div class="tech-pts ${status}">${score}/${d.weight}</div>
+          <div class="tech-pts-lbl">points</div>
+          <div class="tech-arr" id="tarr-${d.id}">▾</div>
+        </div>
+      </div>
+      <div class="tech-edu" id="tedu-${d.id}">
+        <div class="tech-edu-box">
+          <div class="tech-edu-tag">${d.tag}</div>
+          <div class="tech-edu-body">${d.edu}</div>
+          <div class="tech-edu-impact ${status}">
+            <div class="tech-edu-ico">${status==="pass"?"✓":"✗"}</div>
+            <div class="tech-edu-txt">${status==="pass"?d.impactPass:d.impactFail}</div>
+          </div>
+        </div>
+      </div>`;
+    checksEl.appendChild(div);
+  });
+
+  const pct=techTotal?Math.round((techScore/techTotal)*100):0;
+  const tier=pct>=70?"good":pct>=40?"warn":"bad";
+  const col={good:"#4ade80",warn:"#f5c842",bad:"#ff6b5b"}[tier];
+  const verdicts={good:"Your site gives AI a good chance of recommending you.",warn:"AI may know you exist — but isn't recommending you consistently.",bad:"Your site doesn't give AI what it needs to recommend your business."};
+  const circ=238.8;
+  el("tech-score-num").textContent=pct;
+  el("tech-score-num").style.color=col;
+  el("tech-arc").style.strokeDashoffset=circ-(circ*(pct/100));
+  el("tech-arc").style.stroke=col;
+  el("tech-bar").style.width=pct+"%";
+  el("tech-bar").style.background=col;
+  el("tech-verdict").textContent=verdicts[tier];
+  el("tech-verdict").style.color=col;
+  const domainClean=bizUrl.replace(/https?:\/\//,"").replace(/\/$/,"");
+  el("tech-domain").textContent=domainClean;
+  const dmEl=el("tech-domain-meta");if(dmEl)dmEl.textContent=domainClean;
+
+  const prompts=r.prompts||[];
+  const appearedCount=prompts.filter(p=>p.appeared).length;
+  el("disc-appeared").textContent=appearedCount;
+  const visiblePrompts=prompts.slice(0,3);
+  const hiddenPrompts=prompts.slice(3);
+
+  el("disc-visible").innerHTML=visiblePrompts.map(p=>{
+    const runs=typeof p.appearedInRuns==="number"?p.appearedInRuns:(p.appeared?2:0);
+    const runColor=runs===3?"#4ade80":runs>=1?"#f5c842":"var(--warn)";
+    return `<div class="disc-prompt-row">
+      <div class="disc-status ${p.appeared?"pass":"fail"}">${p.appeared?"✓":"✗"}</div>
+      <div class="disc-main">
+        <div class="disc-query">"${p.query}"</div>
+        <div class="disc-sub" style="filter:blur(4px);user-select:none;pointer-events:none">Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
+      </div>
+      <div class="disc-runs" style="filter:blur(4px);user-select:none;pointer-events:none;color:${runColor}">${runs}/3</div>
+    </div>`;
+  }).join("");
+
+  if(hiddenPrompts.length){
+    el("disc-blur-rows").innerHTML=`<div class="disc-prompt-row"><div class="disc-status fail">✗</div><div class="disc-main"><div class="disc-query">"${hiddenPrompts[0]?.query||'Who would you recommend for this service?'}"</div><div class="disc-sub">Appeared in 0 of 3 runs</div></div><div class="disc-runs" style="color:#ff6b5b">0/3</div></div>`;
+    el("disc-blur-wrap").style.display="block";
+  }
+
+  const competitors=r.competitors||[];
+  el("comp-visible").innerHTML=competitors.slice(0,2).map(c=>{
+    const pctC=c.aar||50;
+    const colC=pctC>=50?"#4ade80":pctC>=25?"#f5c842":"#ff6b5b";
+    return `<div class="comp-row"><div class="comp-row-name">${c.name}</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:${pctC}%;background:${colC}"></div></div></div>`;
+  }).join("");
+
+  if(competitors.length>2){
+    el("comp-blur-rows").innerHTML=`<div class="comp-row"><div class="comp-row-name">████████████</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:65%;background:#4ade80"></div></div></div>`;
+    el("comp-blur-wrap").style.display="block";
+  }
+
+  const insight=r.insight||"";
+  const insightEl=el("personalised-insight");
+  if(insightEl&&insight){insightEl.textContent=insight;insightEl.style.display="block";}
+
+  fetch(FORMSPREE,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({email,business:bizName,techScore:pct+"%",appeared:appearedCount+"/20",message:`New scan. Business: ${bizName}. Tech: ${pct}%. Appeared: ${appearedCount}/20 prompts.`})}).catch(()=>{});
+
+  show("results-wrap");
+  el("results-wrap").scrollIntoView({behavior:"smooth"});
+}
+
+function toggleTech(id){
+  const edu=el("tedu-"+id);
+  const arr=el("tarr-"+id);
+  if(!edu)return;
+  const open=edu.classList.contains("open");
+  document.querySelectorAll(".tech-edu.open").forEach(e=>e.classList.remove("open"));
+  document.querySelectorAll(".tech-arr").forEach(a=>a.style.transform="");
+  if(!open){edu.classList.add("open");arr.style.transform="rotate(180deg)";}
+}
+
 function resetScan(){
   scanData=null;bizName="";bizUrl="";
   ["f-name","f-url","f-city","f-cat","gate-email"].forEach(id=>{const e=el(id);if(e)e.value="";});
@@ -1328,4 +1464,4 @@ function resetScan(){
 }
 </script>
 </body>
-              </html>
+            </html>
