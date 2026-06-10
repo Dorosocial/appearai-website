@@ -31,7 +31,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .nav-cta{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s;flex-shrink:0;white-space:nowrap}
 .nav-cta:hover{opacity:.8}
 
-/* SECTION TITLES - Bebas Neue fills width */
+/* SECTION TITLES */
 .section-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
 .section-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:7vw;line-height:1;letter-spacing:.03em;color:var(--ink);margin-bottom:1rem;display:block;width:100%}
@@ -250,7 +250,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
       <a href="/blog.html">Blog</a>
       <a href="/case-studies.html">Case Studies</a>
     </div>
-    <a href="/audit.html" class="nav-cta">Get Your Audit</a>
+    <a href="https://calendly.com/hello-appearai/30min" class="nav-cta">Book a Call</a>
   </div>
 </nav>
 
@@ -260,7 +260,6 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
   <h1 class="section-title">If someone asks AI to recommend a business like yours — do <em>you</em> appear?</h1>
   <p class="section-sub">Most brands and businesses are completely invisible on AI search and have no idea. Enter your details and we'll show you exactly how often AI recommends you — and who it recommends instead.</p>
 
-  <!-- SCANNER TABS -->
   <div class="scanner-tabs">
     <button class="scanner-tab active" id="tab-enterprise" onclick="window.switchTab('enterprise')">For Brands and Enterprises</button>
     <button class="scanner-tab" id="tab-local" onclick="window.switchTab('local')">For Local Businesses</button>
@@ -323,7 +322,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
         <div id="form-error-local" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
       </div>
 
-    </div>    </div>
+    </div>
 
     <div class="scan-state" id="scan-state">
       <div class="scan-spinner"></div>
@@ -401,7 +400,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
       <div style="padding:1.25rem 0 0">
         <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in your Full AI Visibility Audit</div>
         <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Every prompt, every engine, every run — and exactly what your competitors are doing that you aren't.</div>
-        <a href="/audit.html" class="disc-lock-btn">Get Your Full AI Visibility Audit →</a>
+        <a href="https://calendly.com/hello-appearai/30min" class="disc-lock-btn">Book a Discovery Call →</a>
       </div>
     </div>
   </div>
@@ -427,23 +426,23 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="cta-inner">
       <div>
         <div class="cta-eyebrow"><span></span>Your next step</div>
-        <div class="cta-title">Get your Full AI Visibility Audit for <em>$250</em></div>
-        <p class="cta-sub">Your complete AI visibility picture — every prompt, every signal, every competitor — in a detailed PDF report with a 15-minute walkthrough call included.</p>
+        <div class="cta-title">Find out exactly why — and exactly <em>how to fix it</em></div>
+        <p class="cta-sub">Your scan shows how visible you are. Our full diagnostic shows you exactly why you are invisible, which competitors are appearing instead, and the precise steps to become the default AI recommendation in your category.</p>
       </div>
       <div>
         <div id="personalised-insight" style="display:none;font-size:.82rem;color:var(--ink);line-height:1.8;padding:1.25rem 1.5rem;border-left:3px solid var(--ink);background:var(--paper);margin-bottom:1.5rem;font-style:italic"></div>
         <div style="border:1px solid var(--border);padding:1.25rem;margin-bottom:1.5rem;background:var(--paper)">
-          <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem">What's in your Full AI Visibility Audit</div>
+          <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem">What we cover on the call</div>
           <div style="display:flex;flex-direction:column;gap:.5rem">
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>All 20 discovery prompts — every engine, every run</div>
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Full technical breakdown — 7 scored signals with exact fixes</div>
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Complete competitor list — every business appearing instead of you</div>
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Personalised fix plan — ranked by impact on your visibility</div>
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>PDF report + 15-minute walkthrough call included</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Full breakdown of your AI Appearance Rate across all engines</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Exactly which competitors are appearing instead of you and why</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>The specific technical gaps holding your visibility back</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>A clear picture of what needs to be fixed and in what order</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>20 minutes — no pitch, no pressure, just your data</div>
           </div>
         </div>
-        <a href="https://buy.stripe.com/cNiaEWcve0NNdKvgWu14401" style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Get Your Full AI Visibility Audit — $250 →</a>
-        <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.75rem;letter-spacing:.05em">$250 · PDF Report + 15-min call · Delivered within 48hrs</div>
+        <a href="https://calendly.com/hello-appearai/30min" style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Book a 20-Minute Call →</a>
+        <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.75rem;letter-spacing:.05em">Free · 20 minutes · We walk you through your full findings</div>
       </div>
     </div>
   </div>
@@ -467,7 +466,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <h2 class="section-title">The AI visibility agency for brands and businesses</h2>
     <p>AppearAI helps brands, enterprises, and local businesses appear consistently in AI-generated recommendations across ChatGPT, Perplexity, and every major AI search engine.</p>
     <p>We invented the AI Appearance Rate™ — the metric that measures how often AI actually recommends you when someone searches for what you offer.</p>
-    <a href="/audit.html" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Get Your Audit</a>
+    <a href="https://calendly.com/hello-appearai/30min" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Book a Call</a>
   </div>
   <div class="about-right">
     <div class="about-item"><div class="about-item-num">01</div><div class="about-item-title">We measure your AAR™</div><div class="about-item-text">The only metric that tells you exactly how often AI recommends your business — not estimates, not proxies, but real prompt results across real platforms.</div></div>
@@ -507,7 +506,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
           <a href="/research.html">Research</a>
           <a href="/resources.html">Resources</a>
           <a href="/index.html">Free Scanner</a>
-          <a href="/audit.html">Get Your Audit</a>
+          <a href="https://calendly.com/hello-appearai/30min">Book a Call</a>
         </div>
       </div>
       <div>
@@ -529,8 +528,6 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 
 <script>
 const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
-
-// ── TAB SWITCHING ─────────────────────────────────────────────────────────────
 let currentMode = 'enterprise';
 
 function switchTab(mode) {
@@ -539,7 +536,6 @@ function switchTab(mode) {
   const localForm = document.getElementById('local-form');
   const tabEnterprise = document.getElementById('tab-enterprise');
   const tabLocal = document.getElementById('tab-local');
-
   if(mode === 'enterprise') {
     enterpriseForm.style.display = 'block';
     localForm.style.display = 'none';
@@ -552,6 +548,7 @@ function switchTab(mode) {
     tabEnterprise.classList.remove('active');
   }
 }
+
 const WORKER_URL = "https://appearai-checker.socialmoa95.workers.dev";
 const FORMSPREE = "https://formspree.io/f/xqeyorpd";
 
@@ -587,7 +584,6 @@ async function startScan(){
   const industry=el("f-industry")?el("f-industry").value.trim():"";
   const cat=el("f-cat").value.trim();
   const market=el("f-market")?el("f-market").value.trim():"Global";
-
   if(!bizName||!bizUrl||!cat){
     el("form-error").textContent="Please fill in all required fields.";
     show("form-error");return;
@@ -596,7 +592,6 @@ async function startScan(){
   switchScanState("scan-state");
   el("scan-log").innerHTML="";
   scanData={_meta:{bizName,bizUrl,industry,cat,market,mode:'enterprise'}};
-
   try{
     await sleep(300);addLog("→ Initialising AppearAI scan engine…");
     await sleep(600);addLog(`→ Generating 20 AI discovery prompts for ${bizName} in ${market}…`);
@@ -608,24 +603,20 @@ async function startScan(){
     await sleep(600);addLog("→ Simulating AI discovery prompts across engines…");
     await sleep(400);addLog("→ Identifying competitors appearing instead of you…");
     await sleep(300);addLog("→ Compiling your AI Visibility results…");
-
     const [techResult,claudeData]=await Promise.allSettled([
       fetchTechSignals(bizUrl),
       fetchClaudeDataEnterprise(bizName,bizUrl,industry,cat,market)
     ]);
-
     scanData.tech=techResult.status==="fulfilled"?techResult.value:null;
     if(claudeData.status==="fulfilled"){
       Object.assign(scanData,claudeData.value);
     } else {
       addLog("✗ Claude error: "+claudeData.reason?.message);
     }
-
     addLog("✓ Scan complete — report ready");
     await sleep(400);
     el("gate-biz-name").textContent=bizName;
     switchScanState("email-gate");
-
   }catch(e){
     switchScanState("scan-form-wrap");
     el("form-error").textContent="Scan failed: "+e.message;
@@ -641,566 +632,45 @@ async function fetchTechSignals(url){
   return await resp.json();
 }
 
-function detectCategoryType(cat) {
-  const c = cat.toLowerCase();
-
-  // HEALTHCARE — all medical, dental, mental health, allied health
-  if (/dentist|dental|doctor|physician|gp|physio|physiotherapist|chiro|chiropractor|optician|optometrist|ophthalmologist|vet|veterinar|clinic|medical|health|therapist|psychologist|psychiatrist|counsellor|counselor|dermatologist|pediatric|paediatric|surgeon|specialist|nurse|midwife|veneer|implant|orthodont|teeth|cosmetic dent|endodont|periodont|prosthodont|oral|gum disease|root canal|invisalign|braces|whitening|hygienist|audiologist|podiatrist|osteopath|acupunctur|nutritionist|dietitian|speech therap|occupational therap|radiolog|oncolog|cardiolog|neurolog|urol|gynecol|gynaecol|obstetric|fertility|ivf|plastic surg|cosmetic surg|aesthetic|botox|filler|skin clinic|laser clinic|mri|ultrasound|x.ray|blood test|pharmacy|pharmacist|optom/.test(c)) return 'healthcare';
-
-  // LEGAL & FINANCE
-  if (/lawyer|attorney|solicitor|legal|law firm|barrister|notary|accountant|cpa|chartered accountant|bookkeeper|financial|advisor|adviser|financial planner|insurance|wealth|tax|auditor|mortgage broker|financial consultant|investment|stockbroker|forex|crypto advisor|pension|estate planner|will|probate|conveyancer|paralegal/.test(c)) return 'legal';
-
-  // TRADES & HOME SERVICES
-  if (/plumber|plumbing|electrician|electrical|contractor|hvac|heating|cooling|air con|carpenter|joiner|roofer|roofing|handyman|builder|building|painter|decorator|landscap|gardener|garden|pest control|exterminator|cleaner|cleaning|mover|removal|locksmith|glazier|window|flooring|tiler|tiling|plastering|plasterer|bricklayer|mason|welder|fencer|fence|driveway|paving|pool|solar|insulation|waterproof|restoration|demolition/.test(c)) return 'trades';
-
-  // FOOD & HOSPITALITY
-  if (/restaurant|cafe|coffee shop|bar|bistro|diner|eatery|brasserie|food|pizza|sushi|burger|chinese|indian|thai|mexican|italian|french|japanese|korean|vietnamese|greek|mediterranean|middle east|african|caribbean|american|bbq|steakhouse|seafood|vegan|vegetarian|catering|bakery|patisserie|brunch|pub|gastropub|grill|takeaway|takeout|fast food|food truck|buffet|tapas|ramen|noodle|curry|sandwich|deli|ice cream|dessert|cake|donut|waffle|breakfast|lunch|dinner|supper/.test(c)) return 'food';
-
-  // BEAUTY & WELLNESS
-  if (/salon|spa|barber|barbershop|hair|nail|beauty|gym|fitness|yoga|pilates|wellness|massage|tanning|lash|lashes|brow|wax|waxing|threading|facial|skincare|skin care|makeup|make.up|microblading|tattoo|piercing|personal trainer|pt |crossfit|boxing|martial arts|kickboxing|karate|judo|bjj|mma|swimming|dance|ballet|zumba|aerobics|boot camp|weight loss|slimming|liposuction|cryotherapy|infrared|float tank|reiki|reflexology|hypnotherapy|life coach|wellness coach/.test(c)) return 'beauty';
-
-  // RETAIL & SHOPPING
-  if (/shop|store|boutique|retail|market|supermarket|grocery|florist|jeweller|jeweler|jewelry|jewellery|clothing|clothes|fashion|gift|furniture|homeware|electronics|appliance|bookshop|bookstore|toy|sport|outdoor|camping|cycling|bike|shoe|footwear|optician|glasses|sunglasses|watch|luggage|bag|handbag|antique|vintage|second.hand|thrift|charity shop|art gallery|craft|hobby|garden centre|nursery plant|hardware|diy/.test(c)) return 'retail';
-
-  // REAL ESTATE
-  if (/real estate|realtor|estate agent|property|mortgage|letting|letting agent|property management|property manager|property developer|land|surveyor|home staging|interior design|interior designer|architect|architecture/.test(c)) return 'realestate';
-
-  // AUTOMOTIVE
-  if (/mechanic|garage|auto|car|vehicle|tyre|tire|body shop|dealership|mot|servicing|car service|car repair|car wash|valet|detailing|windscreen|exhaust|transmission|clutch|brake|engine|oil change|breakdown|recovery|towing|electric vehicle|ev charging|van|truck|motorcycle|motorbike|scooter/.test(c)) return 'auto';
-
-  // EDUCATION & TRAINING
-  if (/tutor|tutoring|school|academy|training|coach|instructor|education|college|university|class|course|workshop|driving|music teacher|music lesson|piano|guitar|singing|art class|language|english|spanish|french|german|mandarin|maths|math|science|coding|programming|test prep|exam|ielts|sat|gmat|gre|online course|e.learning|skills/.test(c)) return 'education';
-
-  // HOTELS & ACCOMMODATION
-  if (/hotel|b&b|bed and breakfast|accommodation|guesthouse|guest house|hostel|airbnb|lodge|motel|inn|resort|villa|apartment rental|serviced apartment|holiday let|vacation rental|campsite|glamping|caravan/.test(c)) return 'hotel';
-
-  // EVENTS & CREATIVE
-  if (/photographer|photography|videographer|videography|photo booth|wedding planner|wedding|event planner|event management|dj|venue|florist|catering|caterer|magician|entertainer|band|musician|mc|emcee|balloon|decorator|prop hire|photo studio|film|production|animation|graphic design|graphic designer/.test(c)) return 'events';
-
-  // CLEANING SERVICES
-  if (/cleaner|cleaning|laundry|dry clean|ironing|domestic cleaner|house clean|office clean|carpet clean|window clean|pressure wash|end of tenancy|after builders|oven clean|upholstery/.test(c)) return 'cleaning';
-
-  // TECHNOLOGY & DIGITAL
-  if (/it support|it services|tech support|computer repair|computer|phone repair|iphone|samsung|web design|web developer|web development|app developer|app development|software|digital marketing|seo|social media|graphic design|branding|cybersecurity|network|data recovery|cctv|smart home|automation/.test(c)) return 'tech';
-
-  // CHILDCARE & EDUCATION
-  if (/nursery|childcare|child care|babysitter|babysitting|nanny|creche|daycare|day care|after school|breakfast club|holiday club|child minder|childminder|preschool|pre.school|kindergarten|montessori|steiner|kids club/.test(c)) return 'childcare';
-
-  // TRANSPORT & LOGISTICS
-  if (/taxi|cab|minicab|private hire|chauffeur|limo|limousine|courier|delivery|same day delivery|removal|removals|moving company|man with a van|shipping|freight|logistics|airport transfer|minibus|coach hire|bike courier|motorcycle courier/.test(c)) return 'transport';
-
-  // PETS & ANIMALS
-  if (/groomer|dog groomer|dog walker|dog walking|pet|kennel|cattery|animal|boarding|pet sitting|pet sitter|dog trainer|dog training|aquarium|reptile|exotic|horse|equine|farrier|stable/.test(c)) return 'pets';
-
-  // HEALTH & SOCIAL CARE
-  if (/care home|nursing home|assisted living|home care|domiciliary|carer|support worker|disability|mental health support|addiction|rehab|recovery|hospice/.test(c)) return 'healthcare';
-
-  return 'general';
+async function fetchClaudeDataEnterprise(brandName, bizUrl, industry, category, market) {
+  const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
+Generate 20 natural conversational discovery prompts that someone would type into an AI search engine when looking for a ${category} solution in ${market}. Then simulate whether ${brandName} (${bizUrl}) appears in AI results for each prompt.
+Return exactly this JSON structure:
+{
+  "prompts": [<exactly 20 objects: {"query":"<natural conversational question>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":[<engines where appeared>]}>],
+  "competitors": [{"name":"<real competitor brand>","aar":<30-80>},{"name":"<real competitor>","aar":<25-75>},{"name":"<real competitor>","aar":<20-70>}],
+  "insight": "<1 sharp sentence about ${brandName} AI visibility in the ${category} space, max 30 words>"
 }
-
-function normaliseCategory(cat, type) {
-  const c = cat.toLowerCase();
-
-  const labels = {
-    // Healthcare
-    'veneer': 'dentist', 'veneers': 'dentist', 'dental implant': 'dentist', 'implant': 'dentist',
-    'teeth whitening': 'dentist', 'whitening': 'dentist', 'root canal': 'dentist',
-    'invisalign': 'orthodontist', 'braces': 'orthodontist', 'orthodont': 'orthodontist',
-    'cosmetic dent': 'cosmetic dentist', 'hygienist': 'dental hygienist',
-    'physio': 'physiotherapist', 'physiotherapist': 'physiotherapist',
-    'chiro': 'chiropractor', 'chiropractor': 'chiropractor',
-    'optician': 'optician', 'optometrist': 'optometrist',
-    'vet': 'vet', 'veterinar': 'vet',
-    'physician': 'doctor', 'gp': 'doctor', 'general practitioner': 'doctor',
-    'surgeon': 'surgeon', 'plastic surg': 'plastic surgeon', 'cosmetic surg': 'cosmetic surgeon',
-    'dermatologist': 'dermatologist', 'skin clinic': 'skin clinic',
-    'psychiatrist': 'psychiatrist', 'psychologist': 'psychologist',
-    'counsellor': 'counsellor', 'counselor': 'counsellor', 'therapist': 'therapist',
-    'podiatrist': 'podiatrist', 'osteopath': 'osteopath', 'audiologist': 'audiologist',
-    'nutritionist': 'nutritionist', 'dietitian': 'dietitian',
-    'midwife': 'midwife', 'fertility': 'fertility clinic', 'ivf': 'fertility clinic',
-    'botox': 'aesthetics clinic', 'filler': 'aesthetics clinic', 'aesthetic': 'aesthetics clinic',
-    'laser': 'laser clinic', 'pharmacy': 'pharmacy', 'pharmacist': 'pharmacist',
-    // Legal & Finance
-    'attorney': 'lawyer', 'solicitor': 'solicitor', 'barrister': 'barrister',
-    'law firm': 'law firm', 'notary': 'notary',
-    'accountant': 'accountant', 'cpa': 'accountant', 'bookkeeper': 'bookkeeper',
-    'financial advisor': 'financial advisor', 'financial adviser': 'financial advisor',
-    'mortgage broker': 'mortgage broker', 'insurance': 'insurance broker',
-    'wealth manager': 'wealth manager', 'tax advisor': 'tax advisor',
-    'conveyancer': 'conveyancer', 'estate planner': 'estate planner',
-    // Trades
-    'plumbing': 'plumber', 'electrician': 'electrician', 'electrical': 'electrician',
-    'hvac': 'HVAC engineer', 'heating': 'heating engineer', 'air con': 'air conditioning engineer',
-    'carpenter': 'carpenter', 'joiner': 'joiner', 'roofer': 'roofer', 'roofing': 'roofer',
-    'landscap': 'landscaper', 'gardener': 'gardener',
-    'pest control': 'pest control specialist', 'exterminator': 'pest control specialist',
-    'locksmith': 'locksmith', 'glazier': 'glazier', 'window': 'window fitter',
-    'flooring': 'flooring specialist', 'tiler': 'tiler', 'plasterer': 'plasterer',
-    'removal': 'removal company', 'mover': 'removal company',
-    // Food
-    'cafe': 'cafe', 'coffee shop': 'coffee shop', 'bistro': 'restaurant',
-    'diner': 'diner', 'eatery': 'restaurant', 'pub': 'pub', 'gastropub': 'pub',
-    'takeaway': 'takeaway', 'takeout': 'takeaway', 'bakery': 'bakery',
-    'patisserie': 'patisserie', 'pizza': 'pizza restaurant', 'sushi': 'sushi restaurant',
-    'burger': 'burger restaurant', 'steakhouse': 'steakhouse', 'bar': 'bar',
-    // Beauty
-    'barber': 'barber', 'barbershop': 'barber',
-    'nail': 'nail salon', 'lash': 'lash technician', 'lashes': 'lash technician',
-    'brow': 'brow specialist', 'wax': 'waxing salon', 'threading': 'threading salon',
-    'spa': 'spa', 'massage': 'massage therapist', 'tanning': 'tanning salon',
-    'gym': 'gym', 'fitness': 'gym', 'yoga': 'yoga studio', 'pilates': 'pilates studio',
-    'personal trainer': 'personal trainer', 'pt ': 'personal trainer',
-    'tattoo': 'tattoo studio', 'piercing': 'piercing studio',
-    // Auto
-    'car service': 'mechanic', 'car repair': 'mechanic', 'mot': 'MOT garage',
-    'body shop': 'body shop', 'car wash': 'car wash', 'valet': 'car valet',
-    'detailing': 'car detailing', 'tyre': 'tyre fitter', 'tire': 'tyre fitter',
-    // Education
-    'tutoring': 'tutor', 'driving': 'driving instructor',
-    'music lesson': 'music teacher', 'piano': 'piano teacher',
-    'guitar': 'guitar teacher', 'singing': 'singing teacher',
-    'language': 'language teacher', 'coding': 'coding tutor',
-    // Events
-    'photography': 'photographer', 'videography': 'videographer',
-    'wedding planner': 'wedding planner', 'dj': 'DJ',
-    'caterer': 'catering company', 'florist': 'florist',
-    'graphic design': 'graphic designer', 'graphic designer': 'graphic designer',
-    // Tech
-    'it support': 'IT support specialist', 'it services': 'IT support specialist',
-    'phone repair': 'phone repair technician', 'iphone repair': 'phone repair technician',
-    'web design': 'web designer', 'web developer': 'web developer',
-    'app developer': 'app developer', 'seo': 'SEO agency',
-    'social media': 'social media agency', 'digital marketing': 'digital marketing agency',
-    // Transport
-    'taxi': 'taxi service', 'cab': 'taxi service', 'chauffeur': 'chauffeur service',
-    'limo': 'limousine service', 'courier': 'courier service',
-    'removal': 'removal company', 'man with a van': 'removal company',
-    // Pets
-    'dog groomer': 'dog groomer', 'dog walker': 'dog walker',
-    'dog walking': 'dog walker', 'dog trainer': 'dog trainer',
-    'kennel': 'dog kennel', 'cattery': 'cattery', 'pet sitting': 'pet sitter',
-  };
-
-  // Check specific label overrides first (longest match wins)
-  const sortedKeys = Object.keys(labels).sort((a,b) => b.length - a.length);
-  for (const keyword of sortedKeys) {
-    if (c.includes(keyword)) return labels[keyword];
-  }
-
-  // Type defaults
-  const defaults = {
-    healthcare: 'dentist', legal: 'lawyer', trades: 'contractor',
-    food: 'restaurant', beauty: 'salon', retail: 'shop',
-    realestate: 'estate agent', auto: 'mechanic', education: 'tutor',
-    hotel: 'hotel', events: 'event specialist', cleaning: 'cleaning service',
-    tech: 'IT specialist', childcare: 'nursery', transport: 'transport service',
-    pets: 'pet specialist', general: c
-  };
-
-  return defaults[type] || c;
-}
-
-function buildPrompts(bizName, city, cat) {
-  const type = detectCategoryType(cat);
-  const c = normaliseCategory(cat, type);
-
-  const sets = {
-    healthcare: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Any recommendations?`,
-      `Which ${c} in ${city} is accepting new patients?`,
-      `I just moved to ${city}. Which ${c} should I register with?`,
-      `Which ${c} near ${city} would you trust for your family?`,
-      `I'm nervous about seeing a ${c}. Which one in ${city} is known for being gentle?`,
-      `Who's the most recommended ${c} in ${city} right now?`,
-      `Which ${c} in ${city} has the shortest waiting times?`,
-      `I've been looking for a good ${c} in ${city}. Any suggestions?`,
-      `Which ${c} in ${city} do people keep going back to?`,
-      `My friend needs a ${c} in ${city}. Who should I suggest?`,
-      `Which ${c} in ${city} is best for someone who hasn't been in a while?`,
-      `Who's the most trusted ${c} in ${city}?`,
-      `I had a bad experience at my last ${c}. Who is better in ${city}?`,
-      `Which ${c} near ${city} has the best reviews?`,
-      `Who is the ${c} in ${city} known for taking their time with patients?`,
-      `Who are the top ${c}s in ${city}?`,
-      `I need a ${c} in ${city} today. Who should I call?`,
-      `Which ${c} in ${city} do you actually recommend?`,
-      `Who is the ${c} in ${city} that people have been going to for years?`
-    ],
-    legal: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Who do people actually recommend?`,
-      `Which ${c} in ${city} has a strong reputation?`,
-      `I've a legal issue in ${city}. Who should I call first?`,
-      `Who is the ${c} in ${city} known for getting results?`,
-      `Who are the best ${c}s in ${city} right now?`,
-      `I need someone I can trust. Which ${c} in ${city} would you recommend?`,
-      `Which ${c} near ${city} would you hire for a serious matter?`,
-      `Which ${c} firm in ${city} do businesses use?`,
-      `I'm looking for a ${c} in ${city} who's straightforward and honest. Any names?`,
-      `Which ${c} in ${city} has handled cases like mine?`,
-      `Who is the go-to ${c} in ${city} for complex situations?`,
-      `My friend needs a ${c} in ${city}. Who should I suggest?`,
-      `Which ${c} in ${city} is worth the fee?`,
-      `Which ${c} near ${city} has the best track record?`,
-      `I need a ${c} in ${city} urgently. Who can I reach today?`,
-      `Who are the most experienced ${c}s in ${city}?`,
-      `Which ${c} in ${city} actually picks up the phone?`,
-      `I've never used a ${c} before. Who in ${city} is approachable?`,
-      `Which ${c} in ${city} would you trust with something important?`
-    ],
-    trades: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Who do people recommend?`,
-      `Which ${c} near ${city} shows up on time and doesn't overcharge?`,
-      `I need a ${c} in ${city} urgently. Who can come today?`,
-      `Which ${c} in ${city} do homeowners keep calling back?`,
-      `Who's a reliable ${c} in ${city} for a big job?`,
-      `I've had bad experiences before. Who is a trustworthy ${c} in ${city}?`,
-      `Which ${c} in ${city} does quality work without cutting corners?`,
-      `Which ${c} near ${city} is fairly priced and professional?`,
-      `Who is the most recommended ${c} in ${city}?`,
-      `I need a licensed ${c} in ${city}. Who should I use?`,
-      `Which ${c} in ${city} would you use for your own home?`,
-      `Which ${c} in ${city} can I call on a weekend?`,
-      `Who does the best ${c} work in ${city}?`,
-      `My neighbour needs a ${c} in ${city}. Who should I tell them to call?`,
-      `Which ${c} near ${city} gives honest quotes?`,
-      `Which ${c} in ${city} is available for emergencies?`,
-      `I want a ${c} in ${city} who's clean and professional. Any recommendations?`,
-      `Which ${c} in ${city} has the most experience?`,
-      `Who is the go-to ${c} in ${city} that everyone uses?`
-    ],
-    food: [
-      `What are the best ${c}s in ${city} right now?`,
-      `Where should I eat in ${city} tonight?`,
-      `I'm visiting ${city}. Where do locals actually eat?`,
-      `What's a good ${c} in ${city} for a date night?`,
-      `Where's the most popular ${c} in ${city}?`,
-      `I'm in ${city}. What ${c} would you recommend?`,
-      `What are the must-try ${c}s in ${city}?`,
-      `Where do people in ${city} go for a special occasion?`,
-      `What's the most talked about ${c} in ${city} right now?`,
-      `I want a great meal in ${city}. Where should I go?`,
-      `What ${c} in ${city} is worth the wait?`,
-      `Where do locals in ${city} eat on a Friday night?`,
-      `What is the best ${c} experience in ${city}?`,
-      `I've visitors coming to ${city}. Where should I take them to eat?`,
-      `What ${c} in ${city} has been around for years and is still great?`,
-      `Which ${c} in ${city} do food critics love?`,
-      `What's a hidden gem ${c} in ${city}?`,
-      `What ${c} in ${city} is consistently good every visit?`,
-      `What ${c} near ${city} centre would you recommend?`,
-      `If you could only eat at one ${c} in ${city}, where would you go?`
-    ],
-    beauty: [
-      `What's the best ${c} in ${city}?`,
-      `I need a new ${c} in ${city}. Who do you recommend?`,
-      `Which ${c} near ${city} is worth the price?`,
-      `I want to treat myself. Which ${c} in ${city} should I try?`,
-      `My usual ${c} closed. What is a good one in ${city}?`,
-      `Which ${c} in ${city} is taking new clients?`,
-      `What ${c} in ${city} do people rave about?`,
-      `I'm looking for a ${c} in ${city} with a great atmosphere.`,
-      `Which ${c} near ${city} has the most talented staff?`,
-      `What ${c} in ${city} actually listens to what you want?`,
-      `I had a bad experience at my last ${c}. What is a good one in ${city}?`,
-      `Which ${c} in ${city} is worth booking in advance?`,
-      `What ${c} in ${city} would you send your friend to?`,
-      `What are the best ${c}s in ${city} right now?`,
-      `I'm visiting ${city} and need a ${c}. Who should I book?`,
-      `Which ${c} in ${city} is consistently good every time?`,
-      `What ${c} near ${city} has the best reviews?`,
-      `I want a ${c} in ${city} that really knows what they're doing.`,
-      `Which ${c} in ${city} has been around the longest and is still great?`,
-      `What's the most popular ${c} in ${city} right now?`
-    ],
-    retail: [
-      `What's the best ${c} in ${city}?`,
-      `Where's a good ${c} in ${city}?`,
-      `Which ${c} near ${city} has the best selection?`,
-      `Where do locals in ${city} shop for ${c}?`,
-      `I'm looking for a ${c} in ${city}. Where should I go?`,
-      `What's the top-rated ${c} in ${city}?`,
-      `Which ${c} in ${city} has the best prices?`,
-      `Where do people in ${city} buy ${c}?`,
-      `What ${c} near ${city} has friendly staff and good stock?`,
-      `Which ${c} in ${city} is worth visiting?`,
-      `What is the best ${c} in ${city} for quality?`,
-      `Where's a reliable ${c} in ${city}?`,
-      `Which ${c} in ${city} do people recommend?`,
-      `What ${c} in ${city} has the best customer service?`,
-      `I need to find a ${c} in ${city}. Any suggestions?`,
-      `Which ${c} near ${city} is popular with locals?`,
-      `What ${c} in ${city} has been around the longest?`,
-      `Where is the most trusted ${c} in ${city}?`,
-      `Which ${c} in ${city} would you buy from again?`,
-      `What ${c} in ${city} gets the best word of mouth?`
-    ],
-    realestate: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Who do people recommend?`,
-      `Which ${c} near ${city} has the strongest track record?`,
-      `Who is the ${c} in ${city} that buyers and sellers trust?`,
-      `I need a ${c} in ${city}. Who should I work with?`,
-      `Who's the top-rated ${c} in ${city}?`,
-      `Which ${c} in ${city} knows the local market best?`,
-      `Who is a trusted ${c} in ${city} for a first-time buyer?`,
-      `Which ${c} near ${city} closes deals quickly?`,
-      `Which ${c} in ${city} has the most listings?`,
-      `Who are the best ${c}s in ${city} right now?`,
-      `Which ${c} in ${city} would you use for your own home?`,
-      `Who are the top ${c}s in ${city} right now?`,
-      `Who is the ${c} in ${city} that gives honest advice?`,
-      `Which ${c} near ${city} is known for getting the best price?`,
-      `I'm selling my home in ${city}. Which ${c} should I call?`,
-      `Who's the most experienced ${c} in ${city}?`,
-      `Which ${c} in ${city} has the best client reviews?`,
-      `Who do people in ${city} trust most for ${c}?`,
-      `Which ${c} in ${city} comes most highly recommended?`
-    ],
-    auto: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Who do people trust?`,
-      `Which ${c} near ${city} is honest and fairly priced?`,
-      `I need a ${c} in ${city}. Who do people recommend?`,
-      `What's the best ${c} in ${city}?`,
-      `Which ${c} near ${city} does quality work?`,
-      `Who is the most recommended ${c} in ${city}?`,
-      `Which ${c} in ${city} would you take your own car to?`,
-      `Which ${c} in ${city} has the best reviews?`,
-      `I need my car fixed in ${city}. Who should I go to?`,
-      `Who are the best ${c}s in ${city}?`,
-      `Which ${c} near ${city} is transparent about pricing?`,
-      `Who is a trusted ${c} in ${city}?`,
-      `Which ${c} in ${city} is known for getting it right first time?`,
-      `Which ${c} in ${city} is taking new customers?`,
-      `I'm new to ${city} and need a ${c}. Any recommendations?`,
-      `Who does the best ${c} work in ${city}?`,
-      `Which ${c} in ${city} has been around the longest?`,
-      `Which ${c} near ${city} do car owners recommend?`,
-      `Which ${c} in ${city} would you trust with your car?`
-    ],
-    education: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Any recommendations?`,
-      `Which ${c} near ${city} gets the best results?`,
-      `Which ${c} in ${city} do parents recommend?`,
-      `I need a ${c} in ${city}. Who is most effective?`,
-      `Who's the top-rated ${c} in ${city}?`,
-      `Which ${c} in ${city} is known for improving results?`,
-      `Who is a trusted ${c} in ${city} for students?`,
-      `Which ${c} near ${city} has the most experience?`,
-      `Which ${c} in ${city} would you recommend for a struggling student?`,
-      `Who are the best ${c}s in ${city}?`,
-      `Which ${c} in ${city} offers the best value?`,
-      `Who are the most recommended ${c}s in ${city}?`,
-      `Which ${c} in ${city} has the best teaching approach?`,
-      `Which ${c} near ${city} is taking new students?`,
-      `I'm looking for a ${c} in ${city} for my child. Who should I call?`,
-      `Who's the most qualified ${c} in ${city}?`,
-      `Which ${c} in ${city} gets consistent results?`,
-      `Which ${c} in ${city} do students actually enjoy working with?`,
-      `Which ${c} in ${city} comes most highly recommended?`
-    ],
-    hotel: [
-      `What's the best ${c} in ${city}?`,
-      `I'm visiting ${city}. Where should I stay?`,
-      `What's a good ${c} in ${city} for a weekend break?`,
-      `Where do people stay when they visit ${city}?`,
-      `What's the most recommended ${c} in ${city}?`,
-      `I'm taking my family to ${city}. Where's a good ${c}?`,
-      `What ${c} in ${city} is worth the price?`,
-      `Where's the best ${c} experience in ${city}?`,
-      `What ${c} near ${city} centre would you recommend?`,
-      `I need a ${c} in ${city} for a business trip. Any suggestions?`,
-      `What's the most popular ${c} in ${city} right now?`,
-      `Which ${c} in ${city} has the best reviews?`,
-      `What ${c} in ${city} has the friendliest staff?`,
-      `Where's a quiet ${c} in ${city} away from the crowds?`,
-      `What's a hidden gem ${c} in ${city}?`,
-      `I'm travelling to ${city} solo. Where's a good ${c}?`,
-      `What ${c} in ${city} is great value for money?`,
-      `Which ${c} near ${city} has the best location?`,
-      `What ${c} in ${city} would you book again?`,
-      `Where is the most luxurious ${c} in ${city}?`
-    ],
-    events: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Who do people recommend?`,
-      `Which ${c} near ${city} produces the best work?`,
-      `I'm planning an event in ${city}. Who should I hire for ${c}?`,
-      `Who's the most talented ${c} in ${city}?`,
-      `Which ${c} in ${city} is worth the investment?`,
-      `Who are the top ${c}s in ${city} right now?`,
-      `I need a ${c} in ${city} for a wedding. Any recommendations?`,
-      `Which ${c} in ${city} has the best portfolio?`,
-      `Who is the most recommended ${c} in ${city}?`,
-      `I've seen some amazing work lately. Who is a great ${c} in ${city}?`,
-      `Which ${c} near ${city} is professional and creative?`,
-      `Who is the go-to ${c} in ${city} for events?`,
-      `Which ${c} in ${city} is booked up in advance for a reason?`,
-      `I need a ${c} in ${city} urgently. Who's available?`,
-      `Who does the best ${c} work in ${city}?`,
-      `Which ${c} in ${city} is known for going above and beyond?`,
-      `Who are the most creative ${c}s in ${city}?`,
-      `Which ${c} in ${city} would you hire again?`,
-      `Who is the ${c} in ${city} everyone keeps talking about?`
-    ],
-    cleaning: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Who do people recommend?`,
-      `Which ${c} near ${city} is reliable and thorough?`,
-      `I need a ${c} in ${city}. Who can I trust in my home?`,
-      `Which ${c} in ${city} do homeowners recommend?`,
-      `Who is the most reliable ${c} in ${city}?`,
-      `Which ${c} in ${city} is professional and trustworthy?`,
-      `I need a regular ${c} in ${city}. Who should I use?`,
-      `Which ${c} near ${city} is fairly priced?`,
-      `Who is the most recommended ${c} in ${city}?`,
-      `Which ${c} in ${city} is available weekly?`,
-      `Who does the best ${c} work in ${city}?`,
-      `Which ${c} in ${city} brings their own supplies?`,
-      `I need a one-off deep ${c} in ${city}. Who should I call?`,
-      `Which ${c} near ${city} has the best reviews?`,
-      `Who is a trusted ${c} in ${city} for a family home?`,
-      `Which ${c} in ${city} is taking on new clients?`,
-      `I need an end of tenancy ${c} in ${city}. Who do you recommend?`,
-      `Which ${c} in ${city} is insured and vetted?`,
-      `Who is the go-to ${c} in ${city} that everyone uses?`
-    ],
-    tech: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Who do people recommend?`,
-      `Which ${c} near ${city} is reliable and knows what they're doing?`,
-      `I've a tech problem in ${city}. Who should I call?`,
-      `Which ${c} in ${city} do businesses use?`,
-      `Who's the most trusted ${c} in ${city}?`,
-      `I need a ${c} in ${city} urgently. Who can help today?`,
-      `Which ${c} near ${city} explains things clearly?`,
-      `Who is the most recommended ${c} in ${city}?`,
-      `Which ${c} in ${city} is good value for money?`,
-      `I need a ${c} in ${city} for a small business. Any suggestions?`,
-      `Which ${c} in ${city} has the best reviews?`,
-      `Who's the go-to ${c} in ${city}?`,
-      `Which ${c} near ${city} responds quickly?`,
-      `Who does the best ${c} work in ${city}?`,
-      `I need a ${c} in ${city} who can also train my team. Any recommendations?`,
-      `Which ${c} in ${city} is taking on new clients?`,
-      `Who's the most experienced ${c} in ${city}?`,
-      `Which ${c} in ${city} would you trust with your business data?`,
-      `Who is the ${c} in ${city} that everyone recommends?`
-    ],
-    childcare: [
-      `What's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Any recommendations?`,
-      `Which ${c} near ${city} do parents trust most?`,
-      `I'm looking for a ${c} in ${city} for my child. Where should I start?`,
-      `What ${c} in ${city} has the best reputation?`,
-      `Which ${c} in ${city} is ofsted rated or equivalent?`,
-      `What ${c} in ${city} has availability right now?`,
-      `Which ${c} near ${city} do working parents recommend?`,
-      `What's the most recommended ${c} in ${city}?`,
-      `I need a ${c} in ${city} from next month. What are my options?`,
-      `Which ${c} in ${city} has the happiest children?`,
-      `What ${c} near ${city} has the best staff ratio?`,
-      `I'm new to ${city} and need a ${c}. What do parents recommend?`,
-      `Which ${c} in ${city} is best for under twos?`,
-      `What ${c} in ${city} has outdoor space?`,
-      `Which ${c} in ${city} has been open the longest?`,
-      `What ${c} in ${city} do children actually enjoy?`,
-      `Which ${c} near ${city} has the best communication with parents?`,
-      `What ${c} in ${city} would you trust with your child?`,
-      `Which ${c} in ${city} comes most highly recommended by parents?`
-    ],
-    transport: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Who is reliable?`,
-      `Which ${c} near ${city} is on time and professional?`,
-      `I need a ${c} in ${city} tonight. Who should I call?`,
-      `Which ${c} in ${city} do people actually use?`,
-      `Who is the most recommended ${c} in ${city}?`,
-      `I need a ${c} in ${city} at short notice. Who's available?`,
-      `Which ${c} near ${city} is fairly priced?`,
-      `Who is a trusted ${c} in ${city}?`,
-      `Which ${c} in ${city} is safe and reliable?`,
-      `I need a ${c} in ${city} for an early morning airport run. Who should I book?`,
-      `Which ${c} in ${city} has the best reviews?`,
-      `Who does the best ${c} service in ${city}?`,
-      `Which ${c} near ${city} is available 24 hours?`,
-      `I'm moving to ${city}. Which ${c} should I use?`,
-      `Who's the go-to ${c} in ${city}?`,
-      `Which ${c} in ${city} is professional and clean?`,
-      `I need a ${c} in ${city} for a group. Who can accommodate that?`,
-      `Which ${c} near ${city} is taking new bookings?`,
-      `Who's the most trusted ${c} in ${city}?`
-    ],
-    pets: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Any recommendations?`,
-      `Which ${c} near ${city} is gentle and experienced?`,
-      `I need someone to look after my pet in ${city}. Who is trustworthy?`,
-      `Which ${c} in ${city} do pet owners recommend?`,
-      `Who's the most trusted ${c} in ${city}?`,
-      `I'm going on holiday. Which ${c} in ${city} should I use?`,
-      `Which ${c} near ${city} really loves animals?`,
-      `Who is the most recommended ${c} in ${city}?`,
-      `Which ${c} in ${city} has the best reviews from pet owners?`,
-      `I've a nervous dog. Which ${c} in ${city} is known for being patient?`,
-      `Which ${c} in ${city} has been around the longest?`,
-      `I need a ${c} in ${city} who's also trained in first aid. Any suggestions?`,
-      `Which ${c} near ${city} is reliable and communicates well?`,
-      `Who does the best ${c} work in ${city}?`,
-      `Which ${c} in ${city} treats animals like their own?`,
-      `I need a ${c} in ${city} who can handle large breeds.`,
-      `Which ${c} in ${city} is taking on new clients?`,
-      `Who is the go-to ${c} in ${city} for pet owners?`,
-      `Which ${c} in ${city} would you trust with your pet?`
-    ],
-    general: [
-      `Who's the best ${c} in ${city}?`,
-      `I need a ${c} in ${city}. Any suggestions?`,
-      `Which ${c} near ${city} is worth using?`,
-      `Who do people in ${city} use for ${c}?`,
-      `I'm looking for a good ${c} in ${city}. Where should I start?`,
-      `Who's the most trusted ${c} in ${city}?`,
-      `Which ${c} in ${city} has the best reviews?`,
-      `I'm new to ${city}. Which ${c} do locals use?`,
-      `Which ${c} in ${city} would you recommend to a friend?`,
-      `Who's the go-to ${c} in ${city}?`,
-      `Which ${c} near ${city} is consistently good?`,
-      `I've heard good things about ${c}s in ${city}. Who specifically?`,
-      `Which ${c} in ${city} is taking on new customers?`,
-      `Which ${c} in ${city} has been around the longest?`,
-      `Who runs the best ${c} in ${city}?`,
-      `Which ${c} in ${city} do you keep hearing about?`,
-      `I want a ${c} in ${city} I can actually rely on. Who is that?`,
-      `Which ${c} in ${city} would you use yourself?`,
-      `What makes the best ${c}s in ${city} stand out?`,
-      `If I could only use one ${c} in ${city}, which should it be?`
-    ]
-  };
-
-  return sets[type] || sets.general;
+Be realistic: most brands appear in 3-8 of 20 prompts. Only include engines where brand actually appeared.`;
+  const resp = await fetch(WORKER_URL + "/claude", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      model: "claude-sonnet-4-5",
+      max_tokens: 3500,
+      system: sys,
+      messages: [{role: "user", content: `Brand: ${brandName}\nWebsite: ${bizUrl}\nIndustry: ${industry}\nCategory: ${category}\nTarget Market: ${market}`}]
+    })
+  });
+  const data = await resp.json();
+  if(data.error) throw new Error(data.error.message);
+  const raw = data.content?.find(b => b.type === "text")?.text || "{}";
+  let cleaned = raw.replace(/```json|```/g, "").trim();
+  const s = cleaned.indexOf("{"), e = cleaned.lastIndexOf("}");
+  if(s !== -1 && e !== -1) cleaned = cleaned.slice(s, e + 1);
+  return JSON.parse(cleaned);
 }
 
 async function fetchClaudeData(bizName,bizUrl,city,cat){
   const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
 Generate 20 natural conversational discovery prompts that someone would type into an AI search engine when looking for a ${cat} in ${city}. Then simulate whether ${bizName} (${bizUrl}) appears in AI results for each prompt.
-Use the correct question word for each prompt based on what is being asked:
-- Use WHO for people based businesses like doctors, lawyers, dentists, plumbers
-- Use WHAT or WHERE for places and experiences like restaurants, hotels, cafes
-- Use WHICH when choosing between options
-Prompts must sound exactly like how real people type into ChatGPT. Use contractions. Keep them short and natural. No dashes.
 Return exactly this JSON structure:
 {
   "prompts": [<exactly 20 objects: {"query":"<natural conversational question>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":[<engines where appeared>]}>],
   "competitors": [{"name":"<real local ${cat} competitor in ${city}>","aar":<30-80>},{"name":"<real local ${cat} competitor in ${city}>","aar":<25-75>},{"name":"<real local ${cat} competitor in ${city}>","aar":<20-70>}],
   "insight": "<1 sharp sentence about ${bizName} AI visibility in ${city}, max 30 words>"
 }
-Be realistic: most unoptimised local businesses appear in 2-6 of 20 prompts. Only include engines where business actually appeared.`;
-
+Be realistic: most unoptimised local businesses appear in 2-6 of 20 prompts.`;
   const resp=await fetch(WORKER_URL+"/claude",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
@@ -1218,72 +688,29 @@ Be realistic: most unoptimised local businesses appear in 2-6 of 20 prompts. Onl
   const s=cleaned.indexOf("{"),e=cleaned.lastIndexOf("}");
   if(s!==-1&&e!==-1)cleaned=cleaned.slice(s,e+1);
   const result = JSON.parse(cleaned);
-
   if(!result.competitors||result.competitors.length===0){
     result.competitors=[{name:"Local competitor",aar:45},{name:"Another competitor",aar:32},{name:"Third competitor",aar:28}];
   }
-
   return result;
 }
 
-
-async function fetchClaudeDataEnterprise(brandName, bizUrl, industry, category, market) {
-  const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
-Generate 20 natural conversational discovery prompts that someone would type into an AI search engine when looking for a ${category} solution in ${market}. Then simulate whether ${brandName} (${bizUrl}) appears in AI results for each prompt.
-Return exactly this JSON structure:
-{
-  "prompts": [<exactly 20 objects: {"query":"<natural conversational question>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":[<engines where appeared>]}>],
-  "competitors": [{"name":"<real competitor brand>","aar":<30-80>},{"name":"<real competitor>","aar":<25-75>},{"name":"<real competitor>","aar":<20-70>}],
-  "insight": "<1 sharp sentence about ${brandName} AI visibility in the ${category} space, max 30 words>"
-}
-Prompts should sound like real people asking AI: "What is the best CRM for small businesses?", "Which email marketing tool would you recommend?", "I need a project management tool for my team, any suggestions?"
-Be realistic: most brands appear in 3-8 of 20 prompts. Only include engines where brand actually appeared.`;
-
-  const resp = await fetch(WORKER_URL + "/claude", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      model: "claude-sonnet-4-5",
-      max_tokens: 3500,
-      system: sys,
-      messages: [{role: "user", content: `Brand: ${brandName}
-Website: ${bizUrl}
-Industry: ${industry}
-Category: ${category}
-Target Market: ${market}`}]
-    })
-  });
-  const data = await resp.json();
-  if(data.error) throw new Error(data.error.message);
-  const raw = data.content?.find(b => b.type === "text")?.text || "{}";
-  let cleaned = raw.replace(/```json|```/g, "").trim();
-  const s = cleaned.indexOf("{"), e = cleaned.lastIndexOf("}");
-  if(s !== -1 && e !== -1) cleaned = cleaned.slice(s, e + 1);
-  return JSON.parse(cleaned);
-}
-
-// ── LOCAL SCAN ────────────────────────────────────────────────────────────────
 async function startScanLocal() {
   const localBizName = el("f-name-local").value.trim();
   const localBizUrl = el("f-url-local").value.trim();
   const city = el("f-city").value.trim();
   const cat = el("f-cat-local").value.trim();
-
   if(!localBizName || !localBizUrl || !city || !cat) {
     el("form-error-local").textContent = "Please fill in all four fields.";
     el("form-error-local").style.display = "block";
     return;
   }
   el("form-error-local").style.display = "none";
-
   bizName = localBizName;
   bizUrl = localBizUrl;
   currentMode = 'local';
-
   switchScanState("scan-state");
   el("scan-log").innerHTML = "";
   scanData = {_meta: {bizName, bizUrl, city, cat}};
-
   try {
     await sleep(300); addLog("→ Initialising AppearAI scan engine…");
     await sleep(600); addLog(`→ Building 20 discovery prompts for ${bizName} in ${city}…`);
@@ -1292,19 +719,16 @@ async function startScanLocal() {
     await sleep(400); addLog("→ Checking AI crawler access…");
     await sleep(600); addLog("→ Analysing discovery prompt patterns across AI engines…");
     await sleep(400); addLog("→ Identifying competitors appearing in your category…");
-
     const [techResult, claudeData] = await Promise.allSettled([
       fetchTechSignals(localBizUrl),
       fetchClaudeData(localBizName, localBizUrl, city, cat)
     ]);
-
     scanData.tech = techResult.status === "fulfilled" ? techResult.value : null;
     if(claudeData.status === "fulfilled") {
       Object.assign(scanData, claudeData.value);
     } else {
       addLog("✗ Claude error: " + claudeData.reason?.message);
     }
-
     addLog("✓ Scan complete — report ready");
     await sleep(400);
     el("gate-biz-name").textContent = bizName;
@@ -1316,7 +740,6 @@ async function startScanLocal() {
   }
 }
 
-// ── RESET ────────────────────────────────────────────────────────────────────
 function revealResults(){
   const email=el("gate-email").value.trim();
   if(!email||!email.includes("@"))return;
@@ -1345,7 +768,6 @@ function revealResults(){
   const checksEl=el("tech-checks");
   checksEl.innerHTML="";
   let techScore=0,techTotal=0;
-
   techDefs.forEach((d,i)=>{
     const t=r.tech?.results?.[d.id];
     const status=t?.status||"warn";
@@ -1464,4 +886,4 @@ function resetScan(){
 }
 </script>
 </body>
-            </html>
+</html>
