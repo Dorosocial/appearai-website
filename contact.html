@@ -3,90 +3,135 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Contact AppearAI — AppearAI</title>
-<meta name="description" content="Get in touch with AppearAI. Book a free 15-minute strategy call or email us at hello@appearai.io."/>
+<title>Contact — AppearAI</title>
+<meta name="description" content="Get in touch with AppearAI. hello@appearai.io"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{overflow-x:hidden;width:100%}
-:root{--ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;--muted:#7a7469;--ok:#1a7a4a;--warn:#e84c1e;--gold:#c9a84c;--border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25)}
+:root{--ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;--muted:#7a7469;--gold:#c9a84c;--border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25)}
 html{font-size:16px;scroll-behavior:smooth}
-body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6}
+body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);line-height:1.6}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px);pointer-events:none;z-index:0}
+
 nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 3rem}
 .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.35rem .9rem;text-decoration:none;transition:color .15s,border-color .15s}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.35rem .9rem;text-decoration:none;transition:color .15s,border-color .15s}
 .nav-logo:hover{color:var(--ink);border-color:var(--ink)}
 .nav-links{display:flex;align-items:center;gap:2.5rem}
-.nav-links a{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a{font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
 .nav-links a:hover,.nav-links a.active{color:var(--ink)}
-.nav-cta{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s}
+.nav-cta{font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;text-decoration:none;transition:opacity .15s}
 .nav-cta:hover{opacity:.8}
-.section-eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
-.section-eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
-.btn-ink{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.875rem 2rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
-.btn-ink:hover{opacity:.8}
-.btn-ghost{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--ink);padding:.875rem 2rem;border:1px solid var(--ink);cursor:pointer;text-decoration:none;display:inline-block;transition:all .15s}
-.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+.main{max-width:1100px;margin:0 auto;padding:7rem 3rem 6rem;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start;border-bottom:1px solid var(--border);position:relative;z-index:1}
+
+.eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
+.eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
+
+.contact-details{display:flex;flex-direction:column;gap:2.5rem;margin-top:2.5rem}
+.contact-item{}
+.contact-item-label{font-family:'Bebas Neue',sans-serif;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.contact-item-value{font-size:.88rem;color:var(--ink);line-height:1.7}
+.contact-item-value a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-strong);padding-bottom:1px;transition:border-color .15s}
+.contact-item-value a:hover{border-color:var(--ink)}
+
+.form-wrap{background:var(--cream);border:1px solid var(--border);padding:2.5rem;position:relative}
+.form-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
+.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.form-lbl{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.form-input{background:var(--paper);border:1px solid var(--border);padding:.75rem 1rem;font-family:'DM Mono',monospace;font-size:.78rem;color:var(--ink);outline:none;transition:border-color .15s;width:100%}
+.form-input:focus{border-color:var(--ink)}
+.form-input::placeholder{color:rgba(10,10,15,.25)}
+textarea.form-input{resize:vertical;min-height:140px}
+.form-submit{font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.875rem 2rem;border:none;cursor:pointer;transition:opacity .15s;width:100%;margin-top:.5rem}
+.form-submit:hover{opacity:.8}
+.form-note{font-size:.65rem;color:var(--muted);text-align:center;margin-top:.75rem;line-height:1.6}
+
 footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relative;z-index:1}
 .footer-top{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem;display:inline-block;margin-bottom:1rem}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem;display:inline-block;margin-bottom:1rem}
 .footer-addr{font-size:.72rem;color:var(--muted);line-height:1.9}
-.footer-col-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem}
+.footer-col-title{font-family:'Bebas Neue',sans-serif;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:.875rem}
 .footer-col{display:flex;flex-direction:column;gap:.5rem}
 .footer-col a{font-size:.72rem;color:var(--muted);text-decoration:none;transition:color .15s}
 .footer-col a:hover{color:var(--ink)}
 .footer-cols{display:flex;gap:4rem;flex-wrap:wrap}
-.footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-bottom{max-width:1100px;margin:0 auto}
 .footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
-@media(max-width:768px){nav{padding:0 1.5rem}.nav-links{display:none}footer{padding:2rem 1.5rem}.footer-cols{gap:2rem}}
 
-
+@media(max-width:768px){
+  nav{padding:0 1.5rem}.nav-links{display:none}
+  .main{grid-template-columns:1fr;gap:3.5rem;padding:4rem 1.5rem}
+  footer{padding:2rem 1.5rem}.footer-cols{gap:2rem}
+}
 </style>
 </head>
 <body>
+
 <nav>
   <div class="nav-inner">
     <a href="/index.html" class="nav-logo">AppearAI</a>
     <div class="nav-links">
-      <a href="/services-local.html">For Local Businesses</a>
-      <a href="/services-enterprise.html">For Brands</a>
       <a href="/research.html">Research</a>
       <a href="/blog.html">Blog</a>
-      <a href="/case-studies.html">Case Studies</a>
+      <a href="/about.html">About</a>
     </div>
-    <a href="/audit.html" class="nav-cta">Get Your Audit</a>
+    <a href="/contact.html" class="nav-cta">Get In Touch</a>
   </div>
 </nav>
 
-<section style="max-width:1100px;margin:0 auto;padding:5rem 3rem 4rem;border-bottom:1px solid var(--border);position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start">
+<section class="main">
   <div>
-    <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem"><span style="display:block;width:24px;height:1px;background:var(--muted)"></span>Get in touch</div>
-    <h1 style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(2rem,5vw,4rem);line-height:.95;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.25rem">Let's talk about<br>your AI visibility.</h1>
-    <p style="font-size:.88rem;color:var(--muted);line-height:1.9;margin-bottom:2.5rem">Book a free 15-minute strategy call. We'll come prepared with your current AI visibility data and give you an honest view of where the biggest opportunities are.</p>
-    <div style="display:flex;flex-direction:column;gap:1.25rem">
-      <div style="padding:1.5rem;border:1px solid var(--border);background:var(--cream);position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--ink);margin-bottom:.25rem">Email</div><a href="mailto:hello@appearai.io" style="font-size:.78rem;color:var(--muted);text-decoration:none">hello@appearai.io</a></div>
-      <div style="padding:1.5rem;border:1px solid var(--border);background:var(--cream);position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--ink);margin-bottom:.25rem">Address</div><div style="font-size:.78rem;color:var(--muted);line-height:1.7">131 Continental Dr, Suite 305<br>Newark, Delaware 19713<br>United States (Operations)<br><br><em style="font-size:.7rem">Remote-first · Global team</em></div></div>
-      <div style="padding:1.5rem;border:1px solid var(--border);background:var(--cream);position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div><div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.82rem;color:var(--ink);margin-bottom:.25rem">Response time</div><div style="font-size:.78rem;color:var(--muted)">We respond to all enquiries within one business day.</div></div>
+    <div class="eyebrow"><span></span>Contact</div>
+    <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);line-height:.93;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.25rem">Get in<br>touch.</h1>
+    <p style="font-size:.88rem;color:var(--muted);line-height:1.95;max-width:42ch">AI search visibility is a fast-moving space. Whether you are researching the field, exploring what AppearAI measures, or want to discuss a specific analysis — this is the right place to start.</p>
+
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-item-label">Email</div>
+        <div class="contact-item-value"><a href="mailto:hello@appearai.io">hello@appearai.io</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Platform</div>
+        <div class="contact-item-value"><a href="/index.html">Run the free AI visibility scan →</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Research</div>
+        <div class="contact-item-value"><a href="/aar.html">Read the AAR methodology →</a></div>
+      </div>
     </div>
   </div>
-  <div style="background:var(--cream);border:1px solid var(--border);padding:2.5rem;position:relative"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)"></div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem">Book a Strategy Call</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.25rem;color:var(--ink);margin-bottom:.625rem;line-height:1.2">15 minutes. No obligation.<br>Specific to your business.</div>
-    <p style="font-size:.78rem;color:var(--muted);line-height:1.7;margin-bottom:1.75rem">We don't do generic pitches. Every call starts with your actual AI visibility data and ends with a clear recommendation.</p>
-    <!-- Calendly inline widget -->
-    <div class="calendly-inline-widget" data-url="https://calendly.com/hello-appearai/30min?hide_gdpr_banner=1&background_color=ede9df&text_color=0a0a0f&primary_color=0a0a0f" style="min-width:280px;height:420px"></div>
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+  <div class="form-wrap">
+    <div class="form-group">
+      <label class="form-lbl">Your name</label>
+      <input type="text" class="form-input" id="f-name" placeholder="Your name"/>
+    </div>
+    <div class="form-group">
+      <label class="form-lbl">Your email address</label>
+      <input type="email" class="form-input" id="f-email" placeholder="you@company.com"/>
+    </div>
+    <div class="form-group">
+      <label class="form-lbl">Subject</label>
+      <input type="text" class="form-input" id="f-subject" placeholder="What is this about?"/>
+    </div>
+    <div class="form-group">
+      <label class="form-lbl">Message</label>
+      <textarea class="form-input" id="f-message" placeholder="Tell us what you have in mind."></textarea>
+    </div>
+    <button class="form-submit" onclick="submitForm()">Send Message →</button>
+    
   </div>
 </section>
+
 <footer>
   <div class="footer-top">
     <div>
       <div class="footer-logo">AppearAI</div>
       <div class="footer-addr">
-        131 Continental Dr, Suite 305<br>Newark, Delaware 19713<br>United States (Operations)<br><br><em style="font-size:.7rem">Remote-first · Global team</em><br><br>
         <a href="mailto:hello@appearai.io" style="color:var(--muted);text-decoration:none">hello@appearai.io</a>
       </div>
     </div>
@@ -95,10 +140,7 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relati
         <div class="footer-col-title">Company</div>
         <div class="footer-col">
           <a href="/about.html">About</a>
-          <a href="/services-local.html">For Local Businesses</a>
-          <a href="/services-enterprise.html">For Brands</a>
           <a href="/blog.html">Blog</a>
-          <a href="/case-studies.html">Case Studies</a>
           <a href="/contact.html">Contact</a>
         </div>
       </div>
@@ -106,9 +148,8 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relati
         <div class="footer-col-title">Resources</div>
         <div class="footer-col">
           <a href="/research.html">Research</a>
-          <a href="/resources.html">Resources</a>
-          <a href="/index.html">Free Scanner</a>
-          <a href="/audit.html">Get Your Audit</a>
+          <a href="/aar.html">The AAR Framework</a>
+          <a href="/index.html">Free AI Scanner</a>
         </div>
       </div>
       <div>
@@ -123,9 +164,26 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relati
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2026 Avarabrands Inc. All rights reserved.</div>
-    <div class="footer-copy">AppearAI is a product of Avarabrands Inc.</div>
+    <div class="footer-copy">© 2026 AppearAI. All rights reserved.</div>
   </div>
 </footer>
+
+<script>
+function submitForm(){
+  var name = document.getElementById('f-name').value.trim();
+  var email = document.getElementById('f-email').value.trim();
+  var subject = document.getElementById('f-subject').value.trim();
+  var message = document.getElementById('f-message').value.trim();
+  if(!name || !email || !message){
+    alert('Please fill in your name, email, and message.');
+    return;
+  }
+  window.location.href = 'mailto:hello@appearai.io'
+    + '?subject=' + encodeURIComponent(subject || 'AppearAI Enquiry')
+    + '&body=Name: ' + encodeURIComponent(name)
+    + '%0AEmail: ' + encodeURIComponent(email)
+    + '%0A%0A' + encodeURIComponent(message);
+}
+</script>
 </body>
 </html>
