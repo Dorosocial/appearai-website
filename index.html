@@ -391,7 +391,17 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="discovery-title">Discovery Prompts Tested</div>
     <div class="discovery-stat">Appeared in <strong id="disc-appeared">—</strong> out of <strong>20</strong> discovery prompts run across 5 AI engines</div>
     <div id="disc-visible"></div>
-
+    <div id="disc-blur-wrap" class="disc-blur-wrap" style="display:none">
+      <div style="position:relative;overflow:hidden">
+        <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="disc-blur-rows"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
+      </div>
+      <div style="padding:1.25rem 0 0">
+        <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in your Full AI Visibility Audit</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Every prompt, every engine, every run — and exactly what your competitors are doing that you aren't.</div>
+        <a href="https://calendly.com/hello-appearai/30min" class="disc-lock-btn">Book a Discovery Call →</a>
+      </div>
+    </div>
   </div>
 
   <!-- COMPETITORS -->
@@ -399,7 +409,15 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="competitors-title">Who Appeared Instead</div>
     <div class="competitors-sub">Businesses appearing in the same discovery prompts where yours did not</div>
     <div id="comp-visible"></div>
-
+    <div class="comp-blur-wrap" id="comp-blur-wrap" style="display:none">
+      <div style="position:relative;overflow:hidden">
+        <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="comp-blur-rows"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
+      </div>
+      <div style="padding:.875rem 0 0">
+        <div class="comp-lock-text">+ more competitors revealed in your Full AI Visibility Audit</div>
+      </div>
+    </div>
   </div>
 
   <!-- CTA -->
@@ -407,23 +425,23 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="cta-inner">
       <div>
         <div class="cta-eyebrow"><span></span>Your next step</div>
-        <div class="cta-title">Find out exactly why — and exactly <em>how to fix it</em></div>
-        <p class="cta-sub">Your scan shows how visible you are. Our full diagnostic shows you exactly why you are invisible, which competitors are appearing instead, and the precise steps to become the default AI recommendation in your category.</p>
+        <div class="cta-title">Request a <em>full analysis</em></div>
+        <p class="cta-sub">The scan shows your baseline AI Appearance Rate and technical signal audit. The full analysis covers your complete citation rate across all four engines, the sources driving competitor visibility, and a ranked breakdown of what is holding your score back.</p>
       </div>
       <div>
         <div id="personalised-insight" style="display:none;font-size:.82rem;color:var(--ink);line-height:1.8;padding:1.25rem 1.5rem;border-left:3px solid var(--ink);background:var(--paper);margin-bottom:1.5rem;font-style:italic"></div>
         <div style="border:1px solid var(--border);padding:1.25rem;margin-bottom:1.5rem;background:var(--paper)">
-          <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem">What we cover on the call</div>
+          <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem">What the full report covers</div>
           <div style="display:flex;flex-direction:column;gap:.5rem">
             <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Full breakdown of your AI Appearance Rate across all engines</div>
             <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Exactly which competitors are appearing instead of you and why</div>
             <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>The specific technical gaps holding your visibility back</div>
             <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>A clear picture of what needs to be fixed and in what order</div>
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>20 minutes — no pitch, no pressure, just your data</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Priority action plan ranked by expected impact on your score</div>
           </div>
         </div>
-        <a href="/contact.html" style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Book a 20-Minute Call →</a>
-        <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.75rem;letter-spacing:.05em">Free · 20 minutes · We walk you through your full findings</div>
+        <a href="/contact.html" style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Request a Full Analysis →</a>
+        <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.75rem;letter-spacing:.05em">hello@appearai.io</div>
       </div>
     </div>
   </div>
@@ -435,9 +453,9 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 
 <!-- STATS -->
 <div class="stats-row">
-  <div class="stat"><div class="stat-num">89.8%</div><div class="stat-label">of brands had zero AI mentions across eight platforms in Q1 2026. Victorious, Q1 2026 Quarterly Search Report.</div></div>
-  <div class="stat"><div class="stat-num">58%</div><div class="stat-label">of consumers now turn to AI tools for brand recommendations. Trustpilot consumer research, April 2026.</div></div>
-  <div class="stat"><div class="stat-num">42%</div><div class="stat-label">better conversion rate from AI-referred buyers versus traditional organic search visitors. Adobe Analytics, March 2026.</div></div>
+  <div class="stat"><div class="stat-num">45%</div><div class="stat-label">of consumers now use AI to find local services — up from 6% one year ago</div></div>
+  <div class="stat"><div class="stat-num">83%</div><div class="stat-label">of local businesses don't appear in AI-generated recommendations</div></div>
+  <div class="stat"><div class="stat-num">1.2%</div><div class="stat-label">of all local business locations are currently recommended by ChatGPT</div></div>
 </div>
 
 <!-- ABOUT -->
