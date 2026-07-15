@@ -3,30 +3,20 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The AI Appearance Rate Framework — AppearAI</title>
-<meta name="description" content="The AI Appearance Rate is a frequency-based measurement framework for AI search visibility. It uses multiple runs across multiple engines to surface dominant players and reveal where brands actually stand in AI search."/>
-<link rel="canonical" href="https://appearai.io/aar.html"/>
-<meta property="og:title" content="The AI Appearance Rate Framework — AppearAI"/>
-<meta property="og:description" content="A frequency-based measurement framework for AI search visibility. Multiple runs. Multiple engines. Real competitive intelligence."/>
-<meta property="og:url" content="https://appearai.io/aar.html"/>
-<meta property="og:type" content="article"/>
+<title>Research — AppearAI</title>
+<meta name="description" content="A curated index of the primary research on AI search visibility, citation behaviour, and brand discovery across large language models. Organised by research question."/>
+<link rel="canonical" href="https://appearai.io/research.html"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{overflow-x:hidden;width:100%}
-:root{
-  --ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;
-  --muted:#7a7469;--gold:#c9a84c;--green:#4ade80;
-  --red:#ff6b5b;--amber:#f5c842;
-  --border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25)
-}
+:root{--ink:#0a0a0f;--paper:#f5f2eb;--cream:#ede9df;--muted:#7a7469;--gold:#c9a84c;--border:rgba(10,10,15,0.12);--border-strong:rgba(10,10,15,0.25)}
 html{font-size:16px;scroll-behavior:smooth}
-body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:'DM Mono',monospace;font-weight:300;background:var(--paper);color:var(--ink);line-height:1.6}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(10,10,15,.04) 60px);pointer-events:none;z-index:0}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 3rem}
+nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 3rem}
 .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.35rem .9rem;text-decoration:none;transition:color .15s,border-color .15s}
 .nav-logo:hover{color:var(--ink);border-color:var(--ink)}
@@ -39,122 +29,68 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.96);backdrop
 /* HERO */
 .hero{background:var(--ink);position:relative;overflow:hidden;border-bottom:3px solid var(--gold)}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(245,242,235,.03) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(245,242,235,.03) 60px);pointer-events:none}
-.hero-inner{max-width:1100px;margin:0 auto;padding:7rem 3rem 6rem;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:end}
-.hero-left{}
-.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.75rem}
-.hero-tag::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
-.hero-right{padding-bottom:.5rem}
-.hero-desc{font-size:.88rem;color:rgba(245,242,235,.4);line-height:1.9;margin-bottom:2rem}
-.hero-meta{display:flex;flex-direction:column;gap:.75rem}
-.hero-meta-row{display:flex;align-items:center;gap:.75rem;font-size:.72rem;color:rgba(245,242,235,.3)}
-.hero-meta-row::before{content:'';display:block;width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
-
-/* PULL QUOTE */
-.pull{background:var(--gold);padding:4rem 3rem;position:relative;z-index:1}
-.pull-inner{max-width:1100px;margin:0 auto}
-.pull-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3.5vw,2.5rem);color:var(--ink);line-height:1.05;letter-spacing:-.01em;max-width:800px;margin-bottom:1rem}
-.pull-sub{font-size:.78rem;color:rgba(10,10,15,.55);line-height:1.7;max-width:600px}
-
-/* SECTIONS */
-.section{max-width:1100px;margin:0 auto;padding:5rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
-.section-dark{background:var(--ink);position:relative;z-index:1;border-bottom:1px solid rgba(245,242,235,.06)}
-.section-dark-inner{max-width:1100px;margin:0 auto;padding:5rem 3rem}
-.section-cream{background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
-.section-cream-inner{max-width:1100px;margin:0 auto;padding:5rem 3rem}
-
-.eyebrow{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.hero-inner{max-width:1100px;margin:0 auto;padding:6rem 3rem 5rem;position:relative;z-index:1}
+.eyebrow-light{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,242,235,.3);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
+.eyebrow-light span{display:block;width:24px;height:1px;background:rgba(245,242,235,.2)}
+.eyebrow{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
 .eyebrow span{display:block;width:24px;height:1px;background:var(--muted)}
-.eyebrow-light{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,242,235,.25);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
-.eyebrow-light span{display:block;width:24px;height:1px;background:rgba(245,242,235,.15)}
 
-.section-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3.5vw,2.6rem);letter-spacing:-.02em;color:var(--ink);line-height:1.0;margin-bottom:1.5rem}
-.section-h2-light{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3.5vw,2.6rem);letter-spacing:-.02em;color:var(--paper);line-height:1.0;margin-bottom:1.5rem}
-.section-h2 em,.section-h2-light em{font-style:normal;color:var(--gold)}
+/* INTRO NOTE */
+.intro{max-width:1100px;margin:0 auto;padding:3.5rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.intro-note{font-size:.82rem;color:var(--muted);line-height:1.9}
+.intro-note strong{color:var(--ink);font-weight:400}
+.reliability-grid{display:flex;flex-direction:column;gap:.75rem}
+.reliability-row{display:flex;align-items:flex-start;gap:.85rem;font-size:.75rem;color:var(--muted);line-height:1.65}
+.reliability-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.35rem}
+.reliability-dot.high{background:#4ade80}
+.reliability-dot.medium{background:var(--gold)}
+.reliability-dot.low{background:#ff6b5b}
 
-.prose{font-size:.85rem;color:var(--muted);line-height:1.95;margin-bottom:1.1rem;max-width:64ch}
-.prose strong{color:var(--ink);font-weight:400}
-.prose-light{font-size:.85rem;color:rgba(245,242,235,.4);line-height:1.95;margin-bottom:1.1rem;max-width:64ch}
-.prose-light strong{color:rgba(245,242,235,.75);font-weight:400}
+/* SECTION */
+.section{max-width:1100px;margin:0 auto;padding:4rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.section:last-of-type{border-bottom:none}
+.section-header{margin-bottom:2.5rem}
+.section-q{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,3vw,2rem);letter-spacing:-.02em;color:var(--ink);line-height:1.05;margin-bottom:.6rem}
+.section-q em{font-style:normal;color:var(--gold)}
+.section-note{font-size:.75rem;color:var(--muted);line-height:1.7;max-width:60ch}
 
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.two-col-wide{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start}
+/* STUDY GRID */
+.study-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.study-card{border:1px solid var(--border);position:relative;background:var(--paper);display:flex;flex-direction:column;transition:border-color .15s}
+.study-card:hover{border-color:var(--border-strong)}
+.study-card.primary::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
+.study-card.vendor::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold)}
+.study-card.weak::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:rgba(10,10,15,.15)}
+.study-card-top{padding:1.5rem 1.5rem 0}
+.study-source{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.study-date{font-size:.58rem;color:var(--muted);opacity:.6;margin-bottom:.75rem}
+.study-title{font-family:'Bebas Neue',sans-serif;font-size:.95rem;color:var(--ink);line-height:1.2;letter-spacing:.03em;margin-bottom:.75rem}
+.study-finding{font-size:.72rem;color:var(--ink);line-height:1.65;margin-bottom:.75rem;font-weight:400}
+.study-finding strong{color:var(--ink);font-weight:600}
+.study-commentary{font-size:.7rem;color:var(--muted);line-height:1.65;font-style:italic}
+.study-card-bottom{padding:1rem 1.5rem;border-top:1px solid var(--border);margin-top:auto;display:flex;align-items:center;justify-content:space-between}
+.study-meta{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.study-link{font-family:'Bebas Neue',sans-serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-strong);padding-bottom:1px;transition:border-color .15s}
+.study-link:hover{border-color:var(--ink)}
 
-/* FORMULA */
-.formula-box{background:var(--ink);padding:0;position:relative;overflow:hidden}
-.formula-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
-.formula-top{padding:2rem 2rem 1.5rem}
-.formula-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,242,235,.25);margin-bottom:1rem}
-.formula-expr{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.1rem,2.5vw,1.6rem);color:var(--paper);line-height:1.2;margin-bottom:.5rem}
-.formula-note{font-size:.7rem;color:rgba(245,242,235,.3);line-height:1.55}
-.formula-rows{border-top:1px solid rgba(245,242,235,.06)}
-.formula-row{display:flex;justify-content:space-between;align-items:center;padding:.85rem 2rem;border-bottom:1px solid rgba(245,242,235,.04);font-size:.72rem}
-.formula-row:last-child{border-bottom:none}
-.formula-row-l{color:rgba(245,242,235,.3)}
-.formula-row-v{font-family:'Bebas Neue',sans-serif;font-size:.9rem}
-
-/* RUNS VISUALISER */
-.runs-viz{margin-top:2.5rem}
-.runs-title{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem}
-.runs-grid{display:flex;flex-direction:column;gap:.75rem}
-.run-row{display:flex;align-items:center;gap:1rem}
-.run-label{font-size:.7rem;color:var(--muted);width:80px;flex-shrink:0}
-.run-dots{display:flex;gap:.35rem}
-.run-dot{width:28px;height:28px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700}
-.run-dot.appear{background:var(--ink);color:var(--green)}
-.run-dot.miss{background:rgba(10,10,15,.06);color:var(--muted)}
-.run-dot.dominant{background:var(--ink);color:var(--gold);outline:1px solid var(--gold)}
-.run-pct{font-family:'Bebas Neue',sans-serif;font-size:.88rem;color:var(--ink);margin-left:.5rem}
-.run-verdict{font-size:.62rem;color:var(--muted);margin-left:.25rem}
-
-/* INSIGHT BOX */
-.insight{border-left:3px solid var(--gold);padding:1.25rem 1.5rem;background:rgba(201,168,76,.06);margin:2rem 0}
-.insight p{font-size:.82rem;color:var(--ink);line-height:1.75}
-.insight p strong{color:var(--gold);font-weight:600}
-
-/* ENGINE GRID */
-.engine-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2.5rem}
-.engine-cell{background:var(--paper);padding:1.75rem;position:relative}
-.engine-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.engine-cell.chatgpt::before{background:#10a37f}
-.engine-cell.perplexity::before{background:#1fb8cd}
-.engine-cell.gemini::before{background:#4285f4}
-.engine-cell.claude::before{background:#c17a4a}
-.engine-name{font-family:'Bebas Neue',sans-serif;font-size:.88rem;color:var(--ink);letter-spacing:.06em;margin-bottom:.5rem}
-.engine-arch{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
-.engine-body{font-size:.72rem;color:var(--muted);line-height:1.65;margin-bottom:1rem}
-.engine-persona{background:var(--cream);padding:.6rem .85rem;font-size:.65rem;color:var(--ink);line-height:1.5}
-.engine-persona strong{font-weight:600;display:block;margin-bottom:.2rem;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-
-/* STRATEGY FLOW */
-.strategy-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
-.strategy-card{padding:2rem;border:1px solid var(--border);position:relative}
-.strategy-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
-.strategy-n{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:rgba(10,10,15,.08);line-height:1;margin-bottom:.75rem}
-.strategy-title{font-family:'Bebas Neue',sans-serif;font-size:.88rem;color:var(--ink);letter-spacing:.04em;margin-bottom:.6rem}
-.strategy-body{font-size:.75rem;color:var(--muted);line-height:1.7}
-
-/* FINDING STRIP */
-.finding-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-.finding-cell{background:var(--paper);padding:1.75rem}
-.finding-src{font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.finding-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--ink);line-height:1;margin-bottom:.35rem}
-.finding-text{font-size:.72rem;color:var(--muted);line-height:1.65}
-
-/* LIMITATION */
-.limit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
-.limit-card{padding:1.75rem;border:1px solid rgba(245,242,235,.08);background:rgba(245,242,235,.03)}
-.limit-title{font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--paper);letter-spacing:.04em;margin-bottom:.6rem}
-.limit-body{font-size:.73rem;color:rgba(245,242,235,.35);line-height:1.7}
+/* WEAK EVIDENCE */
+.weak-section{background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.weak-inner{max-width:1100px;margin:0 auto;padding:4rem 3rem}
+.weak-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.weak-card{border:1px solid var(--border);padding:1.5rem;background:var(--paper);position:relative}
+.weak-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:rgba(10,10,15,.12)}
+.weak-claim{font-size:.78rem;color:var(--ink);margin-bottom:.5rem;line-height:1.5}
+.weak-claim strong{font-weight:600}
+.weak-problem{font-size:.7rem;color:var(--muted);line-height:1.65}
 
 /* CTA */
-.cta-section{position:relative;z-index:1;border-top:1px solid var(--border)}
-.cta-inner{max-width:1100px;margin:0 auto;padding:6rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
-.btn-ink{font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem 2rem;text-decoration:none;display:block;text-align:center;margin-bottom:1rem;transition:opacity .15s}
-.btn-ink:hover{opacity:.8}
-.btn-outline{font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:1rem 2rem;text-decoration:none;display:block;text-align:center;transition:all .15s}
-.btn-outline:hover{border-color:var(--ink);color:var(--ink)}
+.cta-section{background:var(--ink);position:relative;z-index:1}
+.cta-inner{max-width:1100px;margin:0 auto;padding:5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.btn-paper{font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--paper);color:var(--ink);padding:1rem 2rem;text-decoration:none;display:block;text-align:center;margin-bottom:1rem;transition:opacity .15s}
+.btn-paper:hover{opacity:.88}
+.btn-ghost-light{font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:rgba(245,242,235,.5);border:1px solid rgba(245,242,235,.15);padding:1rem 2rem;text-decoration:none;display:block;text-align:center;transition:all .15s}
+.btn-ghost-light:hover{background:rgba(245,242,235,.06)}
 
-/* FOOTER */
 footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relative;z-index:1}
 .footer-top{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
 .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid currentColor;padding:.3rem .75rem;display:inline-block;margin-bottom:1rem}
@@ -169,16 +105,11 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relati
 
 @media(max-width:768px){
   nav{padding:0 1.5rem}.nav-links{display:none}
-  .hero-inner{grid-template-columns:1fr;gap:2.5rem;padding:4rem 1.5rem}
-  .pull{padding:3rem 1.5rem}
-  .section,.section-dark-inner,.section-cream-inner,.cta-inner{padding:3.5rem 1.5rem}
-  .two-col,.two-col-wide{grid-template-columns:1fr;gap:2.5rem}
-  .engine-grid,.finding-strip{grid-template-columns:1fr 1fr}
-  .strategy-flow,.limit-grid{grid-template-columns:1fr}
+  .hero-inner,.intro,.section,.weak-inner,.cta-inner{padding:3.5rem 1.5rem}
+  .intro{grid-template-columns:1fr;gap:2rem}
+  .study-grid,.weak-grid{grid-template-columns:1fr}
+  .cta-inner{grid-template-columns:1fr;gap:2rem}
   footer{padding:2rem 1.5rem}.footer-cols{gap:2rem}
-}
-@media(max-width:480px){
-  .engine-grid,.finding-strip{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -188,7 +119,7 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relati
   <div class="nav-inner">
     <a href="/index.html" class="nav-logo">AppearAI</a>
     <div class="nav-links">
-      <a href="/research.html">Research</a>
+      <a href="/research.html" class="active">Research</a>
       <a href="/blog.html">Blog</a>
       <a href="/about.html">About</a>
     </div>
@@ -199,293 +130,334 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relati
 <!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-tag">AppearAI · Methodology</div>
-      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);line-height:.9;letter-spacing:-.03em;color:var(--paper);margin-bottom:1.5rem">The AI<br>Appearance<br>Rate<br><span style="color:var(--gold)">Framework</span></h1>
-    </div>
-    <div class="hero-right">
-      <p class="hero-desc">AI recommendations are probabilistic. A single prompt run once gives you noise. The same prompt run many times across many engines gives you signal. The AI Appearance Rate is a frequency-based measurement framework built on that insight — designed to surface who AI actually trusts in a category, not who got lucky in a single response.</p>
-      <div class="hero-meta">
-        <div class="hero-meta-row">Developed by AppearAI · 2026</div>
-        <div class="hero-meta-row">Built on primary research from Princeton, Ahrefs, Seer Interactive, Muck Rack, and others</div>
-        <div class="hero-meta-row">Tested across ChatGPT, Perplexity, Gemini, and Claude</div>
+    <div class="eyebrow-light"><span></span>Research</div>
+    <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);line-height:.93;letter-spacing:-.03em;color:var(--paper);margin-bottom:1.75rem;max-width:760px">The evidence base for AI search visibility.</h1>
+    <p style="font-size:.92rem;color:rgba(245,242,235,.45);line-height:1.95;max-width:600px">A curated index of the primary studies, large-scale data analyses, and peer-reviewed research on how AI engines retrieve, cite, and recommend brands. Organised by research question. Updated as new evidence emerges.</p>
+  </div>
+</div>
+
+<!-- INTRO NOTE -->
+<div class="intro">
+  <div>
+    <div class="eyebrow"><span></span>A note on evidence quality</div>
+    <p class="intro-note">The AI search visibility space has a significant noise problem. Many widely cited statistics come from vendors with a commercial interest in the findings, thin sample sizes, or secondary reporting that has drifted from the original source. This index distinguishes between primary research, vendor-commissioned studies, and claims that lack reliable sourcing.</p>
+    <p class="intro-note" style="margin-top:1rem">The strongest evidence in this space comes from a small number of large-scale studies with clear methodology and no direct vendor incentive. The Princeton KDD paper, the Ahrefs brand correlation studies, and the Seer Interactive citation analysis are the three most methodologically rigorous sources available as of mid-2026.</p>
+  </div>
+  <div>
+    <div class="eyebrow"><span></span>Evidence key</div>
+    <div class="reliability-grid">
+      <div class="reliability-row">
+        <div class="reliability-dot high"></div>
+        <div><strong style="color:var(--ink);font-weight:400">Primary research</strong> — peer-reviewed studies, large-scale controlled analyses, or data from platforms with no direct incentive to bias the finding.</div>
+      </div>
+      <div class="reliability-row">
+        <div class="reliability-dot medium"></div>
+        <div><strong style="color:var(--ink);font-weight:400">Vendor research</strong> — primary data collection by a company with a commercial relationship to the finding. Directionally useful but should be read with the incentive structure in mind.</div>
+      </div>
+      <div class="reliability-row">
+        <div class="reliability-dot low"></div>
+        <div><strong style="color:var(--ink);font-weight:400">Weak or unverified</strong> — widely circulated claims that lack primary sourcing, have thin sample sizes, or originate from secondary reporting of secondary reporting.</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PULL QUOTE -->
-<div class="pull">
-  <div class="pull-inner">
-    <div class="pull-text">Tracking your position in a single AI response is like measuring the weather by looking out the window once. The signal is in the pattern, not the snapshot.</div>
-    <p class="pull-sub">AI engines are non-deterministic systems. The same prompt returns different outputs on every run. Position tracking is meaningless in this environment. Frequency across many runs is the only measurement that produces stable, actionable data.</p>
-  </div>
-</div>
-
-<!-- THE PROBLEM WITH POSITION TRACKING -->
+<!-- SECTION 1 -->
 <section class="section">
-  <div class="two-col-wide">
-    <div>
-      <div class="eyebrow"><span></span>Why current measurement fails</div>
-      <h2 class="section-h2">Tracking AI search positions produces unreliable data. Here is why.</h2>
-      <p class="prose">When someone asks ChatGPT which provider to recommend, the model does not return a ranked list from a deterministic index. It generates a response influenced by training data, retrieval patterns, and probabilistic sampling. Ask the same question five minutes later and you get a different response.</p>
-      <p class="prose">Rand Fishkin's study of 2,961 prompt tests across four AI engines found that only <strong>around 30% of brands appearing in an AI response appear again on the next run of the same prompt.</strong> Run it five times consecutively and just 20% of brands persist across all five.</p>
-      <p class="prose">This is the nature of the system. Large language models are not search indexes. They do not have fixed rankings — what they have is probability distributions over possible outputs, shaped by the signals they have encountered across training and retrieval.</p>
-      <p class="prose">The implication is direct. Any tool reporting your brand's position on an AI engine is reporting a single sample from a non-deterministic distribution. That number has no predictive value, no stability, and no strategic utility. It is noise presented as signal.</p>
-      <p class="prose">The AI Appearance Rate solves this by replacing position with frequency. Instead of asking where a brand appears in one response, it asks how often a brand appears across many responses. That frequency is stable, comparable, and it reveals something position tracking never could.</p>
-    </div>
-    <div>
-      <div class="runs-viz">
-        <div class="runs-title">Why runs reveal the truth — same prompt, different runs</div>
-        <div class="runs-grid">
-          <div class="run-row">
-            <div class="run-label" style="font-size:.6rem;color:var(--muted)">Run 1</div>
-            <div class="run-dots">
-              <div class="run-dot dominant">A</div>
-              <div class="run-dot appear">B</div>
-              <div class="run-dot miss">—</div>
-              <div class="run-dot dominant">D</div>
-              <div class="run-dot miss">—</div>
-            </div>
-          </div>
-          <div class="run-row">
-            <div class="run-label" style="font-size:.6rem;color:var(--muted)">Run 2</div>
-            <div class="run-dots">
-              <div class="run-dot dominant">A</div>
-              <div class="run-dot miss">—</div>
-              <div class="run-dot appear">C</div>
-              <div class="run-dot dominant">D</div>
-              <div class="run-dot miss">—</div>
-            </div>
-          </div>
-          <div class="run-row">
-            <div class="run-label" style="font-size:.6rem;color:var(--muted)">Run 3</div>
-            <div class="run-dots">
-              <div class="run-dot dominant">A</div>
-              <div class="run-dot appear">B</div>
-              <div class="run-dot miss">—</div>
-              <div class="run-dot dominant">D</div>
-              <div class="run-dot appear">E</div>
-            </div>
-          </div>
-          <div class="run-row">
-            <div class="run-label" style="font-size:.6rem;color:var(--muted)">Run 4</div>
-            <div class="run-dots">
-              <div class="run-dot dominant">A</div>
-              <div class="run-dot miss">—</div>
-              <div class="run-dot appear">C</div>
-              <div class="run-dot dominant">D</div>
-              <div class="run-dot miss">—</div>
-            </div>
-          </div>
-          <div class="run-row">
-            <div class="run-label" style="font-size:.6rem;color:var(--muted)">Run 5</div>
-            <div class="run-dots">
-              <div class="run-dot dominant">A</div>
-              <div class="run-dot appear">B</div>
-              <div class="run-dot miss">—</div>
-              <div class="run-dot dominant">D</div>
-              <div class="run-dot miss">—</div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:.5rem">
-          <div style="display:flex;align-items:center;gap:.5rem;font-size:.68rem;color:var(--muted)"><div class="run-dot dominant" style="width:20px;height:20px;font-size:.52rem">A</div>Brand A — appears 5/5 runs. <strong style="color:var(--ink)">Dominant player.</strong></div>
-          <div style="display:flex;align-items:center;gap:.5rem;font-size:.68rem;color:var(--muted)"><div class="run-dot appear" style="width:20px;height:20px;font-size:.52rem">B</div>Brand B — appears 3/5 runs. Established presence.</div>
-          <div style="display:flex;align-items:center;gap:.5rem;font-size:.68rem;color:var(--muted)"><div class="run-dot miss" style="width:20px;height:20px;font-size:.52rem">—</div>Your brand — appears 0/5 runs. Not yet visible.</div>
-        </div>
+  <div class="section-header">
+    <div class="eyebrow"><span></span>Research question 01</div>
+    <div class="section-q">What signals predict whether an AI engine <em>cites or recommends a brand?</em></div>
+    <p class="section-note">The most important question in the field. The answer reshapes how visibility strategy should be built — and it differs significantly from what traditional SEO optimises for.</p>
+  </div>
+  <div class="study-grid">
+    <div class="study-card primary">
+      <div class="study-card-top">
+        <div class="study-source">Ahrefs</div>
+        <div class="study-date">August 2025 — December 2025</div>
+        <div class="study-title">AI Overview Brand Visibility Factors — 75,000 Brands</div>
+        <div class="study-finding">Branded web mentions correlate with AI Overview visibility at <strong>0.664</strong>, versus 0.218 for backlinks. The December follow-up found YouTube mentions correlate at <strong>0.737</strong> — the strongest single signal measured across both studies. The top three correlating factors are all off-site brand signals.</div>
+        <div class="study-commentary">The most comprehensive brand-level correlation study available. The 3:1 ratio between mentions and backlinks is the single finding that most clearly separates AI search strategy from traditional SEO.</div>
       </div>
-      <div class="insight" style="margin-top:1.5rem">
-        <p>After 5 runs, Brand A is clearly your real competitor. This is because AI reaches for it every single time. That is what dominant independent consensus looks like from the inside of a language model.</p>
+      <div class="study-card-bottom">
+        <div class="study-meta">75,000 brands · Primary research</div>
+        <a href="https://ahrefs.com/blog/ai-overview-brand-correlation/" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+
+    <div class="study-card vendor">
+      <div class="study-card-top">
+        <div class="study-source">Seer Interactive / Trustpilot</div>
+        <div class="study-date">March 2026</div>
+        <div class="study-title">How Review Profiles Shape Brand Presence in AI Search — 804,491 Responses</div>
+        <div class="study-finding">Brands with no active review profile appear in just <strong>1% of AI answers</strong>. Brands with actively managed profiles of 80 or more reviews appear in <strong>75.3%</strong>. Review and trust sites account for 14% of all AI citations, rising to 24% at the buying intent stage.</div>
+        <div class="study-commentary">The largest study on review signals and AI citation rates conducted to date. Note: commissioned by Trustpilot, a review platform with a commercial interest in the finding. The sample size and methodology are nonetheless robust.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">804,491 responses · 1,926 brands · Vendor research</div>
+        <a href="https://www.seerinteractive.com/insights/study-of-800k-ai-responses-how-reviews-shape-brand-presence-in-ai-search" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+
+    <div class="study-card vendor">
+      <div class="study-card-top">
+        <div class="study-source">Muck Rack</div>
+        <div class="study-date">May 2026 — 3rd edition</div>
+        <div class="study-title">What Is AI Reading? Generative Pulse</div>
+        <div class="study-finding">Earned media accounts for <strong>84% of all AI citations</strong> across ChatGPT, Claude, and Gemini. Non-paid sources account for 94%. Paid and advertorial content accounts for 0.3%. Consistent across three separate editions of the same research.</div>
+        <div class="study-commentary">The consistency across three editions is what makes this finding credible despite the vendor context. Muck Rack is a PR platform with an interest in earned media appearing valuable — but the directional finding has been replicated independently.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">25M+ citations · 17 industries · Vendor research</div>
+        <a href="https://muckrack.com/blog/generative-pulse" class="study-link" target="_blank">View study →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- THE FORMULA -->
-<div class="section-dark">
-  <div class="section-dark-inner">
-    <div class="eyebrow-light"><span></span>The formula</div>
-    <h2 class="section-h2-light">AI Appearance Rate = <em>Appearances ÷ Total evaluations × 100</em></h2>
-    <div class="two-col">
-      <div>
-        <p class="prose-light">Total evaluations = Prompts × Engines × Runs</p>
-        <p class="prose-light">The more runs per prompt, the more statistically meaningful the data. A single run gives you a snapshot. Three runs gives you a direction. Five or more runs begins to reveal the dominant players — the brands AI reaches for consistently rather than randomly.</p>
-        <p class="prose-light">The higher the number of runs, the clearer the competitive picture. Brands appearing in 1 out of 5 runs are incidental. Brands appearing in 4 or 5 out of 5 runs have built enough <strong>independent consensus</strong> that the model has resolved them as category leaders. That distinction is the most strategically valuable output the AAR produces.</p>
-        <p class="prose-light">The goal is not just to measure your score. It is to increase your appearances over time — to move from incidental to consistent to dominant across the prompts that matter most to your buyers.</p>
-      </div>
-      <div class="formula-box">
-        <div class="formula-top">
-          <div class="formula-label">Standard audit cycle</div>
-          <div class="formula-expr">Prompts × Engines × Runs = Total evaluations</div>
-          <div class="formula-note">The higher the number of runs, the more clearly dominant players emerge from random appearances.</div>
-        </div>
-        <div class="formula-rows">
-          <div class="formula-row">
-            <span class="formula-row-l">Prompts per cycle</span>
-            <span class="formula-row-v" style="color:var(--paper)">20</span>
-          </div>
-          <div class="formula-row">
-            <span class="formula-row-l">Engines tested</span>
-            <span class="formula-row-v" style="color:var(--paper)">4</span>
-          </div>
-          <div class="formula-row">
-            <span class="formula-row-l">Runs per prompt per engine</span>
-            <span class="formula-row-v" style="color:var(--gold)">3+</span>
-          </div>
-          <div class="formula-row">
-            <span class="formula-row-l">Minimum evaluations</span>
-            <span class="formula-row-v" style="color:var(--paper)">240</span>
-          </div>
-          <div class="formula-row">
-            <span class="formula-row-l">1/5 runs = incidental appearance</span>
-            <span class="formula-row-v" style="color:var(--red)">Random</span>
-          </div>
-          <div class="formula-row">
-            <span class="formula-row-l">3/5 runs = established presence</span>
-            <span class="formula-row-v" style="color:var(--amber)">Consistent</span>
-          </div>
-          <div class="formula-row">
-            <span class="formula-row-l">5/5 runs = dominant player</span>
-            <span class="formula-row-v" style="color:var(--green)">Dominant</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PER ENGINE -->
+<!-- SECTION 2 -->
 <section class="section">
-  <div class="eyebrow"><span></span>Per-engine measurement</div>
-  <h2 class="section-h2">Your AAR on ChatGPT will differ from your AAR on Perplexity. <em>That difference is the strategy.</em></h2>
-  <p class="prose">Each AI engine has a different retrieval architecture and relies on different signals to form recommendations. A brand can dominate on ChatGPT and be completely invisible on Perplexity. This is mostly because the AI engines are drawing on different data sources, with different recency biases, serving different user behaviours.</p>
-  <p class="prose">The AAR is therefore not a single number. It is a per-engine score. And the most strategically important question it surfaces is not just where you stand overall — it is which engine your specific buyer persona uses most, and whether you are visible on that engine in particular.</p>
-
-  <div class="engine-grid">
-    <div class="engine-cell chatgpt">
-      <div class="engine-name">ChatGPT</div>
-      <div class="engine-arch">Bing index · licensed media · query fan-out</div>
-      <div class="engine-body">Relies heavily on review platforms, encyclopedic sources, and licensed media partnerships. Explicitly flags missing review profiles in responses. High domain authority and referring domain count are strong predictors.</div>
-      <div class="engine-persona"><strong>Typical buyer persona</strong>General consumers, SMB decision makers, broad category research</div>
-    </div>
-    <div class="engine-cell perplexity">
-      <div class="engine-name">Perplexity</div>
-      <div class="engine-arch">Real-time retrieval · recency-biased · multi-source</div>
-      <div class="engine-body">The strongest recency bias of any major engine. Approximately 50% of citations come from current-year content. Favours original research, high information density, and structured data. Fast-moving categories shift here first.</div>
-      <div class="engine-persona"><strong>Typical buyer persona</strong>Researchers, technical buyers, professionals doing active due diligence</div>
-    </div>
-    <div class="engine-cell gemini">
-      <div class="engine-name">Gemini</div>
-      <div class="engine-arch">Google index · Workspace integration · Android</div>
-      <div class="engine-body">Deep integration with Google's organic index, Google Business Profile, and structured schema data. Traditional organic authority transfers more directly here than on other engines. Local business visibility is heavily GBP-dependent.</div>
-      <div class="engine-persona"><strong>Typical buyer persona</strong>Google Workspace users, Android users, local and regional buyers</div>
-    </div>
-    <div class="engine-cell claude">
-      <div class="engine-name">Claude</div>
-      <div class="engine-arch">Anthropic training · structured content · documentation</div>
-      <div class="engine-body">Favours technical documentation, structured and well-formatted content, and sources with clear authorial voice. Performs well for brands with deep content libraries and strong topical authority in specific domains.</div>
-      <div class="engine-persona"><strong>Typical buyer persona</strong>Developers, technical practitioners, enterprise research workflows</div>
-    </div>
+  <div class="section-header">
+    <div class="eyebrow"><span></span>Research question 02</div>
+    <div class="section-q">What <em>content changes</em> move AI citation rates?</div>
+    <p class="section-note">The only controlled experiment available in this space. Everything else is correlational. The Princeton findings are the closest thing to causal evidence for on-page optimisation.</p>
   </div>
-
-  <div class="insight">
-    <p>The strategic implication: identify which engine your specific buyer persona uses most heavily. A B2B SaaS targeting developers should prioritise their AAR on Claude and Perplexity. A dental practice should prioritise Gemini and ChatGPT. <strong>Dominating the right engine for your buyer is more valuable than averaging across all four.</strong></p>
-  </div>
-</section>
-
-<!-- THE STRATEGIC GOAL -->
-<div class="section-cream">
-  <div class="section-cream-inner">
-    <div class="eyebrow"><span></span>The strategic goal</div>
-    <h2 class="section-h2">The AAR is not just a measurement. It is a competitive intelligence system.</h2>
-    <p class="prose">Measuring frequency across multiple runs and multiple engines produces something more valuable than a score. It produces a competitive map. The brands appearing consistently across runs are the ones AI has resolved as category leaders. They have built enough independent consensus — reviews, earned media, editorial coverage, peer mentions — that the model reaches for them reliably rather than randomly.</p>
-    <p class="prose">Your goal is to move through three stages over time.</p>
-
-    <div class="strategy-flow">
-      <div class="strategy-card">
-        <div class="strategy-n">01</div>
-        <div class="strategy-title">Measure and identify</div>
-        <div class="strategy-body">Establish your baseline AAR across all four engines. Identify who the dominant players are in your category — the brands appearing in 4 or 5 out of 5 runs. These are your real competitors, not the ones ranking well on Google. Identify which engine your buyers use most.</div>
+  <div class="study-grid">
+    <div class="study-card primary">
+      <div class="study-card-top">
+        <div class="study-source">Princeton University · IIT Delhi · Georgia Tech · Allen Institute for AI</div>
+        <div class="study-date">Published KDD 2024 · Preprint November 2023</div>
+        <div class="study-title">GEO: Generative Engine Optimization</div>
+        <div class="study-finding">Adding statistics improves AI citation probability by <strong>+41%</strong>. Expert quotations add <strong>+28%</strong>. Citing sources inline adds <strong>+30–40%</strong>. Keyword stuffing performs <strong>−10%</strong> below baseline — actively harmful. Combining statistics with fluency optimisation produces the strongest combined effect.</div>
+        <div class="study-commentary">The foundational controlled experiment in the field. The only study that isolates specific content changes and measures their causal effect on AI citation rates. Every other content recommendation in this space is either derivative of this study or correlational.</div>
       </div>
-      <div class="strategy-card">
-        <div class="strategy-n">02</div>
-        <div class="strategy-title">Build and close the gap</div>
-        <div class="strategy-body">Systematically build the independent consensus signals that drive AI citation rates — review profiles on the platforms AI cites, earned media in the publications AI trusts, content that is specific, statistic-rich, and fresh. Track your AAR monthly. Every improvement in score represents a real shift in how AI models your brand's trustworthiness.</div>
-      </div>
-      <div class="strategy-card">
-        <div class="strategy-n">03</div>
-        <div class="strategy-title">Dominate your priority engine</div>
-        <div class="strategy-body">Concentrate signal-building efforts on the engine your buyers use most. A rising AAR on your priority engine is the metric that matters. The goal is to move from incidental to consistent to dominant — to become the brand that AI reaches for reliably when a buyer in your category asks for a recommendation.</div>
+      <div class="study-card-bottom">
+        <div class="study-meta">~10,000 queries · GEO-bench · Peer-reviewed</div>
+        <a href="https://arxiv.org/abs/2311.09735" class="study-link" target="_blank">View study →</a>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- RESEARCH -->
-<section class="section">
-  <div class="eyebrow"><span></span>Research foundation</div>
-  <h2 class="section-h2">The signals that independent research shows <em>consistently move AI citation rates.</em></h2>
-  <div class="finding-strip">
-    <div class="finding-cell">
-      <div class="finding-src">Ahrefs · 75,000 brands · Aug 2025 / Dec 2025</div>
-      <div class="finding-num">0.664</div>
-      <div class="finding-text">Correlation between branded web mentions and AI visibility versus 0.218 for backlinks. A December 2025 follow-up found YouTube mentions correlate even more strongly at 0.737 across ChatGPT, AI Mode, and AI Overviews.</div>
+    <div class="study-card vendor">
+      <div class="study-card-top">
+        <div class="study-source">SE Ranking</div>
+        <div class="study-date">November 2025 — updated March 2026</div>
+        <div class="study-title">What Drives ChatGPT Citations — 129,000 Domain Study</div>
+        <div class="study-finding">Pages with FAQ schema markup averaged <strong>3.6 citations versus 4.2 for pages without</strong>. Optimal section length is 120–180 words, producing approximately 70% more citations than longer unbroken sections. High domain trust scores correlate with approximately 4x more citations.</div>
+        <div class="study-commentary">One of the largest domain-level citation studies conducted. The FAQ schema finding is counterintuitive and significant — structured data does not reliably increase AI citation rates for this format.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">129,000 domains · 100,000 prompts · Vendor research</div>
+        <a href="https://seranking.com/blog/how-to-optimize-for-chatgpt/" class="study-link" target="_blank">View study →</a>
+      </div>
     </div>
-    <div class="finding-cell">
-      <div class="finding-src">Seer Interactive / Trustpilot · 804,491 responses · 2026</div>
-      <div class="finding-num">1% → 75%</div>
-      <div class="finding-text">Citation rate lift from no active review profile to an actively managed one across ChatGPT, Gemini, Perplexity, and Google AI Mode.</div>
-    </div>
-    <div class="finding-cell">
-      <div class="finding-src">Muck Rack · 25M citations · May 2026</div>
-      <div class="finding-num">84%</div>
-      <div class="finding-text">Of all AI citations come from earned media. Consistent across three separate research editions. AI trusts independent sources over brand-owned content.</div>
-    </div>
-    <div class="finding-cell">
-      <div class="finding-src">Princeton University KDD · peer-reviewed · 2024</div>
-      <div class="finding-num">+41%</div>
-      <div class="finding-text">Improvement in AI citation probability from adding statistics and verifiable data to content. Expert quotations add a further 28% on top.</div>
+
+    <div class="study-card primary">
+      <div class="study-card-top">
+        <div class="study-source">Cyrus Shepard · Zyppy Signal</div>
+        <div class="study-date">May 2026</div>
+        <div class="study-title">54-Study Meta-Analysis of AI Citation Factors</div>
+        <div class="study-finding">URL accessibility scores <strong>9.5/10</strong> as the top AI citation factor. Traditional search rank scores <strong>9.4/10</strong>. LLMs.txt scores <strong>2.0/10</strong> — the lowest of 23 factors tested. The meta-analysis covers ChatGPT, Gemini, and Perplexity across 54 experiments, patents, and case studies.</div>
+        <div class="study-commentary">The most useful synthesis of the available evidence weighted by repeatability and methodological rigour. The scoring system makes it easier to prioritise actions than reading individual studies in isolation.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">54 studies synthesised · Meta-analysis</div>
+        <a href="https://signal.zyppy.com" class="study-link" target="_blank">View study →</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- LIMITATIONS -->
-<div class="section-dark">
-  <div class="section-dark-inner">
-    <div class="eyebrow-light"><span></span>Limitations</div>
-    <h2 class="section-h2-light">What the AAR does not measure and why that matters.</h2>
-    <div class="limit-grid">
-      <div class="limit-card">
-        <div class="limit-title">It is not a ranking</div>
-        <div class="limit-body">The AAR measures frequency of appearance, not position within a response. A brand appearing third in every response scores identically to one appearing first. Position within AI responses is too unstable to measure reliably.</div>
+<!-- SECTION 3 -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow"><span></span>Research question 03</div>
+    <div class="section-q">How <em>volatile</em> are AI recommendations and what does that mean for measurement?</div>
+    <p class="section-note">Understanding volatility is essential before measuring anything. Position tracking is largely meaningless in a probabilistic system. These studies establish the baseline for why frequency-based measurement is necessary.</p>
+  </div>
+  <div class="study-grid">
+    <div class="study-card primary">
+      <div class="study-card-top">
+        <div class="study-source">Rand Fishkin · SparkToro · Patrick O'Donnell · Gumshoe.ai</div>
+        <div class="study-date">January 2026</div>
+        <div class="study-title">AI Recommendation Consistency Study</div>
+        <div class="study-finding">Only <strong>~30% of brands</strong> appearing in an AI response appear again on the next run of the same prompt. Run the same prompt five times consecutively and just <strong>20% of brands</strong> persist across all five. However the consideration set — the pool of brands that could appear — is stable, with top brands appearing in 55–77% of responses.</div>
+        <div class="study-commentary">The clearest evidence that tracking position in any single AI response is meaningless. The consideration set stability finding is equally important — it explains why frequency-based measurement across many runs produces stable, actionable data.</div>
       </div>
-      <div class="limit-card">
-        <div class="limit-title">It is correlational not causal</div>
-        <div class="limit-body">Most of the underlying research is observational. The Princeton KDD study is the primary controlled experiment. Strong correlation with verified signals is a reasonable basis for action but does not guarantee specific outcomes in every context.</div>
+      <div class="study-card-bottom">
+        <div class="study-meta">2,961 prompt tests · 600 volunteers · 4 engines</div>
+        <a href="https://sparktoro.com" class="study-link" target="_blank">View study →</a>
       </div>
-      <div class="limit-card">
-        <div class="limit-title">It changes with model updates</div>
-        <div class="limit-body">Profound's analysis of 240 million ChatGPT citations found 40 to 60% of cited domains change month to month for identical queries. The AAR should be tracked monthly and treated as a trend metric, not a fixed score.</div>
+    </div>
+
+    <div class="study-card vendor">
+      <div class="study-card-top">
+        <div class="study-source">Kevin Indig · Growth Memo</div>
+        <div class="study-date">2026</div>
+        <div class="study-title">The Ghost Citation Problem — 3,981 Domains</div>
+        <div class="study-finding"><strong>74.9% of domains</strong> are cited by AI engines but only <strong>38.3%</strong> are mentioned by name. 61.7% of citations are ghost citations — AI links to a domain without naming the brand. Only 13.2% of cited brands receive both a link and a name mention. Gemini names brands in 83.7% of citations but links in only 21.4%.</div>
+        <div class="study-commentary">The ghost citation finding has significant implications for how brand visibility is measured. Citation tracking that only counts links misses the majority of the competitive picture.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">3,981 domains · 115 prompts · 4 engines</div>
+        <a href="https://www.growth-memo.com" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+
+    <div class="study-card vendor">
+      <div class="study-card-top">
+        <div class="study-source">Profound</div>
+        <div class="study-date">2026</div>
+        <div class="study-title">AI Citation Volatility Analysis</div>
+        <div class="study-finding"><strong>40–60% of cited domains change month to month</strong> for identical queries across ChatGPT. Turn 1 of a conversation is <strong>2.5x more likely</strong> to trigger citations than Turn 10. Analysis drawn from approximately 240 million ChatGPT citations and 730,000 conversations.</div>
+        <div class="study-commentary">The month-to-month volatility finding establishes why the AI Appearance Rate must be tracked monthly rather than treated as a fixed score. Model updates can significantly shift citation patterns even without changes to the brand's own signals.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">240M citations · 730,000 conversations · Vendor research</div>
+        <a href="https://profound.co" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow"><span></span>Research question 04</div>
+    <div class="section-q">How does <em>content freshness</em> affect AI citation rates?</div>
+    <p class="section-note">Freshness preference varies significantly between engines. Perplexity is the most recency-biased. Google AI Overviews are the exception — they favour slightly older, more authoritative content.</p>
+  </div>
+  <div class="study-grid">
+    <div class="study-card primary">
+      <div class="study-card-top">
+        <div class="study-source">Ahrefs</div>
+        <div class="study-date">2026</div>
+        <div class="study-title">Do AI Assistants Prefer to Cite Fresh Content? — 16.975M URLs</div>
+        <div class="study-finding">AI-cited content is <strong>25.7% fresher</strong> than content appearing in the organic Google top-10 for the same queries. The average AI-cited URL is 1,064 days old versus 1,432 days for organic top-10 results. ChatGPT shows the strongest freshness preference. Google AI Overviews is the exception — it cites slightly older content.</div>
+        <div class="study-commentary">The largest freshness study available. The per-engine variation is the most actionable finding — strategy should differ based on which engine a brand is prioritising.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">16.975M cited URLs · 7 platforms · Primary research</div>
+        <a href="https://ahrefs.com/blog/do-ai-assistants-prefer-to-cite-fresh-content/" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+
+    <div class="study-card vendor">
+      <div class="study-card-top">
+        <div class="study-source">GrowByData · ConvertMate</div>
+        <div class="study-date">2026</div>
+        <div class="study-title">Content Freshness and ChatGPT Citation Rate</div>
+        <div class="study-finding">Content updated within 30 days earns approximately <strong>3.2x more ChatGPT citations</strong> than content not recently updated. <strong>76.4% of ChatGPT's most-cited pages</strong> were updated within 30 days. Content 90 or more days without update sees 40–60% citation rate drops.</div>
+        <div class="study-commentary">Corroborated by multiple independent vendor analyses. The 30-day threshold is the most actionable finding for content refresh strategy, though the causal mechanism is update recency rather than cosmetic date changes.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">Multiple datasets · Vendor research</div>
+        <a href="https://growbydata.com" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+
+    <div class="study-card vendor">
+      <div class="study-card-top">
+        <div class="study-source">Ahrefs</div>
+        <div class="study-date">2026</div>
+        <div class="study-title">Schema Markup and AI Citation Rates — Controlled Study</div>
+        <div class="study-finding">Tracking <strong>1,885 pages</strong> that added JSON-LD schema against 4,000 matched controls over seven months found <strong>no meaningful citation uplift</strong> on any AI platform. Google AI Overviews actually showed a <strong>−4.6% decline</strong> — the only statistically significant result.</div>
+        <div class="study-commentary">The most important negative finding in the field. Schema markup is useful infrastructure for entity clarity and rich results but is not a reliable AI citation lever. This study directly contradicts a significant amount of GEO advice circulating in the industry.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">1,885 pages · 4,000 controls · Primary research</div>
+        <a href="https://ahrefs.com/blog/schema-ai-citations/" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow"><span></span>Research question 05</div>
+    <div class="section-q">What is the <em>scale and commercial impact</em> of AI search visibility?</div>
+    <p class="section-note">Understanding the size of the opportunity and the downstream commercial effects of AI visibility is essential context for any brand investment in this area.</p>
+  </div>
+  <div class="study-grid">
+    <div class="study-card vendor">
+      <div class="study-card-top">
+        <div class="study-source">Victorious</div>
+        <div class="study-date">Q1 2026</div>
+        <div class="study-title">Q1 2026 Quarterly Search Report — AI Mention Rate</div>
+        <div class="study-finding">Of 177 brands tested across 8 AI platforms, <strong>89.8% had zero AI mentions</strong> in Q1 2026. Only 18 brands in the dataset had any AI mention rate above zero.</div>
+        <div class="study-commentary">Small sample but the direction is consistent with other visibility studies. The 89.8% figure is the most-cited baseline for AI search invisibility and is directionally reliable despite the limited sample.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">177 brands · 8 platforms · Vendor research</div>
+        <a href="https://searchenginejournal.com/ai-seo-mentions-study-victorious-spa/575040/" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+
+    <div class="study-card vendor">
+      <div class="study-card-top">
+        <div class="study-source">Semrush</div>
+        <div class="study-date">June 2025</div>
+        <div class="study-title">Impact of AI Search on SEO Traffic</div>
+        <div class="study-finding">The average AI search visitor is <strong>4.4x as valuable</strong> as the average traditional organic visitor across 500 high-value topics. Brands cited in AI Overviews earn approximately <strong>120% more organic clicks</strong> per impression than uncited brands on the same queries.</div>
+        <div class="study-commentary">Vendor research from a company selling AI visibility tools. The 4.4x figure is frequently cited but should be treated as directional rather than precise given the commercial context.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">500+ topics · Vendor research</div>
+        <a href="https://semrush.com/blog/ai-search-seo-traffic-study/" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+
+    <div class="study-card primary">
+      <div class="study-card-top">
+        <div class="study-source">SparkToro · Similarweb</div>
+        <div class="study-date">June 2026</div>
+        <div class="study-title">Zero-Click Search and the Open Web — 2026</div>
+        <div class="study-finding">In the first four months of 2026, <strong>68.01% of Google searches ended without a click</strong> to any website — up from 60.45% in 2024. Only 276 of every 1,000 Google searches reach the open web. AI search is accelerating the structural shift away from click-based discovery.</div>
+        <div class="study-commentary">The clearest evidence of the structural shift driving AI search relevance. The zero-click trend is the macro context within which all AI visibility strategy operates.</div>
+      </div>
+      <div class="study-card-bottom">
+        <div class="study-meta">US Google searches · Jan–Apr 2026 · Primary research</div>
+        <a href="https://sparktoro.com" class="study-link" target="_blank">View study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEAK EVIDENCE -->
+<div class="weak-section">
+  <div class="weak-inner">
+    <div class="eyebrow"><span></span>Claims to treat with caution</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.02em;color:var(--ink);line-height:1.05;max-width:600px">Widely circulated statistics in this space that lack reliable primary sourcing.</h2>
+    <div class="weak-grid">
+      <div class="weak-card">
+        <div class="weak-claim"><strong>"77% of brands are invisible to AI search"</strong></div>
+        <div class="weak-problem">Originates from Loamly and PRWeb, February 2026. No methodology published, no sample size disclosed, no primary data accessible. Circulates widely in trade press despite thin sourcing.</div>
+      </div>
+      <div class="weak-card">
+        <div class="weak-claim"><strong>"llms.txt improves AI search visibility"</strong></div>
+        <div class="weak-problem">Google confirmed in June 2026 that Google Search does not use llms.txt. Ahrefs telemetry found 97% of llms.txt files received zero AI requests in May 2026. The file has legitimate uses for coding agents but is not an SEO or GEO lever.</div>
+      </div>
+      <div class="weak-card">
+        <div class="weak-claim"><strong>"FAQ schema boosts AI citation rates"</strong></div>
+        <div class="weak-problem">SE Ranking's 129,000-domain study found pages with FAQ schema averaged 3.6 citations versus 4.2 without. Google deprecated FAQ rich results in May 2026. Schema remains useful infrastructure but is not a reliable citation lever.</div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- CTA -->
-<section class="cta-section">
+<div class="cta-section">
   <div class="cta-inner">
     <div>
-      <div class="eyebrow"><span></span>See it in action</div>
-      <h2 class="section-h2">Calculate your AI Appearance Rate across all four engines.</h2>
-      <p class="prose">The free scanner generates 20 buyer intent prompts for your category, runs them across ChatGPT, Perplexity, Gemini, and Claude, audits your technical signals across seven checks, and returns your AAR alongside a view of which competitors are appearing in the prompts where you are not.</p>
+      <div class="eyebrow-light"><span></span>Apply the research</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.75rem,4vw,3rem);letter-spacing:-.03em;color:var(--paper);line-height:1;margin-bottom:1rem">See how this research applies to your brand's AI visibility.</h2>
+      <p style="font-size:.82rem;color:rgba(245,242,235,.4);line-height:1.9">The free scanner applies the signal framework from this research to your specific brand and category — returning your AI Appearance Rate, technical signal audit, and a view of which competitors are appearing instead.</p>
     </div>
     <div>
-      <a href="/index.html" class="btn-ink">Run Your Free AI Visibility Scan →</a>
-      <a href="/about.html" class="btn-outline">About the Framework</a>
+      <a href="/index.html" class="btn-paper">Run Your Free AI Visibility Scan →</a>
+      <a href="/aar.html" class="btn-ghost-light">Read the AAR Methodology</a>
     </div>
   </div>
-</section>
+</div>
 
 <footer>
   <div class="footer-top">
