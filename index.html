@@ -391,10 +391,6 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="discovery-stat">Appeared in <strong id="disc-appeared">—</strong> out of <strong>20</strong> discovery prompts run across 5 AI engines</div>
     <div id="disc-visible"></div>
     <div id="disc-blur-wrap" class="disc-blur-wrap" style="display:none">
-      <div style="position:relative;overflow:hidden">
-        <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="disc-blur-rows"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
-      </div>
       <div style="padding:1.25rem 0 0">
         <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in the full analysis</div>
         <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Every prompt, every engine, every run — plus the full competitor consensus gap analysis.</div>
@@ -409,12 +405,9 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="competitors-sub">Businesses appearing in the same discovery prompts where yours did not</div>
     <div id="comp-visible"></div>
     <div class="comp-blur-wrap" id="comp-blur-wrap" style="display:none">
-      <div style="position:relative;overflow:hidden">
-        <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="comp-blur-rows"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
-      </div>
-      <div style="padding:.875rem 0 0">
-        <div class="comp-lock-text">+ more competitors in the full analysis</div>
+      <div style="padding:1.25rem 1.5rem;border:1px solid var(--border);background:var(--cream);margin-top:.75rem">
+        <div style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.4rem">+ more competitors in the full analysis</div>
+        <div style="font-size:.72rem;color:var(--muted);line-height:1.55">The full analysis maps every competitor appearing in your category and traces the sources driving their visibility.</div>
       </div>
     </div>
   </div>
@@ -460,10 +453,10 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 <!-- ABOUT -->
 <div class="about-strip">
   <div class="about-left">
-    <div class="section-eyebrow"><span></span>What we do</div>
+    <div class="section-eyebrow"><span></span>What AppearAI measures</div>
     <h2 class="section-title">What determines whether an AI engine recommends one brand over another?</h2>
-    <p>AppearAI helps brands, enterprises, and local businesses appear consistently in AI-generated recommendations across ChatGPT, Perplexity, and every major AI search engine.</p>
-    <p>We invented the AI Appearance Rate™ — the metric that measures how often AI actually recommends you when someone searches for what you offer.</p>
+    <p>That is the question AppearAI was built to answer. The platform runs structured prompt sets across multiple AI engines and multiple runs to measure citation frequency, surface dominant competitors, and identify the signals driving visibility differences between brands in the same category.</p>
+    <p>The methodology draws on primary research from Princeton, Ahrefs, Seer Interactive, and Muck Rack — tested against live citation behaviour across ChatGPT, Perplexity, Gemini, and Claude.</p>
     <a href="/aar.html" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Read the AAR Methodology →</a>
   </div>
   <div class="about-right">
@@ -821,9 +814,9 @@ function revealResults(){
       <div class="disc-status ${p.appeared?"pass":"fail"}">${p.appeared?"✓":"✗"}</div>
       <div class="disc-main">
         <div class="disc-query">"${p.query}"</div>
-        <div class="disc-sub" style="filter:blur(4px);user-select:none;pointer-events:none">Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
+        <div class="disc-sub" >Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
       </div>
-      <div class="disc-runs" style="filter:blur(4px);user-select:none;pointer-events:none;color:${runColor}">${runs}/3</div>
+      <div class="disc-runs" style="color:${runColor}">${runs}/3</div>
     </div>`;
   }).join("");
 
