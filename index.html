@@ -391,9 +391,9 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="discovery-stat">Appeared in <strong id="disc-appeared">—</strong> out of <strong>20</strong> discovery prompts run across 5 AI engines</div>
     <div id="disc-visible"></div>
     <div id="disc-blur-wrap" class="disc-blur-wrap" style="display:none">
-      <div style="padding:1.25rem 0 0">
-        <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in the full analysis</div>
-        <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Every prompt, every engine, every run — plus the full competitor consensus gap analysis.</div>
+      <div style="padding:1.25rem 1.5rem;border:1px solid var(--border);background:var(--cream);margin-top:.75rem">
+        <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.4rem">+ 15 more discovery prompts in the full analysis</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.55">Every prompt, every engine, every run — plus the full competitor consensus gap analysis.</div>
         <a href="/contact.html" class="disc-lock-btn">Request Full Analysis →</a>
       </div>
     </div>
@@ -406,8 +406,8 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div id="comp-visible"></div>
     <div class="comp-blur-wrap" id="comp-blur-wrap" style="display:none">
       <div style="padding:1.25rem 1.5rem;border:1px solid var(--border);background:var(--cream);margin-top:.75rem">
-        <div style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.4rem">+ more competitors in the full analysis</div>
-        <div style="font-size:.72rem;color:var(--muted);line-height:1.55">The full analysis maps every competitor appearing in your category and traces the sources driving their visibility.</div>
+        <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.4rem">+ more competitors in the full analysis</div>
+        <div style="font-size:.72rem;color:var(--muted);line-height:1.55">The full analysis maps every competitor and traces the sources driving their visibility.</div>
       </div>
     </div>
   </div>
@@ -432,7 +432,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
             <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Priority action plan ranked by expected impact on your score</div>
           </div>
         </div>
-        <a href="/contact.html" style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Request a Full Analysis →</a>
+        <a href="https://calendly.com/hello-appearai/30min" style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Request a Full Analysis →</a>
         <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.75rem;letter-spacing:.05em">hello@appearai.io</div>
       </div>
     </div>
@@ -488,8 +488,9 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
         <div class="footer-col-title">Resources</div>
         <div class="footer-col">
           <a href="/research.html">Research</a>
-          <a href="/aar.html">The AAR Framework</a>
-          <a href="/index.html">Free AI Scanner</a>
+          <a href="/resources.html">Resources</a>
+          <a href="/index.html">Free Scanner</a>
+          <a href="https://calendly.com/hello-appearai/30min">Book a Call</a>
         </div>
       </div>
       <div>
@@ -814,7 +815,7 @@ function revealResults(){
       <div class="disc-status ${p.appeared?"pass":"fail"}">${p.appeared?"✓":"✗"}</div>
       <div class="disc-main">
         <div class="disc-query">"${p.query}"</div>
-        <div class="disc-sub" >Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
+        <div class="disc-sub">Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
       </div>
       <div class="disc-runs" style="color:${runColor}">${runs}/3</div>
     </div>`;
