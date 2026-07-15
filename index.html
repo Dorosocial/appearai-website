@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AppearAI — Measuring How AI Engines Decide Which Brands to Recommend</title>
-<meta name="description" content="AppearAI is an AI search intelligence platform. We built the AI Appearance Rate — the framework that measures and improves how often AI recommends your business across ChatGPT, Perplexity, and Gemini."/>
+<meta name="description" content="AppearAI tracks how often AI engines recommend a brand, surfaces which competitors dominate and why, and maps the signals that drive citation rates across ChatGPT, Perplexity, Gemini, and Claude."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -204,8 +204,8 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 .footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
 
-/* DISC/COMP — blur removed, all results shown */
-.disc-all-wrap,.comp-all-wrap{overflow:hidden}
+/* DISC/COMP BLUR */
+.disc-blur-wrap,.comp-blur-wrap{overflow:hidden}
 .comp-lock-text{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink);padding-bottom:2px;display:inline-block}
 .disc-lock-btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.5rem;text-decoration:none;display:inline-block;transition:opacity .15s}
 .disc-lock-btn:hover{opacity:.8}
@@ -246,7 +246,6 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="nav-links">
       <a href="/research.html">Research</a>
       <a href="/blog.html">Blog</a>
-      <a href="/case-studies.html">Case Studies</a>
       <a href="/about.html">About</a>
     </div>
     <a href="/contact.html" class="nav-cta">Get In Touch</a>
@@ -291,7 +290,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
           <label class="form-label">Target Market</label>
           <input class="form-input" id="f-market" placeholder="e.g. United States, Global, United Kingdom"/>
         </div>
-        <button class="scan-btn" id="scan-btn" onclick="startScan()">Check My AI Appearance Rate →</button>
+        <button class="scan-btn" id="scan-btn" onclick="startScan()">Check My AI Appearance Rate™ →</button>
         <div class="form-note">Free · No signup required · Takes 30–60 seconds</div>
         <div id="form-error" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
       </div>
@@ -316,7 +315,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
             <input class="form-input" id="f-cat-local" placeholder="e.g. Dentist, Plumber, Lawyer"/>
           </div>
         </div>
-        <button class="scan-btn" onclick="startScanLocal()">Check My AI Appearance Rate →</button>
+        <button class="scan-btn" onclick="startScanLocal()">Check My AI Appearance Rate™ →</button>
         <div class="form-note">Free · No signup required · Takes 30–60 seconds</div>
         <div id="form-error-local" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
       </div>
@@ -333,7 +332,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="email-gate" id="email-gate">
       <div class="gate-icon">◈</div>
       <div class="gate-title">Your report is ready</div>
-      <p class="gate-sub">Enter your email to reveal your AI Appearance Rate and GEO health report for <strong id="gate-biz-name"></strong>.</p>
+      <p class="gate-sub">Enter your email to reveal your AI Appearance Rate™ and GEO health report for <strong id="gate-biz-name"></strong>.</p>
       <div class="gate-row">
         <input class="form-input" type="email" id="gate-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')revealResults()"/>
         <button class="gate-btn" onclick="revealResults()">See My Report →</button>
@@ -397,9 +396,9 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
         <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
       </div>
       <div style="padding:1.25rem 0 0">
-        <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in your Full AI Visibility Audit</div>
-        <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Every prompt, every engine, every run — and exactly what your competitors are doing that you aren't.</div>
-        <a href="https://calendly.com/hello-appearai/30min" class="disc-lock-btn">Book a Discovery Call →</a>
+        <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in the full analysis</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Every prompt, every engine, every run — plus the full competitor consensus gap analysis.</div>
+        <a href="/contact.html" class="disc-lock-btn">Request Full Analysis →</a>
       </div>
     </div>
   </div>
@@ -415,7 +414,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
         <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
       </div>
       <div style="padding:.875rem 0 0">
-        <div class="comp-lock-text">+ more competitors revealed in your Full AI Visibility Audit</div>
+        <div class="comp-lock-text">+ more competitors in the full analysis</div>
       </div>
     </div>
   </div>
@@ -453,18 +452,18 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 
 <!-- STATS -->
 <div class="stats-row">
-  <div class="stat"><div class="stat-num">45%</div><div class="stat-label">of consumers now use AI to find local services — up from 6% one year ago</div></div>
-  <div class="stat"><div class="stat-num">83%</div><div class="stat-label">of local businesses don't appear in AI-generated recommendations</div></div>
-  <div class="stat"><div class="stat-num">1.2%</div><div class="stat-label">of all local business locations are currently recommended by ChatGPT</div></div>
+  <div class="stat"><div class="stat-num">89.8%</div><div class="stat-label">of brands had zero AI mentions across eight platforms in Q1 2026. Victorious, Q1 2026 Quarterly Search Report.</div></div>
+  <div class="stat"><div class="stat-num">58%</div><div class="stat-label">of consumers now turn to AI tools for brand recommendations. Trustpilot consumer research, April 2026.</div></div>
+  <div class="stat"><div class="stat-num">42%</div><div class="stat-label">better conversion rate from AI-referred buyers versus traditional organic search visitors. Adobe Analytics, March 2026.</div></div>
 </div>
 
 <!-- ABOUT -->
 <div class="about-strip">
   <div class="about-left">
-    <div class="section-eyebrow"><span></span>What AppearAI does</div>
+    <div class="section-eyebrow"><span></span>What we do</div>
     <h2 class="section-title">What determines whether an AI engine recommends one brand over another?</h2>
-    <p>That is the question AppearAI was built to answer. The platform runs structured prompt sets across multiple AI engines and multiple runs to measure citation frequency, surface dominant competitors, and identify the signals driving visibility differences between brands in the same category.</p>
-    <p>The methodology draws on primary research from Princeton, Ahrefs, Seer Interactive, and Muck Rack — tested against live citation behaviour across ChatGPT, Perplexity, Gemini, and Claude.</p>
+    <p>AppearAI helps brands, enterprises, and local businesses appear consistently in AI-generated recommendations across ChatGPT, Perplexity, and every major AI search engine.</p>
+    <p>We invented the AI Appearance Rate™ — the metric that measures how often AI actually recommends you when someone searches for what you offer.</p>
     <a href="/aar.html" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Read the AAR Methodology →</a>
   </div>
   <div class="about-right">
@@ -479,13 +478,14 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
   <div class="footer-top">
     <div>
       <div class="footer-logo">AppearAI</div>
-      <div class="footer-addr"><a href="mailto:hello@appearai.io" style="color:var(--muted);text-decoration:none">hello@appearai.io</a></div>
+      <div class="footer-addr">
+        <a href="mailto:hello@appearai.io" style="color:var(--muted);text-decoration:none">hello@appearai.io</a>
+      </div>
     </div>
     <div class="footer-cols">
       <div>
         <div class="footer-col-title">Company</div>
         <div class="footer-col">
-          <a href="/about.html">About</a>
           <a href="/about.html">About</a>
           <a href="/blog.html">Blog</a>
           <a href="/contact.html">Contact</a>
@@ -495,6 +495,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
         <div class="footer-col-title">Resources</div>
         <div class="footer-col">
           <a href="/research.html">Research</a>
+          <a href="/aar.html">The AAR Framework</a>
           <a href="/index.html">Free AI Scanner</a>
         </div>
       </div>
@@ -820,15 +821,15 @@ function revealResults(){
       <div class="disc-status ${p.appeared?"pass":"fail"}">${p.appeared?"✓":"✗"}</div>
       <div class="disc-main">
         <div class="disc-query">"${p.query}"</div>
-        <div class="disc-sub">Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
+        <div class="disc-sub" style="filter:blur(4px);user-select:none;pointer-events:none">Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
       </div>
-      <div class="disc-runs" style="color:${runColor}">${runs}/3</div>
+      <div class="disc-runs" style="filter:blur(4px);user-select:none;pointer-events:none;color:${runColor}">${runs}/3</div>
     </div>`;
   }).join("");
 
   if(hiddenPrompts.length){
-    // gate shown instead — removed: el("disc-blur-rows").innerHTML=`<div class="disc-prompt-row"><div class="disc-status fail">✗</div><div class="disc-main"><div class="disc-query">"${hiddenPrompts[0]?.query||'Who would you recommend for this service?'}"</div><div class="disc-sub">Appeared in 0 of 3 runs</div></div><div class="disc-runs" style="color:#ff6b5b">0/3</div></div>`;
-    el("disc-all-wrap").style.display="block";
+    el("disc-blur-rows").innerHTML=`<div class="disc-prompt-row"><div class="disc-status fail">✗</div><div class="disc-main"><div class="disc-query">"${hiddenPrompts[0]?.query||'Who would you recommend for this service?'}"</div><div class="disc-sub">Appeared in 0 of 3 runs</div></div><div class="disc-runs" style="color:#ff6b5b">0/3</div></div>`;
+    el("disc-blur-wrap").style.display="block";
   }
 
   const competitors=r.competitors||[];
@@ -839,8 +840,8 @@ function revealResults(){
   }).join("");
 
   if(competitors.length>2){
-    // gate shown instead — removed: el("comp-blur-rows").innerHTML=`<div class="comp-row"><div class="comp-row-name">████████████</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:65%;background:#4ade80"></div></div></div>`;
-    el("comp-all-wrap").style.display="block";
+    el("comp-blur-rows").innerHTML=`<div class="comp-row"><div class="comp-row-name">████████████</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:65%;background:#4ade80"></div></div></div>`;
+    el("comp-blur-wrap").style.display="block";
   }
 
   const insight=r.insight||"";
