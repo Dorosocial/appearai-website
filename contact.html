@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="shortcut icon" href="/favicon.svg"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Contact — AppearAI</title>
 <meta name="description" content="Get in touch with AppearAI. hello@appearai.io"/>
@@ -106,23 +108,25 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relati
   </div>
 
   <div class="form-wrap">
+    <form action="https://formspree.io/f/mkodoyng" method="POST">
     <div class="form-group">
       <label class="form-lbl">Your name</label>
-      <input type="text" class="form-input" id="f-name" placeholder="Your name"/>
+      <input type="text" name="name" class="form-input" placeholder="Your name" required/>
     </div>
     <div class="form-group">
       <label class="form-lbl">Your email address</label>
-      <input type="email" class="form-input" id="f-email" placeholder="you@company.com"/>
+      <input type="email" name="email" class="form-input" placeholder="you@company.com" required/>
     </div>
     <div class="form-group">
       <label class="form-lbl">Subject</label>
-      <input type="text" class="form-input" id="f-subject" placeholder="What is this about?"/>
+      <input type="text" name="subject" class="form-input" placeholder="What is this about?"/>
     </div>
     <div class="form-group">
       <label class="form-lbl">Message</label>
-      <textarea class="form-input" id="f-message" placeholder="Tell us what you have in mind."></textarea>
+      <textarea name="message" class="form-input" placeholder="Tell us what you have in mind." required></textarea>
     </div>
-    <button class="form-submit" onclick="submitForm()">Send Message →</button>
+    <button type="submit" class="form-submit">Send Message →</button>
+    </form>
     
   </div>
 </section>
@@ -168,22 +172,6 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 2rem;position:relati
   </div>
 </footer>
 
-<script>
-function submitForm(){
-  var name = document.getElementById('f-name').value.trim();
-  var email = document.getElementById('f-email').value.trim();
-  var subject = document.getElementById('f-subject').value.trim();
-  var message = document.getElementById('f-message').value.trim();
-  if(!name || !email || !message){
-    alert('Please fill in your name, email, and message.');
-    return;
-  }
-  window.location.href = 'mailto:hello@appearai.io'
-    + '?subject=' + encodeURIComponent(subject || 'AppearAI Enquiry')
-    + '&body=Name: ' + encodeURIComponent(name)
-    + '%0AEmail: ' + encodeURIComponent(email)
-    + '%0A%0A' + encodeURIComponent(message);
-}
-</script>
+
 </body>
 </html>
