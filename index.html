@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AppearAI — Measuring How AI Engines Decide Which Brands to Recommend</title>
-<meta name="description" content="AppearAI tracks how often AI engines recommend a brand, surfaces which competitors dominate and why, and maps the signals that drive citation rates across ChatGPT, Perplexity, Gemini, and Claude."/>
+<meta name="description" content="AppearAI tracks how often AI engines recommend a brand, shows which competitors get recommended instead, and checks the technical signals AI crawlers rely on. Measured live on Claude and Gemini, with ChatGPT and Perplexity coming soon."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -70,17 +70,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(245,242,235,0.95);backdrop
 .scan-log-line{display:block;animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
 
-/* EMAIL GATE */
-.email-gate{display:none;padding:2rem 2.5rem;background:var(--cream);border:1px solid var(--border);text-align:center;position:relative}
-.email-gate::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
-.gate-icon{font-size:2.5rem;margin-bottom:1.5rem}
-.gate-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;color:var(--ink);margin-bottom:.75rem}
-.gate-sub{font-size:.82rem;color:var(--muted);line-height:1.8;max-width:380px;margin:0 auto 2rem}
-.gate-row{display:flex;gap:.75rem;max-width:420px;margin:0 auto .75rem}
-.gate-row .form-input{flex:1}
-.gate-btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:none;padding:.75rem 1.25rem;cursor:pointer;white-space:nowrap;transition:opacity .15s}
-.gate-btn:hover{opacity:.8}
-.gate-note{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
 
 /* RESULTS */
 .results-wrap{display:none;position:relative;z-index:1}
@@ -204,11 +193,6 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 .footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .footer-copy{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
 
-/* DISC/COMP BLUR */
-.disc-blur-wrap,.comp-blur-wrap{overflow:hidden}
-.comp-lock-text{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink);padding-bottom:2px;display:inline-block}
-.disc-lock-btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:.75rem 1.5rem;text-decoration:none;display:inline-block;transition:opacity .15s}
-.disc-lock-btn:hover{opacity:.8}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -217,8 +201,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
   .section-title{font-size:7vw}
   .scanner-section{padding:2.5rem 1rem}
   .form-grid{grid-template-columns:1fr}
-  .scan-state,.email-gate{padding:2rem 1rem}
-  .gate-row{flex-direction:column}
+  .scan-state{padding:2rem 1rem}
   .tech-section{padding:2.5rem 1rem}
   .tech-header{grid-template-columns:1fr;gap:1.5rem}
   .tech-score-wrap{gap:1rem}
@@ -256,7 +239,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 <section class="scanner-section" id="scanner-section">
   <div class="section-eyebrow"><span></span>Free AI Appearance Check</div>
   <h1 class="section-title">Measuring How AI Engines Decide Which Brands to Recommend.</h1>
-  <p class="section-sub">AppearAI tracks how often AI engines recommend a brand, surfaces which competitors dominate and why, and maps the signals that drive citation rates across ChatGPT, Perplexity, Gemini, and Claude.</p>
+  <p class="section-sub">AppearAI tracks how often AI engines recommend a brand, shows which competitors get recommended instead, and checks the technical signals AI crawlers rely on. Measured live on Claude and Gemini, with ChatGPT and Perplexity coming soon.</p>
 
   <div class="scanner-tabs">
     <button class="scanner-tab active" id="tab-enterprise" onclick="window.switchTab('enterprise')">For Brands and Enterprises</button>
@@ -291,7 +274,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
           <input class="form-input" id="f-market" placeholder="e.g. United States, Global, United Kingdom"/>
         </div>
         <button class="scan-btn" id="scan-btn" onclick="startScan()">Check My AI Appearance Rate™ →</button>
-        <div class="form-note">Free · No signup required · Takes 30–60 seconds</div>
+        <div class="form-note">Free · No signup required · Takes about 1–2 minutes</div>
         <div id="form-error" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
       </div>
 
@@ -316,7 +299,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
           </div>
         </div>
         <button class="scan-btn" onclick="startScanLocal()">Check My AI Appearance Rate™ →</button>
-        <div class="form-note">Free · No signup required · Takes 30–60 seconds</div>
+        <div class="form-note">Free · No signup required · Takes about 1–2 minutes</div>
         <div id="form-error-local" style="font-size:.72rem;color:var(--warn);text-align:center;margin-top:.75rem;display:none;"></div>
       </div>
 
@@ -325,20 +308,11 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="scan-state" id="scan-state">
       <div class="scan-spinner"></div>
       <div class="scan-title">Running your AI Appearance Check</div>
-      <div class="scan-sub">Checking technical signals · Analysing discovery prompt patterns · Identifying competitors</div>
+      <div class="scan-sub">Asking Claude and Gemini 20 real buyer questions · This takes about 1–2 minutes</div>
+      <div class="scan-sub" id="scan-progress" style="font-weight:600"></div>
       <div class="scan-log" id="scan-log"></div>
     </div>
 
-    <div class="email-gate" id="email-gate">
-      <div class="gate-icon">◈</div>
-      <div class="gate-title">Your report is ready</div>
-      <p class="gate-sub">Enter your email to reveal your AI Appearance Rate™ and GEO health report for <strong id="gate-biz-name"></strong>.</p>
-      <div class="gate-row">
-        <input class="form-input" type="email" id="gate-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')revealResults()"/>
-        <button class="gate-btn" onclick="revealResults()">See My Report →</button>
-      </div>
-      <div class="gate-note">No spam · Unsubscribe anytime</div>
-    </div>
   </div>
 </section>
 
@@ -376,8 +350,8 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
             <div class="tech-meta-val" id="tech-domain-meta">—</div>
           </div>
           <div class="tech-meta-row">
-            <div class="tech-meta-label">Discovery prompts run</div>
-            <div class="tech-meta-val">20</div>
+            <div class="tech-meta-label">AI answers checked</div>
+            <div class="tech-meta-val" id="tech-answers-meta">—</div>
           </div>
         </div>
       </div>
@@ -388,59 +362,36 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
   <!-- DISCOVERY -->
   <div class="discovery-section">
     <div class="discovery-title">Discovery Prompts Tested</div>
-    <div class="discovery-stat">Appeared in <strong id="disc-appeared">—</strong> out of <strong>20</strong> discovery prompts run across 5 AI engines</div>
+    <div class="discovery-stat">Appeared in <strong id="disc-appeared">—</strong> out of <strong id="disc-total">—</strong> live AI answers · AI Appearance Rate <strong id="disc-aar">—</strong></div>
+    <div class="discovery-stat" style="margin-top:-.5rem;font-size:.72rem;color:var(--muted)">Each question was asked to Claude and Gemini with live web search. ✓ means the brand was named in that engine's answer.</div>
     <div id="disc-visible"></div>
-    <div id="disc-blur-wrap" class="disc-blur-wrap" style="display:none">
-      <div style="position:relative;overflow:hidden">
-        <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="disc-blur-rows"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
-      </div>
-      <div style="padding:1.25rem 0 0">
-        <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.375rem">+ 15 more prompts in the full analysis</div>
-        <div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Every prompt, every engine, every run — plus the full competitor consensus gap analysis.</div>
-        <a href="https://calendly.com/hello-appearai/30min" class="disc-lock-btn">Request Full Analysis →</a>
-      </div>
-    </div>
   </div>
 
   <!-- COMPETITORS -->
   <div class="competitors-section">
     <div class="competitors-title">Who Appeared Instead</div>
-    <div class="competitors-sub">Brands appearing in the same prompts where this brand did not</div>
+    <div class="competitors-sub">Brands the AI engines named most often across all answers</div>
     <div id="comp-visible"></div>
-    <div class="comp-blur-wrap" id="comp-blur-wrap" style="display:none">
-      <div style="position:relative;overflow:hidden">
-        <div style="filter:blur(4px);pointer-events:none;user-select:none;opacity:.45" id="comp-blur-rows"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--paper) 60%)"></div>
-      </div>
-      <div style="padding:.875rem 0 0">
-        <div class="comp-lock-text">+ more competitors in the full analysis</div>
-      </div>
-    </div>
   </div>
 
   <!-- CTA -->
   <div class="cta-section">
     <div class="cta-inner">
       <div>
-        <div class="cta-eyebrow"><span></span>Your next step</div>
-        <div class="cta-title">Request a <em>full analysis</em></div>
-        <p class="cta-sub">The scan shows your baseline AI Appearance Rate and technical signal audit. The full analysis covers your complete citation rate across all four engines, the sources driving competitor visibility, and a ranked breakdown of what is holding your score back.</p>
+        <div class="cta-eyebrow"><span></span>How this was measured</div>
+        <div class="cta-title">Live answers, <em>not estimates</em></div>
+        <p class="cta-sub">AppearAI wrote 20 buyer-intent questions for your category, then asked each one to Claude and Gemini with live web search turned on. A brand counts as appearing when its name or website shows up in the answer or its sources.</p>
       </div>
       <div>
-        <div id="personalised-insight" style="display:none;font-size:.82rem;color:var(--ink);line-height:1.8;padding:1.25rem 1.5rem;border-left:3px solid var(--ink);background:var(--paper);margin-bottom:1.5rem;font-style:italic"></div>
         <div style="border:1px solid var(--border);padding:1.25rem;margin-bottom:1.5rem;background:var(--paper)">
-          <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem">What the full report covers</div>
+          <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem">Engines in this scan</div>
           <div style="display:flex;flex-direction:column;gap:.5rem">
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Complete AI Appearance Rate across ChatGPT, Perplexity, Gemini, and Claude</div>
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Competitor consensus gap — which sources are driving their visibility</div>
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Full technical signal audit across seven checks with ranked remediation priorities</div>
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>All 20 discovery prompts with per-engine appearance data</div>
-            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Priority action plan ranked by expected impact on your score</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Claude, with web search</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="color:var(--ok);font-weight:700;flex-shrink:0">✓</span>Gemini, with Google Search</div>
+            <div style="display:flex;align-items:flex-start;gap:.625rem;font-size:.75rem;color:var(--muted);line-height:1.5"><span style="flex-shrink:0">○</span>ChatGPT and Perplexity: coming soon</div>
           </div>
         </div>
-        <a href="/contact.html" style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:1rem;text-align:center;text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">Request a Full Analysis →</a>
-        <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.75rem;letter-spacing:.05em">hello@appearai.io</div>
+        <div style="font-size:.7rem;color:var(--muted);line-height:1.6">AI answers vary from one run to the next, so a new scan can give a slightly different result. <a href="/aar.html" style="color:var(--ink)">Read the AAR methodology →</a></div>
       </div>
     </div>
   </div>
@@ -463,13 +414,13 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
     <div class="section-eyebrow"><span></span>What AppearAI measures</div>
     <h2 class="section-title">What determines whether an AI engine recommends one brand over another?</h2>
     <p>That is the question AppearAI was built to answer. The platform runs structured prompt sets across multiple AI engines and multiple runs to measure citation frequency, surface dominant competitors, and identify the signals driving visibility differences between brands in the same category.</p>
-    <p>The methodology draws on primary research from Princeton, Ahrefs, Seer Interactive, and Muck Rack — tested against live citation behaviour across ChatGPT, Perplexity, Gemini, and Claude.</p>
+    <p>The methodology draws on primary research from Princeton, Ahrefs, Seer Interactive, and Muck Rack — and the free scanner measures live answers from Claude and Gemini today.</p>
     <a href="/aar.html" class="btn-ink" style="display:inline-block;margin-top:1.5rem">Read the AAR Methodology →</a>
   </div>
   <div class="about-right">
-    <div class="about-item"><div class="about-item-num">01</div><div class="about-item-title">AI Appearance Rate</div><div class="about-item-text">A frequency-based metric calculated across 20 buyer intent prompts, multiple runs, and four engines. The more runs, the clearer the distinction between brands AI consistently trusts and those appearing by chance.</div></div>
+    <div class="about-item"><div class="about-item-num">01</div><div class="about-item-title">AI Appearance Rate</div><div class="about-item-text">The share of live AI answers that name a brand, across 20 buyer-intent questions. The free scan asks each question to Claude and Gemini; ChatGPT and Perplexity are coming soon.</div></div>
     <div class="about-item"><div class="about-item-num">02</div><div class="about-item-title">Technical Signal Audit</div><div class="about-item-text">Seven technical checks covering AI crawler access, structured data, schema markup, llms.txt, meta signals, content structure, and HTTPS — the infrastructure layer that determines whether AI crawlers can read and cite a brand at all.</div></div>
-    <div class="about-item"><div class="about-item-num">03</div><div class="about-item-title">Competitor Consensus Intelligence</div><div class="about-item-text">For every prompt where a brand does not appear, the platform identifies which competitors do and traces the specific sources driving their citations — surfacing the independent consensus gap between brands in the same category.</div></div>
+    <div class="about-item"><div class="about-item-num">03</div><div class="about-item-title">Competitor Consensus Intelligence</div><div class="about-item-text">Every scan lists the brands the AI engines named most often, so you can see which competitors are winning the answers where a brand is missing.</div></div>
   </div>
 </div>
 
@@ -495,9 +446,8 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
         <div class="footer-col-title">Resources</div>
         <div class="footer-col">
           <a href="/research.html">Research</a>
-          <a href="/resources.html">Resources</a>
-          <a href="/index.html">Free Scanner</a>
-          <a href="https://calendly.com/hello-appearai/30min">Book a Call</a>
+          <a href="/aar.html">The AAR Framework</a>
+          <a href="/index.html">Free AI Scanner</a>
         </div>
       </div>
       <div>
@@ -506,7 +456,6 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
           <a href="/cookies.html">Cookie Policy</a>
-          <a href="/refunds.html">Refund Policy</a>
         </div>
       </div>
     </div>
@@ -517,45 +466,33 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem 2rem;position:relati
 </footer>
 
 <script>
-const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
-let currentMode = 'enterprise';
-
-function switchTab(mode) {
-  currentMode = mode;
-  const enterpriseForm = document.getElementById('enterprise-form');
-  const localForm = document.getElementById('local-form');
-  const tabEnterprise = document.getElementById('tab-enterprise');
-  const tabLocal = document.getElementById('tab-local');
-  if(mode === 'enterprise') {
-    enterpriseForm.style.display = 'block';
-    localForm.style.display = 'none';
-    tabEnterprise.classList.add('active');
-    tabLocal.classList.remove('active');
-  } else {
-    enterpriseForm.style.display = 'none';
-    localForm.style.display = 'block';
-    tabLocal.classList.add('active');
-    tabEnterprise.classList.remove('active');
-  }
-}
-
 const WORKER_URL = "https://appearai-checker.socialmoa95.workers.dev";
-const FORMSPREE = "https://formspree.io/f/xqeyorpd";
+const ASK_CONCURRENCY = 3;
+const ENGINE_LABELS = {claude: "Claude", gemini: "Gemini"};
 
+let currentMode = 'enterprise';
 let scanData = null;
 let bizName = "";
 let bizUrl = "";
 
-function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
-function show(id){document.getElementById(id).style.display="block"}
-function hide(id){document.getElementById(id).style.display="none"}
+function switchTab(mode) {
+  currentMode = mode;
+  el('enterprise-form').style.display = mode === 'enterprise' ? 'block' : 'none';
+  el('local-form').style.display = mode === 'local' ? 'block' : 'none';
+  el('tab-enterprise').classList.toggle('active', mode === 'enterprise');
+  el('tab-local').classList.toggle('active', mode === 'local');
+}
+window.switchTab = switchTab;
+
+function show(id){el(id).style.display="block"}
+function hide(id){el(id).style.display="none"}
 function el(id){return document.getElementById(id)}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 
 function switchScanState(show_id){
-  ["scan-form-wrap","scan-state","email-gate"].forEach(id=>{
-    const e=document.getElementById(id);
-    if(!e)return;
-    e.style.display=(id===show_id)?"block":"none";
+  ["scan-form-wrap","scan-state"].forEach(id=>{
+    const e=el(id);
+    if(e)e.style.display=(id===show_id)?"block":"none";
   });
 }
 
@@ -568,174 +505,96 @@ function addLog(msg){
   log.scrollTop=log.scrollHeight;
 }
 
-async function startScan(){
-  bizName=el("f-name").value.trim();
-  bizUrl=el("f-url").value.trim();
-  const industry=el("f-industry")?el("f-industry").value.trim():"";
-  const cat=el("f-cat").value.trim();
-  const market=el("f-market")?el("f-market").value.trim():"Global";
-  if(!bizName||!bizUrl||!cat){
-    el("form-error").textContent="Please fill in all required fields.";
-    show("form-error");return;
+async function api(path, body){
+  const resp = await fetch(WORKER_URL + path, {
+    method: body ? "POST" : "GET",
+    headers: body ? {"Content-Type": "application/json"} : undefined,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const data = await resp.json().catch(() => ({}));
+  if (!resp.ok) throw new Error(data.error || "The scanner is busy. Please try again.");
+  return data;
+}
+
+function startScan(){
+  const params = {
+    mode: "enterprise",
+    name: el("f-name").value.trim(),
+    url: el("f-url").value.trim(),
+    industry: el("f-industry").value.trim(),
+    category: el("f-cat").value.trim(),
+    market: el("f-market").value.trim() || "Global",
+  };
+  if (!params.name || !params.url || !params.category) {
+    el("form-error").textContent = "Please fill in all required fields.";
+    show("form-error"); return;
   }
   hide("form-error");
-  switchScanState("scan-state");
-  el("scan-log").innerHTML="";
-  scanData={_meta:{bizName,bizUrl,industry,cat,market,mode:'enterprise'}};
-  try{
-    await sleep(300);addLog("→ Initialising AppearAI scan engine…");
-    await sleep(600);addLog(`→ Generating 20 AI discovery prompts for ${bizName} in ${market}…`);
-    await sleep(500);addLog("→ Running technical signal checks on your website…");
-    await sleep(500);addLog("→ Checking crawlability and AI bot access…");
-    await sleep(400);addLog("→ Checking structured data and schema markup…");
-    await sleep(400);addLog("→ Checking llms.txt and meta signals…");
-    await sleep(400);addLog("→ Checking content structure and page signals…");
-    await sleep(600);addLog("→ Simulating AI discovery prompts across engines…");
-    await sleep(400);addLog("→ Identifying competitors appearing instead of you…");
-    await sleep(300);addLog("→ Compiling your AI Visibility results…");
-    const [techResult,claudeData]=await Promise.allSettled([
-      fetchTechSignals(bizUrl),
-      fetchClaudeDataEnterprise(bizName,bizUrl,industry,cat,market)
-    ]);
-    scanData.tech=techResult.status==="fulfilled"?techResult.value:null;
-    if(claudeData.status==="fulfilled"){
-      Object.assign(scanData,claudeData.value);
-    } else {
-      addLog("✗ Claude error: "+claudeData.reason?.message);
-    }
-    addLog("✓ Scan complete — report ready");
-    await sleep(400);
-    el("gate-biz-name").textContent=bizName;
-    switchScanState("email-gate");
-  }catch(e){
-    switchScanState("scan-form-wrap");
-    el("form-error").textContent="Scan failed: "+e.message;
-    show("form-error");
-  }
+  runScan(params, "form-error");
 }
 
-async function fetchTechSignals(url){
-  let u=url.trim();
-  if(!u.startsWith("http"))u="https://"+u;
-  try{new URL(u);}catch(e){u="https://"+url.trim();}
-  const resp=await fetch(`${WORKER_URL}?url=${encodeURIComponent(u)}`);
-  return await resp.json();
-}
-
-async function fetchClaudeDataEnterprise(brandName, bizUrl, industry, category, market) {
-  const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
-Generate 20 natural conversational discovery prompts that someone would type into an AI search engine when looking for a ${category} solution in ${market}. Then simulate whether ${brandName} (${bizUrl}) appears in AI results for each prompt.
-Return exactly this JSON structure:
-{
-  "prompts": [<exactly 20 objects: {"query":"<natural conversational question>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":[<engines where appeared>]}>],
-  "competitors": [{"name":"<real competitor brand>","aar":<30-80>},{"name":"<real competitor>","aar":<25-75>},{"name":"<real competitor>","aar":<20-70>}],
-  "insight": "<1 sharp sentence about ${brandName} AI visibility in the ${category} space, max 30 words>"
-}
-Be realistic: most brands appear in 3-8 of 20 prompts. Only include engines where brand actually appeared.`;
-  const resp = await fetch(WORKER_URL + "/claude", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      model: "claude-sonnet-4-5",
-      max_tokens: 3500,
-      system: sys,
-      messages: [{role: "user", content: `Brand: ${brandName}\nWebsite: ${bizUrl}\nIndustry: ${industry}\nCategory: ${category}\nTarget Market: ${market}`}]
-    })
-  });
-  const data = await resp.json();
-  if(data.error) throw new Error(data.error.message);
-  const raw = data.content?.find(b => b.type === "text")?.text || "{}";
-  let cleaned = raw.replace(/```json|```/g, "").trim();
-  const s = cleaned.indexOf("{"), e = cleaned.lastIndexOf("}");
-  if(s !== -1 && e !== -1) cleaned = cleaned.slice(s, e + 1);
-  return JSON.parse(cleaned);
-}
-
-async function fetchClaudeData(bizName,bizUrl,city,cat){
-  const sys = `You are AppearAI. Return ONLY raw JSON, no markdown, no backticks, no explanation.
-Generate 20 natural conversational discovery prompts that someone would type into an AI search engine when looking for a ${cat} in ${city}. Then simulate whether ${bizName} (${bizUrl}) appears in AI results for each prompt.
-Return exactly this JSON structure:
-{
-  "prompts": [<exactly 20 objects: {"query":"<natural conversational question>","appeared":<bool>,"appearedInRuns":<0-3>,"engines":[<engines where appeared>]}>],
-  "competitors": [{"name":"<real local ${cat} competitor in ${city}>","aar":<30-80>},{"name":"<real local ${cat} competitor in ${city}>","aar":<25-75>},{"name":"<real local ${cat} competitor in ${city}>","aar":<20-70>}],
-  "insight": "<1 sharp sentence about ${bizName} AI visibility in ${city}, max 30 words>"
-}
-Be realistic: most unoptimised local businesses appear in 2-6 of 20 prompts.`;
-  const resp=await fetch(WORKER_URL+"/claude",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      model:"claude-sonnet-4-5",
-      max_tokens:3500,
-      system:sys,
-      messages:[{role:"user",content:`Business: ${bizName}\nWebsite: ${bizUrl}\nCity: ${city}\nCategory: ${cat}`}]
-    })
-  });
-  const data=await resp.json();
-  if(data.error)throw new Error(data.error.message);
-  const raw=data.content?.find(b=>b.type==="text")?.text||"{}";
-  let cleaned=raw.replace(/```json|```/g,"").trim();
-  const s=cleaned.indexOf("{"),e=cleaned.lastIndexOf("}");
-  if(s!==-1&&e!==-1)cleaned=cleaned.slice(s,e+1);
-  const result = JSON.parse(cleaned);
-  if(!result.competitors||result.competitors.length===0){
-    result.competitors=[{name:"Local competitor",aar:45},{name:"Another competitor",aar:32},{name:"Third competitor",aar:28}];
-  }
-  return result;
-}
-
-async function startScanLocal() {
-  const localBizName = el("f-name-local").value.trim();
-  const localBizUrl = el("f-url-local").value.trim();
-  const city = el("f-city").value.trim();
-  const cat = el("f-cat-local").value.trim();
-  if(!localBizName || !localBizUrl || !city || !cat) {
+function startScanLocal(){
+  const params = {
+    mode: "local",
+    name: el("f-name-local").value.trim(),
+    url: el("f-url-local").value.trim(),
+    city: el("f-city").value.trim(),
+    category: el("f-cat-local").value.trim(),
+  };
+  if (!params.name || !params.url || !params.city || !params.category) {
     el("form-error-local").textContent = "Please fill in all four fields.";
-    el("form-error-local").style.display = "block";
-    return;
+    show("form-error-local"); return;
   }
-  el("form-error-local").style.display = "none";
-  bizName = localBizName;
-  bizUrl = localBizUrl;
-  currentMode = 'local';
+  hide("form-error-local");
+  runScan(params, "form-error-local");
+}
+
+async function runScan(params, errorId){
+  bizName = params.name;
+  bizUrl = params.url;
+  scanData = {params, tech: null, prompts: [], results: []};
   switchScanState("scan-state");
   el("scan-log").innerHTML = "";
-  scanData = {_meta: {bizName, bizUrl, city, cat}};
+  el("scan-progress").textContent = "";
+
   try {
-    await sleep(300); addLog("→ Initialising AppearAI scan engine…");
-    await sleep(600); addLog(`→ Building 20 discovery prompts for ${bizName} in ${city}…`);
-    await sleep(500); addLog("→ Running technical signal checks on your website…");
-    await sleep(400); addLog("→ Checking structured data and schema markup…");
-    await sleep(400); addLog("→ Checking AI crawler access…");
-    await sleep(600); addLog("→ Analysing discovery prompt patterns across AI engines…");
-    await sleep(400); addLog("→ Identifying competitors appearing in your category…");
-    const [techResult, claudeData] = await Promise.allSettled([
-      fetchTechSignals(localBizUrl),
-      fetchClaudeData(localBizName, localBizUrl, city, cat)
-    ]);
-    scanData.tech = techResult.status === "fulfilled" ? techResult.value : null;
-    if(claudeData.status === "fulfilled") {
-      Object.assign(scanData, claudeData.value);
-    } else {
-      addLog("✗ Claude error: " + claudeData.reason?.message);
+    addLog("→ Checking technical signals on " + bizUrl + "…");
+    const techPromise = api("/?url=" + encodeURIComponent(bizUrl)).catch(() => null);
+
+    addLog("→ Writing 20 buyer questions for your category…");
+    const scan = await api("/prompts", params);
+    scanData.prompts = scan.prompts;
+    addLog("→ Asking Claude and Gemini each question with live web search…");
+
+    let done = 0, next = 0;
+    const total = scan.prompts.length;
+    el("scan-progress").textContent = `0 of ${total} questions checked`;
+    async function worker(){
+      while (next < total) {
+        const i = next++;
+        try {
+          scanData.results[i] = await api("/ask", {token: scan.token, index: i});
+        } catch (e) {
+          scanData.results[i] = {index: i, prompt: scan.prompts[i], claude: {ok: false}, gemini: {ok: false}};
+        }
+        done++;
+        el("scan-progress").textContent = `${done} of ${total} questions checked`;
+      }
     }
-    addLog("✓ Scan complete — report ready");
-    await sleep(400);
-    el("gate-biz-name").textContent = bizName;
-    switchScanState("email-gate");
-  } catch(e) {
+    await Promise.all(Array.from({length: ASK_CONCURRENCY}, worker));
+
+    scanData.tech = await techPromise;
+    addLog("✓ Scan complete");
+    switchScanState(null);
+    renderResults();
+  } catch (e) {
     switchScanState("scan-form-wrap");
-    el("form-error-local").textContent = "Scan failed: " + e.message;
-    el("form-error-local").style.display = "block";
+    el(errorId).textContent = e.message;
+    show(errorId);
   }
 }
 
-function revealResults(){
-  const email=el("gate-email").value.trim();
-  if(!email||!email.includes("@"))return;
-  switchScanState(null);
-  const r=scanData;
-
+function renderResults(){
   const techDefs=[
     {id:"https",title:"HTTPS & Security",weight:10,tag:"What is HTTPS?",edu:"HTTPS encrypts the connection between a visitor and your website. Without it, your site is flagged as Not Secure.",impactFail:"AI crawlers like GPTBot and ClaudeBot deprioritise non-HTTPS sites.",impactPass:"Your site is secure. AI crawlers fully trust HTTPS sites."},
     {id:"schema",title:"Structured Data (Schema)",weight:20,tag:"What is structured data?",edu:"Schema markup is hidden code that tells AI exactly what your business is — your name, address, phone, services, hours, and reviews.",impactFail:"Without schema, AI guesses what your business does and often gets it wrong.",impactPass:"Your schema markup means AI can read your business details accurately."},
@@ -759,7 +618,7 @@ function revealResults(){
   checksEl.innerHTML="";
   let techScore=0,techTotal=0;
   techDefs.forEach((d,i)=>{
-    const t=r.tech?.results?.[d.id];
+    const t=scanData.tech?.results?.[d.id];
     const status=t?.status||"warn";
     const score=t?.score??0;
     techScore+=score;techTotal+=d.weight;
@@ -795,7 +654,7 @@ function revealResults(){
   const pct=techTotal?Math.round((techScore/techTotal)*100):0;
   const tier=pct>=70?"good":pct>=40?"warn":"bad";
   const col={good:"#4ade80",warn:"#f5c842",bad:"#ff6b5b"}[tier];
-  const verdicts={good:"Your site gives AI a good chance of recommending you.",warn:"AI may know you exist — but isn't recommending you consistently.",bad:"Your site doesn't give AI what it needs to recommend your business."};
+  const verdicts={good:"Your site gives AI crawlers what they need to read it.",warn:"Some technical signals need work.",bad:"Your site is missing key signals AI crawlers rely on."};
   const circ=238.8;
   el("tech-score-num").textContent=pct;
   el("tech-score-num").style.color=col;
@@ -809,50 +668,66 @@ function revealResults(){
   el("tech-domain").textContent=domainClean;
   const dmEl=el("tech-domain-meta");if(dmEl)dmEl.textContent=domainClean;
 
-  const prompts=r.prompts||[];
-  const appearedCount=prompts.filter(p=>p.appeared).length;
-  el("disc-appeared").textContent=appearedCount;
-  const visiblePrompts=prompts.slice(0,3);
-  const hiddenPrompts=prompts.slice(3);
 
-  el("disc-visible").innerHTML=visiblePrompts.map(p=>{
-    const runs=typeof p.appearedInRuns==="number"?p.appearedInRuns:(p.appeared?2:0);
-    const runColor=runs===3?"#4ade80":runs>=1?"#f5c842":"var(--warn)";
-    return `<div class="disc-prompt-row">
-      <div class="disc-status ${p.appeared?"pass":"fail"}">${p.appeared?"✓":"✗"}</div>
+  const results = scanData.results.filter(Boolean);
+  let answered = 0, appeared = 0;
+  const brandCounts = new Map();
+  const own = bizName.toLowerCase();
+  for (const r of results) {
+    for (const engine of Object.keys(ENGINE_LABELS)) {
+      const a = r[engine];
+      if (!a || !a.ok) continue;
+      answered++;
+      if (a.appeared) appeared++;
+      for (const b of new Set(a.brands || [])) {
+        const key = b.toLowerCase();
+        if (key === own || key.includes(own) || own.includes(key)) continue;
+        const entry = brandCounts.get(key) || {name: b, count: 0};
+        entry.count++;
+        brandCounts.set(key, entry);
+      }
+    }
+  }
+  const aar = answered ? Math.round((appeared / answered) * 100) : 0;
+  el("disc-appeared").textContent = appeared;
+  el("disc-total").textContent = answered;
+  el("disc-aar").textContent = answered ? aar + "%" : "—";
+  const am = el("tech-answers-meta"); if (am) am.textContent = answered;
+
+  el("disc-visible").innerHTML = results.map((r, i) => {
+    const badges = Object.entries(ENGINE_LABELS).map(([engine, label]) => {
+      const a = r[engine];
+      const state = !a || !a.ok ? "n/a" : a.appeared ? "✓" : "✗";
+      const color = state === "✓" ? "var(--ok)" : state === "✗" ? "var(--warn)" : "var(--muted)";
+      return `<span style="margin-right:.75rem;color:${color}">${label} ${state}</span>`;
+    }).join("");
+    const anyHit = Object.keys(ENGINE_LABELS).some(e => r[e]?.appeared);
+    const excerpts = Object.entries(ENGINE_LABELS).filter(([e]) => r[e]?.ok).map(([e, label]) =>
+      `<div style="margin-top:.5rem"><strong>${label}:</strong> ${esc(r[e].excerpt)}${r[e].excerpt.length >= 600 ? "…" : ""}</div>`).join("");
+    return `<div class="disc-prompt-row" style="cursor:pointer" onclick="toggleAnswer(${i})">
+      <div class="disc-status ${anyHit ? "pass" : "fail"}">${anyHit ? "✓" : "✗"}</div>
       <div class="disc-main">
-        <div class="disc-query">"${p.query}"</div>
-        <div class="disc-sub" style="filter:blur(4px);user-select:none;pointer-events:none">Appeared in ${runs} of 3 runs across ${(p.engines||[]).length} engines</div>
+        <div class="disc-query">"${esc(r.prompt)}"</div>
+        <div class="disc-sub">${badges}<span style="text-decoration:underline">See answers</span></div>
+        <div id="ans-${i}" style="display:none;font-size:.72rem;color:var(--muted);line-height:1.6">${excerpts}</div>
       </div>
-      <div class="disc-runs" style="filter:blur(4px);user-select:none;pointer-events:none;color:${runColor}">${runs}/3</div>
     </div>`;
   }).join("");
 
-  if(hiddenPrompts.length){
-    el("disc-blur-rows").innerHTML=`<div class="disc-prompt-row"><div class="disc-status fail">✗</div><div class="disc-main"><div class="disc-query">"${hiddenPrompts[0]?.query||'Who would you recommend for this service?'}"</div><div class="disc-sub">Appeared in 0 of 3 runs</div></div><div class="disc-runs" style="color:#ff6b5b">0/3</div></div>`;
-    el("disc-blur-wrap").style.display="block";
-  }
-
-  const competitors=r.competitors||[];
-  el("comp-visible").innerHTML=competitors.slice(0,2).map(c=>{
-    const pctC=c.aar||50;
-    const colC=pctC>=50?"#4ade80":pctC>=25?"#f5c842":"#ff6b5b";
-    return `<div class="comp-row"><div class="comp-row-name">${c.name}</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:${pctC}%;background:${colC}"></div></div></div>`;
-  }).join("");
-
-  if(competitors.length>2){
-    el("comp-blur-rows").innerHTML=`<div class="comp-row"><div class="comp-row-name">████████████</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:65%;background:#4ade80"></div></div></div>`;
-    el("comp-blur-wrap").style.display="block";
-  }
-
-  const insight=r.insight||"";
-  const insightEl=el("personalised-insight");
-  if(insightEl&&insight){insightEl.textContent=insight;insightEl.style.display="block";}
-
-  fetch(FORMSPREE,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({email,business:bizName,techScore:pct+"%",appeared:appearedCount+"/20",message:`New scan. Business: ${bizName}. Tech: ${pct}%. Appeared: ${appearedCount}/20 prompts.`})}).catch(()=>{});
+  const competitors = [...brandCounts.values()].sort((a, b) => b.count - a.count).slice(0, 6);
+  el("comp-visible").innerHTML = competitors.length ? competitors.map(c => {
+    const pctC = answered ? Math.round((c.count / answered) * 100) : 0;
+    const colC = pctC >= 50 ? "#4ade80" : pctC >= 25 ? "#f5c842" : "#ff6b5b";
+    return `<div class="comp-row"><div class="comp-row-name">${esc(c.name)}</div><div class="comp-row-bar-wrap"><div class="comp-row-bar" style="width:${Math.max(pctC, 3)}%;background:${colC}"></div></div><div style="font-size:.72rem;color:var(--muted);min-width:3rem;text-align:right">${pctC}%</div></div>`;
+  }).join("") : `<div style="font-size:.75rem;color:var(--muted)">No other brands were named in these answers.</div>`;
 
   show("results-wrap");
   el("results-wrap").scrollIntoView({behavior:"smooth"});
+}
+
+function toggleAnswer(i){
+  const box = el("ans-" + i);
+  if (box) box.style.display = box.style.display === "none" ? "block" : "none";
 }
 
 function toggleTech(id){
@@ -867,7 +742,7 @@ function toggleTech(id){
 
 function resetScan(){
   scanData=null;bizName="";bizUrl="";
-  ["f-name","f-url","f-city","f-cat","gate-email"].forEach(id=>{const e=el(id);if(e)e.value="";});
+  ["f-name","f-url","f-industry","f-cat","f-market","f-name-local","f-url-local","f-city","f-cat-local"].forEach(id=>{const e=el(id);if(e)e.value="";});
   el("scan-log").innerHTML="";
   hide("results-wrap");
   el("results-wrap").style.display="none";
