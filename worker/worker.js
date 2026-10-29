@@ -113,18 +113,22 @@ async function techSignals(rawUrl) {
     results[id] = { status, score: status === "pass" ? w : status === "warn" ? Math.round(w / 2) : 0 };
   };
 
-  let html = "", finalUrl = "";
+  let html = "", finalUrl = "", pageOk = false;
   try {
     const r = await fetch(base + site.pathname, { redirect: "follow", headers: { "User-Agent": "AppearAI-Checker/1.0 (+https://appearai.io)" } });
     finalUrl = r.url;
+    pageOk = r.ok;
     html = (await r.text()).slice(0, 500000);
   } catch {
     try {
       const r = await fetch(`http://${site.hostname}${site.pathname}`, { redirect: "follow" });
       finalUrl = r.url;
+      pageOk = r.ok;
       html = (await r.text()).slice(0, 500000);
     } catch { /* site unreachable */ }
   }
+  // A blocked or failed page (e.g. 403 bot protection) can't be graded: report "couldn't check".
+  const unreadable = !pageOk;
 
   grade("https", finalUrl.startsWith("https://") ? "pass" : finalUrl ? "fail" : "warn");
 
@@ -145,6 +149,10 @@ async function techSignals(rawUrl) {
     .replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
   grade("content", h1 >= 1 && h2 >= 2 && words >= 300 ? "pass" : h1 >= 1 || words >= 300 ? "warn" : "fail");
 
+  if (unreadable) {
+    for (const id of ["schema", "metadesc", "title", "content"]) results[id] = { status: "unknown", score: 0 };
+  }
+
   try {
     const r = await fetch(`${base}/robots.txt`, { redirect: "follow" });
     if (!r.ok) {
@@ -160,10 +168,11 @@ async function techSignals(rawUrl) {
   try {
     const r = await fetch(`${base}/llms.txt`, { redirect: "follow" });
     const body = r.ok ? (await r.text()).slice(0, 2000) : "";
-    grade("llms", r.ok && body.trim() && !/<html/i.test(body) ? "pass" : "fail");
+    if (r.status === 401 || r.status === 403 || r.status === 429) results.llms = { status: "unknown", score: 0 };
+    else grade("llms", r.ok && body.trim() && !/<html/i.test(body) ? "pass" : "fail");
   } catch { grade("llms", "warn"); }
 
-  return { url: finalUrl || base, results };
+  return { url: finalUrl || base, unreadable, results };
 }
 
 function robotsBlocks(text, bot) {

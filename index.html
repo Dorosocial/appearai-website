@@ -621,19 +621,19 @@ function renderResults(){
     const t=scanData.tech?.results?.[d.id];
     const status=t?.status||"warn";
     const score=t?.score??0;
-    techScore+=score;techTotal+=d.weight;
-    const msg=techMsgs[d.id][status]||techMsgs[d.id].warn;
+    if(status!=="unknown"){techScore+=score;techTotal+=d.weight;}
+    const msg=status==="unknown"?"Couldn't check — the site blocked our checker.":(techMsgs[d.id][status]||techMsgs[d.id].warn);
     const div=document.createElement("div");
     div.className="tech-check";
     div.innerHTML=`
       <div class="tech-check-header" onclick="toggleTech('${d.id}')">
-        <div class="tech-icon ${status}">${status==="pass"?"✓":status==="fail"?"✗":"!"}</div>
+        <div class="tech-icon ${status==="unknown"?"warn":status}">${status==="pass"?"✓":status==="fail"?"✗":status==="unknown"?"?":"!"}</div>
         <div class="tech-check-mid">
           <div class="tech-check-title">${d.title}</div>
           <div class="tech-check-desc">${msg}</div>
         </div>
         <div class="tech-check-right">
-          <div class="tech-pts ${status}">${score}/${d.weight}</div>
+          <div class="tech-pts ${status==="unknown"?"warn":status}">${status==="unknown"?"—":score+"/"+d.weight}</div>
           <div class="tech-pts-lbl">points</div>
           <div class="tech-arr" id="tarr-${d.id}">▾</div>
         </div>
@@ -643,8 +643,8 @@ function renderResults(){
           <div class="tech-edu-tag">${d.tag}</div>
           <div class="tech-edu-body">${d.edu}</div>
           <div class="tech-edu-impact ${status}">
-            <div class="tech-edu-ico">${status==="pass"?"✓":"✗"}</div>
-            <div class="tech-edu-txt">${status==="pass"?d.impactPass:d.impactFail}</div>
+            <div class="tech-edu-ico">${status==="pass"?"✓":status==="unknown"?"?":"✗"}</div>
+            <div class="tech-edu-txt">${status==="pass"?d.impactPass:status==="unknown"?"This site blocks automated visitors, so this check couldn't run.":d.impactFail}</div>
           </div>
         </div>
       </div>`;
@@ -662,7 +662,7 @@ function renderResults(){
   el("tech-arc").style.stroke=col;
   el("tech-bar").style.width=pct+"%";
   el("tech-bar").style.background=col;
-  el("tech-verdict").textContent=verdicts[tier];
+  el("tech-verdict").textContent=scanData.tech?.unreadable?"This site blocks automated visitors, so some checks couldn't run. The score covers the checks that did.":verdicts[tier];
   el("tech-verdict").style.color=col;
   const domainClean=bizUrl.replace(/https?:\/\//,"").replace(/\/$/,"");
   el("tech-domain").textContent=domainClean;
