@@ -1,7 +1,7 @@
 # AppearAI scanner worker
 
 Runs the free scan behind appearai.io. It asks real buyer questions to Claude
-(with web search) and Gemini (with Google Search) and checks whether the brand
+(with web search) and Gemini (from its built-in knowledge; Google Search grounding needs paid billing) and checks whether the brand
 appears in their answers. No results are simulated.
 
 ## Deploy (Cloudflare dashboard)
@@ -15,7 +15,7 @@ appears in their answers. No results are simulated.
 4. Optional variables (type Text):
    - `DAILY_SCAN_CAP`: scans per day for everyone (default 40)
    - `PER_IP_DAILY_CAP`: scans per visitor per day (default 3)
-   - `GEMINI_MODEL`: default `gemini-2.5-flash`
+   - `GEMINI_MODEL`: default `gemini-flash-lite-latest`
 5. Recommended: Storage & Databases → **KV** → create a namespace, then in the
    worker's Settings → **Bindings** → add a KV binding named `SCANS`. Without it
    the daily limits are switched off.

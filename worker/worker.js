@@ -3,7 +3,7 @@
 // Endpoints
 //   GET  /?url=<site>   technical signal checks (7 checks)
 //   POST /prompts       generate 20 buyer-intent prompts, returns a signed scan token
-//   POST /ask           ask ONE of those prompts to Claude and Gemini (live, with web search)
+//   POST /ask           ask ONE of those prompts to Claude (with web search) and Gemini (built-in knowledge)
 //                       and report whether the brand appeared and which brands were named
 //
 // Secrets / variables (Settings -> Variables and Secrets)
@@ -19,7 +19,8 @@
 
 const CLAUDE_MODEL = "claude-haiku-5-5";
 const CLAUDE_WEB_SEARCH = { type: "web_search_20250305", name: "web_search", max_uses: 3 };
-const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
+// Free tier: no Google Search grounding, so Gemini answers from its built-in knowledge.
+const DEFAULT_GEMINI_MODEL = "gemini-flash-lite-latest";
 const PROMPT_COUNT = 20;
 const TOKEN_TTL_MS = 20 * 60 * 1000;
 const MAX_ASKS_PER_TOKEN = PROMPT_COUNT + 10; // room for a few retries
@@ -369,7 +370,6 @@ async function askGemini(env, prompt, attempt = 0) {
     headers: { "x-goog-api-key": env.GEMINI_API_KEY, "content-type": "application/json" },
     body: JSON.stringify({
       contents: [{ role: "user", parts: [{ text: prompt }] }],
-      tools: [{ google_search: {} }],
     }),
   });
   if ((r.status === 429 || r.status >= 500) && attempt < 3) {
